@@ -1,5 +1,6 @@
 
 public class TestClass {
 // Dies ist ein Test für GitHub 
-  Salam test
+ // Salam test
+ // Niko test
 }
