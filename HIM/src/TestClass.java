@@ -4,9 +4,6 @@ public class TestClass {
 	// Salam test
 	// niko war hier
 	// Sheyenne hiiiiiiiii
-	
-	
+	// 16:35
 
-	
-	
 }
