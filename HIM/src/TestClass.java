@@ -6,4 +6,6 @@ public class TestClass {
 	// Sheyenne hiiiiiiiii
 	// 16:35
 
+	
+	private int matrikelnummer;
 }
