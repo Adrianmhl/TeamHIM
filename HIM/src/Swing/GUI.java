@@ -147,7 +147,7 @@ public class GUI extends JFrame {
 		contentPane.add(panel_2);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(119, 61, 565, 300);
+		tabbedPane.setBounds(119, 50, 565, 311);
 		contentPane.add(tabbedPane);
 
 		JPanel t1 = new JPanel();
