@@ -2,6 +2,12 @@ package Objekte;
 
 public class Betreuer extends User {
 
-	private int  betPersNr;
+	
+	private int betPersNr ;
 	private Studierende listeStud;
+	
+	public Betreuer(int betPersNr, String nachname, String vorname) {
+		
+	}
+	
 }
