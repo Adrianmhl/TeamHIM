@@ -3,6 +3,8 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,12 +16,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
-
+	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtMatrikelnummer;
+	private JTextField txtName;
+	private JTextField txtUnternehmen;
+	private JTextField txtZeitraum;
 	private JTextField txtBenutzer;
 	private JTextField txtPasswort;
 
@@ -38,6 +40,10 @@ public class GUI extends JFrame {
 				}
 			}
 		});
+	}
+
+	private void JLabelMouseCLicked(java.awt.event.MouseEvent evt) {
+		tabbedPane.setSelectedIndex(0);
 	}
 
 	/**
@@ -63,6 +69,12 @@ public class GUI extends JFrame {
 		panel_1.add(tab1);
 
 		JLabel lblNewLabel = new JLabel("Log-in");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(0);
+			}
+		});
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 10));
 		tab1.add(lblNewLabel);
 
@@ -71,6 +83,12 @@ public class GUI extends JFrame {
 		panel_1.add(tab2);
 
 		JLabel lblNewLabel_1 = new JLabel("BPS-Formular");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(1);
+			}
+		});
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 10));
 		tab2.add(lblNewLabel_1);
 
@@ -79,6 +97,12 @@ public class GUI extends JFrame {
 		panel_1.add(tab2_1);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Praktikumsverwaltung");
+		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(2);
+			}
+		});
 		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 10));
 		tab2_1.add(lblNewLabel_1_1);
 
@@ -87,6 +111,12 @@ public class GUI extends JFrame {
 		panel_1.add(tab2_2);
 
 		JLabel lblNewLabel_1_2 = new JLabel("Dokumente");
+		lblNewLabel_1_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(3);
+			}
+		});
 		lblNewLabel_1_2.setFont(new Font("Arial", Font.BOLD, 10));
 		tab2_2.add(lblNewLabel_1_2);
 
@@ -95,6 +125,12 @@ public class GUI extends JFrame {
 		panel_1.add(tab2_2_1);
 
 		JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
+		lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(4);
+			}
+		});
 		lblNewLabel_1_2_1.setFont(new Font("Arial", Font.BOLD, 10));
 		tab2_2_1.add(lblNewLabel_1_2_1);
 
@@ -110,59 +146,73 @@ public class GUI extends JFrame {
 		panel_2.setBounds(0, 0, 684, 50);
 		contentPane.add(panel_2);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(119, 61, 565, 300);
 		contentPane.add(tabbedPane);
 
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
-		panel.setLayout(null);
+		JPanel t1 = new JPanel();
+		tabbedPane.addTab("New tab", null, t1, null);
+		t1.setLayout(null);
 
 		txtBenutzer = new JTextField();
+		txtBenutzer.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBenutzer.setText("Benutzer");
-		txtBenutzer.setBounds(10, 11, 244, 20);
-		panel.add(txtBenutzer);
+		txtBenutzer.setBounds(10, 54, 244, 20);
+		t1.add(txtBenutzer);
 		txtBenutzer.setColumns(10);
 
 		txtPasswort = new JTextField();
+		txtPasswort.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtPasswort.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPasswort.setText("Passwort");
 		txtPasswort.setColumns(10);
-		txtPasswort.setBounds(10, 42, 244, 20);
-		panel.add(txtPasswort);
+		txtPasswort.setBounds(10, 85, 244, 20);
+		t1.add(txtPasswort);
 
 		JButton btnNewButton_1 = new JButton("Log In");
-		btnNewButton_1.setBounds(165, 73, 89, 23);
-		panel.add(btnNewButton_1);
+		btnNewButton_1.setBounds(165, 116, 89, 23);
+		t1.add(btnNewButton_1);
+
+		JLabel lblNewLabel_3_3 = new JLabel("Login");
+		lblNewLabel_3_3.setBounds(10, 11, 252, 32);
+		t1.add(lblNewLabel_3_3);
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_3, null);
 		panel_3.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("BPS-Formular Abgabe");
-		lblNewLabel_3.setBounds(10, 0, 252, 32);
+		lblNewLabel_3.setBounds(10, 11, 252, 32);
 		panel_3.add(lblNewLabel_3);
 
-		textField = new JTextField();
-		textField.setBounds(10, 43, 341, 20);
-		panel_3.add(textField);
-		textField.setColumns(10);
+		txtMatrikelnummer = new JTextField();
+		txtMatrikelnummer.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtMatrikelnummer.setText("Matrikelnummer");
+		txtMatrikelnummer.setBounds(10, 43, 341, 20);
+		panel_3.add(txtMatrikelnummer);
+		txtMatrikelnummer.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(10, 74, 341, 20);
-		panel_3.add(textField_1);
+		txtName = new JTextField();
+		txtName.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtName.setText("Name");
+		txtName.setColumns(10);
+		txtName.setBounds(10, 74, 341, 20);
+		panel_3.add(txtName);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 105, 341, 20);
-		panel_3.add(textField_2);
+		txtUnternehmen = new JTextField();
+		txtUnternehmen.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtUnternehmen.setText("Unternehmen");
+		txtUnternehmen.setColumns(10);
+		txtUnternehmen.setBounds(10, 105, 341, 20);
+		panel_3.add(txtUnternehmen);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(10, 136, 341, 20);
-		panel_3.add(textField_3);
+		txtZeitraum = new JTextField();
+		txtZeitraum.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtZeitraum.setText("Zeitraum");
+		txtZeitraum.setColumns(10);
+		txtZeitraum.setBounds(10, 136, 341, 20);
+		panel_3.add(txtZeitraum);
 
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.setBounds(262, 167, 89, 23);
