@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class GUI extends JFrame {
+public class MenuStu extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	private JTextField txtMatrikelnummer;
@@ -33,7 +33,7 @@ public class GUI extends JFrame {
 			@Override
 			public void run() {
 				try {
-					GUI frame = new GUI();
+					MenuStu frame = new MenuStu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,14 +42,10 @@ public class GUI extends JFrame {
 		});
 	}
 
-	private void JLabelMouseCLicked(java.awt.event.MouseEvent evt) {
-		tabbedPane.setSelectedIndex(0);
-	}
-
 	/**
 	 * Create the frame.
 	 */
-	public GUI() {
+	public MenuStu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
