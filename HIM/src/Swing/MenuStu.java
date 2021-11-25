@@ -183,6 +183,7 @@ public class MenuStu extends JFrame {
 		panel_3.add(lblNewLabel_3);
 
 		txtMatrikelnummer = new JTextField();
+		txtMatrikelnummer.setForeground(Color.GRAY);
 		txtMatrikelnummer.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtMatrikelnummer.setText("Matrikelnummer");
 		txtMatrikelnummer.setBounds(35, 51, 341, 20);
@@ -190,6 +191,7 @@ public class MenuStu extends JFrame {
 		txtMatrikelnummer.setColumns(10);
 
 		txtName = new JTextField();
+		txtName.setForeground(Color.GRAY);
 		txtName.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtName.setText("Name");
 		txtName.setColumns(10);
@@ -197,6 +199,7 @@ public class MenuStu extends JFrame {
 		panel_3.add(txtName);
 
 		txtUnternehmen = new JTextField();
+		txtUnternehmen.setForeground(Color.GRAY);
 		txtUnternehmen.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtUnternehmen.setText("Unternehmen");
 		txtUnternehmen.setColumns(10);
@@ -204,17 +207,19 @@ public class MenuStu extends JFrame {
 		panel_3.add(txtUnternehmen);
 
 		txtZeitraum = new JTextField();
+		txtZeitraum.setForeground(Color.GRAY);
 		txtZeitraum.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtZeitraum.setText("Zeitraum");
 		txtZeitraum.setColumns(10);
 		txtZeitraum.setBounds(35, 144, 341, 20);
 		panel_3.add(txtZeitraum);
 
-		JButton btnNewButton = new JButton("versenden");
+		JButton btnNewButton = new JButton("best\u00E4tigen");
 		btnNewButton.setBounds(273, 274, 103, 23);
 		panel_3.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
+		txtBeschreibung.setForeground(Color.GRAY);
 		txtBeschreibung.setText("Beschreibung");
 		txtBeschreibung.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtBeschreibung.setColumns(10);

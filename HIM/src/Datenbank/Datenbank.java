@@ -80,7 +80,25 @@ public class Datenbank {
 
 	}
 
-	public boolean createUser() {
+	public boolean createUser(String id, String passwort, String name, String vorname, String mail) {
+
+		if (con == null)
+			try {
+				startConnection();
+			} catch (ClassNotFoundException e1) {
+
+				e1.printStackTrace();
+			}
+
+		try {
+
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("INSERT INTO `db3`.`student` (`id`, `passwort`, `name`, `vorname`, `mail`) VALUES (' "
+					+ id + " ', '" + passwort + "', '" + name + "', '" + vorname + "', '" + mail + "');");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return true;
 	}

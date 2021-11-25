@@ -3,6 +3,8 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,6 +41,7 @@ public class Login extends JFrame {
 	 */
 
 	public Login() {
+		setTitle("HIM - HFT Intern Manager");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 400);
@@ -46,24 +49,26 @@ public class Login extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(130, 0, 544, 361);
+		panel.setBounds(145, 0, 529, 361);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
 		textFieldBenutzer = new JTextField();
-		textFieldBenutzer.setText("Benutzer");
+		textFieldBenutzer.setForeground(Color.GRAY);
+		textFieldBenutzer.setText("Matrikelnummer / Personalnummer");
 		textFieldBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldBenutzer.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		textFieldBenutzer.setFont(new Font("Tahoma", Font.ITALIC, 13));
 		textFieldBenutzer.setColumns(10);
-		textFieldBenutzer.setBounds(146, 150, 157, 32);
+		textFieldBenutzer.setBounds(70, 150, 284, 32);
 		panel.add(textFieldBenutzer);
 
 		textFieldPasswort = new JTextField();
-		textFieldPasswort.setText("Passwort");
+		textFieldPasswort.setForeground(Color.GRAY);
+		textFieldPasswort.setText("Kennwort");
 		textFieldPasswort.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldPasswort.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		textFieldPasswort.setFont(new Font("Tahoma", Font.ITALIC, 13));
 		textFieldPasswort.setColumns(10);
-		textFieldPasswort.setBounds(146, 191, 157, 32);
+		textFieldPasswort.setBounds(70, 191, 284, 32);
 		panel.add(textFieldPasswort);
 
 		JButton btnNewButton_1 = new JButton("Login");
@@ -76,7 +81,8 @@ public class Login extends JFrame {
 
 				dispose();
 			} else {
-				JOptionPane.showMessageDialog(btnNewButton_1, "Falsch");
+				JOptionPane.showMessageDialog(btnNewButton_1,
+						"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
 				textFieldBenutzer.setText("");
 				textFieldPasswort.setText("");
 			}
@@ -87,7 +93,7 @@ public class Login extends JFrame {
 		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setOpaque(true);
-		btnNewButton_1.setBounds(146, 234, 157, 32);
+		btnNewButton_1.setBounds(135, 234, 157, 32);
 		panel.add(btnNewButton_1);
 
 		JLabel lblNewLabel = new JLabel("Icon/logo");
@@ -95,11 +101,56 @@ public class Login extends JFrame {
 		lblNewLabel.setBounds(124, 32, 199, 107);
 		panel.add(lblNewLabel);
 
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBounds(0, 0, 146, 361);
-		getContentPane().add(panel_1_1);
-		panel_1_1.setLayout(null);
-		panel_1_1.setBackground(Color.RED);
+		JLabel lblRegistrieren = new JLabel("Jetzt registieren >");
+		lblRegistrieren.setForeground(Color.DARK_GRAY);
+		lblRegistrieren.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistrieren.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Registrierung reg = new Registrierung();
+				reg.setVisible(true);
+				dispose();
+			}
+		});
+		lblRegistrieren.setBounds(135, 278, 157, 14);
+		panel.add(lblRegistrieren);
+
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setBounds(0, 0, 156, 361);
+		getContentPane().add(panel_1_2);
+		panel_1_2.setLayout(null);
+		panel_1_2.setBackground(Color.RED);
+
+		JPanel tab2_3 = new JPanel();
+		tab2_3.setLayout(null);
+		tab2_3.setBackground(Color.RED);
+		tab2_3.setBounds(10, 102, 126, 21);
+		panel_1_2.add(tab2_3);
+
+		JPanel tab2_1_1 = new JPanel();
+		tab2_1_1.setLayout(null);
+		tab2_1_1.setBackground(Color.RED);
+		tab2_1_1.setBounds(10, 134, 126, 21);
+		panel_1_2.add(tab2_1_1);
+
+		JPanel tab2_2_3 = new JPanel();
+		tab2_2_3.setLayout(null);
+		tab2_2_3.setBackground(Color.RED);
+		tab2_2_3.setBounds(10, 166, 126, 21);
+		panel_1_2.add(tab2_2_3);
+
+		JPanel tab2_2_1_1 = new JPanel();
+		tab2_2_1_1.setLayout(null);
+		tab2_2_1_1.setBackground(Color.RED);
+		tab2_2_1_1.setBounds(10, 198, 126, 21);
+		panel_1_2.add(tab2_2_1_1);
+
+		JPanel tab2_2_2_1 = new JPanel();
+		tab2_2_2_1.setLayout(null);
+		tab2_2_2_1.setBackground(Color.RED);
+		tab2_2_2_1.setBounds(0, 329, 136, 21);
+		panel_1_2.add(tab2_2_2_1);
 
 	}
 }
