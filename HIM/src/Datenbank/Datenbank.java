@@ -1,6 +1,5 @@
 package Datenbank;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -35,6 +34,11 @@ public class Datenbank {
 		System.out.println("Connected to the database");
 	}
 
+	/**
+	 * 
+	 * @param betPersNr
+	 * @return
+	 */
 	public Betreuer getBetreuer(int betPersNr) {
 		if (conn == null)
 			try {
