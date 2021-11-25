@@ -11,28 +11,7 @@ import Objekte.Studierende;
 
 public class Datenbank {
 
-	private static Connection conn;
-
-	// Connetion
-	static void startConnDB() throws ClassNotFoundException {
-
-		String url = "jdbc:mysql://3.69.96.96:3306/";
-		String dbName = "db3";
-		String userName = "db3";
-		String password = "!db3.winf?";
-		String driver = "com.mysql.cj.jdbc.Driver";
-
-		Class.forName(driver);
-
-		try {
-			conn = DriverManager.getConnection(url + dbName, userName, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("Connected to the database");
-	}
+	private static Connection con;
 
 	/**
 	 * 
@@ -40,9 +19,9 @@ public class Datenbank {
 	 * @return
 	 */
 	public Betreuer getBetreuer(int betPersNr) {
-		if (conn == null)
+		if (con == null)
 			try {
-				startConnDB();
+				startConnection();
 			} catch (ClassNotFoundException e1) {
 
 				e1.printStackTrace();
@@ -50,8 +29,8 @@ public class Datenbank {
 		Betreuer betreuer = null;
 
 		try {
-			Statement stmt = conn.createStatement();
-			stmt = conn.createStatement();
+			Statement stmt = con.createStatement();
+			stmt = con.createStatement();
 
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT * FROM db3.betreuer WHERE name = '" + betPersNr + "'");
@@ -71,9 +50,9 @@ public class Datenbank {
 
 	public Studierende getStudierende(int mnr) {
 
-		if (conn == null)
+		if (con == null)
 			try {
-				startConnDB();
+				startConnection();
 			} catch (ClassNotFoundException e1) {
 
 				e1.printStackTrace();
@@ -83,7 +62,7 @@ public class Datenbank {
 
 		try {
 
-			Statement stmt = conn.createStatement();
+			Statement stmt = con.createStatement();
 			ResultSet rs;
 
 			rs = stmt.executeQuery("SELECT * FROM db3.student WHERE matrikelnummer = '" + mnr + "'");
@@ -114,7 +93,24 @@ public class Datenbank {
 
 	}
 
-	public void startConnection() {
+	public void startConnection() throws ClassNotFoundException {
+
+		String url = "jdbc:mysql://3.69.96.96:3306/";
+		String dbName = "db3";
+		String userName = "db3";
+		String password = "!db3.winf?";
+		String driver = "com.mysql.cj.jdbc.Driver";
+
+		Class.forName(driver);
+
+		try {
+			con = DriverManager.getConnection(url + dbName, userName, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Connected to the database");
 	}
 
 	public void closeConnection() {
