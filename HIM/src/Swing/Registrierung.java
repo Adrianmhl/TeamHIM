@@ -125,6 +125,10 @@ public class Registrierung extends JFrame {
 
 				JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 
+				Login log = new Login();
+				log.setVisible(true);
+				dispose();
+
 			}
 		});
 		btnNewButton.setBounds(273, 274, 103, 23);
