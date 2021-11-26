@@ -14,7 +14,7 @@ public class Datenbank {
 	private static Connection con;
 
 	/**
-	 * 
+	 * @SalamQu @author isedo
 	 * @param betPersNr
 	 * @return
 	 */
@@ -80,6 +80,18 @@ public class Datenbank {
 		return student;
 
 	}
+
+	/**
+	 * Stellt neuen User im Datenbank her (zur Zeit nur "student" Tabelle)
+	 * 
+	 * @author isedo
+	 * @param id
+	 * @param passwort
+	 * @param name
+	 * @param vorname
+	 * @param mail
+	 * @return
+	 */
 
 	public boolean createUser(String id, String passwort, String name, String vorname, String mail) {
 

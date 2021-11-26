@@ -42,6 +42,9 @@ public class Studierende extends User {
 	}
 
 	@Override
+	/**
+	 * @author isedo Überprüft Login Daten (Datenbank == Eingabe ? )
+	 */
 	public boolean verifyLogin(String id, String passwort) {
 		Datenbank db = new Datenbank();
 		String pass = db.getStudierende(id).getUserPass();
