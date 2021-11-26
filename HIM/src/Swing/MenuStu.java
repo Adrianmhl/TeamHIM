@@ -168,9 +168,9 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_2.setBounds(10, 0, 116, 18);
 		tab2_2_2.add(lblNewLabel_1_2_2);
 
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo3.png")));
-		lblNewLabel_5.setBounds(10, 27, 130, 71);
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo.jpeg")));
+		lblNewLabel_5.setBounds(10, 11, 112, 87);
 		panel_1.add(lblNewLabel_5);
 
 		JPanel panel_2 = new JPanel();
@@ -336,5 +336,9 @@ public class MenuStu extends JFrame {
 		textField_5.setColumns(10);
 		textField_5.setBounds(232, 186, 280, 18);
 		panel_6.add(textField_5);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(116, 361, 10, 10);
+		contentPane.add(panel);
 	}
 }

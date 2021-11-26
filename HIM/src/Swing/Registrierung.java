@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class Registrierung extends JFrame {
 	private JTextField txtName;
 	private JTextField txtMail;
 	private JTextField txtPasswort;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -85,6 +87,11 @@ public class Registrierung extends JFrame {
 		lblNewLabel_1_2_2_1.setFont(new Font("Arial", Font.BOLD, 11));
 		lblNewLabel_1_2_2_1.setBounds(10, 0, 116, 18);
 		tab2_2_2_1.add(lblNewLabel_1_2_2_1);
+
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Registrierung.class.getResource("/res/ProjLogo.jpeg")));
+		lblNewLabel.setBounds(10, 11, 112, 87);
+		panel_1_2.add(lblNewLabel);
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
