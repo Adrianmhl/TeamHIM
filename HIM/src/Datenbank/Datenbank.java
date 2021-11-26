@@ -75,7 +75,7 @@ public class Datenbank {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		}
 		return student;
 

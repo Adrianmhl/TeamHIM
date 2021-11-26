@@ -47,11 +47,14 @@ public class Studierende extends User {
 	 */
 	public boolean verifyLogin(String id, String passwort) {
 		Datenbank db = new Datenbank();
+
+		if (db.getStudierende(id) == null) {
+			return false;
+		}
 		String pass = db.getStudierende(id).getUserPass();
 		if (pass.equals(passwort))
 			return true;
-		else
-			return false;
+		return false;
 
 	}
 

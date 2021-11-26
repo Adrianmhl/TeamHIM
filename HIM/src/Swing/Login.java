@@ -81,8 +81,8 @@ public class Login extends JFrame {
 
 				MenuStu ms = new MenuStu();
 				ms.setVisible(true);
-
 				dispose();
+
 			} else {
 				JOptionPane.showMessageDialog(btnNewButton_1,
 						"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
