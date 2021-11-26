@@ -123,13 +123,15 @@ public class Datenbank {
 
 		return true;
 	}
-
-	public boolean deleteUser() {
+  
+	public boolean deleteUser() { 
+		
 		return false;
 	}
 
 	public void studBetreuerMatch() {
 
+		
 	}
 
 	public void startConnection() throws ClassNotFoundException {
