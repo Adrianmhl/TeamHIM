@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import Objekte.Studierende;
+
 public class Login extends JFrame {
 	private JTextField textFieldBenutzer;
 	private JTextField textFieldPasswort;
@@ -55,7 +57,7 @@ public class Login extends JFrame {
 
 		textFieldBenutzer = new JTextField();
 		textFieldBenutzer.setForeground(Color.GRAY);
-		textFieldBenutzer.setText("Matrikelnummer / Personalnummer");
+		textFieldBenutzer.setText("Matrikel- / Personalnummer");
 		textFieldBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldBenutzer.setFont(new Font("Tahoma", Font.ITALIC, 13));
 		textFieldBenutzer.setColumns(10);
@@ -73,8 +75,9 @@ public class Login extends JFrame {
 
 		JButton btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.addActionListener(e -> {
+			Studierende stud = new Studierende();
 
-			if (textFieldBenutzer.getText().equals("test") && textFieldPasswort.getText().equals("test")) {
+			if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
 
 				MenuStu ms = new MenuStu();
 				ms.setVisible(true);
@@ -86,6 +89,19 @@ public class Login extends JFrame {
 				textFieldBenutzer.setText("");
 				textFieldPasswort.setText("");
 			}
+
+//			if (textFieldBenutzer.getText().equals("test") && textFieldPasswort.getText().equals("test")) {
+//
+//				MenuStu ms = new MenuStu();
+//				ms.setVisible(true);
+//
+//				dispose();
+//			} else {
+//				JOptionPane.showMessageDialog(btnNewButton_1,
+//						"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
+//				textFieldBenutzer.setText("");
+//				textFieldPasswort.setText("");
+//			}
 
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));

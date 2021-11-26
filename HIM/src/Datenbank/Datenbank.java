@@ -48,7 +48,7 @@ public class Datenbank {
 
 	}
 
-	public Studierende getStudierende(int mnr) {
+	public Studierende getStudierende(String id) {
 
 		if (con == null)
 			try {
@@ -65,11 +65,12 @@ public class Datenbank {
 			Statement stmt = con.createStatement();
 			ResultSet rs;
 
-			rs = stmt.executeQuery("SELECT * FROM db3.student WHERE matrikelnummer = '" + mnr + "'");
+			rs = stmt.executeQuery("SELECT * FROM db3.student WHERE id =" + id + "");
 
 			while (rs.next()) {
 
-				student = new Studierende(mnr, rs.getString("vorname"), rs.getString("nachname"));
+				student = new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
+						rs.getString("mail"));
 
 			}
 
