@@ -14,9 +14,14 @@ public class Datenbank {
 	private static Connection con;
 
 	/**
+<<<<<<< Updated upstream
 	 * @SalamQu @author isedo
 	 * @param betPersNr
 	 * @return
+=======
+	 * @Salam  
+	 * 
+>>>>>>> Stashed changes
 	 */
 	public Betreuer getBetreuer(int betPersNr) {
 		if (con == null)
@@ -47,6 +52,9 @@ public class Datenbank {
 		//
 
 	}
+	/**
+	 * @Salam
+	 */
 
 	public Studierende getStudierende(String id) {
 
@@ -90,7 +98,7 @@ public class Datenbank {
 	 * @param name
 	 * @param vorname
 	 * @param mail
-	 * @return
+	 * @return //
 	 */
 
 	public boolean createUser(String id, String passwort, String name, String vorname, String mail) {
