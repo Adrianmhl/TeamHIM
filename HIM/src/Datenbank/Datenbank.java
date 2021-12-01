@@ -2,6 +2,7 @@ package Datenbank;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,11 +35,10 @@ public class Datenbank {
 		Betreuer betreuer = null;
 
 		try {
-			Statement stmt = con.createStatement();
-			stmt = con.createStatement();
-
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE name = ?");
+			stmt.setInt(1, betPersNr);
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT * FROM db3.betreuer WHERE name = '" + betPersNr + "'");
+			rs = stmt.executeQuery();
 			while (rs.next()) {
 
 				betreuer = new Betreuer(betPersNr, rs.getString("nachname"), rs.getString("vorname"));
@@ -49,7 +49,6 @@ public class Datenbank {
 			e.printStackTrace();
 		}
 		return betreuer;
-		//
 
 	}
 	/**
@@ -70,10 +69,10 @@ public class Datenbank {
 
 		try {
 
-			Statement stmt = con.createStatement();
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.student WHERE id =?");
 			ResultSet rs;
-
-			rs = stmt.executeQuery("SELECT * FROM db3.student WHERE id =" + id + "");
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
@@ -113,10 +112,13 @@ public class Datenbank {
 
 		try {
 
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate("INSERT INTO `db3`.`student` (`id`, `passwort`, `name`, `vorname`, `mail`) VALUES (' "
-					+ id + " ', '" + passwort + "', '" + name + "', '" + vorname + "', '" + mail + "');");
-
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO `db3`.`student` (`id`, `passwort`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?);");
+			stmt.setString(1, id);
+			stmt.setString(2,passwort);
+			stmt.setString(3, name);
+			stmt.setString(4,vorname);
+			stmt.setString(5, mail);
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

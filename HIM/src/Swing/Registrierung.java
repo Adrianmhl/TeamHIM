@@ -122,10 +122,8 @@ public class Registrierung extends JFrame {
 		panel_3.add(txtVorname);
 
 		JButton btnNewButton = new JButton("best\u00E4tigen");
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
+		btnNewButton.addActionListener(e-> {
+			
 				Datenbank db = new Datenbank();
 				db.createUser(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(), txtVorname.getText(),
 						txtMail.getText());
@@ -136,7 +134,6 @@ public class Registrierung extends JFrame {
 				log.setVisible(true);
 				dispose();
 
-			}
 		});
 		btnNewButton.setBounds(273, 274, 103, 23);
 		panel_3.add(btnNewButton);
