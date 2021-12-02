@@ -27,6 +27,7 @@ public class MenuStu extends JFrame {
 	private JTextField txtUnternehmen;
 	private JTextField txtZeitraum;
 	private JTextField txtBeschreibung;
+	private JTextField txtVorname;
 
 	/**
 	 * Launch the application.
@@ -226,7 +227,7 @@ public class MenuStu extends JFrame {
 		txtUnternehmen.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtUnternehmen.setText("Unternehmen");
 		txtUnternehmen.setColumns(10);
-		txtUnternehmen.setBounds(35, 113, 341, 20);
+		txtUnternehmen.setBounds(35, 144, 341, 20);
 		panel_BPSFormularAbgabe.add(txtUnternehmen);
 
 		txtZeitraum = new JTextField();
@@ -234,11 +235,11 @@ public class MenuStu extends JFrame {
 		txtZeitraum.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtZeitraum.setText("Zeitraum");
 		txtZeitraum.setColumns(10);
-		txtZeitraum.setBounds(35, 144, 341, 20);
+		txtZeitraum.setBounds(35, 175, 341, 20);
 		panel_BPSFormularAbgabe.add(txtZeitraum);
 
 		JButton btnNewButton = new JButton("best\u00E4tigen");
-		btnNewButton.setBounds(273, 274, 103, 23);
+		btnNewButton.setBounds(273, 288, 103, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
@@ -246,8 +247,16 @@ public class MenuStu extends JFrame {
 		txtBeschreibung.setText("Beschreibung");
 		txtBeschreibung.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtBeschreibung.setColumns(10);
-		txtBeschreibung.setBounds(35, 175, 341, 88);
+		txtBeschreibung.setBounds(35, 206, 341, 72);
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
+
+		txtVorname = new JTextField();
+		txtVorname.setText("Vorname");
+		txtVorname.setForeground(Color.GRAY);
+		txtVorname.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtVorname.setColumns(10);
+		txtVorname.setBounds(35, 113, 341, 20);
+		panel_BPSFormularAbgabe.add(txtVorname);
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
@@ -262,7 +271,7 @@ public class MenuStu extends JFrame {
 
 		JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
 		panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
-		panel_Praktikumsverwaltungl_2.setBounds(10, 54, 419, 126);
+		panel_Praktikumsverwaltungl_2.setBounds(10, 54, 468, 190);
 		panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2);
 		panel_Praktikumsverwaltungl_2.setLayout(null);
 
@@ -280,29 +289,29 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
 
 		JLabel lblBericht = new JLabel("Bericht");
-		lblBericht.setBounds(10, 28, 135, 13);
+		lblBericht.setBounds(10, 55, 135, 13);
 		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));
 		panel_Praktikumsverwaltungl_2.add(lblBericht);
 
 		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
-		lblBpsvertrag.setBounds(10, 56, 135, 13);
+		lblBpsvertrag.setBounds(10, 116, 135, 13);
 		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
 		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag);
 
 		JButton btnNewButton_1_1 = new JButton("hochladen");
-		btnNewButton_1_1.setBounds(188, 28, 105, 23);
+		btnNewButton_1_1.setBounds(188, 50, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
 
 		JButton btnNewButton_1_2 = new JButton("hochladen");
-		btnNewButton_1_2.setBounds(188, 56, 105, 23);
+		btnNewButton_1_2.setBounds(188, 111, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
 
 		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
-		btnNewButton_2_1.setBounds(303, 28, 105, 23);
+		btnNewButton_2_1.setBounds(303, 50, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
 
 		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
-		btnNewButton_2_2.setBounds(303, 56, 105, 23);
+		btnNewButton_2_2.setBounds(303, 111, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
 
 		JPanel panel_Dokumente = new JPanel();

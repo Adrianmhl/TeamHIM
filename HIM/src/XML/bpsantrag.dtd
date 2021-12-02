@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+
 	<!ELEMENT bpsantrag (matrikelnummer,name,vorname,praxisstelle,zeitraum, beschreibung)>
-		
 		<!ELEMENT matrikelnummer (#PCDATA)>
 		<!ELEMENT name (#PCDATA)>
 		<!ELEMENT vorname (#PCDATA)>
