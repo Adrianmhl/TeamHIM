@@ -50,6 +50,7 @@ public class Studierende extends User {
 		Datenbank db = new Datenbank();
 
 		if (db.getStudierende(id) == null) {
+
 			return false;
 		}
 		String pass = db.getStudierende(id).getUserPass();

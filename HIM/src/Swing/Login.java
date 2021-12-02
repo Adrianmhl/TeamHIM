@@ -3,7 +3,6 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -91,7 +90,7 @@ public class Login extends JFrame {
 					textFieldBenutzer.setText("");
 					textFieldPasswort.setText("");
 				}
-			
+
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

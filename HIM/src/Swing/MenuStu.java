@@ -188,7 +188,7 @@ public class MenuStu extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setForeground(Color.WHITE);
-		panel_2.setBounds(0, 0, 684, 10);
+		panel_2.setBounds(0, 0, 684, 19);
 		contentPane.add(panel_2);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
