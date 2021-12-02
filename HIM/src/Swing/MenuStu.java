@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -25,7 +26,6 @@ public class MenuStu extends JFrame {
 	private JTextField txtMatrikelnummer;
 	private JTextField txtName;
 	private JTextField txtUnternehmen;
-	private JTextField txtZeitraum;
 	private JTextField txtBeschreibung;
 	private JTextField txtVorname;
 
@@ -188,7 +188,7 @@ public class MenuStu extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setForeground(Color.WHITE);
-		panel_2.setBounds(0, 0, 684, 19);
+		panel_2.setBounds(0, 0, 684, 25);
 		contentPane.add(panel_2);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -207,6 +207,12 @@ public class MenuStu extends JFrame {
 		panel_BPSFormularAbgabe.add(lblNewLabel_3);
 
 		txtMatrikelnummer = new JTextField();
+		txtMatrikelnummer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtMatrikelnummer.setText("");
+			}
+		});
 		txtMatrikelnummer.setForeground(Color.GRAY);
 		txtMatrikelnummer.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtMatrikelnummer.setText("Matrikelnummer");
@@ -215,6 +221,12 @@ public class MenuStu extends JFrame {
 		txtMatrikelnummer.setColumns(10);
 
 		txtName = new JTextField();
+		txtName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtName.setText("");
+			}
+		});
 		txtName.setForeground(Color.GRAY);
 		txtName.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtName.setText("Name");
@@ -223,6 +235,13 @@ public class MenuStu extends JFrame {
 		panel_BPSFormularAbgabe.add(txtName);
 
 		txtUnternehmen = new JTextField();
+		txtUnternehmen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtUnternehmen.setText("");
+
+			}
+		});
 		txtUnternehmen.setForeground(Color.GRAY);
 		txtUnternehmen.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtUnternehmen.setText("Unternehmen");
@@ -230,19 +249,17 @@ public class MenuStu extends JFrame {
 		txtUnternehmen.setBounds(35, 144, 341, 20);
 		panel_BPSFormularAbgabe.add(txtUnternehmen);
 
-		txtZeitraum = new JTextField();
-		txtZeitraum.setForeground(Color.GRAY);
-		txtZeitraum.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		txtZeitraum.setText("Zeitraum");
-		txtZeitraum.setColumns(10);
-		txtZeitraum.setBounds(35, 175, 341, 20);
-		panel_BPSFormularAbgabe.add(txtZeitraum);
-
 		JButton btnNewButton = new JButton("best\u00E4tigen");
 		btnNewButton.setBounds(273, 288, 103, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
+		txtBeschreibung.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtBeschreibung.setText("");
+			}
+		});
 		txtBeschreibung.setForeground(Color.GRAY);
 		txtBeschreibung.setText("Beschreibung");
 		txtBeschreibung.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -251,12 +268,33 @@ public class MenuStu extends JFrame {
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
 
 		txtVorname = new JTextField();
+		txtVorname.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtVorname.setText("");
+			}
+		});
 		txtVorname.setText("Vorname");
 		txtVorname.setForeground(Color.GRAY);
 		txtVorname.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtVorname.setColumns(10);
 		txtVorname.setBounds(35, 113, 341, 20);
 		panel_BPSFormularAbgabe.add(txtVorname);
+
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("01.03 - 31.08");
+		rdbtnNewRadioButton.setBackground(Color.WHITE);
+		rdbtnNewRadioButton.setBounds(153, 176, 109, 23);
+		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton);
+
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("01.09 - 28.02");
+		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
+		rdbtnNewRadioButton_1.setBounds(267, 176, 109, 23);
+		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton_1);
+
+		JLabel lblNewLabel_2 = new JLabel("Zeitraum");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblNewLabel_2.setBounds(35, 181, 46, 14);
+		panel_BPSFormularAbgabe.add(lblNewLabel_2);
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
@@ -294,24 +332,24 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(lblBericht);
 
 		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
-		lblBpsvertrag.setBounds(10, 116, 135, 13);
+		lblBpsvertrag.setBounds(10, 111, 135, 13);
 		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
 		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag);
 
 		JButton btnNewButton_1_1 = new JButton("hochladen");
-		btnNewButton_1_1.setBounds(188, 50, 105, 23);
+		btnNewButton_1_1.setBounds(188, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
 
 		JButton btnNewButton_1_2 = new JButton("hochladen");
-		btnNewButton_1_2.setBounds(188, 111, 105, 23);
+		btnNewButton_1_2.setBounds(188, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
 
 		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
-		btnNewButton_2_1.setBounds(303, 50, 105, 23);
+		btnNewButton_2_1.setBounds(303, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
 
 		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
-		btnNewButton_2_2.setBounds(303, 111, 105, 23);
+		btnNewButton_2_2.setBounds(303, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
 
 		JPanel panel_Dokumente = new JPanel();
@@ -332,7 +370,7 @@ public class MenuStu extends JFrame {
 
 		JPanel panel_Profil_2 = new JPanel();
 		panel_Profil_2.setBackground(Color.WHITE);
-		panel_Profil_2.setBounds(20, 45, 450, 212);
+		panel_Profil_2.setBounds(20, 43, 450, 212);
 		panel_Profil.add(panel_Profil_2);
 		GridBagLayout gbl_panel_Profil_2 = new GridBagLayout();
 		gbl_panel_Profil_2.columnWidths = new int[] { 114, 46, 0, 0, 0 };

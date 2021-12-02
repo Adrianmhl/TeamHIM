@@ -56,6 +56,12 @@ public class Login extends JFrame {
 		panel.setLayout(null);
 
 		textFieldBenutzer = new JTextField();
+		textFieldBenutzer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textFieldBenutzer.setText("");
+			}
+		});
 		textFieldBenutzer.setForeground(Color.GRAY);
 		textFieldBenutzer.setText("Matrikel- / Personalnummer");
 		textFieldBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,6 +71,13 @@ public class Login extends JFrame {
 		panel.add(textFieldBenutzer);
 
 		textFieldPasswort = new JTextField();
+		textFieldPasswort.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				textFieldPasswort.setText("");
+			}
+		});
 		textFieldPasswort.setForeground(Color.GRAY);
 		textFieldPasswort.setText("Kennwort");
 		textFieldPasswort.setHorizontalAlignment(SwingConstants.CENTER);

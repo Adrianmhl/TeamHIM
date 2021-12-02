@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -28,6 +29,9 @@ public class Registrierung extends JFrame {
 	private JTextField txtMail;
 	private JTextField txtPasswort;
 	private JLabel lblNewLabel;
+	private JRadioButton rdbtnNewRadioButton_1;
+	private JRadioButton rdbtnNewRadioButton_2;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -105,64 +109,115 @@ public class Registrierung extends JFrame {
 		panel_3.add(lblNewLabel_3);
 
 		txtMatrnr = new JTextField();
+		txtMatrnr.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtMatrnr.setText("");
+			}
+		});
 		txtMatrnr.setForeground(Color.GRAY);
 		txtMatrnr.setText("Matrikelnummer / Personalnummer");
 		txtMatrnr.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtMatrnr.setColumns(10);
-		txtMatrnr.setBounds(35, 136, 341, 20);
+		txtMatrnr.setBounds(35, 172, 341, 20);
 		panel_3.add(txtMatrnr);
 
 		txtVorname = new JTextField();
+		txtVorname.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtVorname.setText("");
+
+			}
+		});
 		txtVorname.setForeground(Color.GRAY);
 		txtVorname.setText("Vorname");
 		txtVorname.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtVorname.setColumns(10);
-		txtVorname.setBounds(35, 43, 341, 20);
+		txtVorname.setBounds(35, 79, 341, 20);
 		panel_3.add(txtVorname);
 
-		JButton btnNewButton = new JButton("best\u00E4tigen");
-		btnNewButton.addActionListener(e-> {
-			
-				Datenbank db = new Datenbank();
-				
-				try {
-					db.createUser(new Studierende(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(), txtVorname.getText(), txtMail.getText()));
-				
+		JButton btnNewButton = new JButton("registrieren");
+		btnNewButton.addActionListener(e -> {
+
+			Datenbank db = new Datenbank();
+
+			try {
+				db.createUser(new Studierende(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(),
+						txtVorname.getText(), txtMail.getText()));
+
 				JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 
 				Login log = new Login();
 				log.setVisible(true);
 				dispose();
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Fehler");
-				}
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Fehler");
+			}
 		});
-		btnNewButton.setBounds(273, 274, 103, 23);
+		btnNewButton.setBounds(273, 234, 103, 23);
 		panel_3.add(btnNewButton);
 
 		txtName = new JTextField();
+		txtName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtName.setText("");
+			}
+		});
 		txtName.setForeground(Color.GRAY);
 		txtName.setText("Name");
 		txtName.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtName.setColumns(10);
-		txtName.setBounds(35, 74, 341, 20);
+		txtName.setBounds(35, 110, 341, 20);
 		panel_3.add(txtName);
 
 		txtMail = new JTextField();
+		txtMail.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtMail.setText("");
+			}
+		});
 		txtMail.setForeground(Color.GRAY);
 		txtMail.setText("Mail");
 		txtMail.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtMail.setColumns(10);
-		txtMail.setBounds(35, 105, 341, 20);
+		txtMail.setBounds(35, 141, 341, 20);
 		panel_3.add(txtMail);
 
 		txtPasswort = new JTextField();
+		txtPasswort.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtPasswort.setText("");
+			}
+		});
 		txtPasswort.setForeground(Color.GRAY);
 		txtPasswort.setText("Passwort");
 		txtPasswort.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		txtPasswort.setColumns(10);
-		txtPasswort.setBounds(35, 167, 341, 20);
+		txtPasswort.setBounds(35, 203, 341, 20);
 		panel_3.add(txtPasswort);
-	}
 
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Studierende");
+		rdbtnNewRadioButton.setBackground(Color.WHITE);
+		rdbtnNewRadioButton.setBounds(35, 49, 109, 23);
+		panel_3.add(rdbtnNewRadioButton);
+
+		rdbtnNewRadioButton_1 = new JRadioButton("Betreuer");
+		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
+		rdbtnNewRadioButton_1.setBounds(153, 49, 109, 23);
+		panel_3.add(rdbtnNewRadioButton_1);
+
+		rdbtnNewRadioButton_2 = new JRadioButton("PPA");
+		rdbtnNewRadioButton_2.setBackground(Color.WHITE);
+		rdbtnNewRadioButton_2.setBounds(273, 49, 109, 23);
+		panel_3.add(rdbtnNewRadioButton_2);
+
+		lblNewLabel_1 = new JLabel("(rdbutton = not functional)");
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setBounds(351, 28, 146, 32);
+		panel_3.add(lblNewLabel_1);
+	}
 }
