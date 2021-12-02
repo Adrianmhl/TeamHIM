@@ -1,1 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+	<student>
+		<matrikelnummer></matrikelnummer>
+		<name></name>
+		<vorname></vorname>
+		<email></email>
+		<praxisstelle></praxisstelle>	
+		<zeitraum>2 Choices</zeitraum>
+		<Betreuer></Betreuer>
+	</student>

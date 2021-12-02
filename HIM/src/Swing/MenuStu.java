@@ -187,178 +187,12 @@ public class MenuStu extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
 		panel_2.setForeground(Color.WHITE);
-		panel_2.setBounds(0, 0, 684, 43);
+		panel_2.setBounds(0, 0, 684, 10);
 		contentPane.add(panel_2);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(145, 11, 539, 350);
 		contentPane.add(tabbedPane);
-
-		JPanel panel_Praktikumsverwaltung = new JPanel();
-		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
-		panel_Praktikumsverwaltung.setLayout(null);
-
-		JButton btnNewButton_2 = new JButton("hochladen");
-		btnNewButton_2.setBounds(58, 229, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_2);
-
-		JButton btnNewButton_2_1 = new JButton("hochladen");
-		btnNewButton_2_1.setBounds(206, 229, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_2_1);
-
-		JButton btnNewButton_2_2 = new JButton("hochladen");
-		btnNewButton_2_2.setBounds(367, 229, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_2_2);
-
-		JLabel lblNewLabel_3_1 = new JLabel("Praktikumsverwaltung");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1.setBounds(10, 0, 252, 32);
-		panel_Praktikumsverwaltung.add(lblNewLabel_3_1);
-
-		JPanel panel_Dokumente = new JPanel();
-		panel_Dokumente.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Dokumente, null);
-		panel_Dokumente.setLayout(null);
-
-		JLabel lblNewLabel_3_1_1 = new JLabel("Dokumente");
-		lblNewLabel_3_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_1.setBounds(10, 0, 252, 32);
-		panel_Dokumente.add(lblNewLabel_3_1_1);
-
-		JPanel panel_Profil = new JPanel();
-		panel_Profil.setLayout(null);
-		panel_Profil.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Profil, null);
-
-		JPanel panel_Profil_2 = new JPanel();
-		panel_Profil_2.setBounds(10, 37, 451, 249);
-		panel_Profil.add(panel_Profil_2);
-		GridBagLayout gbl_panel_Profil_2 = new GridBagLayout();
-		gbl_panel_Profil_2.columnWidths = new int[] { 75, 114, 46, 0, 0, 0 };
-		gbl_panel_Profil_2.rowHeights = new int[] { 14, 14, 14, 14, 14, 0, 14, 0, 0 };
-		gbl_panel_Profil_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel_Profil_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_Profil_2.setLayout(gbl_panel_Profil_2);
-
-		JLabel lblProfilMatrikelnummer = new JLabel("Matrikelnummer");
-		GridBagConstraints gbc_lblProfilMatrikelnummer = new GridBagConstraints();
-		gbc_lblProfilMatrikelnummer.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilMatrikelnummer.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilMatrikelnummer.gridx = 1;
-		gbc_lblProfilMatrikelnummer.gridy = 1;
-		panel_Profil_2.add(lblProfilMatrikelnummer, gbc_lblProfilMatrikelnummer);
-
-		JLabel lblProfilMatrikelnummerOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
-		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilMatrikelnummerOutput.gridx = 4;
-		gbc_lblProfilMatrikelnummerOutput.gridy = 1;
-		panel_Profil_2.add(lblProfilMatrikelnummerOutput, gbc_lblProfilMatrikelnummerOutput);
-
-		JLabel lblProfilName = new JLabel("Name");
-		GridBagConstraints gbc_lblProfilName = new GridBagConstraints();
-		gbc_lblProfilName.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilName.gridx = 1;
-		gbc_lblProfilName.gridy = 2;
-		panel_Profil_2.add(lblProfilName, gbc_lblProfilName);
-
-		JLabel lblProfilNameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilNameOutput = new GridBagConstraints();
-		gbc_lblProfilNameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilNameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilNameOutput.gridx = 4;
-		gbc_lblProfilNameOutput.gridy = 2;
-		panel_Profil_2.add(lblProfilNameOutput, gbc_lblProfilNameOutput);
-
-		JLabel lblProfilVorname = new JLabel("Vorname");
-		GridBagConstraints gbc_lblProfilVorname = new GridBagConstraints();
-		gbc_lblProfilVorname.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilVorname.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilVorname.gridx = 1;
-		gbc_lblProfilVorname.gridy = 3;
-		panel_Profil_2.add(lblProfilVorname, gbc_lblProfilVorname);
-
-		JLabel lblProfilVornameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilVornameOutput = new GridBagConstraints();
-		gbc_lblProfilVornameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilVornameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilVornameOutput.gridx = 4;
-		gbc_lblProfilVornameOutput.gridy = 3;
-		panel_Profil_2.add(lblProfilVornameOutput, gbc_lblProfilVornameOutput);
-
-		JLabel lblProfilEmail = new JLabel("Email");
-		GridBagConstraints gbc_lblProfilEmail = new GridBagConstraints();
-		gbc_lblProfilEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilEmail.gridx = 1;
-		gbc_lblProfilEmail.gridy = 4;
-		panel_Profil_2.add(lblProfilEmail, gbc_lblProfilEmail);
-
-		JLabel lblProfilEmailOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilEmailOutput = new GridBagConstraints();
-		gbc_lblProfilEmailOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilEmailOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmailOutput.gridx = 4;
-		gbc_lblProfilEmailOutput.gridy = 4;
-		panel_Profil_2.add(lblProfilEmailOutput, gbc_lblProfilEmailOutput);
-
-		JLabel lblProfilPraxisstelle = new JLabel("Praxisstelle");
-		GridBagConstraints gbc_lblProfilPraxisstelle = new GridBagConstraints();
-		gbc_lblProfilPraxisstelle.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilPraxisstelle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilPraxisstelle.gridx = 1;
-		gbc_lblProfilPraxisstelle.gridy = 5;
-		panel_Profil_2.add(lblProfilPraxisstelle, gbc_lblProfilPraxisstelle);
-
-		JLabel lblProfilPraxisstelleOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilPraxisstelleOutput = new GridBagConstraints();
-		gbc_lblProfilPraxisstelleOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilPraxisstelleOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilPraxisstelleOutput.gridx = 4;
-		gbc_lblProfilPraxisstelleOutput.gridy = 5;
-		panel_Profil_2.add(lblProfilPraxisstelleOutput, gbc_lblProfilPraxisstelleOutput);
-
-		JLabel lblProfilZeitraum = new JLabel("Zeitraum");
-		GridBagConstraints gbc_lblProfilZeitraum = new GridBagConstraints();
-		gbc_lblProfilZeitraum.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilZeitraum.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilZeitraum.gridx = 1;
-		gbc_lblProfilZeitraum.gridy = 6;
-		panel_Profil_2.add(lblProfilZeitraum, gbc_lblProfilZeitraum);
-
-		JLabel lblProfilZeitraumOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilZeitraumOutput = new GridBagConstraints();
-		gbc_lblProfilZeitraumOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilZeitraumOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilZeitraumOutput.gridx = 4;
-		gbc_lblProfilZeitraumOutput.gridy = 6;
-		panel_Profil_2.add(lblProfilZeitraumOutput, gbc_lblProfilZeitraumOutput);
-
-		JLabel lblProfilBetreuer = new JLabel("Betreuer");
-		GridBagConstraints gbc_lblProfilBetreuer = new GridBagConstraints();
-		gbc_lblProfilBetreuer.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilBetreuer.insets = new Insets(0, 0, 0, 5);
-		gbc_lblProfilBetreuer.gridx = 1;
-		gbc_lblProfilBetreuer.gridy = 7;
-		panel_Profil_2.add(lblProfilBetreuer, gbc_lblProfilBetreuer);
-
-		JLabel lblProfilBetreuerOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilBetreuerOutput = new GridBagConstraints();
-		gbc_lblProfilBetreuerOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilBetreuerOutput.gridx = 4;
-		gbc_lblProfilBetreuerOutput.gridy = 7;
-		panel_Profil_2.add(lblProfilBetreuerOutput, gbc_lblProfilBetreuerOutput);
-
-		JLabel lblNewLabel_3_1_1_1_1_1 = new JLabel("Profil");
-		lblNewLabel_3_1_1_1_1_1.setBounds(10, 11, 30, 14);
-		panel_Profil.add(lblNewLabel_3_1_1_1_1_1);
-		lblNewLabel_3_1_1_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_1_1_1_1.setFont(new Font("Arial", Font.BOLD, 12));
 
 		JPanel panel_BPSFormularAbgabe = new JPanel();
 		panel_BPSFormularAbgabe.setBackground(Color.WHITE);
@@ -414,6 +248,213 @@ public class MenuStu extends JFrame {
 		txtBeschreibung.setColumns(10);
 		txtBeschreibung.setBounds(35, 175, 341, 88);
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
+
+		JPanel panel_Praktikumsverwaltung = new JPanel();
+		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
+		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
+		panel_Praktikumsverwaltung.setLayout(null);
+
+		JLabel lblNewLabel_3_1 = new JLabel("Praktikumsverwaltung");
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_3_1.setBounds(10, 0, 252, 32);
+		panel_Praktikumsverwaltung.add(lblNewLabel_3_1);
+
+		JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
+		panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
+		panel_Praktikumsverwaltungl_2.setBounds(10, 54, 419, 126);
+		panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2);
+		panel_Praktikumsverwaltungl_2.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("T\u00E4tigkeitsnachweis");
+		lblNewLabel.setBounds(10, 0, 135, 13);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 11));
+		panel_Praktikumsverwaltungl_2.add(lblNewLabel);
+
+		JButton btnNewButton_1 = new JButton("hochladen");
+		btnNewButton_1.setBounds(188, 0, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
+		btnNewButton_2.setBounds(303, 0, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
+
+		JLabel lblBericht = new JLabel("Bericht");
+		lblBericht.setBounds(10, 28, 135, 13);
+		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));
+		panel_Praktikumsverwaltungl_2.add(lblBericht);
+
+		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
+		lblBpsvertrag.setBounds(10, 56, 135, 13);
+		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
+		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag);
+
+		JButton btnNewButton_1_1 = new JButton("hochladen");
+		btnNewButton_1_1.setBounds(188, 28, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
+
+		JButton btnNewButton_1_2 = new JButton("hochladen");
+		btnNewButton_1_2.setBounds(188, 56, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
+
+		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
+		btnNewButton_2_1.setBounds(303, 28, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
+
+		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
+		btnNewButton_2_2.setBounds(303, 56, 105, 23);
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
+
+		JPanel panel_Dokumente = new JPanel();
+		panel_Dokumente.setBackground(Color.WHITE);
+		tabbedPane.addTab("New tab", null, panel_Dokumente, null);
+		panel_Dokumente.setLayout(null);
+
+		JLabel lblNewLabel_3_1_1 = new JLabel("Dokumente");
+		lblNewLabel_3_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3_1_1.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_3_1_1.setBounds(10, 0, 252, 32);
+		panel_Dokumente.add(lblNewLabel_3_1_1);
+
+		JPanel panel_Profil = new JPanel();
+		panel_Profil.setLayout(null);
+		panel_Profil.setBackground(Color.WHITE);
+		tabbedPane.addTab("New tab", null, panel_Profil, null);
+
+		JPanel panel_Profil_2 = new JPanel();
+		panel_Profil_2.setBackground(Color.WHITE);
+		panel_Profil_2.setBounds(20, 45, 450, 212);
+		panel_Profil.add(panel_Profil_2);
+		GridBagLayout gbl_panel_Profil_2 = new GridBagLayout();
+		gbl_panel_Profil_2.columnWidths = new int[] { 114, 46, 0, 0, 0 };
+		gbl_panel_Profil_2.rowHeights = new int[] { 14, 14, 14, 14, 0, 14, 0, 0 };
+		gbl_panel_Profil_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel_Profil_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_Profil_2.setLayout(gbl_panel_Profil_2);
+
+		JLabel lblProfilMatrikelnummer = new JLabel("Matrikelnummer");
+		lblProfilMatrikelnummer.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilMatrikelnummer = new GridBagConstraints();
+		gbc_lblProfilMatrikelnummer.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilMatrikelnummer.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilMatrikelnummer.gridx = 0;
+		gbc_lblProfilMatrikelnummer.gridy = 0;
+		panel_Profil_2.add(lblProfilMatrikelnummer, gbc_lblProfilMatrikelnummer);
+
+		JLabel lblProfilMatrikelnummerOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
+		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilMatrikelnummerOutput.gridx = 3;
+		gbc_lblProfilMatrikelnummerOutput.gridy = 0;
+		panel_Profil_2.add(lblProfilMatrikelnummerOutput, gbc_lblProfilMatrikelnummerOutput);
+
+		JLabel lblProfilName = new JLabel("Name");
+		lblProfilName.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilName = new GridBagConstraints();
+		gbc_lblProfilName.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilName.gridx = 0;
+		gbc_lblProfilName.gridy = 1;
+		panel_Profil_2.add(lblProfilName, gbc_lblProfilName);
+
+		JLabel lblProfilNameOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilNameOutput = new GridBagConstraints();
+		gbc_lblProfilNameOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilNameOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilNameOutput.gridx = 3;
+		gbc_lblProfilNameOutput.gridy = 1;
+		panel_Profil_2.add(lblProfilNameOutput, gbc_lblProfilNameOutput);
+
+		JLabel lblProfilVorname = new JLabel("Vorname");
+		lblProfilVorname.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilVorname = new GridBagConstraints();
+		gbc_lblProfilVorname.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilVorname.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilVorname.gridx = 0;
+		gbc_lblProfilVorname.gridy = 2;
+		panel_Profil_2.add(lblProfilVorname, gbc_lblProfilVorname);
+
+		JLabel lblProfilVornameOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilVornameOutput = new GridBagConstraints();
+		gbc_lblProfilVornameOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilVornameOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilVornameOutput.gridx = 3;
+		gbc_lblProfilVornameOutput.gridy = 2;
+		panel_Profil_2.add(lblProfilVornameOutput, gbc_lblProfilVornameOutput);
+
+		JLabel lblProfilEmail = new JLabel("Email");
+		lblProfilEmail.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilEmail = new GridBagConstraints();
+		gbc_lblProfilEmail.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilEmail.gridx = 0;
+		gbc_lblProfilEmail.gridy = 3;
+		panel_Profil_2.add(lblProfilEmail, gbc_lblProfilEmail);
+
+		JLabel lblProfilEmailOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilEmailOutput = new GridBagConstraints();
+		gbc_lblProfilEmailOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilEmailOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilEmailOutput.gridx = 3;
+		gbc_lblProfilEmailOutput.gridy = 3;
+		panel_Profil_2.add(lblProfilEmailOutput, gbc_lblProfilEmailOutput);
+
+		JLabel lblProfilPraxisstelle = new JLabel("Praxisstelle");
+		lblProfilPraxisstelle.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilPraxisstelle = new GridBagConstraints();
+		gbc_lblProfilPraxisstelle.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilPraxisstelle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilPraxisstelle.gridx = 0;
+		gbc_lblProfilPraxisstelle.gridy = 4;
+		panel_Profil_2.add(lblProfilPraxisstelle, gbc_lblProfilPraxisstelle);
+
+		JLabel lblProfilPraxisstelleOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilPraxisstelleOutput = new GridBagConstraints();
+		gbc_lblProfilPraxisstelleOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilPraxisstelleOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilPraxisstelleOutput.gridx = 3;
+		gbc_lblProfilPraxisstelleOutput.gridy = 4;
+		panel_Profil_2.add(lblProfilPraxisstelleOutput, gbc_lblProfilPraxisstelleOutput);
+
+		JLabel lblProfilZeitraum = new JLabel("Zeitraum");
+		lblProfilZeitraum.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilZeitraum = new GridBagConstraints();
+		gbc_lblProfilZeitraum.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilZeitraum.insets = new Insets(0, 0, 5, 5);
+		gbc_lblProfilZeitraum.gridx = 0;
+		gbc_lblProfilZeitraum.gridy = 5;
+		panel_Profil_2.add(lblProfilZeitraum, gbc_lblProfilZeitraum);
+
+		JLabel lblProfilZeitraumOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilZeitraumOutput = new GridBagConstraints();
+		gbc_lblProfilZeitraumOutput.insets = new Insets(0, 0, 5, 0);
+		gbc_lblProfilZeitraumOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilZeitraumOutput.gridx = 3;
+		gbc_lblProfilZeitraumOutput.gridy = 5;
+		panel_Profil_2.add(lblProfilZeitraumOutput, gbc_lblProfilZeitraumOutput);
+
+		JLabel lblProfilBetreuer = new JLabel("Betreuer");
+		lblProfilBetreuer.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblProfilBetreuer = new GridBagConstraints();
+		gbc_lblProfilBetreuer.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilBetreuer.insets = new Insets(0, 0, 0, 5);
+		gbc_lblProfilBetreuer.gridx = 0;
+		gbc_lblProfilBetreuer.gridy = 6;
+		panel_Profil_2.add(lblProfilBetreuer, gbc_lblProfilBetreuer);
+
+		JLabel lblProfilBetreuerOutput = new JLabel("-");
+		GridBagConstraints gbc_lblProfilBetreuerOutput = new GridBagConstraints();
+		gbc_lblProfilBetreuerOutput.anchor = GridBagConstraints.WEST;
+		gbc_lblProfilBetreuerOutput.gridx = 3;
+		gbc_lblProfilBetreuerOutput.gridy = 6;
+		panel_Profil_2.add(lblProfilBetreuerOutput, gbc_lblProfilBetreuerOutput);
+
+		JLabel lblNewLabel_3_1_2 = new JLabel("Profil");
+		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
+		panel_Profil.add(lblNewLabel_3_1_2);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(116, 361, 10, 10);

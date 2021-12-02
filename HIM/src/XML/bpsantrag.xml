@@ -1,1 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bpsantrag SYSTEM "bpsantrag.dtd">
+
+<bpsantrag>
+	<matrikelnummer></matrikelnummer>
+	<name></name>
+	<vorname></vorname>
+	<praxisstelle></praxisstelle>
+	<zeitraum ></zeitraum>
+	<beschreibung></beschreibung>
+</bpsantrag>

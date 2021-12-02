@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
+	<!ELEMENT studierende (order+)>
+	<!ELEMENT order (ordernumber,date?,sender,recipient,productlist)>
+		<!ATTLIST order priority (high|mid|low) "low">
+		<!ELEMENT ordernumber (#PCDATA)>
+		<!ELEMENT date (#PCDATA)>
+		<!ELEMENT sender (company, address)>
+			<!ELEMENT company (#PCDATA)>
+			<!ELEMENT address (street, zip, location)>
+				<!ELEMENT street (#PCDATA)>
+				<!ELEMENT zip (#PCDATA)>
+				<!ELEMENT location (#PCDATA)>	
+		<!ELEMENT recipient (company,address)>
+		<!ELEMENT productlist (product+)>
+			<!ELEMENT product (name, quantity, price)>
+				<!ELEMENT name (#PCDATA)>
+				<!ELEMENT quantity (#PCDATA)>
+				<!ELEMENT price (#PCDATA)>
+	
+
