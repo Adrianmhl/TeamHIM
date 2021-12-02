@@ -3,6 +3,7 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -77,17 +78,23 @@ public class Login extends JFrame {
 		btnNewButton_1.addActionListener(e -> {
 			Studierende stud = new Studierende();
 
-			if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
+			try {
+				if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
 
-				MenuStu ms = new MenuStu();
-				ms.setVisible(true);
-				dispose();
+					MenuStu ms = new MenuStu();
+					ms.setVisible(true);
+					dispose();
 
-			} else {
-				JOptionPane.showMessageDialog(btnNewButton_1,
-						"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
-				textFieldBenutzer.setText("");
-				textFieldPasswort.setText("");
+				} else {
+					JOptionPane.showMessageDialog(btnNewButton_1,
+							"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
+					textFieldBenutzer.setText("");
+					textFieldPasswort.setText("");
+				}
+			
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 //			if (textFieldBenutzer.getText().equals("test") && textFieldPasswort.getText().equals("test")) {

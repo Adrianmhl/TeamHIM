@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import Objekte.Betreuer;
 import Objekte.Studierende;
 
@@ -20,71 +18,58 @@ public class Datenbank {
 	 * @param betPersNr
 	 * @return
 =======
+	 * @throws Exception 
 	 * @Salam  
 	 * 
 >>>>>>> Stashed changes
 	 */
-	public Betreuer getBetreuer(int betPersNr) {
-		if (con == null)
-			try {
-				startConnection();
-			} catch (ClassNotFoundException e1) {
-
-				e1.printStackTrace();
-			}
-		Betreuer betreuer = null;
+	public Betreuer getBetreuer(int betPersNr) throws Exception{
+		if (con == null) startConnection();
+			
+		//Betreuer betreuer = null;
 
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE name = ?");
 			stmt.setInt(1, betPersNr);
-			ResultSet rs;
-			rs = stmt.executeQuery();
-			while (rs.next()) {
+			ResultSet rs = stmt.executeQuery();
+			//while (rs.next()) { Unnoetig, betPersNr ist Primärschlüssel
 
-				betreuer = new Betreuer(betPersNr, rs.getString("nachname"), rs.getString("vorname"));
-
-			}
+				return new Betreuer(betPersNr, rs.getString("nachname"), rs.getString("vorname"));
+			//}
 		} catch (SQLException e) {
-
-			e.printStackTrace();
+			return null;
 		}
-		return betreuer;
+	
 
 	}
 	/**
+	 * @throws Exception 
 	 * @Salam
 	 */
 
-	public Studierende getStudierende(String id) {
+	public Studierende getStudierende(String id) throws Exception {
 
-		if (con == null)
-			try {
-				startConnection();
-			} catch (ClassNotFoundException e1) {
+		if (con == null)	startConnection();
 
-				e1.printStackTrace();
-			}
-
-		Studierende student = null;
+		//Studierende student = null;
 
 		try {
 
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.student WHERE id =?");
-			ResultSet rs;
 			stmt.setString(1, id);
-			rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 
-			while (rs.next()) {
+			//while (rs.next()) { Unnoetig, id ist Primärschlüssel
 
-				student = new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
+				return new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
 						rs.getString("mail"));
-
-			}
+				
+			//}
 
 		} catch (Exception e) {
 			return null;
 		}
-		return student;
+		
 
 	}
 
@@ -98,35 +83,25 @@ public class Datenbank {
 	 * @param vorname
 	 * @param mail
 	 * @return //
+	 * @throws Exception 
 	 */
 
-	public boolean createUser(String id, String passwort, String name, String vorname, String mail) {
+	public void createUser(Studierende student) throws Exception{//Vorschlag: Student als Parameter
 
-		if (con == null)
-			try {
-				startConnection();
-			} catch (ClassNotFoundException e1) {
-
-				e1.printStackTrace();
-			}
-
-		try {
+		if (con == null) startConnection();
+			
 
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO `db3`.`student` (`id`, `passwort`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?);");
-			stmt.setString(1, id);
-			stmt.setString(2,passwort);
-			stmt.setString(3, name);
-			stmt.setString(4,vorname);
-			stmt.setString(5, mail);
+			stmt.setString(1, student.getUserId());
+			stmt.setString(2,student.getUserPass());
+			stmt.setString(3, student.getUserName());
+			stmt.setString(4,student.getUserVorname());
+			stmt.setString(5, student.getUserMail());
 			stmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return true;
+		//return true; vorschlag: ueber exception erfolg determinieren -F
 	}
   
-	public boolean deleteUser() { 
+	public boolean deleteUser() { //boolean?
 		
 		return false;
 	}
@@ -136,7 +111,7 @@ public class Datenbank {
 		
 	}
 
-	public void startConnection() throws ClassNotFoundException {
+	public void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";
 		String dbName = "db3";
@@ -146,13 +121,8 @@ public class Datenbank {
 
 		Class.forName(driver);
 
-		try {
-			con = DriverManager.getConnection(url + dbName, userName, password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		con = DriverManager.getConnection(url + dbName, userName, password);
+		
 		System.out.println("Connected to the database");
 	}
 

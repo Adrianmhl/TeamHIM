@@ -3,8 +3,6 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Datenbank.Datenbank;
+import Objekte.Studierende;
 
 public class Registrierung extends JFrame {
 
@@ -125,15 +124,18 @@ public class Registrierung extends JFrame {
 		btnNewButton.addActionListener(e-> {
 			
 				Datenbank db = new Datenbank();
-				db.createUser(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(), txtVorname.getText(),
-						txtMail.getText());
-
+				
+				try {
+					db.createUser(new Studierende(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(), txtVorname.getText(), txtMail.getText()));
+				
 				JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 
 				Login log = new Login();
 				log.setVisible(true);
 				dispose();
-
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Fehler");
+				}
 		});
 		btnNewButton.setBounds(273, 274, 103, 23);
 		panel_3.add(btnNewButton);

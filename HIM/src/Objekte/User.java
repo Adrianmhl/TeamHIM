@@ -71,7 +71,7 @@ public class User {
 		this.loginStatus = loginStatus;
 	}
 
-	public boolean verifyLogin(String id, String passwort) {
+	public boolean verifyLogin(String id, String passwort) throws Exception {
 
 		return false;
 	}

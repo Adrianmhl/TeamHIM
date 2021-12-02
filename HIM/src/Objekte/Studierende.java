@@ -41,11 +41,12 @@ public class Studierende extends User {
 		this.studBetreuer = studBetreuer;
 	}
 
-	@Override
+	@Override //RIESIGES SICHERHEITSRISIKO!!!!
 	/**
-	 * @author isedo Überprüft Login Daten (Datenbank == Eingabe ? )
+	 * @author isedo Überprüft Login Daten (Datenbank == Eingabe ? ) 
+	 * @throws Exception 
 	 */
-	public boolean verifyLogin(String id, String passwort) {
+	public boolean verifyLogin(String id, String passwort) throws Exception {
 		Datenbank db = new Datenbank();
 
 		if (db.getStudierende(id) == null) {
