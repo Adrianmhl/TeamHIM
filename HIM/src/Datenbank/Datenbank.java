@@ -54,7 +54,7 @@ public class Datenbank {
 		if (con == null)
 			startConnection();
 
-		// Studierende student = null;
+		Studierende student = null;
 
 		try {
 
@@ -62,7 +62,7 @@ public class Datenbank {
 			stmt.setString(1, id);
 			ResultSet rs = stmt.executeQuery();
 
-			// while (rs.next()) { Unnoetig, id ist Primärschlüssel
+//			rs.next();
 
 			return new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
 					rs.getString("mail"));
@@ -70,6 +70,7 @@ public class Datenbank {
 			// }
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 

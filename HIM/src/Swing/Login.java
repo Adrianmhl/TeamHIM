@@ -75,6 +75,7 @@ public class Login extends JFrame {
 
 		JButton btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.addActionListener(e -> {
+
 			Studierende stud = new Studierende();
 
 			try {

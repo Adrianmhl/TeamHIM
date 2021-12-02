@@ -192,7 +192,7 @@ public class MenuStu extends JFrame {
 		contentPane.add(panel_2);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(145, 11, 539, 350);
+		tabbedPane.setBounds(145, 0, 539, 361);
 		contentPane.add(tabbedPane);
 
 		JPanel panel_BPSFormularAbgabe = new JPanel();
