@@ -101,27 +101,34 @@ public class Datenbank {
 		stmt.setString(5, student.getUserMail());
 		stmt.executeUpdate();
 	}
-	public static void upload(String path, String matnum) throws Exception {
+	
+	
+	public static void upload(File infile, String matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
-        PreparedStatement stmnt = con.prepareStatement("UPDATE student SET nachweis = ? WHERE id = ?");
-        InputStream inputStream = new FileInputStream(new File(path));
+        PreparedStatement stmnt = con.prepareStatement("UPDATE student SET "+column+" = ? WHERE id = ?");
+        InputStream inputStream = new FileInputStream(infile);
         System.out.println(inputStream);
+        //stmnt.setString(1, column);
         stmnt.setBlob(1, inputStream);
         stmnt.setString(2, matnum);
         stmnt.executeUpdate();
         inputStream.close();
 	}
-	public static void download(String path, String matnum) throws Exception {
+	
+	
+	public static void download(String path, String matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
 		FileOutputStream output= new FileOutputStream(path);
-		PreparedStatement stmnt = con.prepareStatement("Select nachweis From student WHERE id = ?");
+		PreparedStatement stmnt = con.prepareStatement("Select "+column+" From student WHERE id = ?");
+		//stmnt.setString(1, column);
 		stmnt.setString(1, matnum);
 		ResultSet rs=stmnt.executeQuery();
 		while(rs.next()) {
-			output.write(rs.getBlob("nachweis").getBytes(1,(int) rs.getBlob("nachweis").length()));
+			output.write(rs.getBlob(column).getBytes(1,(int) rs.getBlob(column).length()));
 		}
+		output.close();
 		
 		
 	}

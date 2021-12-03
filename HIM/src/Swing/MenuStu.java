@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -352,7 +353,8 @@ public class MenuStu extends JFrame {
 		btnNewButton_1.addActionListener(e->{
 			
 				try {
-					Datenbank.upload(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum);
+					File inFileNachweis=new File(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"));
+					Datenbank.upload(inFileNachweis, matrikelnum,"nachweis");
 				}
 				 catch (Exception e1) {
 					e1.printStackTrace();
@@ -364,7 +366,7 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(e->{
 			try {
-				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum);
+				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "nachweis");
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -383,19 +385,51 @@ public class MenuStu extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("hochladen");
 		btnNewButton_1_1.setBounds(188, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
-
+		btnNewButton_1_1.addActionListener(e->{
+			
+			try {
+				File inFileBericht=new File(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"));
+				Datenbank.upload(inFileBericht, matrikelnum,"bericht");
+			} 
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		JButton btnNewButton_1_2 = new JButton("hochladen");
 		btnNewButton_1_2.setBounds(188, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
+		btnNewButton_1_2.addActionListener(e->{
+			try {
+				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "bericht");
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		
 
 		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
 		btnNewButton_2_1.setBounds(303, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
-
+		btnNewButton_2_1.addActionListener(e->{
+			try {
+				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "bericht");
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
 		btnNewButton_2_2.setBounds(303, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
-
+		btnNewButton_2_2.addActionListener(e->{
+			try {
+				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "vertrag");
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		JPanel panel_Dokumente = new JPanel();
 		panel_Dokumente.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Dokumente, null);

@@ -47,13 +47,13 @@ public class Studierende extends User {
 	 * @throws Exception
 	 */
 	public boolean verifyLogin(String id, String passwort) throws Exception {
-		//Datenbank db = new Datenbank();
+		
 
-		if (Datenbank.getStudierende(id) == null) { //static
+		if (Datenbank.getStudierende(id) == null) { 
 
 			return false;
 		}
-		String pass = Datenbank.getStudierende(id).getUserPass(); //static
+		String pass = Datenbank.getStudierende(id).getUserPass(); 
 		if (pass.equals(passwort))
 			return true;
 		return false;
