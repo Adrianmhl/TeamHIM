@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,12 +16,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+import com.mysql.cj.TransactionEventHandler;
+
+import Datenbank.Datenbank;
+
+import javax.swing.ButtonGroup;
 
 public class MenuStu extends JFrame {
 	private JTabbedPane tabbedPane;
@@ -28,16 +40,18 @@ public class MenuStu extends JFrame {
 	private JTextField txtUnternehmen;
 	private JTextField txtBeschreibung;
 	private JTextField txtVorname;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					MenuStu frame = new MenuStu();
+					MenuStu frame = new MenuStu("matrikelnummer");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +63,12 @@ public class MenuStu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuStu() {
+	public MenuStu(String matrikelnum) {
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -155,8 +174,15 @@ public class MenuStu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Login log = new Login();
-				log.setVisible(true);
+				Login log;
+				try {
+					log = new Login();
+					log.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				dispose();
 
 			}
@@ -177,7 +203,7 @@ public class MenuStu extends JFrame {
 		tab2_2_1_1.setBounds(10, 307, 126, 21);
 		panel_1.add(tab2_2_1_1);
 
-		JLabel lblNewLabel_1_2_1_1 = new JLabel("Matrikelnummer");
+		JLabel lblNewLabel_1_2_1_1 = new JLabel(matrikelnum);
 		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
@@ -282,11 +308,13 @@ public class MenuStu extends JFrame {
 		panel_BPSFormularAbgabe.add(txtVorname);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("01.03 - 31.08");
+		buttonGroup.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.setBackground(Color.WHITE);
 		rdbtnNewRadioButton.setBounds(153, 176, 109, 23);
 		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("01.09 - 28.02");
+		buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
 		rdbtnNewRadioButton_1.setBounds(267, 176, 109, 23);
 		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton_1);
@@ -321,6 +349,15 @@ public class MenuStu extends JFrame {
 		JButton btnNewButton_1 = new JButton("hochladen");
 		btnNewButton_1.setBounds(188, 0, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(e->{
+			
+				try {
+					Datenbank.upload(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum);
+				}
+				 catch (Exception e1) {
+					e1.printStackTrace();
+				}
+		});
 
 		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
 		btnNewButton_2.setBounds(303, 0, 105, 23);

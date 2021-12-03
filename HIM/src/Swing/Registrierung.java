@@ -15,10 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
 import Objekte.Studierende;
+import javax.swing.ButtonGroup;
 
 public class Registrierung extends JFrame {
 
@@ -29,9 +33,10 @@ public class Registrierung extends JFrame {
 	private JTextField txtMail;
 	private JTextField txtPasswort;
 	private JLabel lblNewLabel;
-	private JRadioButton rdbtnNewRadioButton_1;
-	private JRadioButton rdbtnNewRadioButton_2;
+	private JRadioButton betreuerBtn;
+	private JRadioButton ppaBtn;
 	private JLabel lblNewLabel_1;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -54,8 +59,14 @@ public class Registrierung extends JFrame {
 	 * Create the frame.
 	 */
 	public Registrierung() {
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -80,14 +91,19 @@ public class Registrierung extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Login log = new Login();
-				log.setVisible(true);
+				Login log;
+				try {
+					log = new Login();
+					log.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});
 		lblNewLabel_1_2_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_2_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_2_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2_2_1.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 11));
 		lblNewLabel_1_2_2_1.setBounds(10, 0, 116, 18);
 		tab2_2_2_1.add(lblNewLabel_1_2_2_1);
 
@@ -123,6 +139,7 @@ public class Registrierung extends JFrame {
 		panel_3.add(txtMatrnr);
 
 		txtVorname = new JTextField();
+		txtVorname.setToolTipText("Vorname");
 		txtVorname.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -137,7 +154,8 @@ public class Registrierung extends JFrame {
 		txtVorname.setBounds(35, 79, 341, 20);
 		panel_3.add(txtVorname);
 
-		JButton btnNewButton = new JButton("registrieren");
+		JButton btnNewButton = new JButton("Registrieren");
+		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 11));
 		btnNewButton.addActionListener(e -> {
 
 			Datenbank db = new Datenbank();
@@ -200,20 +218,26 @@ public class Registrierung extends JFrame {
 		txtPasswort.setBounds(35, 203, 341, 20);
 		panel_3.add(txtPasswort);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Studierende");
-		rdbtnNewRadioButton.setBackground(Color.WHITE);
-		rdbtnNewRadioButton.setBounds(35, 49, 109, 23);
-		panel_3.add(rdbtnNewRadioButton);
+		JRadioButton studierendeBtn = new JRadioButton("Studierende");
+		buttonGroup.add(studierendeBtn);
+		studierendeBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		studierendeBtn.setBackground(Color.WHITE);
+		studierendeBtn.setBounds(35, 49, 109, 23);
+		panel_3.add(studierendeBtn);
+		
+		betreuerBtn = new JRadioButton("Betreuer");
+		buttonGroup.add(betreuerBtn);
+		betreuerBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		betreuerBtn.setBackground(Color.WHITE);
+		betreuerBtn.setBounds(153, 49, 109, 23);
+		panel_3.add(betreuerBtn);
 
-		rdbtnNewRadioButton_1 = new JRadioButton("Betreuer");
-		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
-		rdbtnNewRadioButton_1.setBounds(153, 49, 109, 23);
-		panel_3.add(rdbtnNewRadioButton_1);
-
-		rdbtnNewRadioButton_2 = new JRadioButton("PPA");
-		rdbtnNewRadioButton_2.setBackground(Color.WHITE);
-		rdbtnNewRadioButton_2.setBounds(273, 49, 109, 23);
-		panel_3.add(rdbtnNewRadioButton_2);
+		ppaBtn = new JRadioButton("PPA");
+		buttonGroup.add(ppaBtn);
+		ppaBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		ppaBtn.setBackground(Color.WHITE);
+		ppaBtn.setBounds(273, 49, 109, 23);
+		panel_3.add(ppaBtn);
 
 		lblNewLabel_1 = new JLabel("(rdbutton = not functional)");
 		lblNewLabel_1.setForeground(Color.RED);

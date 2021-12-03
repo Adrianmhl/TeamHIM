@@ -18,7 +18,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
@@ -31,6 +34,7 @@ public class MenuBet extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -48,6 +52,11 @@ public class MenuBet extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuBet() {
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,8 +129,13 @@ public class MenuBet extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Login log = new Login();
-				log.setVisible(true);
+				Login log;
+				try {
+					log = new Login();
+					log.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 
 			}

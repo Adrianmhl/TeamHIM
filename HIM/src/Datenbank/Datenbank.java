@@ -1,5 +1,9 @@
 package Datenbank;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,24 +28,21 @@ public class Datenbank {
 	 * 
 	 *        >>>>>>> Stashed changes
 	 */
-	public Betreuer getBetreuer(int betPersNr) throws Exception {
+	public static Betreuer getBetreuer(int betPersNr) throws Exception {
 		if (con == null)
 			startConnection();
-
-		// Betreuer betreuer = null;
-
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE name = ?");
 			stmt.setInt(1, betPersNr);
 			ResultSet rs = stmt.executeQuery();
-			// while (rs.next()) { Unnoetig, betPersNr ist Primärschlüssel
-
+			 while (rs.next()) { 
+			
 			return new Betreuer(betPersNr, rs.getString("nachname"), rs.getString("vorname"));
-			// }
+			}
 		} catch (SQLException e) {
 			return null;
 		}
-
+		return null;
 	}
 
 	/**
@@ -49,12 +50,10 @@ public class Datenbank {
 	 * @Salam
 	 */
 
-	public Studierende getStudierende(String id) throws Exception {
+	public static Studierende getStudierende(String id) throws Exception {
 
 		if (con == null)
 			startConnection();
-
-		Studierende student = null;
 
 		try {
 
@@ -62,18 +61,16 @@ public class Datenbank {
 			stmt.setString(1, id);
 			ResultSet rs = stmt.executeQuery();
 
-//			rs.next();
-
+			while(rs.next()) {
 			return new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
 					rs.getString("mail"));
-
-			// }
+			 }
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-
+		return null;
 	}
 
 	/**
@@ -89,7 +86,7 @@ public class Datenbank {
 	 * @throws Exception
 	 */
 
-	public void createUser(Studierende student) throws Exception {// Vorschlag: Student als Parameter
+	public static void createUser(Studierende student) throws Exception {// Vorschlag: Student als Parameter
 
 		if (con == null)
 			startConnection();
@@ -102,10 +99,19 @@ public class Datenbank {
 		stmt.setString(4, student.getUserVorname());
 		stmt.setString(5, student.getUserMail());
 		stmt.executeUpdate();
-		// return true; vorschlag: ueber exception erfolg determinieren -F
 	}
-
-	public boolean deleteUser() { // boolean?
+	public static void upload(String path, String matnum) throws Exception {
+		if (con == null)
+			startConnection();
+        PreparedStatement stmnt = con.prepareStatement("UPDATE student SET nachweis = ? WHERE id = ?");
+        InputStream inputStream = new FileInputStream(new File(path));
+        System.out.println(inputStream);
+        stmnt.setBlob(1, inputStream);
+        stmnt.setString(2, matnum);
+        stmnt.executeUpdate();
+        inputStream.close();
+	}
+	public boolean deleteUser() { 
 
 		return false;
 	}
@@ -114,7 +120,7 @@ public class Datenbank {
 
 	}
 
-	public void startConnection() throws Exception {
+	public static void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";
 		String dbName = "db3";

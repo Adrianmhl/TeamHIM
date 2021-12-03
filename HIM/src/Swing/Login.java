@@ -3,6 +3,7 @@ package Swing;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Objekte.Studierende;
 
@@ -42,9 +46,14 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 
-	public Login() {
+	public Login() throws Exception{
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		setTitle("HIM - HFT Intern Manager");
-
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 400);
 		getContentPane().setLayout(null);
@@ -54,8 +63,10 @@ public class Login extends JFrame {
 		panel.setBounds(145, 0, 529, 361);
 		getContentPane().add(panel);
 		panel.setLayout(null);
+		
 
 		textFieldBenutzer = new JTextField();
+		textFieldBenutzer.setToolTipText("Matrikel- / Personalnummer");
 		textFieldBenutzer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -71,6 +82,7 @@ public class Login extends JFrame {
 		panel.add(textFieldBenutzer);
 
 		textFieldPasswort = new JTextField();
+		textFieldPasswort.setToolTipText("Kennwort");
 		textFieldPasswort.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -91,24 +103,29 @@ public class Login extends JFrame {
 
 			Studierende stud = new Studierende();
 
-			try {
-				if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
+			
+				try {
+					if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
 
-					MenuStu ms = new MenuStu();
-					ms.setVisible(true);
-					dispose();
+						MenuStu ms = new MenuStu(textFieldBenutzer.getText());
+						ms.setVisible(true);
+						dispose();
 
-				} else {
-					JOptionPane.showMessageDialog(btnNewButton_1,
-							"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
-					textFieldBenutzer.setText("");
-					textFieldPasswort.setText("");
+					} else {
+						JOptionPane.showMessageDialog(btnNewButton_1,
+								"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihre Daten.");
+						textFieldBenutzer.setText("");
+						textFieldPasswort.setText("");
+					}
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			
 
 //			if (textFieldBenutzer.getText().equals("test") && textFieldPasswort.getText().equals("test")) {
 //
@@ -124,7 +141,7 @@ public class Login extends JFrame {
 //			}
 
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
 		btnNewButton_1.setForeground(Color.BLACK);
 		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.setBorderPainted(false);
@@ -138,6 +155,7 @@ public class Login extends JFrame {
 		panel.add(lblNewLabel);
 
 		JLabel lblRegistrieren = new JLabel("Jetzt registieren >");
+		lblRegistrieren.setFont(new Font("Segoe UI Light", Font.PLAIN, 11));
 		lblRegistrieren.setForeground(Color.DARK_GRAY);
 		lblRegistrieren.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrieren.addMouseListener(new MouseAdapter() {

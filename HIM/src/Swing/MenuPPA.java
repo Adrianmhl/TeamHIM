@@ -18,7 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 public class MenuPPA extends JFrame {
 
@@ -29,6 +32,11 @@ public class MenuPPA extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -46,7 +54,13 @@ public class MenuPPA extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPPA() {
+		try {
+		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
+		} catch( Exception ex ) {
+		    ex.printStackTrace();
+		}
 		setTitle("HIM - HFT Intern Manager");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
@@ -156,8 +170,15 @@ public class MenuPPA extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Login log = new Login();
-				log.setVisible(true);
+				Login log;
+				try {
+					log = new Login();
+					log.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				dispose();
 
 			}
