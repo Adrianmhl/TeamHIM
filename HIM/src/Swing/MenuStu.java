@@ -362,7 +362,14 @@ public class MenuStu extends JFrame {
 		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
 		btnNewButton_2.setBounds(303, 0, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
-
+		btnNewButton_2.addActionListener(e->{
+			try {
+				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum);
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
 		JLabel lblBericht = new JLabel("Bericht");
 		lblBericht.setBounds(10, 55, 135, 13);
 		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));

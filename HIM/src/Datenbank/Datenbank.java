@@ -3,6 +3,7 @@ package Datenbank;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -111,6 +112,23 @@ public class Datenbank {
         stmnt.executeUpdate();
         inputStream.close();
 	}
+	public static void download(String path, String matnum) throws Exception {
+		if (con == null)
+			startConnection();
+		FileOutputStream output= new FileOutputStream(path);
+		PreparedStatement stmnt = con.prepareStatement("Select nachweis From student WHERE id = ?");
+		stmnt.setString(1, matnum);
+		ResultSet rs=stmnt.executeQuery();
+		while(rs.next()) {
+			output.write(rs.getBlob("nachweis").getBytes(1,(int) rs.getBlob("nachweis").length()));
+		}
+		
+		
+	}
+	
+	
+	
+	
 	public boolean deleteUser() { 
 
 		return false;
