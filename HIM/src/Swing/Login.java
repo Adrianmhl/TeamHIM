@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -20,8 +21,6 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
-import Objekte.Studierende;
-import Objekte.User;
 
 public class Login extends JFrame {
 	private JTextField textFieldBenutzer;
@@ -83,7 +82,7 @@ public class Login extends JFrame {
 		textFieldBenutzer.setBounds(70, 150, 284, 32);
 		panel.add(textFieldBenutzer);
 
-		textFieldPasswort = new JTextField();
+		textFieldPasswort = new JPasswordField();
 		textFieldPasswort.setToolTipText("Kennwort");
 		textFieldPasswort.addMouseListener(new MouseAdapter() {
 			@Override

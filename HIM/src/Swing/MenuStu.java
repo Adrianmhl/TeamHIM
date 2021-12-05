@@ -15,6 +15,7 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -359,8 +360,12 @@ public class MenuStu extends JFrame {
 		btnNewButton_1.addActionListener(e->{
 			
 				try {
-					File inFileNachweis=new File(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"));
+					JFileChooser chooser=new JFileChooser();
+					int input=chooser.showOpenDialog(null);
+					if(input==JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
 					Datenbank.upload(inFileNachweis, matrikelnum,"nachweis");
+					}
 				}
 				 catch (Exception e1) {
 					e1.printStackTrace();
@@ -372,7 +377,10 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(e->{
 			try {
-				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "nachweis");
+				JFileChooser chooser=new JFileChooser();
+				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
+				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
+				
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -394,8 +402,13 @@ public class MenuStu extends JFrame {
 		btnNewButton_1_1.addActionListener(e->{
 			
 			try {
-				File inFileBericht=new File(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"));
-				Datenbank.upload(inFileBericht, matrikelnum,"bericht");
+				JFileChooser chooser=new JFileChooser();
+				int input=chooser.showOpenDialog(null);
+				if(input==JFileChooser.APPROVE_OPTION) {
+				File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
+				Datenbank.upload(inFileNachweis, matrikelnum,"bericht");
+				}
+				
 			} 
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -406,7 +419,12 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
 		btnNewButton_1_2.addActionListener(e->{
 			try {
-				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "bericht");
+				JFileChooser chooser=new JFileChooser();
+				int input=chooser.showOpenDialog(null);
+				if(input==JFileChooser.APPROVE_OPTION) {
+				File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
+				Datenbank.upload(inFileNachweis, matrikelnum,"vertrag");
+				}
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -419,7 +437,9 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
 		btnNewButton_2_1.addActionListener(e->{
 			try {
-				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "bericht");
+				JFileChooser chooser=new JFileChooser();
+				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
+				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();
@@ -430,7 +450,10 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
 		btnNewButton_2_2.addActionListener(e->{
 			try {
-				Datenbank.download(JOptionPane.showInputDialog(null,"Bitte Dateipfad angeben"), matrikelnum, "vertrag");
+				JFileChooser chooser=new JFileChooser();
+				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
+				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+				
 			}
 			catch (Exception e1) {
 				e1.printStackTrace();

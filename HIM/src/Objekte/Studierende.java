@@ -33,12 +33,4 @@ public class Studierende extends User {
 	}
 	
 
-	
-/*
-	@Override
-	public String toString() {
-		return "Studierende [studMat=" + studMat + ", studStatus=" + studStatus + ", studBetreuer=" + studBetreuer
-				+ "]";
-	}
-*/
 }

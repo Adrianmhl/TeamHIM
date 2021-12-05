@@ -1,6 +1,6 @@
 package Objekte;
 
-import Datenbank.Datenbank;
+
 
 public class User {
 
