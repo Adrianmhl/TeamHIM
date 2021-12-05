@@ -81,7 +81,7 @@ public class Datenbank {
 							rs.getString("mail"));
 					 }
 			}
-			stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE id =?");
+			stmt = con.prepareStatement("SELECT * FROM db3.ppa WHERE id =?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs!=null){
@@ -111,19 +111,27 @@ public class Datenbank {
 	 * @throws Exception
 	 */
 
-	public static void createUser(Studierende student) throws Exception {
+	public static void createUser(User user) throws Exception {
 
 		if (con == null)
 			startConnection();
-
-		PreparedStatement stmt = con.prepareStatement(
-				"INSERT INTO `db3`.`student` (`id`, `passwort`, `pwSalt`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?,?);");
-		stmt.setInt(1, student.getUserId());
-		stmt.setString(2, student.getUserPass());
-		stmt.setBytes(3, student.getUserSalt());
-		stmt.setString(4, student.getUserName());
-		stmt.setString(5, student.getUserVorname());
-		stmt.setString(6, student.getUserMail());
+		PreparedStatement stmt = null;
+		switch(user.getRole()) {
+			case -1:
+				stmt = con.prepareStatement("INSERT INTO `db3`.`student` (`id`, `passwort`, `pwSalt`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?,?);");
+				break;
+			case 0:
+				stmt = con.prepareStatement("INSERT INTO `db3`.`betreuer` (`id`, `passwort`, `pwSalt`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?,?);");
+				break;
+			case 1:
+				stmt = con.prepareStatement("INSERT INTO `db3`.`ppa` (`id`, `passwort`, `pwSalt`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?,?);");
+		}
+		stmt.setInt(1, user.getUserId());
+		stmt.setString(2, user.getUserPass());
+		stmt.setBytes(3, user.getUserSalt());
+		stmt.setString(4, user.getUserName());
+		stmt.setString(5, user.getUserVorname());
+		stmt.setString(6, user.getUserMail());
 		stmt.executeUpdate();
 	}
 	

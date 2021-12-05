@@ -115,10 +115,12 @@ public class Login extends JFrame {
 								break;
 							case 0:
 								MenuBet mb =new MenuBet();
+								mb.setVisible(true);
 								dispose();
 								break;
 							case 1:
 								MenuPPA mp=new MenuPPA();
+								mp.setVisible(true);
 								dispose();
 						}
 						

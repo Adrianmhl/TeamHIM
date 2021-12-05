@@ -24,6 +24,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightCo
 
 import Datenbank.Datenbank;
 import Objekte.Studierende;
+import Objekte.User;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -122,7 +123,28 @@ public class Registrierung extends JFrame {
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(150, 11, 534, 333);
 		contentPane.add(panel_3);
+		
+		JRadioButton studierendeBtn = new JRadioButton("Studierende");
+		buttonGroup.add(studierendeBtn);
+		studierendeBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		studierendeBtn.setBackground(Color.WHITE);
+		studierendeBtn.setBounds(35, 49, 109, 23);
+		panel_3.add(studierendeBtn);
+		
+		betreuerBtn = new JRadioButton("Betreuer");
+		buttonGroup.add(betreuerBtn);
+		betreuerBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		betreuerBtn.setBackground(Color.WHITE);
+		betreuerBtn.setBounds(153, 49, 109, 23);
+		panel_3.add(betreuerBtn);
 
+		ppaBtn = new JRadioButton("PPA");
+		buttonGroup.add(ppaBtn);
+		ppaBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
+		ppaBtn.setBackground(Color.WHITE);
+		ppaBtn.setBounds(273, 49, 109, 23);
+		panel_3.add(ppaBtn);
+		
 		JLabel lblNewLabel_3 = new JLabel("Registrierung");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
@@ -171,12 +193,23 @@ public class Registrierung extends JFrame {
 				
 				
 				String hash=Datenbank.hashPassword(txtPasswort.getText(), salt);
+				if(studierendeBtn.isSelected()) {
+					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
+						txtVorname.getText(), txtMail.getText(),-1));
+					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
+				}
+				else if(betreuerBtn.isSelected()) {
+					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
+							txtVorname.getText(), txtMail.getText(),0));
+					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
+				}
+				else if(ppaBtn.isSelected()){
+					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
+							txtVorname.getText(), txtMail.getText(),0));
+					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
+				}
+				else JOptionPane.showMessageDialog(btnNewButton, "Keine AusWahl getroffen!");
 				
-				Datenbank.createUser(new Studierende(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
-						txtVorname.getText(), txtMail.getText(),null,null));
-
-				JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
-
 				Login log = new Login();
 				log.setVisible(true);
 				dispose();
@@ -229,26 +262,7 @@ public class Registrierung extends JFrame {
 		txtPasswort.setBounds(35, 203, 341, 20);
 		panel_3.add(txtPasswort);
 
-		JRadioButton studierendeBtn = new JRadioButton("Studierende");
-		buttonGroup.add(studierendeBtn);
-		studierendeBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
-		studierendeBtn.setBackground(Color.WHITE);
-		studierendeBtn.setBounds(35, 49, 109, 23);
-		panel_3.add(studierendeBtn);
 		
-		betreuerBtn = new JRadioButton("Betreuer");
-		buttonGroup.add(betreuerBtn);
-		betreuerBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
-		betreuerBtn.setBackground(Color.WHITE);
-		betreuerBtn.setBounds(153, 49, 109, 23);
-		panel_3.add(betreuerBtn);
-
-		ppaBtn = new JRadioButton("PPA");
-		buttonGroup.add(ppaBtn);
-		ppaBtn.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 11));
-		ppaBtn.setBackground(Color.WHITE);
-		ppaBtn.setBounds(273, 49, 109, 23);
-		panel_3.add(ppaBtn);
 
 		lblNewLabel_1 = new JLabel("(rdbutton = not functional)");
 		lblNewLabel_1.setForeground(Color.RED);
