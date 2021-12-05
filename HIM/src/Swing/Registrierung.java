@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +24,9 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightCo
 
 import Datenbank.Datenbank;
 import Objekte.Studierende;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.swing.ButtonGroup;
 
 public class Registrierung extends JFrame {
@@ -158,11 +163,17 @@ public class Registrierung extends JFrame {
 		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 11));
 		btnNewButton.addActionListener(e -> {
 
-			Datenbank db = new Datenbank();
 
 			try {
-				db.createUser(new Studierende(txtMatrnr.getText(), txtPasswort.getText(), txtName.getText(),
-						txtVorname.getText(), txtMail.getText()));
+				SecureRandom rnd = new SecureRandom();
+				byte[] salt = new byte[16];
+				rnd.nextBytes(salt);
+				
+				
+				String hash=Datenbank.hashPassword(txtPasswort.getText(), salt);
+				
+				Datenbank.createUser(new Studierende(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
+						txtVorname.getText(), txtMail.getText(),null,null));
 
 				JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 

@@ -6,7 +6,7 @@ public class Betreuer extends User {
 	private Studierende listeStud;
 
 	public Betreuer(int betPersNr, String nachname, String vorname) {
-		super(vorname, vorname, vorname, vorname, vorname);
+		//super(vorname, vorname, vorname, vorname, vorname,vorname);
 	}
 
 }

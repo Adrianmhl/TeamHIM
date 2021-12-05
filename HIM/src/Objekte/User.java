@@ -2,25 +2,26 @@ package Objekte;
 
 public class User {
 
-	private String userId;
+	private int userId;
 	private String userPass;
 	private String userName;
 	private String userVorname;
 	private String userMail;
-
+	private byte[] userSalt;
 	private String loginStatus;
 
 	public User() {
 
 	}
 
-	public User(String userId, String userPass, String userName, String userVorname, String userMail) {
+	public User(int userId,String userPass, byte[] userSalt, String userName, String userVorname, String userMail) {
 
 		this.userId = userId;
 		this.userPass = userPass;
 		this.userVorname = userVorname;
 		this.userName = userName;
 		this.userMail = userMail;
+		this.userSalt=userSalt;
 	}
 
 	public String getUserVorname() {
@@ -31,11 +32,11 @@ public class User {
 		this.userVorname = userVorname;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -66,12 +67,14 @@ public class User {
 	public String getLoginStatus() {
 		return loginStatus;
 	}
-
+	public byte[] getUserSalt() {
+		return userSalt;
+	}
 	public void setLoginStatus(String loginStatus) {
 		this.loginStatus = loginStatus;
 	}
 
-	public boolean verifyLogin(String id, String passwort) throws Exception {
+	public boolean verifyLogin(int id, String passwort) throws Exception {
 
 		return false;
 	}

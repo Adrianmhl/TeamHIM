@@ -1,5 +1,6 @@
 package Objekte;
 
+
 import Datenbank.Datenbank;
 
 public class Studierende extends User {
@@ -8,8 +9,8 @@ public class Studierende extends User {
 
 	}
 
-	public Studierende(String userId, String userPass, String userName, String userVorname, String userMail) {
-		super(userId, userPass, userName, userVorname, userMail);
+	public Studierende(int userId, String userPass, byte[] userSalt, String userName, String userVorname, String userMail, String Praxisstelle, String betreuer) {
+		super(userId, userPass,userSalt, userName, userVorname, userMail);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,21 +41,25 @@ public class Studierende extends User {
 	public void setStudBetreuer(String studBetreuer) {
 		this.studBetreuer = studBetreuer;
 	}
+	
 
-	@Override // RIESIGES SICHERHEITSRISIKO!!!!
+	@Override 
 	/**
 	 * @author isedo Überprüft Login Daten (Datenbank == Eingabe ? )
 	 * @throws Exception
 	 */
-	public boolean verifyLogin(String id, String passwort) throws Exception {
+	public boolean verifyLogin(int id, String passwort) throws Exception {
 		
 
 		if (Datenbank.getStudierende(id) == null) { 
 
 			return false;
 		}
-		String pass = Datenbank.getStudierende(id).getUserPass(); 
-		if (pass.equals(passwort))
+		String pass = Datenbank.getStudierende(id).getUserPass();
+		byte[] salt = Datenbank.getStudierende(id).getUserSalt();
+		String hashString= Datenbank.hashPassword(passwort, salt);
+		
+		if (hashString.equals(pass))
 			return true;
 		return false;
 

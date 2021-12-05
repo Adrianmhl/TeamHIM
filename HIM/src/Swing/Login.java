@@ -105,9 +105,9 @@ public class Login extends JFrame {
 
 			
 				try {
-					if (stud.verifyLogin(textFieldBenutzer.getText(), textFieldPasswort.getText()) == true) {
+					if (stud.verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
 
-						MenuStu ms = new MenuStu(textFieldBenutzer.getText());
+						MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));
 						ms.setVisible(true);
 						dispose();
 

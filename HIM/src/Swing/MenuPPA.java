@@ -67,7 +67,6 @@ public class MenuPPA extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 146, 361);
 		panel_1.setLayout(null);

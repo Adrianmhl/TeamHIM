@@ -2,14 +2,17 @@ package Datenbank;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.security.spec.KeySpec;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import Objekte.Betreuer;
 import Objekte.Studierende;
@@ -51,7 +54,7 @@ public class Datenbank {
 	 * @Salam
 	 */
 
-	public static Studierende getStudierende(String id) throws Exception {
+	public static Studierende getStudierende(int id) throws Exception {
 
 		if (con == null)
 			startConnection();
@@ -59,12 +62,12 @@ public class Datenbank {
 		try {
 
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.student WHERE id =?");
-			stmt.setString(1, id);
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
 			while(rs.next()) {
-			return new Studierende(id, rs.getString("passwort"), rs.getString("name"), rs.getString("vorname"),
-					rs.getString("mail"));
+			return new Studierende(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"), rs.getString("vorname"),
+					rs.getString("mail"),rs.getString("praxisstelle"),rs.getString("betreuer"));
 			 }
 
 		} catch (Exception e) {
@@ -87,23 +90,34 @@ public class Datenbank {
 	 * @throws Exception
 	 */
 
-	public static void createUser(Studierende student) throws Exception {// Vorschlag: Student als Parameter
+	public static void createUser(Studierende student) throws Exception {
 
 		if (con == null)
 			startConnection();
 
 		PreparedStatement stmt = con.prepareStatement(
-				"INSERT INTO `db3`.`student` (`id`, `passwort`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?);");
-		stmt.setString(1, student.getUserId());
+				"INSERT INTO `db3`.`student` (`id`, `passwort`, `pwSalt`, `name`, `vorname`, `mail`) VALUES (?,?,?,?,?,?);");
+		stmt.setInt(1, student.getUserId());
 		stmt.setString(2, student.getUserPass());
-		stmt.setString(3, student.getUserName());
-		stmt.setString(4, student.getUserVorname());
-		stmt.setString(5, student.getUserMail());
+		stmt.setBytes(3, student.getUserSalt());
+		stmt.setString(4, student.getUserName());
+		stmt.setString(5, student.getUserVorname());
+		stmt.setString(6, student.getUserMail());
 		stmt.executeUpdate();
 	}
 	
 	
-	public static void upload(File infile, String matnum, String column) throws Exception {
+	public static String hashPassword(String password, byte[] salt) throws Exception {
+		
+		KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 500000, 128); 
+		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		byte[] hash = factory.generateSecret(keySpec).getEncoded();
+		return new String(hash);
+	}
+	
+	
+	
+	public static void upload(File infile, int matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
         PreparedStatement stmnt = con.prepareStatement("UPDATE student SET "+column+" = ? WHERE id = ?");
@@ -111,19 +125,19 @@ public class Datenbank {
         System.out.println(inputStream);
         //stmnt.setString(1, column);
         stmnt.setBlob(1, inputStream);
-        stmnt.setString(2, matnum);
+        stmnt.setInt(2, matnum);
         stmnt.executeUpdate();
         inputStream.close();
 	}
 	
 	
-	public static void download(String path, String matnum, String column) throws Exception {
+	public static void download(String path, int matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
 		FileOutputStream output= new FileOutputStream(path);
 		PreparedStatement stmnt = con.prepareStatement("Select "+column+" From student WHERE id = ?");
 		//stmnt.setString(1, column);
-		stmnt.setString(1, matnum);
+		stmnt.setInt(1, matnum);
 		ResultSet rs=stmnt.executeQuery();
 		while(rs.next()) {
 			output.write(rs.getBlob(column).getBytes(1,(int) rs.getBlob(column).length()));

@@ -30,6 +30,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightCo
 import com.mysql.cj.TransactionEventHandler;
 
 import Datenbank.Datenbank;
+import Objekte.Studierende;
 
 import javax.swing.ButtonGroup;
 
@@ -52,7 +53,7 @@ public class MenuStu extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MenuStu frame = new MenuStu("matrikelnummer");
+					MenuStu frame = new MenuStu(0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,13 +64,15 @@ public class MenuStu extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public MenuStu(String matrikelnum) {
+	public MenuStu(int matrikelnum) throws Exception {
 		try {
 		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
 		} catch( Exception ex ) {
 		    ex.printStackTrace();
 		}
+		Studierende student= Datenbank.getStudierende(matrikelnum);
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,6 +160,9 @@ public class MenuStu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tabbedPane.setSelectedIndex(3);
+				
+					//update Für Profil!!!
+				
 			}
 		});
 		tab2_2_1.setLayout(null);
@@ -204,7 +210,7 @@ public class MenuStu extends JFrame {
 		tab2_2_1_1.setBounds(10, 307, 126, 21);
 		panel_1.add(tab2_2_1_1);
 
-		JLabel lblNewLabel_1_2_1_1 = new JLabel(matrikelnum);
+		JLabel lblNewLabel_1_2_1_1 = new JLabel(String.valueOf(matrikelnum));
 		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
@@ -466,7 +472,7 @@ public class MenuStu extends JFrame {
 		gbc_lblProfilMatrikelnummer.gridy = 0;
 		panel_Profil_2.add(lblProfilMatrikelnummer, gbc_lblProfilMatrikelnummer);
 
-		JLabel lblProfilMatrikelnummerOutput = new JLabel("-");
+		JLabel lblProfilMatrikelnummerOutput = new JLabel(String.valueOf(matrikelnum));
 		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
 		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
 		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
@@ -581,8 +587,12 @@ public class MenuStu extends JFrame {
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2);
 
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(116, 361, 10, 10);
 		contentPane.add(panel);
+		
 	}
+	
+	
 }
