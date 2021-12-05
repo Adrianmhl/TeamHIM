@@ -15,7 +15,9 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import Objekte.Betreuer;
+import Objekte.PPA;
 import Objekte.Studierende;
+import Objekte.User;
 
 public class Datenbank {
 
@@ -32,7 +34,7 @@ public class Datenbank {
 	 * 
 	 *        >>>>>>> Stashed changes
 	 */
-	public static Betreuer getBetreuer(int betPersNr) throws Exception {
+/*	public static Betreuer getBetreuer(int betPersNr) throws Exception {
 		if (con == null)
 			startConnection();
 		try {
@@ -54,7 +56,7 @@ public class Datenbank {
 	 * @Salam
 	 */
 
-	public static Studierende getStudierende(int id) throws Exception {
+	public static User getUser(int id) throws Exception {
 
 		if (con == null)
 			startConnection();
@@ -64,12 +66,31 @@ public class Datenbank {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.student WHERE id =?");
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-
-			while(rs.next()) {
-			return new Studierende(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"), rs.getString("vorname"),
-					rs.getString("mail"),rs.getString("praxisstelle"),rs.getString("betreuer"));
-			 }
-
+			if (rs!=null){
+				while(rs.next()) {
+					return new Studierende(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"), rs.getString("vorname"),
+							rs.getString("mail"),rs.getString("praxisstelle"),rs.getString("betreuer"));
+					 }
+			}
+			stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE id =?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if (rs!=null){
+				while(rs.next()) {
+					return new Betreuer(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"), rs.getString("vorname"),
+							rs.getString("mail"));
+					 }
+			}
+			stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE id =?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			if (rs!=null){
+				while(rs.next()) {
+					return new PPA(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"), rs.getString("vorname"),
+							rs.getString("mail"));
+					 }
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

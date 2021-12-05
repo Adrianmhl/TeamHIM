@@ -19,7 +19,9 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
+import Datenbank.Datenbank;
 import Objekte.Studierende;
+import Objekte.User;
 
 public class Login extends JFrame {
 	private JTextField textFieldBenutzer;
@@ -101,15 +103,25 @@ public class Login extends JFrame {
 		JButton btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.addActionListener(e -> {
 
-			Studierende stud = new Studierende();
-
-			
 				try {
-					if (stud.verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
-
-						MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));
-						ms.setVisible(true);
-						dispose();
+					if (verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
+						int role=Datenbank.getUser(Integer.parseInt(textFieldBenutzer.getText())).getRole();
+						
+						switch(role) {
+							case -1:
+								MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));
+								ms.setVisible(true);
+								dispose();
+								break;
+							case 0:
+								MenuBet mb =new MenuBet();
+								dispose();
+								break;
+							case 1:
+								MenuPPA mp=new MenuPPA();
+								dispose();
+						}
+						
 
 					} else {
 						JOptionPane.showMessageDialog(btnNewButton_1,
@@ -127,18 +139,7 @@ public class Login extends JFrame {
 
 			
 
-//			if (textFieldBenutzer.getText().equals("test") && textFieldPasswort.getText().equals("test")) {
-//
-//				MenuStu ms = new MenuStu();
-//				ms.setVisible(true);
-//
-//				dispose();
-//			} else {
-//				JOptionPane.showMessageDialog(btnNewButton_1,
-//						"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihr Daten.");
-//				textFieldBenutzer.setText("");
-//				textFieldPasswort.setText("");
-//			}
+
 
 		});
 		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
@@ -205,6 +206,23 @@ public class Login extends JFrame {
 		tab2_2_2_1.setBackground(Color.RED);
 		tab2_2_2_1.setBounds(0, 329, 136, 21);
 		panel_1_2.add(tab2_2_2_1);
+
+	}
+	
+	public static boolean verifyLogin(int id, String passwort) throws Exception {
+		
+
+		if (Datenbank.getUser(id) == null) { 
+
+			return false;
+		}
+		String pass = Datenbank.getUser(id).getUserPass();
+		byte[] salt = Datenbank.getUser(id).getUserSalt();
+		String hashString= Datenbank.hashPassword(passwort, salt);
+		
+		if (hashString.equals(pass))
+			return true;
+		return false;
 
 	}
 }

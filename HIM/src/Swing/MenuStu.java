@@ -72,7 +72,7 @@ public class MenuStu extends JFrame {
 		} catch( Exception ex ) {
 		    ex.printStackTrace();
 		}
-		Studierende student= Datenbank.getStudierende(matrikelnum);
+		Studierende student= (Studierende) Datenbank.getUser(matrikelnum);
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

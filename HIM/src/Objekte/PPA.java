@@ -2,11 +2,11 @@ package Objekte;
 
 public class PPA extends User {
 
-	PPA(String userId, String userPass, String userMail) {
-		//super(userId, userPass, userMail, userMail, userMail);
-		// TODO Auto-generated constructor stub
+	public PPA(int ppaPersNr, String pass,byte[]salt,String name, String vorname, String userMail) {
+		super(ppaPersNr, pass,salt,name,vorname, userMail, 1);
+		
 	}
-
-	private int ppaPersNr;
+	
+	
 
 }
