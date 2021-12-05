@@ -205,7 +205,7 @@ public class Registrierung extends JFrame {
 				}
 				else if(ppaBtn.isSelected()){
 					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
-							txtVorname.getText(), txtMail.getText(),0));
+							txtVorname.getText(), txtMail.getText(),1));
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 				}
 				else JOptionPane.showMessageDialog(btnNewButton, "Keine AusWahl getroffen!");
@@ -214,6 +214,7 @@ public class Registrierung extends JFrame {
 				log.setVisible(true);
 				dispose();
 			} catch (Exception e1) {
+				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Fehler");
 			}
 		});

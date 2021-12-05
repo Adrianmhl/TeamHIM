@@ -34,27 +34,7 @@ public class Datenbank {
 	 * 
 	 *        >>>>>>> Stashed changes
 	 */
-/*	public static Betreuer getBetreuer(int betPersNr) throws Exception {
-		if (con == null)
-			startConnection();
-		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE name = ?");
-			stmt.setInt(1, betPersNr);
-			ResultSet rs = stmt.executeQuery();
-			 while (rs.next()) { 
-			
-			return new Betreuer(betPersNr, rs.getString("nachname"), rs.getString("vorname"));
-			}
-		} catch (SQLException e) {
-			return null;
-		}
-		return null;
-	}
 
-	/**
-	 * @throws Exception
-	 * @Salam
-	 */
 
 	public static User getUser(int id) throws Exception {
 
@@ -99,9 +79,9 @@ public class Datenbank {
 	}
 
 	/**
-	 * Stellt neuen User im Datenbank her (zur Zeit nur "student" Tabelle)
+	 * Stellt neuen User im Datenbank her 
 	 * 
-	 * @author isedo
+	 * @author isedor, Felix
 	 * @param id
 	 * @param passwort
 	 * @param name
