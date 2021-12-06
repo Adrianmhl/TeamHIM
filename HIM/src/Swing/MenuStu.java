@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -34,6 +35,19 @@ import Objekte.BPS;
 import Objekte.Studierende;
 
 public class MenuStu extends JFrame {
+
+	private JLabel lblStatus;
+	private JLabel lblUnternehmen;
+	private JLabel lblFirmenanschrift;
+	private JLabel lblURL;
+	private JLabel lblFirmenbetreuer;
+	private JLabel lblAbteilung;
+	private JLabel lblTelefon;
+	private JLabel lblEmail;
+	private JLabel lblZeitraum;
+	private JLabel Themenbereich;
+	private JLabel lblKurzbeschreibung;
+
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	private JTextField txtUnternehmen;
@@ -48,6 +62,8 @@ public class MenuStu extends JFrame {
 	private JRadioButton rdbtnZeitraum1;
 	private JRadioButton rdbtnZeitraum2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPanel panel_BPSFormularAbgabe;
+	private JPanel panel_2;
 
 	/**
 	 * Launch the application.
@@ -67,6 +83,41 @@ public class MenuStu extends JFrame {
 		});
 	}
 
+	public void bpsVisible(int matrikelnum) {
+
+		Datenbank db = new Datenbank();
+
+		for (int i = 0; i < db.getBPSlist().size(); i++) {
+
+			if (matrikelnum == db.getBPSlist().get(i).getId()
+					&& db.getBPSlist().get(i).getStatus().equals("beantragt")) {
+
+				lblStatus.setText(db.getBPSlist().get(i).getStatus());
+				lblUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
+				lblFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
+				lblFirmenbetreuer.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
+				lblAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
+				lblTelefon.setText(db.getBPSlist().get(i).getTelefon());
+				lblEmail.setText(db.getBPSlist().get(i).getMail());
+				lblZeitraum.setText(db.getBPSlist().get(i).getZeitraum());
+				Themenbereich.setText(db.getBPSlist().get(i).getThemenbereich());
+				lblKurzbeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
+
+				panel_2.setVisible(true);
+				panel_BPSFormularAbgabe.setVisible(false);
+
+			}
+
+			if (matrikelnum == db.getBPSlist().get(i).getId() && db.getBPSlist().get(i).getStatus().equals("offen")) {
+
+				panel_2.setVisible(false);
+				panel_BPSFormularAbgabe.setVisible(true);
+
+			}
+
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 * 
@@ -79,6 +130,7 @@ public class MenuStu extends JFrame {
 			ex.printStackTrace();
 		}
 		Studierende student = (Studierende) Datenbank.getUser(matrikelnum);
+
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,15 +152,15 @@ public class MenuStu extends JFrame {
 		lblNewLabel_5.setBounds(14, 11, 112, 87);
 		panel_1.add(lblNewLabel_5);
 
-		JLabel lblNewLabel_1_2_1_1 = new JLabel("Matrikelnummer");
-		lblNewLabel_1_2_1_1.setBounds(10, 488, 116, 23);
-		panel_1.add(lblNewLabel_1_2_1_1);
-		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_1_2_1_1.setBackground(Color.RED);
+		JLabel lblMatrikelnummerLeiste = new JLabel(Integer.toString(matrikelnum));
+		lblMatrikelnummerLeiste.setBounds(10, 488, 116, 23);
+		panel_1.add(lblMatrikelnummerLeiste);
+		lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMatrikelnummerLeiste.setForeground(Color.WHITE);
+		lblMatrikelnummerLeiste.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblMatrikelnummerLeiste.setBackground(Color.RED);
 
-		JLabel lblNewLabel_1_2_2 = new JLabel("Logout");
+		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 		lblNewLabel_1_2_2.setBounds(10, 522, 116, 23);
 		panel_1.add(lblNewLabel_1_2_2);
 		lblNewLabel_1_2_2.setForeground(Color.WHITE);
@@ -133,7 +185,7 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
-		lblNewLabel_1_2_1.setBounds(10, 199, 126, 23);
+		lblNewLabel_1_2_1.setBounds(10, 213, 126, 23);
 		panel_1.add(lblNewLabel_1_2_1);
 		lblNewLabel_1_2_1.setForeground(Color.WHITE);
 		lblNewLabel_1_2_1.setBackground(Color.RED);
@@ -150,7 +202,7 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		JLabel lblNewLabel_1_2 = new JLabel("Dokumente");
-		lblNewLabel_1_2.setBounds(10, 170, 126, 23);
+		lblNewLabel_1_2.setBounds(10, 177, 126, 23);
 		panel_1.add(lblNewLabel_1_2);
 		lblNewLabel_1_2.setForeground(Color.WHITE);
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
@@ -163,7 +215,7 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		JLabel lblNewLabel_1_1 = new JLabel("Praktikumsverwaltung");
-		lblNewLabel_1_1.setBounds(10, 141, 126, 23);
+		lblNewLabel_1_1.setBounds(10, 143, 126, 23);
 		panel_1.add(lblNewLabel_1_1);
 		lblNewLabel_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -192,10 +244,285 @@ public class MenuStu extends JFrame {
 		tabbedPane.setBounds(145, 0, 649, 571);
 		contentPane.add(tabbedPane);
 
-		JPanel panel_BPSFormularAbgabe = new JPanel();
+		panel_BPSFormularAbgabe = new JPanel();
 		panel_BPSFormularAbgabe.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_BPSFormularAbgabe, null);
 		panel_BPSFormularAbgabe.setLayout(null);
+
+		panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+
+		/**
+		 * panel_2 -> visible(true) wenn status = "beantragt" oder in
+		 * bearbeitung/genehmigt (diese noch nicht implementiert), sonst
+		 * panel_BPSFormularAbgabe -> visible
+		 * 
+		 * @author isedo
+		 */
+
+		panel_2.setBounds(0, 0, 644, 419);
+		panel_BPSFormularAbgabe.add(panel_2);
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[] { 5, 69, 42, 61, 198, 121, 0 };
+		gbl_panel_2.rowHeights = new int[] { 5, 23, 23, 23, 23, 23, 23, 23, 23, 5, 23, 23, 23, 23, 0, 0, 23, 0, 0, 0, 0,
+				0 };
+		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_2.setLayout(gbl_panel_2);
+
+		JLayeredPane layeredPane_1 = new JLayeredPane();
+		GridBagConstraints gbc_layeredPane_1 = new GridBagConstraints();
+		gbc_layeredPane_1.anchor = GridBagConstraints.NORTHWEST;
+		gbc_layeredPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_layeredPane_1.gridx = 0;
+		gbc_layeredPane_1.gridy = 0;
+		panel_2.add(layeredPane_1, gbc_layeredPane_1);
+
+		JLabel lblNewLabel_3_2 = new JLabel("Anmeldung des BPS");
+		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3_2.setFont(new Font("Arial", Font.BOLD, 14));
+		GridBagConstraints gbc_lblNewLabel_3_2 = new GridBagConstraints();
+		gbc_lblNewLabel_3_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_3_2.gridx = 1;
+		gbc_lblNewLabel_3_2.gridy = 1;
+		panel_2.add(lblNewLabel_3_2, gbc_lblNewLabel_3_2);
+
+		JLabel lblNewLabel_6_1 = new JLabel("Status");
+		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_6_1 = new GridBagConstraints();
+		gbc_lblNewLabel_6_1.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_6_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_6_1.gridx = 3;
+		gbc_lblNewLabel_6_1.gridy = 1;
+		panel_2.add(lblNewLabel_6_1, gbc_lblNewLabel_6_1);
+
+		lblStatus = new JLabel("New label");
+		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+		gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_lblStatus.gridx = 4;
+		gbc_lblStatus.gridy = 1;
+		panel_2.add(lblStatus, gbc_lblStatus);
+
+		JLabel lblNewLabel_6 = new JLabel("Unternehmen");
+		lblNewLabel_6.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
+		gbc_lblNewLabel_6.gridwidth = 2;
+		gbc_lblNewLabel_6.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_6.gridx = 1;
+		gbc_lblNewLabel_6.gridy = 4;
+		panel_2.add(lblNewLabel_6, gbc_lblNewLabel_6);
+
+		lblUnternehmen = new JLabel("New label");
+		lblUnternehmen.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblUnternehmen = new GridBagConstraints();
+		gbc_lblUnternehmen.anchor = GridBagConstraints.WEST;
+		gbc_lblUnternehmen.fill = GridBagConstraints.VERTICAL;
+		gbc_lblUnternehmen.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUnternehmen.gridx = 4;
+		gbc_lblUnternehmen.gridy = 4;
+		panel_2.add(lblUnternehmen, gbc_lblUnternehmen);
+
+		JLabel lblNewLabel_7 = new JLabel("Firmenanschrift");
+		lblNewLabel_7.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
+		gbc_lblNewLabel_7.gridwidth = 2;
+		gbc_lblNewLabel_7.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7.gridx = 1;
+		gbc_lblNewLabel_7.gridy = 5;
+		panel_2.add(lblNewLabel_7, gbc_lblNewLabel_7);
+
+		lblFirmenanschrift = new JLabel("New label");
+		lblFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblFirmenanschrift = new GridBagConstraints();
+		gbc_lblFirmenanschrift.anchor = GridBagConstraints.WEST;
+		gbc_lblFirmenanschrift.fill = GridBagConstraints.VERTICAL;
+		gbc_lblFirmenanschrift.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFirmenanschrift.gridx = 4;
+		gbc_lblFirmenanschrift.gridy = 5;
+		panel_2.add(lblFirmenanschrift, gbc_lblFirmenanschrift);
+
+		JLabel lblNewLabel_7_1 = new JLabel("URL");
+		lblNewLabel_7_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_1 = new GridBagConstraints();
+		gbc_lblNewLabel_7_1.gridwidth = 2;
+		gbc_lblNewLabel_7_1.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_7_1.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_7_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_1.gridx = 1;
+		gbc_lblNewLabel_7_1.gridy = 6;
+		panel_2.add(lblNewLabel_7_1, gbc_lblNewLabel_7_1);
+
+		lblURL = new JLabel("New label");
+		lblURL.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblURL = new GridBagConstraints();
+		gbc_lblURL.anchor = GridBagConstraints.WEST;
+		gbc_lblURL.fill = GridBagConstraints.VERTICAL;
+		gbc_lblURL.insets = new Insets(0, 0, 5, 5);
+		gbc_lblURL.gridx = 4;
+		gbc_lblURL.gridy = 6;
+		panel_2.add(lblURL, gbc_lblURL);
+
+		JButton btnNewButton_3 = new JButton("Antrag bearbeiten");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				panel_BPSFormularAbgabe.setVisible(true);
+				panel_2.setVisible(false);
+			}
+		});
+
+		JLabel lblNewLabel_7_2 = new JLabel("Firmenbetreuer");
+		lblNewLabel_7_2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_2 = new GridBagConstraints();
+		gbc_lblNewLabel_7_2.gridwidth = 2;
+		gbc_lblNewLabel_7_2.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_7_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_2.gridx = 1;
+		gbc_lblNewLabel_7_2.gridy = 8;
+		panel_2.add(lblNewLabel_7_2, gbc_lblNewLabel_7_2);
+
+		lblFirmenbetreuer = new JLabel("New label");
+		lblFirmenbetreuer.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblFirmenbetreuer = new GridBagConstraints();
+		gbc_lblFirmenbetreuer.anchor = GridBagConstraints.WEST;
+		gbc_lblFirmenbetreuer.fill = GridBagConstraints.VERTICAL;
+		gbc_lblFirmenbetreuer.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFirmenbetreuer.gridx = 4;
+		gbc_lblFirmenbetreuer.gridy = 8;
+		panel_2.add(lblFirmenbetreuer, gbc_lblFirmenbetreuer);
+
+		JLabel lblNewLabel_7_4 = new JLabel("Abteilung");
+		lblNewLabel_7_4.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_4 = new GridBagConstraints();
+		gbc_lblNewLabel_7_4.gridwidth = 2;
+		gbc_lblNewLabel_7_4.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_7_4.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_7_4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_4.gridx = 1;
+		gbc_lblNewLabel_7_4.gridy = 9;
+		panel_2.add(lblNewLabel_7_4, gbc_lblNewLabel_7_4);
+
+		lblAbteilung = new JLabel("New label");
+		lblAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblAbteilung = new GridBagConstraints();
+		gbc_lblAbteilung.anchor = GridBagConstraints.WEST;
+		gbc_lblAbteilung.fill = GridBagConstraints.VERTICAL;
+		gbc_lblAbteilung.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAbteilung.gridx = 4;
+		gbc_lblAbteilung.gridy = 9;
+		panel_2.add(lblAbteilung, gbc_lblAbteilung);
+
+		JLabel lblNewLabel_7_5 = new JLabel("Telefon");
+		lblNewLabel_7_5.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_5 = new GridBagConstraints();
+		gbc_lblNewLabel_7_5.gridwidth = 2;
+		gbc_lblNewLabel_7_5.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_7_5.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_5.gridx = 1;
+		gbc_lblNewLabel_7_5.gridy = 10;
+		panel_2.add(lblNewLabel_7_5, gbc_lblNewLabel_7_5);
+
+		lblTelefon = new JLabel("New label");
+		lblTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblTelefon = new GridBagConstraints();
+		gbc_lblTelefon.anchor = GridBagConstraints.WEST;
+		gbc_lblTelefon.fill = GridBagConstraints.VERTICAL;
+		gbc_lblTelefon.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTelefon.gridx = 4;
+		gbc_lblTelefon.gridy = 10;
+		panel_2.add(lblTelefon, gbc_lblTelefon);
+
+		JLabel lblNewLabel_7_6 = new JLabel("Email");
+		lblNewLabel_7_6.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_6 = new GridBagConstraints();
+		gbc_lblNewLabel_7_6.gridwidth = 2;
+		gbc_lblNewLabel_7_6.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_7_6.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_7_6.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_6.gridx = 1;
+		gbc_lblNewLabel_7_6.gridy = 11;
+		panel_2.add(lblNewLabel_7_6, gbc_lblNewLabel_7_6);
+
+		lblEmail = new JLabel("New label");
+		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.anchor = GridBagConstraints.WEST;
+		gbc_lblEmail.fill = GridBagConstraints.VERTICAL;
+		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEmail.gridx = 4;
+		gbc_lblEmail.gridy = 11;
+		panel_2.add(lblEmail, gbc_lblEmail);
+
+		JLabel lblNewLabel_7_7 = new JLabel("Zeitraum");
+		lblNewLabel_7_7.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_7 = new GridBagConstraints();
+		gbc_lblNewLabel_7_7.gridwidth = 2;
+		gbc_lblNewLabel_7_7.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_7_7.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_7_7.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_7.gridx = 1;
+		gbc_lblNewLabel_7_7.gridy = 13;
+		panel_2.add(lblNewLabel_7_7, gbc_lblNewLabel_7_7);
+
+		lblZeitraum = new JLabel("New label");
+		lblZeitraum.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblZeitraum = new GridBagConstraints();
+		gbc_lblZeitraum.anchor = GridBagConstraints.WEST;
+		gbc_lblZeitraum.fill = GridBagConstraints.VERTICAL;
+		gbc_lblZeitraum.insets = new Insets(0, 0, 5, 5);
+		gbc_lblZeitraum.gridx = 4;
+		gbc_lblZeitraum.gridy = 13;
+		panel_2.add(lblZeitraum, gbc_lblZeitraum);
+
+		JLabel lblThemenbereich2 = new JLabel("Themenbereich");
+		lblThemenbereich2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblThemenbereich2 = new GridBagConstraints();
+		gbc_lblThemenbereich2.gridwidth = 2;
+		gbc_lblThemenbereich2.fill = GridBagConstraints.BOTH;
+		gbc_lblThemenbereich2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblThemenbereich2.gridx = 1;
+		gbc_lblThemenbereich2.gridy = 14;
+		panel_2.add(lblThemenbereich2, gbc_lblThemenbereich2);
+
+		Themenbereich = new JLabel("New label");
+		Themenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_Themenbereich = new GridBagConstraints();
+		gbc_Themenbereich.anchor = GridBagConstraints.NORTHWEST;
+		gbc_Themenbereich.insets = new Insets(0, 0, 5, 5);
+		gbc_Themenbereich.gridx = 4;
+		gbc_Themenbereich.gridy = 14;
+		panel_2.add(Themenbereich, gbc_Themenbereich);
+
+		JLabel lblNewLabel_7_9 = new JLabel("Kurzbeschreibung");
+		lblNewLabel_7_9.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblNewLabel_7_9 = new GridBagConstraints();
+		gbc_lblNewLabel_7_9.gridwidth = 2;
+		gbc_lblNewLabel_7_9.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_7_9.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_7_9.gridx = 1;
+		gbc_lblNewLabel_7_9.gridy = 16;
+		panel_2.add(lblNewLabel_7_9, gbc_lblNewLabel_7_9);
+
+		lblKurzbeschreibung = new JLabel("New label");
+		lblKurzbeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblKurzbeschreibung = new GridBagConstraints();
+		gbc_lblKurzbeschreibung.gridheight = 3;
+		gbc_lblKurzbeschreibung.anchor = GridBagConstraints.WEST;
+		gbc_lblKurzbeschreibung.fill = GridBagConstraints.VERTICAL;
+		gbc_lblKurzbeschreibung.insets = new Insets(0, 0, 5, 5);
+		gbc_lblKurzbeschreibung.gridx = 4;
+		gbc_lblKurzbeschreibung.gridy = 16;
+		panel_2.add(lblKurzbeschreibung, gbc_lblKurzbeschreibung);
+		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
+		gbc_btnNewButton_3.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_3.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnNewButton_3.gridx = 1;
+		gbc_btnNewButton_3.gridy = 20;
+		panel_2.add(btnNewButton_3, gbc_btnNewButton_3);
 
 		JLabel lblNewLabel_3 = new JLabel("Anmeldung des BPS");
 		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 14));
@@ -242,6 +569,7 @@ public class MenuStu extends JFrame {
 					Datenbank.updateBPS(matrikelnum, bps);
 
 					JOptionPane.showMessageDialog(btnNewButton, "BPS - Antrag wurde an das PPA übermittelt ");
+					bpsVisible(matrikelnum);
 
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -349,6 +677,22 @@ public class MenuStu extends JFrame {
 		lblNewLabel_4.setFont(new Font("Dialog", Font.ITALIC, 12));
 		lblNewLabel_4.setBounds(35, 139, 99, 22);
 		panel_BPSFormularAbgabe.add(lblNewLabel_4);
+
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_1.setBounds(0, 0, 5, 5);
+		panel_BPSFormularAbgabe.add(tabbedPane_1);
+
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1, 1);
+		panel_BPSFormularAbgabe.add(layeredPane);
+
+		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_3.setBounds(0, 0, 5, 5);
+		panel_BPSFormularAbgabe.add(tabbedPane_3);
+
+		JLayeredPane layeredPane_2 = new JLayeredPane();
+		layeredPane_2.setBounds(0, 0, 1, 1);
+		panel_BPSFormularAbgabe.add(layeredPane_2);
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
@@ -625,5 +969,6 @@ public class MenuStu extends JFrame {
 		panel.setBounds(116, 361, 10, 10);
 		contentPane.add(panel);
 
+		bpsVisible(matrikelnum);
 	}
 }

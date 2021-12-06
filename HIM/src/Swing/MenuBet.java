@@ -34,7 +34,7 @@ public class MenuBet extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -53,9 +53,9 @@ public class MenuBet extends JFrame {
 	 */
 	public MenuBet() {
 		try {
-		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
-		} catch( Exception ex ) {
-		    ex.printStackTrace();
+			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
@@ -123,7 +123,7 @@ public class MenuBet extends JFrame {
 		tab2_2_2.setBounds(0, 329, 136, 21);
 		panel_1.add(tab2_2_2);
 
-		JLabel lblNewLabel_1_2_2 = new JLabel("Logout");
+		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 		lblNewLabel_1_2_2.setForeground(Color.WHITE);
 		lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
 			@Override

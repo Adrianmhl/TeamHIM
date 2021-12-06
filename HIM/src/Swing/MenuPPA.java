@@ -170,7 +170,7 @@ public class MenuPPA extends JFrame {
 		tab2_2_2.setBounds(10, 329, 126, 21);
 		panel_1.add(tab2_2_2);
 
-		JLabel lblNewLabel_1_2_2 = new JLabel("Logout");
+		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 		lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -469,16 +469,16 @@ public class MenuPPA extends JFrame {
 	public void showBPSinJTable() {
 
 		Datenbank db = new Datenbank();
-		db.getBPS();
+		db.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 		Object[] rowData = new Object[3];
 
-		for (int i = 0; i < db.getBPS().size(); i++) {
+		for (int i = 0; i < db.getBPSlist().size(); i++) {
 
-			rowData[0] = db.getBPS().get(i).getId();
-			rowData[1] = db.getBPS().get(i).getUnternehmen();
-			rowData[2] = db.getBPS().get(i).getStatus();
+			rowData[0] = db.getBPSlist().get(i).getId();
+			rowData[1] = db.getBPSlist().get(i).getUnternehmen();
+			rowData[2] = db.getBPSlist().get(i).getStatus();
 			model.addRow(rowData);
 		}
 	}
@@ -492,16 +492,16 @@ public class MenuPPA extends JFrame {
 	public void refreshBPSinJTable() {
 
 		Datenbank db = new Datenbank();
-		db.getBPS();
+		db.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		Object[] rowData = new Object[3];
 
-		for (int i = 0; i < db.getBPS().size(); i++) {
+		for (int i = 0; i < db.getBPSlist().size(); i++) {
 
-			rowData[0] = db.getBPS().get(i).getId();
-			rowData[1] = db.getBPS().get(i).getUnternehmen();
-			rowData[2] = db.getBPS().get(i).getStatus();
+			rowData[0] = db.getBPSlist().get(i).getId();
+			rowData[1] = db.getBPSlist().get(i).getUnternehmen();
+			rowData[2] = db.getBPSlist().get(i).getStatus();
 			model.addRow(rowData);
 		}
 

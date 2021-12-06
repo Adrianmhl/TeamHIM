@@ -85,7 +85,7 @@ public class Datenbank {
 	 * @return
 	 */
 
-	public ArrayList<BPS> getBPS() {
+	public ArrayList<BPS> getBPSlist() {
 		ArrayList<BPS> bpslist = new ArrayList<>();
 		try {
 			if (con == null)
@@ -110,7 +110,7 @@ public class Datenbank {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(bpslist);
+//		System.out.println(bpslist);
 		return bpslist;
 	}
 
@@ -121,8 +121,8 @@ public class Datenbank {
 		PreparedStatement stmt = null;
 
 		stmt = con.prepareStatement(
-				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuer` = ?, "
-						+ "`abteilung` = ?, `telefon` = ?, `email` = ?, `zeitraum` = ?, `themenbereich` = ?, "
+				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuerName` = ?, "
+						+ "`abteilung` = ?, `telefon` = ?, `mail` = ?, `zeitraum` = ?, `themenbereich` = ?, "
 						+ "`kurzbeschreibung` = ?, `datumantrag` = ?, `status` = ? WHERE (`id` = " + matrikelnum + ")");
 
 		stmt.setString(1, bps.getUnternehmen());
@@ -147,10 +147,11 @@ public class Datenbank {
 			startConnection();
 		PreparedStatement stmt = null;
 
-		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`) VALUES ('" + matrikelnum + "');");
-
+		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`, `status`) VALUES (?,?);");
+		stmt.setInt(1, matrikelnum);
+		stmt.setString(2, "offen");
 		stmt.executeUpdate();
-		System.out.println(matrikelnum);
+
 	}
 
 	/**
