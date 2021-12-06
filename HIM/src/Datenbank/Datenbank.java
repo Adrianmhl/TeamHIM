@@ -110,6 +110,7 @@ public class Datenbank {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(bpslist);
 		return bpslist;
 	}
 

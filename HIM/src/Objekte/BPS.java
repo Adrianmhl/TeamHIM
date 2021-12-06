@@ -55,6 +55,15 @@ public class BPS {
 		this.now = now;
 	}
 
+	@Override
+	public String toString() {
+		return "BPS [dtf=" + dtf + ", now=" + now + ", id=" + id + ", unternehmen=" + unternehmen + ", firmenanschrift="
+				+ firmenanschrift + ", firmenbetreuerName=" + firmenbetreuerName + ", abteilung=" + abteilung
+				+ ", telefon=" + telefon + ", mail=" + mail + ", zeitraum=" + zeitraum + ", themenbereich="
+				+ themenbereich + ", kurzbeschreibung=" + kurzbeschreibung + ", datumantrag=" + datumantrag
+				+ ", status=" + status + "]";
+	}
+
 	public int getId() {
 		return id;
 	}

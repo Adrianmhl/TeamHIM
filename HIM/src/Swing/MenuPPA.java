@@ -258,20 +258,7 @@ public class MenuPPA extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				Datenbank db = new Datenbank();
-				db.getBPS();
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-				Object[] rowData = new Object[3];
-
-				for (int i = 0; i < db.getBPS().size(); i++) {
-					rowData[0] = db.getBPS().get(i).getId();
-					rowData[1] = db.getBPS().get(i).getUnternehmen();
-					rowData[2] = db.getBPS().get(i).getStatus();
-					model.addRow(rowData);
-				}
-
+				refreshBPSinJTable();
 			}
 		});
 		btnNewButton_2.setBounds(20, 288, 129, 23);
@@ -473,5 +460,50 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2_1.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2_1.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2_1);
+	}
+
+	/*
+	 * 
+	 */
+
+	public void showBPSinJTable() {
+
+		Datenbank db = new Datenbank();
+		db.getBPS();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+		Object[] rowData = new Object[3];
+
+		for (int i = 0; i < db.getBPS().size(); i++) {
+
+			rowData[0] = db.getBPS().get(i).getId();
+			rowData[1] = db.getBPS().get(i).getUnternehmen();
+			rowData[2] = db.getBPS().get(i).getStatus();
+			model.addRow(rowData);
+		}
+	}
+
+	/**
+	 * aktualisiert jtable / bps - tabelle
+	 * 
+	 * @author isedo
+	 */
+
+	public void refreshBPSinJTable() {
+
+		Datenbank db = new Datenbank();
+		db.getBPS();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		Object[] rowData = new Object[3];
+
+		for (int i = 0; i < db.getBPS().size(); i++) {
+
+			rowData[0] = db.getBPS().get(i).getId();
+			rowData[1] = db.getBPS().get(i).getUnternehmen();
+			rowData[2] = db.getBPS().get(i).getStatus();
+			model.addRow(rowData);
+		}
+
 	}
 }

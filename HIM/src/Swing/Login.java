@@ -164,7 +164,7 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		lblRegistrieren.setBounds(100, 345, 157, 14);
+		lblRegistrieren.setBounds(100, 345, 157, 32);
 		panel.add(lblRegistrieren);
 
 	}
