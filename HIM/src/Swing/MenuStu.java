@@ -370,21 +370,18 @@ public class MenuStu extends JFrame {
 					if (matrikelnum == db.getBPSlist().get(i).getId()
 							&& db.getBPSlist().get(i).getStatus().equals("beantragt")) {
 
-						lblStatus.setText(db.getBPSlist().get(i).getStatus());
-						lblUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
-						lblFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
-						lblFirmenbetreuer.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
-						lblAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
-						lblTelefon.setText(db.getBPSlist().get(i).getTelefon());
-						lblEmail.setText(db.getBPSlist().get(i).getMail());
-						lblZeitraum.setText(db.getBPSlist().get(i).getZeitraum());
+						/**
+						 * radiobutton
+						 */
+
+						txtUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
+						txtFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
+						txtFirmenbetreuerName.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
+						txtAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
+						txtTelefon.setText(db.getBPSlist().get(i).getTelefon());
+						txtMail.setText(db.getBPSlist().get(i).getMail());
 						Themenbereich.setText(db.getBPSlist().get(i).getThemenbereich());
-						lblKurzbeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
-
-					}
-
-					if (matrikelnum == db.getBPSlist().get(i).getId()
-							&& db.getBPSlist().get(i).getStatus().equals("offen")) {
+						txtBeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
 
 					}
 
