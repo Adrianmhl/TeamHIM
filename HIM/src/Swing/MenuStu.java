@@ -254,7 +254,7 @@ public class MenuStu extends JFrame {
 		txtUnternehmen.setBounds(35, 43, 340, 20);
 		panel_BPSFormularAbgabe.add(txtUnternehmen);
 
-		JButton btnNewButton = new JButton("best\u00E4tigen");
+		JButton btnNewButton = new JButton("Antrag abgeben");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -272,12 +272,12 @@ public class MenuStu extends JFrame {
 
 					BPS bps = new BPS(matrikelnum, txtUnternehmen.getText(), txtFirmenanschrift.getText(),
 							txtFirmenbetreuerName.getText(), txtAbteilung.getText(), txtTelefon.getText(),
-							txtMail.getText(), datum, txtThemenbereich.getText(), txtBeschreibung.getText());
+							txtMail.getText(), datum, txtThemenbereich.getText(), txtBeschreibung.getText(),
+							"beantragt");
 
-					Datenbank.createBPS(matrikelnum, bps);
+					Datenbank.updateBPS(matrikelnum, bps);
 
-					JOptionPane.showMessageDialog(btnNewButton,
-							"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihre Daten.");
+					JOptionPane.showMessageDialog(btnNewButton, "BPS - Antrag wurde an das PPA übermittelt ");
 
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -286,7 +286,7 @@ public class MenuStu extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(431, 402, 103, 23);
+		btnNewButton.setBounds(254, 429, 121, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();

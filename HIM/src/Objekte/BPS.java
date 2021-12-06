@@ -18,14 +18,16 @@ public class BPS {
 	private String themenbereich;
 	private String kurzbeschreibung;
 	private String datumantrag;
+	private String status;
 
-	public BPS(int id, String unternehmen, String firmenanschrift, String firmenbetreuerNameName, String abteilung,
-			String telefon, String mail, String zeitraum, String themenbereich, String kurzbeschreibung) {
+	public BPS(int id, String unternehmen, String firmenanschrift, String firmenbetreuerName, String abteilung,
+			String telefon, String mail, String zeitraum, String themenbereich, String kurzbeschreibung,
+			String status) {
 
 		this.id = id;
 		this.unternehmen = unternehmen;
 		this.firmenanschrift = firmenanschrift;
-		this.firmenbetreuerName = firmenbetreuerNameName;
+		this.firmenbetreuerName = firmenbetreuerName;
 		this.abteilung = abteilung;
 		this.telefon = telefon;
 		this.mail = mail;
@@ -33,7 +35,24 @@ public class BPS {
 		this.themenbereich = themenbereich;
 		this.kurzbeschreibung = kurzbeschreibung;
 		this.datumantrag = dtf.format(now);
+		this.status = status;
 
+	}
+
+	public DateTimeFormatter getDtf() {
+		return dtf;
+	}
+
+	public void setDtf(DateTimeFormatter dtf) {
+		this.dtf = dtf;
+	}
+
+	public LocalDateTime getNow() {
+		return now;
+	}
+
+	public void setNow(LocalDateTime now) {
+		this.now = now;
 	}
 
 	public int getId() {
@@ -60,11 +79,11 @@ public class BPS {
 		this.firmenanschrift = firmenanschrift;
 	}
 
-	public String getfirmenbetreuerName() {
+	public String getFirmenbetreuerName() {
 		return firmenbetreuerName;
 	}
 
-	public void setfirmenbetreuerName(String firmenbetreuerName) {
+	public void setFirmenbetreuerName(String firmenbetreuerName) {
 		this.firmenbetreuerName = firmenbetreuerName;
 	}
 
@@ -124,12 +143,12 @@ public class BPS {
 		this.datumantrag = datumantrag;
 	}
 
-	@Override
-	public String toString() {
-		return "BPS [dtf=" + dtf + ", now=" + now + ", id=" + id + ", unternehmen=" + unternehmen + ", firmenanschrift="
-				+ firmenanschrift + ", firmenbetreuerName=" + firmenbetreuerName + ", abteilung=" + abteilung
-				+ ", telefon=" + telefon + ", mail=" + mail + ", zeitraum=" + zeitraum + ", themenbereich="
-				+ themenbereich + ", kurzbeschreibung=" + kurzbeschreibung + ", datumantrag=" + datumantrag + "]";
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

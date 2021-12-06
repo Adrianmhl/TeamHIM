@@ -78,28 +78,50 @@ public class Datenbank {
 		return null;
 	}
 
-	public static void createBPS(int matrikelnum, BPS bps) throws Exception {
+	public static void updateBPS(int matrikelnum, BPS bps) throws Exception {
 
 		if (con == null)
 			startConnection();
 		PreparedStatement stmt = null;
 
-		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`, `unternehmen`, `firmenanschrift`, "
-				+ "`firmenbetreuerName`, `abteilung`, `telefon` , `mail`, `zeitraum` , `themembereich`, `kurzbeschreibung`, `datumantrag` ) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?);");
+//		stmt = con.prepareStatement("UPDATE `db3`.`bpsantrag` SET (`unternehmen`, `firmenanschrift`, "
+//				+ "`firmenbetreuer`, `abteilung`, `telefon` , `email`, `zeitraum` , `themenbereich`, "
+//				+ "`kurzbeschreibung`, `datumantrag`,`status`) WHERE (`id` = '" + matrikelnum + "')");
+//
+//		stmt = con.prepareStatement("UPDATE db3.bpsantrag SET (unternehmen = ?, firmenanschrift = ?, "
+//				+ "firmenbetreuer = ?, abteilung = ?, telefon = ?, email = ?,  zeitraum = ?, themenbereich = ?, "
+//				+ "kurzbeschreibung = ?, datumantrag = ?, status = ?) WHERE (id = '" + matrikelnum + "')");
 
-		stmt.setInt(1, matrikelnum);
-		stmt.setString(2, bps.getUnternehmen());
-		stmt.setString(3, bps.getFirmenanschrift());
-		stmt.setString(4, bps.getfirmenbetreuerName());
-		stmt.setString(5, bps.getAbteilung());
-		stmt.setString(6, bps.getTelefon());
-		stmt.setString(7, bps.getMail());
-		stmt.setString(8, bps.getZeitraum());
-		stmt.setString(9, bps.getThemenbereich());
-		stmt.setString(10, bps.getKurzbeschreibung());
-		stmt.setString(11, bps.getDatumantrag());
+		stmt = con.prepareStatement(
+				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = '?', `firmenanschrift` = '?', `firmenbetreuer` = '?', "
+						+ "`abteilung` = '?', `telefon` = '?', `email` = '?', `zeitraum` = '?', `themenbereich` = '?', "
+						+ "`kurzbeschreibung` = '?', `datumantrag` = '?', `status` = '?' WHERE (`id` = '123')");
 
+		stmt.setString(1, bps.getUnternehmen());
+		stmt.setString(2, bps.getFirmenanschrift());
+		stmt.setString(3, bps.getFirmenbetreuerName());
+		stmt.setString(4, bps.getAbteilung());
+		stmt.setString(5, bps.getTelefon());
+		stmt.setString(6, bps.getMail());
+		stmt.setString(7, bps.getZeitraum());
+		stmt.setString(8, bps.getThemenbereich());
+		stmt.setString(9, bps.getKurzbeschreibung());
+		stmt.setString(10, bps.getDatumantrag());
+		stmt.setString(11, bps.getStatus());
+		stmt.executeUpdate();
+
+	}
+
+	public static void createBPS(int matrikelnum) throws Exception {
+
+		if (con == null)
+			startConnection();
+		PreparedStatement stmt = null;
+
+		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`) VALUES ('" + matrikelnum + "');");
+
+		stmt.executeUpdate();
+		System.out.println(matrikelnum);
 	}
 
 	/**
