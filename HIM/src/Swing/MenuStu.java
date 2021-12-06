@@ -53,7 +53,6 @@ public class MenuStu extends JFrame {
 	private JTextField txtUnternehmen;
 	private JTextField txtBeschreibung;
 	private JTextField txtFirmenanschrift;
-	private JTextField txtUrl;
 	private JTextField txtAbteilung;
 	private JTextField txtThemenbereich;
 	private JTextField txtTelefon;
@@ -250,18 +249,9 @@ public class MenuStu extends JFrame {
 		panel_BPSFormularAbgabe.setLayout(null);
 
 		panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-
-		/**
-		 * panel_2 -> visible(true) wenn status = "beantragt" oder in
-		 * bearbeitung/genehmigt (diese noch nicht implementiert), sonst
-		 * panel_BPSFormularAbgabe -> visible
-		 * 
-		 * @author isedo
-		 */
-
-		panel_2.setBounds(0, 0, 644, 419);
+		panel_2.setBounds(0, 0, 649, 543);
 		panel_BPSFormularAbgabe.add(panel_2);
+		panel_2.setBackground(Color.WHITE);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[] { 5, 69, 42, 61, 198, 121, 0 };
 		gbl_panel_2.rowHeights = new int[] { 5, 23, 23, 23, 23, 23, 23, 23, 23, 5, 23, 23, 23, 23, 0, 0, 23, 0, 0, 0, 0,
@@ -293,14 +283,14 @@ public class MenuStu extends JFrame {
 		GridBagConstraints gbc_lblNewLabel_6_1 = new GridBagConstraints();
 		gbc_lblNewLabel_6_1.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_6_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_6_1.gridx = 3;
+		gbc_lblNewLabel_6_1.gridx = 4;
 		gbc_lblNewLabel_6_1.gridy = 1;
 		panel_2.add(lblNewLabel_6_1, gbc_lblNewLabel_6_1);
 
 		lblStatus = new JLabel("New label");
 		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-		gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStatus.gridx = 4;
+		gbc_lblStatus.insets = new Insets(0, 0, 5, 0);
+		gbc_lblStatus.gridx = 5;
 		gbc_lblStatus.gridy = 1;
 		panel_2.add(lblStatus, gbc_lblStatus);
 
@@ -372,6 +362,34 @@ public class MenuStu extends JFrame {
 
 				panel_BPSFormularAbgabe.setVisible(true);
 				panel_2.setVisible(false);
+
+				Datenbank db = new Datenbank();
+
+				for (int i = 0; i < db.getBPSlist().size(); i++) {
+
+					if (matrikelnum == db.getBPSlist().get(i).getId()
+							&& db.getBPSlist().get(i).getStatus().equals("beantragt")) {
+
+						lblStatus.setText(db.getBPSlist().get(i).getStatus());
+						lblUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
+						lblFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
+						lblFirmenbetreuer.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
+						lblAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
+						lblTelefon.setText(db.getBPSlist().get(i).getTelefon());
+						lblEmail.setText(db.getBPSlist().get(i).getMail());
+						lblZeitraum.setText(db.getBPSlist().get(i).getZeitraum());
+						Themenbereich.setText(db.getBPSlist().get(i).getThemenbereich());
+						lblKurzbeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
+
+					}
+
+					if (matrikelnum == db.getBPSlist().get(i).getId()
+							&& db.getBPSlist().get(i).getStatus().equals("offen")) {
+
+					}
+
+				}
+
 			}
 		});
 
@@ -578,7 +596,7 @@ public class MenuStu extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(35, 476, 121, 23);
+		btnNewButton.setBounds(35, 447, 121, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
@@ -593,7 +611,7 @@ public class MenuStu extends JFrame {
 		txtBeschreibung.setText("Kurzbeschreibung der geplanten T\u00E4tigkeit");
 		txtBeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtBeschreibung.setColumns(10);
-		txtBeschreibung.setBounds(35, 366, 340, 99);
+		txtBeschreibung.setBounds(35, 337, 340, 99);
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
 
 		rdbtnZeitraum1 = new JRadioButton("01.03 - 31.08");
@@ -601,7 +619,7 @@ public class MenuStu extends JFrame {
 		rdbtnZeitraum1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		rdbtnZeitraum1.setHorizontalAlignment(SwingConstants.RIGHT);
 		rdbtnZeitraum1.setBackground(Color.WHITE);
-		rdbtnZeitraum1.setBounds(155, 304, 109, 22);
+		rdbtnZeitraum1.setBounds(149, 271, 109, 22);
 		panel_BPSFormularAbgabe.add(rdbtnZeitraum1);
 
 		rdbtnZeitraum2 = new JRadioButton("01.09 - 28.02");
@@ -609,15 +627,22 @@ public class MenuStu extends JFrame {
 		rdbtnZeitraum2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		rdbtnZeitraum2.setHorizontalAlignment(SwingConstants.RIGHT);
 		rdbtnZeitraum2.setBackground(Color.WHITE);
-		rdbtnZeitraum2.setBounds(266, 304, 109, 22);
+		rdbtnZeitraum2.setBounds(266, 271, 109, 22);
 		panel_BPSFormularAbgabe.add(rdbtnZeitraum2);
 
 		JLabel lblNewLabel_2 = new JLabel("Zeitraum");
 		lblNewLabel_2.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lblNewLabel_2.setBounds(35, 304, 80, 22);
+		lblNewLabel_2.setBounds(35, 271, 80, 22);
 		panel_BPSFormularAbgabe.add(lblNewLabel_2);
 
 		txtFirmenanschrift = new JTextField();
+		txtFirmenanschrift.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtFirmenanschrift.setText("");
+
+			}
+		});
 		txtFirmenanschrift.setText("Firmenanschrift");
 		txtFirmenanschrift.setForeground(Color.GRAY);
 		txtFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -625,57 +650,80 @@ public class MenuStu extends JFrame {
 		txtFirmenanschrift.setBounds(35, 73, 340, 22);
 		panel_BPSFormularAbgabe.add(txtFirmenanschrift);
 
-		txtUrl = new JTextField();
-		txtUrl.setText("URL des Unternehmens");
-		txtUrl.setForeground(Color.GRAY);
-		txtUrl.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtUrl.setColumns(10);
-		txtUrl.setBounds(35, 106, 340, 22);
-		panel_BPSFormularAbgabe.add(txtUrl);
-
 		txtAbteilung = new JTextField();
+		txtAbteilung.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtAbteilung.setText("");
+
+			}
+		});
 		txtAbteilung.setText("Abteilung");
 		txtAbteilung.setForeground(Color.GRAY);
 		txtAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtAbteilung.setColumns(10);
-		txtAbteilung.setBounds(35, 205, 340, 22);
+		txtAbteilung.setBounds(35, 172, 340, 22);
 		panel_BPSFormularAbgabe.add(txtAbteilung);
 
 		txtThemenbereich = new JTextField();
+		txtThemenbereich.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtThemenbereich.setText("");
+			}
+		});
 		txtThemenbereich.setText("Themenbereich");
 		txtThemenbereich.setForeground(Color.GRAY);
 		txtThemenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtThemenbereich.setColumns(10);
-		txtThemenbereich.setBounds(35, 333, 340, 22);
+		txtThemenbereich.setBounds(35, 304, 340, 22);
 		panel_BPSFormularAbgabe.add(txtThemenbereich);
 
 		txtTelefon = new JTextField();
+		txtTelefon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtTelefon.setText("");
+			}
+		});
 		txtTelefon.setText("Telefon");
 		txtTelefon.setForeground(Color.GRAY);
 		txtTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtTelefon.setColumns(10);
-		txtTelefon.setBounds(35, 238, 340, 22);
+		txtTelefon.setBounds(35, 205, 340, 22);
 		panel_BPSFormularAbgabe.add(txtTelefon);
 
 		txtMail = new JTextField();
+		txtMail.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtMail.setText("");
+			}
+		});
 		txtMail.setText("Email");
 		txtMail.setForeground(Color.GRAY);
 		txtMail.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtMail.setColumns(10);
-		txtMail.setBounds(35, 271, 340, 22);
+		txtMail.setBounds(35, 238, 340, 22);
 		panel_BPSFormularAbgabe.add(txtMail);
 
 		txtFirmenbetreuerName = new JTextField();
+		txtFirmenbetreuerName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtFirmenbetreuerName.setText("");
+			}
+		});
 		txtFirmenbetreuerName.setText("Name");
 		txtFirmenbetreuerName.setForeground(Color.GRAY);
 		txtFirmenbetreuerName.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtFirmenbetreuerName.setColumns(10);
-		txtFirmenbetreuerName.setBounds(35, 172, 340, 22);
+		txtFirmenbetreuerName.setBounds(35, 139, 340, 22);
 		panel_BPSFormularAbgabe.add(txtFirmenbetreuerName);
 
 		JLabel lblNewLabel_4 = new JLabel("Firmenbetreuer");
 		lblNewLabel_4.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lblNewLabel_4.setBounds(35, 139, 99, 22);
+		lblNewLabel_4.setBounds(35, 106, 99, 22);
 		panel_BPSFormularAbgabe.add(lblNewLabel_4);
 
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);

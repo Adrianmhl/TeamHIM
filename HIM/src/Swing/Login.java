@@ -93,7 +93,7 @@ public class Login extends JFrame {
 		textFieldPasswort.setForeground(Color.GRAY);
 		textFieldPasswort.setText("Kennwort");
 		textFieldPasswort.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldPasswort.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		textFieldPasswort.setFont(new Font("Dialog", Font.PLAIN, 12));
 		textFieldPasswort.setColumns(10);
 		textFieldPasswort.setBounds(10, 259, 334, 32);
 		panel.add(textFieldPasswort);
@@ -137,7 +137,7 @@ public class Login extends JFrame {
 			}
 
 		});
-		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
+		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 18));
 		btnNewButton_1.setForeground(Color.BLACK);
 		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.setBorderPainted(false);
@@ -164,7 +164,7 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		lblRegistrieren.setBounds(100, 345, 157, 32);
+		lblRegistrieren.setBounds(100, 345, 157, 14);
 		panel.add(lblRegistrieren);
 
 	}
