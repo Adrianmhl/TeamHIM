@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -28,21 +28,25 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
-import com.mysql.cj.TransactionEventHandler;
 
 import Datenbank.Datenbank;
+import Objekte.BPS;
 import Objekte.Studierende;
-
-import javax.swing.ButtonGroup;
 
 public class MenuStu extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
-	private JTextField txtMatrikelnummer;
-	private JTextField txtName;
 	private JTextField txtUnternehmen;
 	private JTextField txtBeschreibung;
-	private JTextField txtVorname;
+	private JTextField txtFirmenanschrift;
+	private JTextField txtUrl;
+	private JTextField txtAbteilung;
+	private JTextField txtThemenbereich;
+	private JTextField txtTelefon;
+	private JTextField txtMail;
+	private JTextField txtFirmenbetreuerName;
+	private JRadioButton rdbtnZeitraum1;
+	private JRadioButton rdbtnZeitraum2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
@@ -65,19 +69,20 @@ public class MenuStu extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public MenuStu(int matrikelnum) throws Exception {
 		try {
-		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
-		} catch( Exception ex ) {
-		    ex.printStackTrace();
+			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		Studierende student= (Studierende) Datenbank.getUser(matrikelnum);
+		Studierende student = (Studierende) Datenbank.getUser(matrikelnum);
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 400);
+		setBounds(100, 100, 980, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +90,7 @@ public class MenuStu extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 146, 361);
+		panel_1.setBounds(0, 0, 146, 491);
 		panel_1.setBackground(Color.RED);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -95,7 +100,7 @@ public class MenuStu extends JFrame {
 		tab2.setBounds(10, 102, 126, 21);
 		panel_1.add(tab2);
 
-		JLabel lblNewLabel_1 = new JLabel("BPS-Formular");
+		JLabel lblNewLabel_1 = new JLabel("Anmeldung BPS");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(0, 0, 116, 21);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -106,7 +111,7 @@ public class MenuStu extends JFrame {
 			}
 		});
 		tab2.setLayout(null);
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tab2.add(lblNewLabel_1);
 
 		JPanel tab2_1 = new JPanel();
@@ -116,7 +121,7 @@ public class MenuStu extends JFrame {
 
 		JLabel lblNewLabel_1_1 = new JLabel("Praktikumsverwaltung");
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setBounds(0, 0, 141, 18);
+		lblNewLabel_1_1.setBounds(0, 0, 126, 18);
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,7 +130,7 @@ public class MenuStu extends JFrame {
 			}
 		});
 		tab2_1.setLayout(null);
-		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tab2_1.add(lblNewLabel_1_1);
 
 		JPanel tab2_2 = new JPanel();
@@ -144,7 +149,7 @@ public class MenuStu extends JFrame {
 			}
 		});
 		tab2_2.setLayout(null);
-		lblNewLabel_1_2.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tab2_2.add(lblNewLabel_1_2);
 
 		JPanel tab2_2_1 = new JPanel();
@@ -161,13 +166,13 @@ public class MenuStu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tabbedPane.setSelectedIndex(3);
-				
-					//update Für Profil!!!
-				
+
+				// update Für Profil!!!
+
 			}
 		});
 		tab2_2_1.setLayout(null);
-		lblNewLabel_1_2_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tab2_2_1.add(lblNewLabel_1_2_1);
 
 		JPanel tab2_2_2 = new JPanel();
@@ -190,13 +195,13 @@ public class MenuStu extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				dispose();
 
 			}
 		});
 		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_2.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1_2_2.setBounds(0, 0, 116, 18);
 		tab2_2_2.add(lblNewLabel_1_2_2);
 
@@ -214,19 +219,13 @@ public class MenuStu extends JFrame {
 		JLabel lblNewLabel_1_2_1_1 = new JLabel(String.valueOf(matrikelnum));
 		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1_2_1_1.setBackground(Color.RED);
 		lblNewLabel_1_2_1_1.setBounds(0, 0, 116, 18);
 		tab2_2_1_1.add(lblNewLabel_1_2_1_1);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setForeground(Color.WHITE);
-		panel_2.setBounds(0, 0, 684, 25);
-		contentPane.add(panel_2);
-
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(145, 0, 539, 361);
+		tabbedPane.setBounds(145, 0, 549, 491);
 		contentPane.add(tabbedPane);
 
 		JPanel panel_BPSFormularAbgabe = new JPanel();
@@ -234,39 +233,11 @@ public class MenuStu extends JFrame {
 		tabbedPane.addTab("New tab", null, panel_BPSFormularAbgabe, null);
 		panel_BPSFormularAbgabe.setLayout(null);
 
-		JLabel lblNewLabel_3 = new JLabel("BPS-Formular Abgabe");
-		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
+		JLabel lblNewLabel_3 = new JLabel("Anmeldung des BPS");
+		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3.setBounds(10, 0, 252, 32);
+		lblNewLabel_3.setBounds(35, 0, 252, 32);
 		panel_BPSFormularAbgabe.add(lblNewLabel_3);
-
-		txtMatrikelnummer = new JTextField();
-		txtMatrikelnummer.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtMatrikelnummer.setText("");
-			}
-		});
-		txtMatrikelnummer.setForeground(Color.GRAY);
-		txtMatrikelnummer.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		txtMatrikelnummer.setText("Matrikelnummer");
-		txtMatrikelnummer.setBounds(35, 51, 341, 20);
-		panel_BPSFormularAbgabe.add(txtMatrikelnummer);
-		txtMatrikelnummer.setColumns(10);
-
-		txtName = new JTextField();
-		txtName.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtName.setText("");
-			}
-		});
-		txtName.setForeground(Color.GRAY);
-		txtName.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		txtName.setText("Name");
-		txtName.setColumns(10);
-		txtName.setBounds(35, 82, 341, 20);
-		panel_BPSFormularAbgabe.add(txtName);
 
 		txtUnternehmen = new JTextField();
 		txtUnternehmen.addMouseListener(new MouseAdapter() {
@@ -277,17 +248,49 @@ public class MenuStu extends JFrame {
 			}
 		});
 		txtUnternehmen.setForeground(Color.GRAY);
-		txtUnternehmen.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtUnternehmen.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtUnternehmen.setText("Unternehmen");
 		txtUnternehmen.setColumns(10);
-		txtUnternehmen.setBounds(35, 144, 341, 20);
+		txtUnternehmen.setBounds(35, 43, 340, 20);
 		panel_BPSFormularAbgabe.add(txtUnternehmen);
 
 		JButton btnNewButton = new JButton("best\u00E4tigen");
-		btnNewButton.setBounds(273, 288, 103, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					String datum = null;
+
+					if (rdbtnZeitraum1.isSelected()) {
+						datum = rdbtnZeitraum1.getText();
+					}
+
+					if (rdbtnZeitraum2.isSelected()) {
+						datum = rdbtnZeitraum2.getText();
+					}
+
+					BPS bps = new BPS(matrikelnum, txtUnternehmen.getText(), txtFirmenanschrift.getText(),
+							txtFirmenbetreuerName.getText(), txtAbteilung.getText(), txtTelefon.getText(),
+							txtMail.getText(), datum, txtThemenbereich.getText(), txtBeschreibung.getText());
+
+					Datenbank.createBPS(matrikelnum, bps);
+
+					JOptionPane.showMessageDialog(btnNewButton,
+							"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihre Daten.");
+
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnNewButton.setBounds(431, 402, 103, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
+		txtBeschreibung.setHorizontalAlignment(SwingConstants.LEFT);
 		txtBeschreibung.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -295,42 +298,93 @@ public class MenuStu extends JFrame {
 			}
 		});
 		txtBeschreibung.setForeground(Color.GRAY);
-		txtBeschreibung.setText("Beschreibung");
-		txtBeschreibung.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		txtBeschreibung.setText("Kurzbeschreibung der geplanten T\u00E4tigkeit");
+		txtBeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtBeschreibung.setColumns(10);
-		txtBeschreibung.setBounds(35, 206, 341, 72);
+		txtBeschreibung.setBounds(35, 343, 340, 78);
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
 
-		txtVorname = new JTextField();
-		txtVorname.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtVorname.setText("");
-			}
-		});
-		txtVorname.setText("Vorname");
-		txtVorname.setForeground(Color.GRAY);
-		txtVorname.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		txtVorname.setColumns(10);
-		txtVorname.setBounds(35, 113, 341, 20);
-		panel_BPSFormularAbgabe.add(txtVorname);
+		rdbtnZeitraum1 = new JRadioButton("01.03 - 31.08");
+		buttonGroup.add(rdbtnZeitraum1);
+		rdbtnZeitraum1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		rdbtnZeitraum1.setHorizontalAlignment(SwingConstants.RIGHT);
+		rdbtnZeitraum1.setBackground(Color.WHITE);
+		rdbtnZeitraum1.setBounds(153, 285, 109, 20);
+		panel_BPSFormularAbgabe.add(rdbtnZeitraum1);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("01.03 - 31.08");
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBackground(Color.WHITE);
-		rdbtnNewRadioButton.setBounds(153, 176, 109, 23);
-		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton);
-
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("01.09 - 28.02");
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
-		rdbtnNewRadioButton_1.setBounds(267, 176, 109, 23);
-		panel_BPSFormularAbgabe.add(rdbtnNewRadioButton_1);
+		rdbtnZeitraum2 = new JRadioButton("01.09 - 28.02");
+		buttonGroup.add(rdbtnZeitraum2);
+		rdbtnZeitraum2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		rdbtnZeitraum2.setHorizontalAlignment(SwingConstants.RIGHT);
+		rdbtnZeitraum2.setBackground(Color.WHITE);
+		rdbtnZeitraum2.setBounds(266, 285, 109, 20);
+		panel_BPSFormularAbgabe.add(rdbtnZeitraum2);
 
 		JLabel lblNewLabel_2 = new JLabel("Zeitraum");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblNewLabel_2.setBounds(35, 181, 46, 14);
+		lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNewLabel_2.setBounds(35, 287, 80, 17);
 		panel_BPSFormularAbgabe.add(lblNewLabel_2);
+
+		txtFirmenanschrift = new JTextField();
+		txtFirmenanschrift.setText("Firmenanschrift");
+		txtFirmenanschrift.setForeground(Color.GRAY);
+		txtFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtFirmenanschrift.setColumns(10);
+		txtFirmenanschrift.setBounds(35, 74, 340, 20);
+		panel_BPSFormularAbgabe.add(txtFirmenanschrift);
+
+		txtUrl = new JTextField();
+		txtUrl.setText("URL des Unternehmens");
+		txtUrl.setForeground(Color.GRAY);
+		txtUrl.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtUrl.setColumns(10);
+		txtUrl.setBounds(35, 105, 340, 20);
+		panel_BPSFormularAbgabe.add(txtUrl);
+
+		txtAbteilung = new JTextField();
+		txtAbteilung.setText("Abteilung");
+		txtAbteilung.setForeground(Color.GRAY);
+		txtAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtAbteilung.setColumns(10);
+		txtAbteilung.setBounds(35, 194, 340, 20);
+		panel_BPSFormularAbgabe.add(txtAbteilung);
+
+		txtThemenbereich = new JTextField();
+		txtThemenbereich.setText("Themenbereich");
+		txtThemenbereich.setForeground(Color.GRAY);
+		txtThemenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtThemenbereich.setColumns(10);
+		txtThemenbereich.setBounds(35, 312, 340, 20);
+		panel_BPSFormularAbgabe.add(txtThemenbereich);
+
+		txtTelefon = new JTextField();
+		txtTelefon.setText("Telefon");
+		txtTelefon.setForeground(Color.GRAY);
+		txtTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtTelefon.setColumns(10);
+		txtTelefon.setBounds(35, 225, 340, 20);
+		panel_BPSFormularAbgabe.add(txtTelefon);
+
+		txtMail = new JTextField();
+		txtMail.setText("Email");
+		txtMail.setForeground(Color.GRAY);
+		txtMail.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtMail.setColumns(10);
+		txtMail.setBounds(35, 256, 340, 20);
+		panel_BPSFormularAbgabe.add(txtMail);
+
+		txtFirmenbetreuerName = new JTextField();
+		txtFirmenbetreuerName.setText("Name");
+		txtFirmenbetreuerName.setForeground(Color.GRAY);
+		txtFirmenbetreuerName.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txtFirmenbetreuerName.setColumns(10);
+		txtFirmenbetreuerName.setBounds(35, 163, 340, 20);
+		panel_BPSFormularAbgabe.add(txtFirmenbetreuerName);
+
+		JLabel lblNewLabel_4 = new JLabel("Firmenbetreuer");
+		lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNewLabel_4.setBounds(35, 136, 340, 20);
+		panel_BPSFormularAbgabe.add(lblNewLabel_4);
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
@@ -357,32 +411,30 @@ public class MenuStu extends JFrame {
 		JButton btnNewButton_1 = new JButton("hochladen");
 		btnNewButton_1.setBounds(188, 0, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(e->{
-			
-				try {
-					JFileChooser chooser=new JFileChooser();
-					int input=chooser.showOpenDialog(null);
-					if(input==JFileChooser.APPROVE_OPTION) {
-					File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum,"nachweis");
-					}
+		btnNewButton_1.addActionListener(e -> {
+
+			try {
+				JFileChooser chooser = new JFileChooser();
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis");
 				}
-				 catch (Exception e1) {
-					e1.printStackTrace();
-				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
 		btnNewButton_2.setBounds(303, 0, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(e->{
+		btnNewButton_2.addActionListener(e -> {
 			try {
-				JFileChooser chooser=new JFileChooser();
-				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
-				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
-				
-			}
-			catch (Exception e1) {
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
+
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -399,63 +451,58 @@ public class MenuStu extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("hochladen");
 		btnNewButton_1_1.setBounds(188, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
-		btnNewButton_1_1.addActionListener(e->{
-			
+		btnNewButton_1_1.addActionListener(e -> {
+
 			try {
-				JFileChooser chooser=new JFileChooser();
-				int input=chooser.showOpenDialog(null);
-				if(input==JFileChooser.APPROVE_OPTION) {
-				File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
-				Datenbank.upload(inFileNachweis, matrikelnum,"bericht");
+				JFileChooser chooser = new JFileChooser();
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "bericht");
 				}
-				
-			} 
-			catch (Exception e1) {
+
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
 		JButton btnNewButton_1_2 = new JButton("hochladen");
 		btnNewButton_1_2.setBounds(188, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
-		btnNewButton_1_2.addActionListener(e->{
+		btnNewButton_1_2.addActionListener(e -> {
 			try {
-				JFileChooser chooser=new JFileChooser();
-				int input=chooser.showOpenDialog(null);
-				if(input==JFileChooser.APPROVE_OPTION) {
-				File inFileNachweis=new File(chooser.getSelectedFile().getAbsolutePath());
-				Datenbank.upload(inFileNachweis, matrikelnum,"vertrag");
+				JFileChooser chooser = new JFileChooser();
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "vertrag");
 				}
-			}
-			catch (Exception e1) {
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
-		
 
 		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
 		btnNewButton_2_1.setBounds(303, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
-		btnNewButton_2_1.addActionListener(e->{
+		btnNewButton_2_1.addActionListener(e -> {
 			try {
-				JFileChooser chooser=new JFileChooser();
-				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
-				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
-			}
-			catch (Exception e1) {
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
 		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
 		btnNewButton_2_2.setBounds(303, 106, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
-		btnNewButton_2_2.addActionListener(e->{
+		btnNewButton_2_2.addActionListener(e -> {
 			try {
-				JFileChooser chooser=new JFileChooser();
-				if(chooser.showSaveDialog(null)==JFileChooser.APPROVE_OPTION) 
-				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
-				
-			}
-			catch (Exception e1) {
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -610,12 +657,9 @@ public class MenuStu extends JFrame {
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2);
 
-		
 		JPanel panel = new JPanel();
 		panel.setBounds(116, 361, 10, 10);
 		contentPane.add(panel);
-		
+
 	}
-	
-	
 }

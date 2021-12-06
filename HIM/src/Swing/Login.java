@@ -47,11 +47,11 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 
-	public Login() throws Exception{
+	public Login() throws Exception {
 		try {
-		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
-		} catch( Exception ex ) {
-		    ex.printStackTrace();
+			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		setTitle("HIM - HFT Intern Manager");
 		setResizable(false);
@@ -64,7 +64,6 @@ public class Login extends JFrame {
 		panel.setBounds(145, 0, 529, 361);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
 
 		textFieldBenutzer = new JTextField();
 		textFieldBenutzer.setToolTipText("Matrikel- / Personalnummer");
@@ -102,45 +101,40 @@ public class Login extends JFrame {
 		JButton btnNewButton_1 = new JButton("Login");
 		btnNewButton_1.addActionListener(e -> {
 
-				try {
-					if (verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
-						int role=Datenbank.getUser(Integer.parseInt(textFieldBenutzer.getText())).getRole();
-						
-						switch(role) {
-							case -1:
-								MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));
-								ms.setVisible(true);
-								dispose();
-								break;
-							case 0:
-								MenuBet mb =new MenuBet();
-								mb.setVisible(true);
-								dispose();
-								break;
-							case 1:
-								MenuPPA mp=new MenuPPA();
-								mp.setVisible(true);
-								dispose();
-						}
-						
+			try {
+				if (verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
+					int role = Datenbank.getUser(Integer.parseInt(textFieldBenutzer.getText())).getRole();
 
-					} else {
-						JOptionPane.showMessageDialog(btnNewButton_1,
-								"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihre Daten.");
-						textFieldBenutzer.setText("");
-						textFieldPasswort.setText("");
+					switch (role) {
+					case -1:
+						MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));
+						ms.setVisible(true);
+						dispose();
+						break;
+					case 0:
+						MenuBet mb = new MenuBet();
+						mb.setVisible(true);
+						dispose();
+						break;
+					case 1:
+						MenuPPA mp = new MenuPPA();
+						mp.setVisible(true);
+						dispose();
 					}
-				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+
+				} else {
+					JOptionPane.showMessageDialog(btnNewButton_1,
+							"Ihr Benutzername und/oder Kennwort ist nicht korrekt. Bitte überprüfen Sie ihre Daten.");
+					textFieldBenutzer.setText("");
+					textFieldPasswort.setText("");
 				}
-
-			
-
-
+			} catch (HeadlessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 		});
 		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
@@ -178,49 +172,18 @@ public class Login extends JFrame {
 		panel_1_2.setLayout(null);
 		panel_1_2.setBackground(Color.RED);
 
-		JPanel tab2_3 = new JPanel();
-		tab2_3.setLayout(null);
-		tab2_3.setBackground(Color.RED);
-		tab2_3.setBounds(10, 102, 126, 21);
-		panel_1_2.add(tab2_3);
-
-		JPanel tab2_1_1 = new JPanel();
-		tab2_1_1.setLayout(null);
-		tab2_1_1.setBackground(Color.RED);
-		tab2_1_1.setBounds(10, 134, 126, 21);
-		panel_1_2.add(tab2_1_1);
-
-		JPanel tab2_2_3 = new JPanel();
-		tab2_2_3.setLayout(null);
-		tab2_2_3.setBackground(Color.RED);
-		tab2_2_3.setBounds(10, 166, 126, 21);
-		panel_1_2.add(tab2_2_3);
-
-		JPanel tab2_2_1_1 = new JPanel();
-		tab2_2_1_1.setLayout(null);
-		tab2_2_1_1.setBackground(Color.RED);
-		tab2_2_1_1.setBounds(10, 198, 126, 21);
-		panel_1_2.add(tab2_2_1_1);
-
-		JPanel tab2_2_2_1 = new JPanel();
-		tab2_2_2_1.setLayout(null);
-		tab2_2_2_1.setBackground(Color.RED);
-		tab2_2_2_1.setBounds(0, 329, 136, 21);
-		panel_1_2.add(tab2_2_2_1);
-
 	}
-	
-	public static boolean verifyLogin(int id, String passwort) throws Exception {
-		
 
-		if (Datenbank.getUser(id) == null) { 
+	public static boolean verifyLogin(int id, String passwort) throws Exception {
+
+		if (Datenbank.getUser(id) == null) {
 
 			return false;
 		}
 		String pass = Datenbank.getUser(id).getUserPass();
 		byte[] salt = Datenbank.getUser(id).getUserSalt();
-		String hashString= Datenbank.hashPassword(passwort, salt);
-		
+		String hashString = Datenbank.hashPassword(passwort, salt);
+
 		if (hashString.equals(pass))
 			return true;
 		return false;
