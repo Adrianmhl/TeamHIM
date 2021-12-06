@@ -137,7 +137,7 @@ public class Login extends JFrame {
 			}
 
 		});
-		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
+		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		btnNewButton_1.setForeground(Color.BLACK);
 		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.setBorderPainted(false);
@@ -151,7 +151,7 @@ public class Login extends JFrame {
 		panel.add(lblNewLabel);
 
 		JLabel lblRegistrieren = new JLabel("Jetzt registieren >");
-		lblRegistrieren.setFont(new Font("Segoe UI Light", Font.PLAIN, 11));
+		lblRegistrieren.setFont(new Font("Segoe UI Light", Font.PLAIN, 12));
 		lblRegistrieren.setForeground(Color.DARK_GRAY);
 		lblRegistrieren.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrieren.addMouseListener(new MouseAdapter() {

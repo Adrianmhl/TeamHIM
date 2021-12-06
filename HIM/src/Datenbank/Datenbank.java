@@ -93,9 +93,9 @@ public class Datenbank {
 //				+ "kurzbeschreibung = ?, datumantrag = ?, status = ?) WHERE (id = '" + matrikelnum + "')");
 
 		stmt = con.prepareStatement(
-				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = '?', `firmenanschrift` = '?', `firmenbetreuer` = '?', "
-						+ "`abteilung` = '?', `telefon` = '?', `email` = '?', `zeitraum` = '?', `themenbereich` = '?', "
-						+ "`kurzbeschreibung` = '?', `datumantrag` = '?', `status` = '?' WHERE (`id` = '123')");
+				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuer` = ?, "
+						+ "`abteilung` = ?, `telefon` = ?, `email` = ?, `zeitraum` = ?, `themenbereich` = ?, "
+						+ "`kurzbeschreibung` = ?, `datumantrag` = ?, `status` = ? WHERE (`id` = " + matrikelnum + ")");
 
 		stmt.setString(1, bps.getUnternehmen());
 		stmt.setString(2, bps.getFirmenanschrift());
@@ -108,6 +108,7 @@ public class Datenbank {
 		stmt.setString(9, bps.getKurzbeschreibung());
 		stmt.setString(10, bps.getDatumantrag());
 		stmt.setString(11, bps.getStatus());
+
 		stmt.executeUpdate();
 
 	}

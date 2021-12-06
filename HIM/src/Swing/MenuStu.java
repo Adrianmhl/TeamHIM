@@ -82,7 +82,7 @@ public class MenuStu extends JFrame {
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 980, 520);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,7 +90,7 @@ public class MenuStu extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 146, 491);
+		panel_1.setBounds(0, 0, 146, 571);
 		panel_1.setBackground(Color.RED);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
@@ -175,13 +175,14 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		tab2_2_1.add(lblNewLabel_1_2_1);
 
-		JPanel tab2_2_2 = new JPanel();
-		tab2_2_2.setLayout(null);
-		tab2_2_2.setBackground(Color.RED);
-		tab2_2_2.setBounds(10, 329, 126, 21);
-		panel_1.add(tab2_2_2);
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo.jpeg")));
+		lblNewLabel_5.setBounds(10, 11, 112, 87);
+		panel_1.add(lblNewLabel_5);
 
 		JLabel lblNewLabel_1_2_2 = new JLabel("Logout");
+		lblNewLabel_1_2_2.setBounds(10, 542, 116, 18);
+		panel_1.add(lblNewLabel_1_2_2);
 		lblNewLabel_1_2_2.setForeground(Color.WHITE);
 		lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -202,30 +203,17 @@ public class MenuStu extends JFrame {
 		});
 		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_1_2_2.setBounds(0, 0, 116, 18);
-		tab2_2_2.add(lblNewLabel_1_2_2);
 
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo.jpeg")));
-		lblNewLabel_5.setBounds(10, 11, 112, 87);
-		panel_1.add(lblNewLabel_5);
-
-		JPanel tab2_2_1_1 = new JPanel();
-		tab2_2_1_1.setLayout(null);
-		tab2_2_1_1.setBackground(Color.RED);
-		tab2_2_1_1.setBounds(10, 307, 126, 21);
-		panel_1.add(tab2_2_1_1);
-
-		JLabel lblNewLabel_1_2_1_1 = new JLabel(String.valueOf(matrikelnum));
+		JLabel lblNewLabel_1_2_1_1 = new JLabel("Matrilnummer");
+		lblNewLabel_1_2_1_1.setBounds(10, 513, 116, 18);
+		panel_1.add(lblNewLabel_1_2_1_1);
 		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
 		lblNewLabel_1_2_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNewLabel_1_2_1_1.setBackground(Color.RED);
-		lblNewLabel_1_2_1_1.setBounds(0, 0, 116, 18);
-		tab2_2_1_1.add(lblNewLabel_1_2_1_1);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(145, 0, 549, 491);
+		tabbedPane.setBounds(145, 0, 649, 571);
 		contentPane.add(tabbedPane);
 
 		JPanel panel_BPSFormularAbgabe = new JPanel();
@@ -286,7 +274,7 @@ public class MenuStu extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(254, 429, 121, 23);
+		btnNewButton.setBounds(35, 432, 121, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
