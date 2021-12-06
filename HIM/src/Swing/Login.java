@@ -56,12 +56,12 @@ public class Login extends JFrame {
 		setTitle("HIM - HFT Intern Manager");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 400);
+		setBounds(100, 100, 360, 580);
 		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(145, 0, 529, 361);
+		panel.setBounds(0, 0, 354, 551);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -76,9 +76,9 @@ public class Login extends JFrame {
 		textFieldBenutzer.setForeground(Color.GRAY);
 		textFieldBenutzer.setText("Matrikel- / Personalnummer");
 		textFieldBenutzer.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldBenutzer.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		textFieldBenutzer.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		textFieldBenutzer.setColumns(10);
-		textFieldBenutzer.setBounds(70, 150, 284, 32);
+		textFieldBenutzer.setBounds(10, 216, 334, 32);
 		panel.add(textFieldBenutzer);
 
 		textFieldPasswort = new JPasswordField();
@@ -93,12 +93,12 @@ public class Login extends JFrame {
 		textFieldPasswort.setForeground(Color.GRAY);
 		textFieldPasswort.setText("Kennwort");
 		textFieldPasswort.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldPasswort.setFont(new Font("Tahoma", Font.ITALIC, 13));
+		textFieldPasswort.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		textFieldPasswort.setColumns(10);
-		textFieldPasswort.setBounds(70, 191, 284, 32);
+		textFieldPasswort.setBounds(10, 259, 334, 32);
 		panel.add(textFieldPasswort);
 
-		JButton btnNewButton_1 = new JButton("Login");
+		JButton btnNewButton_1 = new JButton("Log In");
 		btnNewButton_1.addActionListener(e -> {
 
 			try {
@@ -137,21 +137,22 @@ public class Login extends JFrame {
 			}
 
 		});
-		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+		btnNewButton_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
 		btnNewButton_1.setForeground(Color.BLACK);
 		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.setBorderPainted(false);
 		btnNewButton_1.setOpaque(true);
-		btnNewButton_1.setBounds(135, 234, 157, 32);
+		btnNewButton_1.setBounds(100, 302, 157, 32);
 		panel.add(btnNewButton_1);
 
-		JLabel lblNewLabel = new JLabel("Icon/logo");
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/res/ProjLogo3.png")));
-		lblNewLabel.setBounds(124, 32, 199, 107);
+		lblNewLabel.setBounds(10, 59, 334, 126);
 		panel.add(lblNewLabel);
 
 		JLabel lblRegistrieren = new JLabel("Jetzt registieren >");
-		lblRegistrieren.setFont(new Font("Segoe UI Light", Font.PLAIN, 12));
+		lblRegistrieren.setFont(new Font("Segoe UI Light", Font.PLAIN, 14));
 		lblRegistrieren.setForeground(Color.DARK_GRAY);
 		lblRegistrieren.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistrieren.addMouseListener(new MouseAdapter() {
@@ -163,14 +164,8 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		lblRegistrieren.setBounds(135, 278, 157, 14);
+		lblRegistrieren.setBounds(100, 345, 157, 14);
 		panel.add(lblRegistrieren);
-
-		JPanel panel_1_2 = new JPanel();
-		panel_1_2.setBounds(0, 0, 156, 361);
-		getContentPane().add(panel_1_2);
-		panel_1_2.setLayout(null);
-		panel_1_2.setBackground(Color.RED);
 
 	}
 

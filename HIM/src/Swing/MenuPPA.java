@@ -16,26 +16,32 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+
+import Datenbank.Datenbank;
 
 public class MenuPPA extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
-		} catch( Exception ex ) {
-		    ex.printStackTrace();
+			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -55,9 +61,9 @@ public class MenuPPA extends JFrame {
 	 */
 	public MenuPPA() {
 		try {
-		    UIManager.setLookAndFeel( new FlatAtomOneLightContrastIJTheme() );
-		} catch( Exception ex ) {
-		    ex.printStackTrace();
+			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		setTitle("HIM - HFT Intern Manager");
 		setResizable(false);
@@ -177,7 +183,7 @@ public class MenuPPA extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				dispose();
 
 			}
@@ -247,6 +253,41 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2_2.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2_2.setBounds(10, 0, 252, 32);
 		panel_BPS.add(lblNewLabel_3_1_2_2);
+
+		JButton btnNewButton_2 = new JButton("aktualisieren");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Datenbank db = new Datenbank();
+				db.getBPS();
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+				Object[] rowData = new Object[3];
+
+				for (int i = 0; i < db.getBPS().size(); i++) {
+					rowData[0] = db.getBPS().get(i).getId();
+					rowData[1] = db.getBPS().get(i).getUnternehmen();
+					rowData[2] = db.getBPS().get(i).getStatus();
+					model.addRow(rowData);
+				}
+
+			}
+		});
+		btnNewButton_2.setBounds(20, 288, 129, 23);
+		panel_BPS.add(btnNewButton_2);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 43, 424, 169);
+		panel_BPS.add(scrollPane);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(
+				new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }));
+		table.getColumnModel().getColumn(0).setPreferredWidth(105);
+		table.getColumnModel().getColumn(1).setPreferredWidth(105);
+		table.getColumnModel().getColumn(2).setPreferredWidth(105);
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);

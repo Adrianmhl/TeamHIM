@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -78,19 +79,45 @@ public class Datenbank {
 		return null;
 	}
 
+	/**
+	 * holt bps daten aus der datenbank und gibt sie in das bps-objekt weiter
+	 * 
+	 * @return
+	 */
+
+	public ArrayList<BPS> getBPS() {
+		ArrayList<BPS> bpslist = new ArrayList<>();
+		try {
+			if (con == null)
+				startConnection();
+
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.bpsantrag");
+
+			ResultSet rs = stmt.executeQuery();
+			if (rs != null) {
+
+				BPS bps;
+				while (rs.next()) {
+
+					bps = new BPS(rs.getInt("id"), rs.getString("unternehmen"), rs.getString("firmenanschrift"),
+							rs.getString("firmenbetreuerName"), rs.getString("abteilung"), rs.getString("telefon"),
+							rs.getString("mail"), rs.getString("zeitraum"), rs.getString("themenbereich"),
+							rs.getString("kurzbeschreibung"), rs.getString("status"));
+					bpslist.add(bps);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bpslist;
+	}
+
 	public static void updateBPS(int matrikelnum, BPS bps) throws Exception {
 
 		if (con == null)
 			startConnection();
 		PreparedStatement stmt = null;
-
-//		stmt = con.prepareStatement("UPDATE `db3`.`bpsantrag` SET (`unternehmen`, `firmenanschrift`, "
-//				+ "`firmenbetreuer`, `abteilung`, `telefon` , `email`, `zeitraum` , `themenbereich`, "
-//				+ "`kurzbeschreibung`, `datumantrag`,`status`) WHERE (`id` = '" + matrikelnum + "')");
-//
-//		stmt = con.prepareStatement("UPDATE db3.bpsantrag SET (unternehmen = ?, firmenanschrift = ?, "
-//				+ "firmenbetreuer = ?, abteilung = ?, telefon = ?, email = ?,  zeitraum = ?, themenbereich = ?, "
-//				+ "kurzbeschreibung = ?, datumantrag = ?, status = ?) WHERE (id = '" + matrikelnum + "')");
 
 		stmt = con.prepareStatement(
 				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuer` = ?, "
