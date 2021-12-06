@@ -204,7 +204,7 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 
-		JLabel lblNewLabel_1_2_1_1 = new JLabel("Matrilnummer");
+		JLabel lblNewLabel_1_2_1_1 = new JLabel("Matrikelnummer");
 		lblNewLabel_1_2_1_1.setBounds(10, 513, 116, 18);
 		panel_1.add(lblNewLabel_1_2_1_1);
 		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -274,7 +274,7 @@ public class MenuStu extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(35, 432, 121, 23);
+		btnNewButton.setBounds(254, 476, 121, 23);
 		panel_BPSFormularAbgabe.add(btnNewButton);
 
 		txtBeschreibung = new JTextField();
@@ -289,7 +289,7 @@ public class MenuStu extends JFrame {
 		txtBeschreibung.setText("Kurzbeschreibung der geplanten T\u00E4tigkeit");
 		txtBeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		txtBeschreibung.setColumns(10);
-		txtBeschreibung.setBounds(35, 343, 340, 78);
+		txtBeschreibung.setBounds(35, 343, 340, 122);
 		panel_BPSFormularAbgabe.add(txtBeschreibung);
 
 		rdbtnZeitraum1 = new JRadioButton("01.03 - 31.08");
