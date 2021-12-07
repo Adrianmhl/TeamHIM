@@ -82,32 +82,31 @@ public class MenuStu extends JFrame {
 		});
 	}
 
-	public void bpsVisible(int matrikelnum) {
+	private void bpsVisible(int matrikelnum) throws Exception{
 
-		Datenbank db = new Datenbank();
+	
+		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
-		for (int i = 0; i < db.getBPSlist().size(); i++) {
+			if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
+					&& Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
 
-			if (matrikelnum == db.getBPSlist().get(i).getId()
-					&& db.getBPSlist().get(i).getStatus().equals("beantragt")) {
-
-				lblStatus.setText(db.getBPSlist().get(i).getStatus());
-				lblUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
-				lblFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
-				lblFirmenbetreuer.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
-				lblAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
-				lblTelefon.setText(db.getBPSlist().get(i).getTelefon());
-				lblEmail.setText(db.getBPSlist().get(i).getMail());
-				lblZeitraum.setText(db.getBPSlist().get(i).getZeitraum());
-				Themenbereich.setText(db.getBPSlist().get(i).getThemenbereich());
-				lblKurzbeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
+				lblStatus.setText(Datenbank.getBPSlist().get(i).getStatus());
+				lblUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
+				lblFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
+				lblFirmenbetreuer.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
+				lblAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
+				lblTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
+				lblEmail.setText(Datenbank.getBPSlist().get(i).getMail());
+				lblZeitraum.setText(Datenbank.getBPSlist().get(i).getZeitraum());
+				Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
+				lblKurzbeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
 
 				panel_2.setVisible(true);
 				panel_BPSFormularAbgabe.setVisible(false);
 
 			}
 
-			if (matrikelnum == db.getBPSlist().get(i).getId() && db.getBPSlist().get(i).getStatus().equals("offen")) {
+			if (matrikelnum == Datenbank.getBPSlist().get(i).getId() && Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
 
 				panel_2.setVisible(false);
 				panel_BPSFormularAbgabe.setVisible(true);
@@ -356,38 +355,36 @@ public class MenuStu extends JFrame {
 		panel_2.add(lblURL, gbc_lblURL);
 
 		JButton btnNewButton_3 = new JButton("Antrag bearbeiten");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
+		btnNewButton_3.addActionListener(e-> {
 				panel_BPSFormularAbgabe.setVisible(true);
 				panel_2.setVisible(false);
+				try {
+					for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
-				Datenbank db = new Datenbank();
-
-				for (int i = 0; i < db.getBPSlist().size(); i++) {
-
-					if (matrikelnum == db.getBPSlist().get(i).getId()
-							&& db.getBPSlist().get(i).getStatus().equals("beantragt")) {
+						if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
+								&& Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
 
 						/**
 						 * radiobutton
 						 */
 
-						txtUnternehmen.setText(db.getBPSlist().get(i).getUnternehmen());
-						txtFirmenanschrift.setText(db.getBPSlist().get(i).getFirmenanschrift());
-						txtFirmenbetreuerName.setText(db.getBPSlist().get(i).getFirmenbetreuerName());
-						txtAbteilung.setText(db.getBPSlist().get(i).getAbteilung());
-						txtTelefon.setText(db.getBPSlist().get(i).getTelefon());
-						txtMail.setText(db.getBPSlist().get(i).getMail());
-						Themenbereich.setText(db.getBPSlist().get(i).getThemenbereich());
-						txtBeschreibung.setText(db.getBPSlist().get(i).getKurzbeschreibung());
+							txtUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
+							txtFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
+							txtFirmenbetreuerName.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
+							txtAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
+							txtTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
+							txtMail.setText(Datenbank.getBPSlist().get(i).getMail());
+							Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
+							txtBeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
+
+						}
 
 					}
-
+					
 				}
-
-			}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
 		});
 
 		JLabel lblNewLabel_7_2 = new JLabel("Firmenbetreuer");
@@ -782,6 +779,9 @@ public class MenuStu extends JFrame {
 		btnNewButton_2.setBounds(303, 0, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(e -> {
+			
+			
+			
 			try {
 				JFileChooser chooser = new JFileChooser();
 				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
@@ -805,7 +805,9 @@ public class MenuStu extends JFrame {
 		btnNewButton_1_1.setBounds(188, 55, 105, 23);
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
 		btnNewButton_1_1.addActionListener(e -> {
-
+			
+			
+			
 			try {
 				JFileChooser chooser = new JFileChooser();
 				int input = chooser.showOpenDialog(null);
@@ -839,6 +841,7 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
 		btnNewButton_2_1.addActionListener(e -> {
 			try {
+			
 				JFileChooser chooser = new JFileChooser();
 				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
 					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
@@ -851,6 +854,7 @@ public class MenuStu extends JFrame {
 		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
 		btnNewButton_2_2.addActionListener(e -> {
 			try {
+			
 				JFileChooser chooser = new JFileChooser();
 				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
 					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");

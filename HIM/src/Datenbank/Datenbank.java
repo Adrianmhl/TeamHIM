@@ -85,9 +85,9 @@ public class Datenbank {
 	 * @return
 	 */
 
-	public ArrayList<BPS> getBPSlist() {
+	public static ArrayList<BPS> getBPSlist() throws Exception{
 		ArrayList<BPS> bpslist = new ArrayList<>();
-		try {
+		
 			if (con == null)
 				startConnection();
 
@@ -106,10 +106,6 @@ public class Datenbank {
 					bpslist.add(bps);
 				}
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 //		System.out.println(bpslist);
 		return bpslist;
 	}

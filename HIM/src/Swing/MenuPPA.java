@@ -38,11 +38,7 @@ public class MenuPPA extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -59,12 +55,11 @@ public class MenuPPA extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuPPA() {
-		try {
-			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	@SuppressWarnings("serial")
+	public MenuPPA() throws Exception{
+		
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		
 		setTitle("HIM - HFT Intern Manager");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -255,10 +250,12 @@ public class MenuPPA extends JFrame {
 		panel_BPS.add(lblNewLabel_3_1_2_2);
 
 		JButton btnNewButton_2 = new JButton("aktualisieren");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton_2.addActionListener(e->{
+			try {
 				refreshBPSinJTable();
+			}
+			catch(Exception e3) {
+				e3.printStackTrace();
 			}
 		});
 		btnNewButton_2.setBounds(20, 288, 129, 23);
@@ -269,13 +266,32 @@ public class MenuPPA extends JFrame {
 		panel_BPS.add(scrollPane);
 
 		table = new JTable();
+		
+		table.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable click = (JTable)e.getSource();
+			      int row = click.getSelectedRow();
+			      StudentPopup popup= new StudentPopup((int) table.getValueAt(row, 0));
+			      popup.setVisible(true);
+			    }
+			  }
+			});
+		
 		scrollPane.setViewportView(table);
 		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }));
+				new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }) {
+
+					@Override
+					public boolean isCellEditable(int row, int column) {
+						return false;
+					}
+					
+				});
 		table.getColumnModel().getColumn(0).setPreferredWidth(105);
 		table.getColumnModel().getColumn(1).setPreferredWidth(105);
 		table.getColumnModel().getColumn(2).setPreferredWidth(105);
-
+		
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
@@ -466,19 +482,19 @@ public class MenuPPA extends JFrame {
 	 * 
 	 */
 
-	public void showBPSinJTable() {
+	public void showBPSinJTable() throws Exception{
 
-		Datenbank db = new Datenbank();
-		db.getBPSlist();
+		
+		Datenbank.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 		Object[] rowData = new Object[3];
 
-		for (int i = 0; i < db.getBPSlist().size(); i++) {
+		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
-			rowData[0] = db.getBPSlist().get(i).getId();
-			rowData[1] = db.getBPSlist().get(i).getUnternehmen();
-			rowData[2] = db.getBPSlist().get(i).getStatus();
+			rowData[0] = Datenbank.getBPSlist().get(i).getId();
+			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
 			model.addRow(rowData);
 		}
 	}
@@ -489,21 +505,21 @@ public class MenuPPA extends JFrame {
 	 * @author isedo
 	 */
 
-	public void refreshBPSinJTable() {
+	public void refreshBPSinJTable() throws Exception{
 
-		Datenbank db = new Datenbank();
-		db.getBPSlist();
+		Datenbank.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		Object[] rowData = new Object[3];
 
-		for (int i = 0; i < db.getBPSlist().size(); i++) {
+		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
-			rowData[0] = db.getBPSlist().get(i).getId();
-			rowData[1] = db.getBPSlist().get(i).getUnternehmen();
-			rowData[2] = db.getBPSlist().get(i).getStatus();
+			rowData[0] = Datenbank.getBPSlist().get(i).getId();
+			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
 			model.addRow(rowData);
 		}
 
 	}
+	
 }

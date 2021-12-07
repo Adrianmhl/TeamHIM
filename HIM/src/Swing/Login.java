@@ -48,11 +48,9 @@ public class Login extends JFrame {
 	 */
 
 	public Login() throws Exception {
-		try {
-			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		
 		setTitle("HIM - HFT Intern Manager");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -51,12 +51,10 @@ public class MenuBet extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuBet() {
-		try {
-			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	public MenuBet() throws Exception{
+		
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
