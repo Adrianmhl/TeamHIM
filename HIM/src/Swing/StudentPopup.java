@@ -6,7 +6,14 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+
+import Objekte.BPS;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -20,7 +27,7 @@ public class StudentPopup extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			StudentPopup dialog = new StudentPopup(0);
+			StudentPopup dialog = new StudentPopup(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -30,15 +37,17 @@ public class StudentPopup extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws Exception 
 	 */
-	public StudentPopup(int matrikelnum) {
+	public StudentPopup(BPS bps) throws Exception {
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblNewLabel = new JLabel(Integer.toString(matrikelnum));
+			JLabel lblNewLabel = new JLabel(bps.toString());
 			contentPanel.add(lblNewLabel);
 		}
 		{

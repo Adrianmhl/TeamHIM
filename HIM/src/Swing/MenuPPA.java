@@ -272,8 +272,14 @@ public class MenuPPA extends JFrame {
 			    if (e.getClickCount() == 2) {
 			      JTable click = (JTable)e.getSource();
 			      int row = click.getSelectedRow();
-			      StudentPopup popup= new StudentPopup((int) table.getValueAt(row, 0));
-			      popup.setVisible(true);
+			      StudentPopup popup;
+				try {
+					popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
+					popup.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			      
 			    }
 			  }
 			});

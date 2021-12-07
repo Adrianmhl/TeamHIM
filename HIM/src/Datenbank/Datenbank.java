@@ -136,7 +136,28 @@ public class Datenbank {
 		stmt.executeUpdate();
 
 	}
+	
+	
+	public static BPS getBPS (int matrikelnum) throws Exception{
+		if (con == null)
+			startConnection();
+		PreparedStatement stmt = null;
 
+		stmt = con.prepareStatement("Select * FROM db3.bpsantrag WHERE id=?");
+		stmt.setInt(1, matrikelnum);
+		ResultSet rs=stmt.executeQuery();
+		
+		if(rs!=null) {
+			while(rs.next()) {
+				return new BPS(matrikelnum, rs.getString("unternehmen"), rs.getString("firmenanschrift"), rs.getString("firmenbetreuerName"), rs.getString("abteilung"),
+						rs.getString("telefon"), rs.getString("mail") , rs.getString("zeitraum") , rs.getString("themenbereich"), rs.getString("kurzbeschreibung"), rs.getString("status"));
+			}
+		}
+		return null;
+	}
+	
+	
+	
 	public static void createBPS(int matrikelnum) throws Exception {
 
 		if (con == null)
