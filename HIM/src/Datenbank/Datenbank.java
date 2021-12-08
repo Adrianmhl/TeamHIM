@@ -85,29 +85,55 @@ public class Datenbank {
 	 * @return
 	 */
 
-	public static ArrayList<BPS> getBPSlist() throws Exception{
+	public static ArrayList<BPS> getBPSlist() throws Exception {
 		ArrayList<BPS> bpslist = new ArrayList<>();
-		
-			if (con == null)
-				startConnection();
 
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.bpsantrag");
+		if (con == null)
+			startConnection();
 
-			ResultSet rs = stmt.executeQuery();
-			if (rs != null) {
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.bpsantrag");
 
-				BPS bps;
-				while (rs.next()) {
+		ResultSet rs = stmt.executeQuery();
+		if (rs != null) {
 
-					bps = new BPS(rs.getInt("id"), rs.getString("unternehmen"), rs.getString("firmenanschrift"),
-							rs.getString("firmenbetreuerName"), rs.getString("abteilung"), rs.getString("telefon"),
-							rs.getString("mail"), rs.getString("zeitraum"), rs.getString("themenbereich"),
-							rs.getString("kurzbeschreibung"), rs.getString("status"));
-					bpslist.add(bps);
-				}
+			BPS bps;
+			while (rs.next()) {
+
+				bps = new BPS(rs.getInt("id"), rs.getString("unternehmen"), rs.getString("firmenanschrift"),
+						rs.getString("firmenbetreuerName"), rs.getString("abteilung"), rs.getString("telefon"),
+						rs.getString("mail"), rs.getString("zeitraum"), rs.getString("themenbereich"),
+						rs.getString("kurzbeschreibung"), rs.getString("status"));
+				bpslist.add(bps);
 			}
+		}
 //		System.out.println(bpslist);
 		return bpslist;
+	}
+	/**
+	 * Diese Methode erzeugt ein Array der Studierenden
+	 * @author Adrian
+	 * @return studList[] Liste von angelegten Studierenden
+	 * @throws Exception
+	 */
+	public static ArrayList<Studierende> getStudentlist() throws Exception {
+		ArrayList<Studierende> studList = new ArrayList<>();
+
+		if (con == null)
+			startConnection();
+
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM db3.student");
+
+		ResultSet rs = stmt.executeQuery();
+		if (rs != null) {
+
+			Studierende stud;
+			while (rs.next()) {
+
+				stud = new Studierende(rs.getInt("id"), null, null, rs.getString("name"), rs.getString("vorname"), rs.getString("mail"), rs.getString("praxisstelle"), rs.getString("betreuer"));
+				studList.add(stud);
+			}
+		}
+		return studList;
 	}
 
 	public static void updateBPS(int matrikelnum, BPS bps) throws Exception {
@@ -136,28 +162,27 @@ public class Datenbank {
 		stmt.executeUpdate();
 
 	}
-	
-	
-	public static BPS getBPS (int matrikelnum) throws Exception{
+
+	public static BPS getBPS(int matrikelnum) throws Exception {
 		if (con == null)
 			startConnection();
 		PreparedStatement stmt = null;
 
 		stmt = con.prepareStatement("Select * FROM db3.bpsantrag WHERE id=?");
 		stmt.setInt(1, matrikelnum);
-		ResultSet rs=stmt.executeQuery();
-		
-		if(rs!=null) {
-			while(rs.next()) {
-				return new BPS(matrikelnum, rs.getString("unternehmen"), rs.getString("firmenanschrift"), rs.getString("firmenbetreuerName"), rs.getString("abteilung"),
-						rs.getString("telefon"), rs.getString("mail") , rs.getString("zeitraum") , rs.getString("themenbereich"), rs.getString("kurzbeschreibung"), rs.getString("status"));
+		ResultSet rs = stmt.executeQuery();
+
+		if (rs != null) {
+			while (rs.next()) {
+				return new BPS(matrikelnum, rs.getString("unternehmen"), rs.getString("firmenanschrift"),
+						rs.getString("firmenbetreuerName"), rs.getString("abteilung"), rs.getString("telefon"),
+						rs.getString("mail"), rs.getString("zeitraum"), rs.getString("themenbereich"),
+						rs.getString("kurzbeschreibung"), rs.getString("status"));
 			}
 		}
 		return null;
 	}
-	
-	
-	
+
 	public static void createBPS(int matrikelnum) throws Exception {
 
 		if (con == null)

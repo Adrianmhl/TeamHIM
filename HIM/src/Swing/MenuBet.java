@@ -17,17 +17,23 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+
+import Swing.MenuBetTableModel.JTableButtonRenderer;
+
+import javax.swing.JScrollPane;
 
 public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField_6;
 	private final JPanel panel_Profil_2 = new JPanel();
 
 	/**
@@ -176,26 +182,31 @@ public class MenuBet extends JFrame {
 		panel_3.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_3, null);
 		panel_3.setLayout(null);
-
-		JLabel lblNewLabel_3 = new JLabel("Bewerbung auf BPS-Student");
-		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3.setBounds(10, 0, 252, 32);
-		panel_3.add(lblNewLabel_3);
+		
+				JLabel lblNewLabel_3 = new JLabel("Bewerbung auf BPS-Student");
+				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
+				lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
+				lblNewLabel_3.setBounds(10, 0, 252, 32);
+				panel_3.add(lblNewLabel_3);
 
 		JButton btnNewButton = new JButton("Bericht versenden");
 		btnNewButton.setBounds(273, 274, 155, 23);
 		panel_3.add(btnNewButton);
-
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 33, 354, 218);
+		panel_3.add(scrollPane);
+		
 		table = new JTable();
+		scrollPane.setViewportView(table);
 		table.setToolTipText("");
-		table.setBounds(22, 44, 366, 218);
-		panel_3.add(table);
 
-		textField_6 = new JTextField();
-		textField_6.setBounds(20, 44, 349, 202);
-		panel_3.add(textField_6);
-		textField_6.setColumns(10);
+		table.setModel(new MenuBetTableModel());
+		
+	    table.setDefaultRenderer(JButton.class, table.getDefaultRenderer(JButton.class));
+	     
+		
+		
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
