@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -24,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
@@ -33,7 +36,9 @@ public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	static JTable table;
+	public JScrollPane scrollPane;
 	private final JPanel panel_Profil_2 = new JPanel();
+	public JPanel panel_3;
 
 	/**
 	 * Launch the application.
@@ -56,10 +61,10 @@ public class MenuBet extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuBet() throws Exception{
-		
+	public MenuBet() throws Exception {
+
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		
+
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -177,37 +182,28 @@ public class MenuBet extends JFrame {
 		tabbedPane.setBounds(145, 0, 539, 361);
 		contentPane.add(tabbedPane);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_3, null);
 		panel_3.setLayout(null);
-		
-				JLabel lblNewLabel_3 = new JLabel("Bewerbung auf BPS-Student");
-				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
-				lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-				lblNewLabel_3.setBounds(10, 0, 252, 32);
-				panel_3.add(lblNewLabel_3);
 
-		JButton btnNewButton = new JButton("Bericht versenden");
-		btnNewButton.setBounds(273, 274, 155, 23);
-		panel_3.add(btnNewButton);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 33, 354, 218);
+		JLabel lblNewLabel_3 = new JLabel("Bewerbung auf BPS-Student");
+		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_3.setBounds(10, 0, 252, 32);
+		panel_3.add(lblNewLabel_3);
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 33, 390, 218);
 		panel_3.add(scrollPane);
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setToolTipText("");
 
 		table.setModel(new MenuBetTableModel());
-		TableCellRenderer tableRenderer;
-		tableRenderer = table.getDefaultRenderer(JButton.class);
-	    table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
-	    
-	   
-		
-		
+		TableColumn tc = table.getColumnModel().getColumn(3);
+		tc.setCellRenderer(new MyRenderer());
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
@@ -316,15 +312,21 @@ public class MenuBet extends JFrame {
 		panel.setBounds(116, 361, 10, 10);
 		contentPane.add(panel);
 	}
-	 public class JTableButtonRenderer implements TableCellRenderer {
-		   private TableCellRenderer defaultRenderer;
-		   public JTableButtonRenderer(TableCellRenderer renderer) {
-		      defaultRenderer = renderer;
-		   }
-		   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		      if(value instanceof Component)
-		         return (Component)value;
-		         return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		   }
+
+	public class MyRenderer implements TableCellRenderer {
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			JButton button = new JButton("Bewerben");
+			button.addActionListener(new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}    
+			});  
+			return button;
 		}
+
+	}
 }

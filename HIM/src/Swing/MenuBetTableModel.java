@@ -95,7 +95,7 @@ public class MenuBetTableModel extends AbstractTableModel {
 		// Für die vierte Spalte
 		if (col == 3) {
 
-			new JButton("Bewerben");
+			
 
 		}
 		return null;
