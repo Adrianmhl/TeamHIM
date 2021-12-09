@@ -27,12 +27,14 @@ import javax.swing.table.DefaultTableModel;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
+import java.awt.ScrollPane;
 
 public class MenuPPA extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -228,12 +230,6 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_5_5.setBounds(10, 11, 112, 87);
 		panel_1.add(lblNewLabel_5_5);
 
-		JPanel panel_2_1 = new JPanel();
-		panel_2_1.setBounds(0, 0, 684, 39);
-		contentPane.add(panel_2_1);
-		panel_2_1.setForeground(Color.WHITE);
-		panel_2_1.setBackground(Color.WHITE);
-
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(145, 11, 539, 350);
 		contentPane.add(tabbedPane);
@@ -266,16 +262,24 @@ public class MenuPPA extends JFrame {
 		panel_BPS.add(scrollPane);
 
 		table = new JTable();
-		
 		table.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
 			    if (e.getClickCount() == 2) {
 			      JTable click = (JTable)e.getSource();
 			      int row = click.getSelectedRow();
-			      StudentPopup popup;
+			      
+			      
 				try {
-					popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
-					popup.setVisible(true);
+					if(table.getValueAt(row, 2).equals("beantragt")) { 
+						StudentPopup popup;
+						popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
+						popup.setVisible(true);
+					}
+					else{
+						ApplicationChooser popup;
+						popup= new ApplicationChooser((int) table.getValueAt(row, 0));
+						popup.setVisible(true);
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -392,7 +396,14 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2_3.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2_3.setBounds(10, 0, 252, 32);
 		panel_Betreuerverwaltung.add(lblNewLabel_3_1_2_3);
-
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(33, 43, 441, 211);
+		panel_Betreuerverwaltung.add(scrollPane_1);
+		
+	
+		
+		
 		JPanel panel_Profil = new JPanel();
 		panel_Profil.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Profil, null);
@@ -482,6 +493,12 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2_1.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2_1.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2_1);
+		
+				JPanel panel_2_1 = new JPanel();
+				panel_2_1.setBounds(0, 0, 684, 39);
+				contentPane.add(panel_2_1);
+				panel_2_1.setForeground(Color.WHITE);
+				panel_2_1.setBackground(Color.WHITE);
 	}
 
 	/*

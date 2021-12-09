@@ -110,7 +110,7 @@ public class Login extends JFrame {
 						dispose();
 						break;
 					case 0:
-						MenuBet mb = new MenuBet();
+						MenuBet mb = new MenuBet(Integer.parseInt(textFieldBenutzer.getText()));
 						mb.setVisible(true);
 						dispose();
 						break;

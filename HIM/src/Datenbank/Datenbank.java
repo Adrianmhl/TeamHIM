@@ -9,13 +9,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.sql.Statement;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import com.mysql.cj.protocol.Resultset;
+
 import Objekte.BPS;
 import Objekte.Betreuer;
+import Objekte.Bewerbung;
 import Objekte.PPA;
 import Objekte.Studierende;
 import Objekte.User;
@@ -277,10 +281,42 @@ public class Datenbank {
 		return false;
 	}
 
-	public void studBetreuerMatch() {
-
+	public static void studBetreuerMatch(int bpsId, int professor)	throws Exception {
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("INSERT INTO db3.bewerbungen (`bps`, `professor`,`position`) VALUES (?,?,?) ");
+		stmnt.setInt(1, bpsId);
+		stmnt.setInt(2, professor);
+		stmnt.setInt(3, getQueuePosition(bpsId)+1);
+		stmnt.executeUpdate();
+		
 	}
-
+	public static int getQueuePosition(int bps) throws Exception{
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.bewerbungen WHERE bps=?");
+		stmnt.setInt(1, bps);
+		ResultSet rs =stmnt.executeQuery();
+	    if (rs != null) 
+	    {
+	      rs.last();
+	      return rs.getRow(); 
+	    }
+		return 0;
+	}
+	 public static ArrayList<Bewerbung> getApplicationList(int id) throws Exception {
+		 ArrayList<Bewerbung> bewerbungList = new ArrayList<>();
+		 PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.bewerbungen WHERE bps=?");
+		 stmnt.setInt(1, id);
+		 ResultSet rs=stmnt.executeQuery();
+		 if(rs!=null) {
+			 while(rs.next()) {
+				 bewerbungList.add(new Bewerbung(rs.getInt(1),rs.getInt(3),rs.getInt(2)));
+			 }
+			 return bewerbungList;
+		 }
+		 else return null;
+	 }
 	public static void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";

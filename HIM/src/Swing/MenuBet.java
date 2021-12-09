@@ -11,11 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.EventObject;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -29,6 +33,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+
+import Datenbank.Datenbank;
 
 import javax.swing.JScrollPane;
 
@@ -44,12 +50,17 @@ public class MenuBet extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-
+		try {
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					MenuBet frame = new MenuBet();
+					MenuBet frame = new MenuBet(0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,8 +72,8 @@ public class MenuBet extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuBet() throws Exception {
-
+	public MenuBet(int id) throws Exception {
+		
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 
 		setResizable(false);
@@ -201,10 +212,47 @@ public class MenuBet extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setToolTipText("");
 
-		table.setModel(new MenuBetTableModel());
-		TableColumn tc = table.getColumnModel().getColumn(3);
-		tc.setCellRenderer(new MyRenderer());
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }) {
 
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+		});
+		
+		JButton btnNewButton = new JButton("Bewerben");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRowCount()>0)
+					try {
+						Datenbank.studBetreuerMatch((int) table.getValueAt(table.getSelectedRow(), 0), id);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				else
+				System.out.println("Bitte eine Zeile auswählen!");
+			}
+		});
+		
+		btnNewButton.setBounds(321, 280, 89, 23);
+		panel_3.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Aktualisieren");
+		btnNewButton_1.addActionListener(e->{
+			try {
+				refreshBPSinJTable();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_1.setBounds(20, 280, 117, 23);
+		panel_3.add(btnNewButton_1);
+	
+		//TableColumn tc = table.getColumnModel().getColumn(3);
+		//tc.setCellRenderer(new MyRenderer());
+		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_4, null);
@@ -314,18 +362,39 @@ public class MenuBet extends JFrame {
 	}
 
 	public class MyRenderer implements TableCellRenderer {
-
+	   
+	      
 		@Override
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
 			JButton button = new JButton("Bewerben");
-			button.addActionListener(new ActionListener(){
+			button.addActionListener(new ActionListener() {
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
-				}    
+				System.out.println(button.getAlignmentX());
+
+				
+				}
 			});  
 			return button;
+		}
+
+	}
+	public void refreshBPSinJTable() throws Exception{
+
+		Datenbank.getBPSlist();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		Object[] rowData = new Object[3];
+		
+		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
+			if(Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
+			rowData[0] = Datenbank.getBPSlist().get(i).getId();
+			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+			model.addRow(rowData);
+			}
 		}
 
 	}

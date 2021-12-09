@@ -1,6 +1,7 @@
 package Swing;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -186,7 +187,7 @@ public class Registrierung extends JFrame {
 				rnd.nextBytes(salt);
 
 				String hash = Datenbank.hashPassword(txtPasswort.getText(), salt);
-				if (studierendeBtn.isSelected()) {
+				if (studierendeBtn.isSelected()) {//&&txtMatrnr.getText().length()==6
 					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
 							txtVorname.getText(), txtMail.getText(), -1));
 
@@ -196,22 +197,21 @@ public class Registrierung extends JFrame {
 					Datenbank.createBPS(Integer.parseInt(txtMatrnr.getText()));
 
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
-				} else if (betreuerBtn.isSelected()) {
+				} else if (betreuerBtn.isSelected()) { //&&txtMatrnr.getText().length()==5
 					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
 							txtVorname.getText(), txtMail.getText(), 0));
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
-				} else if (ppaBtn.isSelected()) {
+				} else if (ppaBtn.isSelected()) {//&&txtMatrnr.getText().length()==4
 					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
 							txtVorname.getText(), txtMail.getText(), 1));
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 				} else
-					JOptionPane.showMessageDialog(btnNewButton, "Keine AusWahl getroffen!");
+					JOptionPane.showMessageDialog(btnNewButton, "Keine AusWahl getroffen!/ Flasche Eingabe");
 
 				Login log = new Login();
 				log.setVisible(true);
 				dispose();
 			} catch (Exception e1) {
-				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Fehler");
 			}
 		});

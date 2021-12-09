@@ -27,7 +27,7 @@ import Datenbank.Datenbank;
 public class MenuBetTableModel extends AbstractTableModel {
 
 	public int getColumnCount() {
-		return 4;
+		return 3;
 
 	}
 
@@ -55,9 +55,9 @@ public class MenuBetTableModel extends AbstractTableModel {
 		}
 
 		// Für die vierte Spalte
-		if (colnum == 3) {
-			return "Bewerben";
-		}
+		//if (colnum == 3) {
+			//return "Bewerben";
+		//}
 		return null;
 	}
 
