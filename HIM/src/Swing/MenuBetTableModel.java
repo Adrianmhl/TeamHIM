@@ -1,18 +1,25 @@
 package Swing;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.AbstractCellEditor;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.plaf.ButtonUI;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import Datenbank.Datenbank;
 
-
 /**
  * Diese Klasse dient als Model für die Tabelle MenuBet
+ * 
  * @author adrianmuhleisen
  *
  */
@@ -57,8 +64,9 @@ public class MenuBetTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		// Für die erste Spalte: Name
 		if (col == 0) {
-			try {	
-				return Datenbank.getStudentlist().get(row).getUserVorname()+ " " +Datenbank.getStudentlist().get(row).getUserName();
+			try {
+				return Datenbank.getStudentlist().get(row).getUserVorname() + " "
+						+ Datenbank.getStudentlist().get(row).getUserName();
 			} catch (Exception e) {
 				return "Fehler";
 			}
@@ -67,50 +75,39 @@ public class MenuBetTableModel extends AbstractTableModel {
 		// Für die zweite Spalte: Unternehmen
 		if (col == 1) {
 			try {
-				
+
 				return Datenbank.getStudentlist().get(row).getPraxisstelle();
 			} catch (Exception e) {
 				return "Fehler";
-			}}
+			}
+		}
 
 		// Für die dritte Spalte: Betreuer
 		if (col == 2) {
 			try {
-				
+
 				return Datenbank.getStudentlist().get(row).getStudBetreuer();
 			} catch (Exception e) {
 				return "Fehler";
-			}}
-			
+			}
+		}
 
 		// Für die vierte Spalte
 		if (col == 3) {
-			return new JButton("Bewerben");
+
+			new JButton("Bewerben");
+
 		}
 		return null;
-		
-		
 
 	}
-	
+
 	public boolean isCellEditable(int row, int column) {
-	      return false;
-	   }
-	
-	   public Class getColumnClass(int column) {
-	      return getValueAt(1, 3).getClass();
-	   }
-	   
-	class JTableButtonRenderer implements TableCellRenderer {
-		   private TableCellRenderer defaultRenderer;
-		   public JTableButtonRenderer(TableCellRenderer renderer) {
-		      defaultRenderer = renderer;
-		   }
-		   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-		      if(value instanceof Component)
-		         return (Component)value;
-		         return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		   }
-		}
+		return false;
+	}
+
+//	public Class getColumnClass(int column) {
+//	      return getValueAt(0, 3).getClass();
+//	   }
 
 }

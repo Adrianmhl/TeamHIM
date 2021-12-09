@@ -1,6 +1,7 @@
 package Swing;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -26,14 +27,12 @@ import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
-import Swing.MenuBetTableModel.JTableButtonRenderer;
-
 import javax.swing.JScrollPane;
 
 public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
-	private JTable table;
+	static JTable table;
 	private final JPanel panel_Profil_2 = new JPanel();
 
 	/**
@@ -202,9 +201,11 @@ public class MenuBet extends JFrame {
 		table.setToolTipText("");
 
 		table.setModel(new MenuBetTableModel());
-		
-	    table.setDefaultRenderer(JButton.class, table.getDefaultRenderer(JButton.class));
-	     
+		TableCellRenderer tableRenderer;
+		tableRenderer = table.getDefaultRenderer(JButton.class);
+	    table.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
+	    
+	   
 		
 		
 
@@ -315,4 +316,15 @@ public class MenuBet extends JFrame {
 		panel.setBounds(116, 361, 10, 10);
 		contentPane.add(panel);
 	}
+	 public class JTableButtonRenderer implements TableCellRenderer {
+		   private TableCellRenderer defaultRenderer;
+		   public JTableButtonRenderer(TableCellRenderer renderer) {
+		      defaultRenderer = renderer;
+		   }
+		   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+		      if(value instanceof Component)
+		         return (Component)value;
+		         return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		   }
+		}
 }
