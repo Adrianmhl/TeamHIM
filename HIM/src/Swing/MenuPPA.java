@@ -270,7 +270,7 @@ public class MenuPPA extends JFrame {
 			      
 			      
 				try {
-					if(table.getValueAt(row, 2).equals("beantragt")) { 
+					if(table.getValueAt(row, 2).equals("beantragt")||table.getValueAt(row, 2).equals("offen")) { 
 						StudentPopup popup;
 						popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
 						popup.setVisible(true);
@@ -279,6 +279,7 @@ public class MenuPPA extends JFrame {
 						ApplicationChooser popup;
 						popup= new ApplicationChooser((int) table.getValueAt(row, 0));
 						popup.setVisible(true);
+						
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();

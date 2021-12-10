@@ -145,7 +145,10 @@ public class Datenbank {
 		if (con == null)
 			startConnection();
 		PreparedStatement stmt = null;
-
+		if(!getBPS(matrikelnum).getStatus().equals("beantragt")&&!(getBPS(matrikelnum).getStatus().length()<2)) {
+			throw new Exception();
+		}
+		
 		stmt = con.prepareStatement(
 				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuerName` = ?, "
 						+ "`abteilung` = ?, `telefon` = ?, `mail` = ?, `zeitraum` = ?, `themenbereich` = ?, "
@@ -285,6 +288,7 @@ public class Datenbank {
 		if (con == null)
 			startConnection();
 		PreparedStatement stmnt = con.prepareStatement("INSERT INTO db3.bewerbungen (`bps`, `professor`,`position`) VALUES (?,?,?) ");
+		
 		stmnt.setInt(1, bpsId);
 		stmnt.setInt(2, professor);
 		stmnt.setInt(3, getQueuePosition(bpsId)+1);
@@ -296,6 +300,7 @@ public class Datenbank {
 		if (con == null)
 			startConnection();
 		PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.bewerbungen WHERE bps=?");
+		updateBPSStatus("Bewerber",bps);
 		stmnt.setInt(1, bps);
 		ResultSet rs =stmnt.executeQuery();
 	    if (rs != null) 
@@ -331,11 +336,14 @@ public class Datenbank {
 	 
 	 public static void zuteilung(int matnum, int betnum) throws Exception{
 		 PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.betreuerstudent (`betnum`,`matnum`) VALUES (?,?)");
+		 PreparedStatement stmnt2 = con.prepareStatement("DELETE FROM db3.bewerbungen WHERE bps=?");
+		 stmnt2.setInt(1, matnum);
+		 
 		 updateBPSStatus("Zugeteilt", matnum);
 		 stmnt.setInt(1, betnum);
 		 stmnt.setInt(2, matnum);
 		 stmnt.executeUpdate();
-		 
+		 stmnt2.executeUpdate();
 	 }
 	 
 	public static void startConnection() throws Exception {

@@ -18,6 +18,7 @@ import Objekte.BPS;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class StudentPopup extends JDialog {
 
@@ -67,7 +68,7 @@ public class StudentPopup extends JDialog {
 				okButton.addActionListener(e->{
 					try {
 						Datenbank.updateBPSStatus("offen", bps.getId());
-						System.out.println(bps.getId()+" bestätigt");
+						new JOptionPane().showMessageDialog(null, "Bestätigt");
 						dispose();
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
@@ -79,6 +80,9 @@ public class StudentPopup extends JDialog {
 				JButton cancelButton = new JButton("Ablehnen");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				cancelButton.addActionListener(e->{
+					dispose();
+				});
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -85,11 +86,13 @@ public class ApplicationChooser extends JDialog {
 						if(table.getSelectedRowCount()>0)
 							try {
 								Datenbank.zuteilung(id, (int) table.getValueAt(table.getSelectedRow(), 0));
+								new JOptionPane().showMessageDialog(null, "Zugeteilt");
+								dispose();
 							} catch (Exception e1) {
 								e1.printStackTrace();
 							}
 						else
-						System.out.println("Bitte eine Zeile auswählen!");
+							new JOptionPane().showMessageDialog(null, "Bitte eine Zeile auswählen");
 					}
 				});
 				getRootPane().setDefaultButton(okButton);
@@ -98,6 +101,11 @@ public class ApplicationChooser extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 			}
 		}
 	}

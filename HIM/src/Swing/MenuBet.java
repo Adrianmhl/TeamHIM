@@ -389,7 +389,7 @@ public class MenuBet extends JFrame {
 		Object[] rowData = new Object[3];
 		
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-			if(Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
+			if(!Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")&&!Datenbank.getBPSlist().get(i).getStatus().equals("Zugeteilt")) {
 			rowData[0] = Datenbank.getBPSlist().get(i).getId();
 			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
 			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();

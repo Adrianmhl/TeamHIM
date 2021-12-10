@@ -37,7 +37,6 @@ public class Registrierung extends JFrame {
 	private JLabel lblNewLabel;
 	private JRadioButton betreuerBtn;
 	private JRadioButton ppaBtn;
-	private JLabel lblNewLabel_1;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
@@ -259,10 +258,5 @@ public class Registrierung extends JFrame {
 		txtPasswort.setColumns(10);
 		txtPasswort.setBounds(35, 203, 341, 20);
 		panel_3.add(txtPasswort);
-
-		lblNewLabel_1 = new JLabel("(rdbutton = not functional)");
-		lblNewLabel_1.setForeground(Color.RED);
-		lblNewLabel_1.setBounds(351, 28, 146, 32);
-		panel_3.add(lblNewLabel_1);
 	}
 }

@@ -122,12 +122,9 @@ public class MenuStu extends JFrame {
 	 * @throws Exception
 	 */
 	public MenuStu(int matrikelnum) throws Exception {
-		try {
-			UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		Studierende student = (Studierende) Datenbank.getUser(matrikelnum);
+		
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
+		
 
 		setResizable(false);
 		setTitle("HIM - HFT Intern Manager");
@@ -303,7 +300,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_6.gridy = 4;
 		panel_2.add(lblNewLabel_6, gbc_lblNewLabel_6);
 
-		lblUnternehmen = new JLabel("New label");
+		lblUnternehmen = new JLabel("-");
 		lblUnternehmen.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblUnternehmen = new GridBagConstraints();
 		gbc_lblUnternehmen.anchor = GridBagConstraints.WEST;
@@ -323,7 +320,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7.gridy = 5;
 		panel_2.add(lblNewLabel_7, gbc_lblNewLabel_7);
 
-		lblFirmenanschrift = new JLabel("New label");
+		lblFirmenanschrift = new JLabel("-");
 		lblFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblFirmenanschrift = new GridBagConstraints();
 		gbc_lblFirmenanschrift.anchor = GridBagConstraints.WEST;
@@ -344,7 +341,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_1.gridy = 6;
 		panel_2.add(lblNewLabel_7_1, gbc_lblNewLabel_7_1);
 
-		lblURL = new JLabel("New label");
+		lblURL = new JLabel("-");
 		lblURL.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblURL = new GridBagConstraints();
 		gbc_lblURL.anchor = GridBagConstraints.WEST;
@@ -362,11 +359,8 @@ public class MenuStu extends JFrame {
 					for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
 						if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
-								&& Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
+								&& (Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")||Datenbank.getBPSlist().get(i).getStatus().equals(""))) {
 
-						/**
-						 * radiobutton
-						 */
 
 							txtUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
 							txtFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
@@ -397,7 +391,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_2.gridy = 8;
 		panel_2.add(lblNewLabel_7_2, gbc_lblNewLabel_7_2);
 
-		lblFirmenbetreuer = new JLabel("New label");
+		lblFirmenbetreuer = new JLabel("-");
 		lblFirmenbetreuer.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblFirmenbetreuer = new GridBagConstraints();
 		gbc_lblFirmenbetreuer.anchor = GridBagConstraints.WEST;
@@ -418,7 +412,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_4.gridy = 9;
 		panel_2.add(lblNewLabel_7_4, gbc_lblNewLabel_7_4);
 
-		lblAbteilung = new JLabel("New label");
+		lblAbteilung = new JLabel("-");
 		lblAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblAbteilung = new GridBagConstraints();
 		gbc_lblAbteilung.anchor = GridBagConstraints.WEST;
@@ -438,7 +432,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_5.gridy = 10;
 		panel_2.add(lblNewLabel_7_5, gbc_lblNewLabel_7_5);
 
-		lblTelefon = new JLabel("New label");
+		lblTelefon = new JLabel("-");
 		lblTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblTelefon = new GridBagConstraints();
 		gbc_lblTelefon.anchor = GridBagConstraints.WEST;
@@ -459,7 +453,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_6.gridy = 11;
 		panel_2.add(lblNewLabel_7_6, gbc_lblNewLabel_7_6);
 
-		lblEmail = new JLabel("New label");
+		lblEmail = new JLabel("-");
 		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.WEST;
@@ -480,7 +474,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_7.gridy = 13;
 		panel_2.add(lblNewLabel_7_7, gbc_lblNewLabel_7_7);
 
-		lblZeitraum = new JLabel("New label");
+		lblZeitraum = new JLabel("-");
 		lblZeitraum.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblZeitraum = new GridBagConstraints();
 		gbc_lblZeitraum.anchor = GridBagConstraints.WEST;
@@ -500,7 +494,7 @@ public class MenuStu extends JFrame {
 		gbc_lblThemenbereich2.gridy = 14;
 		panel_2.add(lblThemenbereich2, gbc_lblThemenbereich2);
 
-		Themenbereich = new JLabel("New label");
+		Themenbereich = new JLabel("-");
 		Themenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_Themenbereich = new GridBagConstraints();
 		gbc_Themenbereich.anchor = GridBagConstraints.NORTHWEST;
@@ -519,7 +513,7 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_7_9.gridy = 16;
 		panel_2.add(lblNewLabel_7_9, gbc_lblNewLabel_7_9);
 
-		lblKurzbeschreibung = new JLabel("New label");
+		lblKurzbeschreibung = new JLabel("-");
 		lblKurzbeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblKurzbeschreibung = new GridBagConstraints();
 		gbc_lblKurzbeschreibung.gridheight = 3;
@@ -584,8 +578,7 @@ public class MenuStu extends JFrame {
 					bpsVisible(matrikelnum);
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					new JOptionPane().showMessageDialog(null, "bereits abgegeben");
 				}
 
 			}
