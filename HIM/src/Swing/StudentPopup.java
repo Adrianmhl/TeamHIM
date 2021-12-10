@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
+import Datenbank.Datenbank;
 import Objekte.BPS;
 
 import java.awt.event.ActionListener;
@@ -63,6 +64,16 @@ public class StudentPopup extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				okButton.addActionListener(e->{
+					try {
+						Datenbank.updateBPSStatus("offen", bps.getId());
+						System.out.println(bps.getId()+" bestätigt");
+						dispose();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				});
 			}
 			{
 				JButton cancelButton = new JButton("Ablehnen");

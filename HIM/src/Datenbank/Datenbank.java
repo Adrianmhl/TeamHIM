@@ -195,7 +195,7 @@ public class Datenbank {
 
 		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`, `status`) VALUES (?,?);");
 		stmt.setInt(1, matrikelnum);
-		stmt.setString(2, "offen");
+		stmt.setString(2, "");
 		stmt.executeUpdate();
 
 	}
@@ -291,6 +291,7 @@ public class Datenbank {
 		stmnt.executeUpdate();
 		
 	}
+	
 	public static int getQueuePosition(int bps) throws Exception{
 		if (con == null)
 			startConnection();
@@ -304,6 +305,7 @@ public class Datenbank {
 	    }
 		return 0;
 	}
+	
 	 public static ArrayList<Bewerbung> getApplicationList(int id) throws Exception {
 		 ArrayList<Bewerbung> bewerbungList = new ArrayList<>();
 		 PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.bewerbungen WHERE bps=?");
@@ -317,6 +319,25 @@ public class Datenbank {
 		 }
 		 else return null;
 	 }
+	 
+	 public static void updateBPSStatus(String status, int id) throws Exception{
+		 if (con == null)
+				startConnection();
+		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.bpsantrag SET `status` = ? WHERE id=?");
+		 stmnt.setString(1, status);
+		 stmnt.setInt(2, id);
+		 stmnt.executeUpdate();
+	 }
+	 
+	 public static void zuteilung(int matnum, int betnum) throws Exception{
+		 PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.betreuerstudent (`betnum`,`matnum`) VALUES (?,?)");
+		 updateBPSStatus("Zugeteilt", matnum);
+		 stmnt.setInt(1, betnum);
+		 stmnt.setInt(2, matnum);
+		 stmnt.executeUpdate();
+		 
+	 }
+	 
 	public static void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";

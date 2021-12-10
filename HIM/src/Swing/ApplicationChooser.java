@@ -9,12 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
+
 import Datenbank.Datenbank;
+import Objekte.Bewerbung;
 
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 
 public class ApplicationChooser extends JDialog {
 
@@ -30,6 +38,7 @@ public class ApplicationChooser extends JDialog {
 	 * @throws Exception 
 	 */
 	public ApplicationChooser(int id) throws Exception {
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,9 +77,21 @@ public class ApplicationChooser extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Zuteilen");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(table.getSelectedRowCount()>0)
+							try {
+								Datenbank.zuteilung((int) table.getValueAt(table.getSelectedRow(), 0), id);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+						else
+						System.out.println("Bitte eine Zeile auswählen!");
+					}
+				});
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
@@ -86,6 +107,7 @@ public class ApplicationChooser extends JDialog {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		Object[] rowData = new Object[3];
+		
 		for (int i = 0; i < Datenbank.getApplicationList(id).size(); i++) {
 
 			//rowData[0] = Datenbank.getApplicationList().get(i).getId();
