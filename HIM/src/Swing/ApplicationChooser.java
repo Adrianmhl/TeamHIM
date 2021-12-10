@@ -84,7 +84,7 @@ public class ApplicationChooser extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(table.getSelectedRowCount()>0)
 							try {
-								Datenbank.zuteilung((int) table.getValueAt(table.getSelectedRow(), 0), id);
+								Datenbank.zuteilung(id, (int) table.getValueAt(table.getSelectedRow(), 0));
 							} catch (Exception e1) {
 								e1.printStackTrace();
 							}

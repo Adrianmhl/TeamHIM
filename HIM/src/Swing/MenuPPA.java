@@ -536,7 +536,7 @@ public class MenuPPA extends JFrame {
 		Object[] rowData = new Object[3];
 
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-			if(Datenbank.getBPSlist().get(i).getStatus().length()>1) {
+			if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&!Datenbank.getBPSlist().get(i).getStatus().equals("Zugeteilt")) {
 				rowData[0] = Datenbank.getBPSlist().get(i).getId();
 				rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
 				rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
