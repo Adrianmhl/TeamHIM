@@ -11,9 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.EventObject;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -35,13 +38,16 @@ import javax.swing.table.TableColumn;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
+import Objekte.Zuteilung;
 
 import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	static JTable table;
+	static JList studentList;
 	public JScrollPane scrollPane;
 	private final JPanel panel_Profil_2 = new JPanel();
 	public JPanel panel_3;
@@ -182,20 +188,42 @@ public class MenuBet extends JFrame {
 			}
 		});
 		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.WHITE);
-		panel_2.setForeground(Color.WHITE);
-		panel_2.setBounds(0, 0, 684, 27);
-		contentPane.add(panel_2);
-
+		
+		JPanel tab2_2_1_1 = new JPanel();
+		tab2_2_1_1.setLayout(null);
+		tab2_2_1_1.setBackground(Color.RED);
+		tab2_2_1_1.setBounds(10, 230, 126, 21);
+		panel_1.add(tab2_2_1_1);
+		
+		JLabel lblNewLabel_1_2_1_1 = new JLabel("Studenten");
+		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblNewLabel_1_2_1_1.setBackground(Color.RED);
+		lblNewLabel_1_2_1_1.setBounds(0, 0, 116, 18);
+		tab2_2_1_1.add(lblNewLabel_1_2_1_1);
+		lblNewLabel_1_2_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.setSelectedIndex(3);
+				try {
+					refreshStudentList(id);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
+		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(145, 0, 539, 361);
 		contentPane.add(tabbedPane);
 
 		panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_3, null);
+		tabbedPane.addTab("Bewerbung", null, panel_3, null);
 		panel_3.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("Bewerbung auf BPS-Student");
@@ -221,12 +249,18 @@ public class MenuBet extends JFrame {
 			
 		});
 		
+				JPanel panel_2 = new JPanel();
+				scrollPane.setColumnHeaderView(panel_2);
+				panel_2.setBackground(Color.WHITE);
+				panel_2.setForeground(Color.WHITE);
+		
 		JButton btnNewButton = new JButton("Bewerben");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRowCount()>0)
 					try {
 						Datenbank.studBetreuerMatch((int) table.getValueAt(table.getSelectedRow(), 0), id);
+						JOptionPane.showConfirmDialog(null, "beworben");
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -250,12 +284,11 @@ public class MenuBet extends JFrame {
 		btnNewButton_1.setBounds(20, 280, 117, 23);
 		panel_3.add(btnNewButton_1);
 	
-		//TableColumn tc = table.getColumnModel().getColumn(3);
-		//tc.setCellRenderer(new MyRenderer());
+
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_4, null);
+		tabbedPane.addTab("Besuchsbericht", null, panel_4, null);
 		panel_4.setLayout(null);
 
 		JButton btnNewButton_2 = new JButton("hochladen");
@@ -270,7 +303,7 @@ public class MenuBet extends JFrame {
 
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_6, null);
+		tabbedPane.addTab("Profil", null, panel_6, null);
 		panel_6.setLayout(null);
 
 		JLabel lblNewLabel_3_1_1_1 = new JLabel("Profil");
@@ -355,10 +388,36 @@ public class MenuBet extends JFrame {
 		gbc_lblProfilEmailOutput.gridx = 3;
 		gbc_lblProfilEmailOutput.gridy = 3;
 		panel_Profil_2.add(lblProfilEmailOutput, gbc_lblProfilEmailOutput);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(116, 361, 10, 10);
-		contentPane.add(panel);
+		
+		JPanel panel5 = new JPanel();
+		panel5.setLayout(null);
+		panel5.setBackground(Color.WHITE);
+		tabbedPane.addTab("Studenten", null, panel5, null);
+		
+	    
+	    DefaultListModel<Integer> studentListModell = new DefaultListModel<>();  
+	     
+	      studentList = new JList<>(studentListModell);  
+	      studentList.setBounds(20,20, 400,200);  
+	      
+	      JScrollPane scrollPane2 = new JScrollPane();
+	      scrollPane2.setBounds(20, 33, 390, 218);
+	      scrollPane2.setViewportView(studentList);
+	      panel5.add(scrollPane2);
+	      
+	      JButton btnNewButton_3 = new JButton("Aktualisieren");
+	      btnNewButton_3.addActionListener(e->{
+	    	  try {
+				refreshStudentList(id);
+			} catch (Exception e1) {
+				
+				e1.printStackTrace();
+			}
+	      });
+	      btnNewButton_3.setBounds(20, 277, 89, 23);
+	      panel5.add(btnNewButton_3);
+	      
+		
 	}
 
 	public class MyRenderer implements TableCellRenderer {
@@ -397,5 +456,9 @@ public class MenuBet extends JFrame {
 			}
 		}
 
+	}
+	public void refreshStudentList(int betnum) throws Exception {	
+		DefaultListModel<Integer> model= (DefaultListModel<Integer>) studentList.getModel();
+		model.addAll( Datenbank.getStudentList(betnum));	
 	}
 }

@@ -23,6 +23,7 @@ import Objekte.Bewerbung;
 import Objekte.PPA;
 import Objekte.Studierende;
 import Objekte.User;
+import Objekte.Zuteilung;
 
 public class Datenbank {
 
@@ -333,6 +334,35 @@ public class Datenbank {
 		 stmnt.setInt(2, id);
 		 stmnt.executeUpdate();
 	 }
+	 
+	 
+	 
+	 public static ArrayList<Integer> getStudentList(int betnum) throws Exception {
+		 if (con == null)
+				startConnection();
+		 PreparedStatement stmnt = con.prepareStatement("SELECT matnum FROM db3.betreuerstudent WHERE betnum=?");
+		 stmnt.setInt(1, betnum);
+		 ResultSet rs=stmnt.executeQuery();
+		 ArrayList<Integer> zuteilungList = new ArrayList<>();
+		 while(rs.next()) {
+			 zuteilungList.add(rs.getInt("matnum"));
+		 }
+		 return zuteilungList;
+	 }
+	 
+	 
+	 
+	 public static Zuteilung getBet(int matnum) throws SQLException{
+		 PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.betreuerstudent WHERE matnum=?");
+		 stmnt.setInt(1, matnum);
+		 ResultSet rs=stmnt.executeQuery();
+		 while(rs.next()) {
+			 return new Zuteilung(rs.getInt("betnum"),rs.getInt("matnum"));
+		 }
+		 return null;
+	 }
+	 
+	 
 	 
 	 public static void zuteilung(int matnum, int betnum) throws Exception{
 		 PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.betreuerstudent (`betnum`,`matnum`) VALUES (?,?)");
