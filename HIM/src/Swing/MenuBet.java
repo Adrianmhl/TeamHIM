@@ -43,7 +43,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightCo
 
 import Datenbank.Datenbank;
 import Objekte.PdfFilter;
-import Objekte.Zuteilung;
+
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -496,7 +496,7 @@ public class MenuBet extends JFrame {
 		Object[] rowData = new Object[5];
 		
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-			if(!Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")&&!Datenbank.getBPSlist().get(i).getStatus().equals("Zugeteilt")) {
+			if(Datenbank.getBPSlist().get(i).getStatus().equals("offen")||Datenbank.getBPSlist().get(i).getStatus().equals("Bewerber")) {
 			rowData[0] = Datenbank.getBPSlist().get(i).getId();
 			rowData[1] = Datenbank.getUser(Datenbank.getBPSlist().get(i).getId()).getUserName();
 			rowData[2] = Datenbank.getUser(Datenbank.getBPSlist().get(i).getId()).getUserVorname();

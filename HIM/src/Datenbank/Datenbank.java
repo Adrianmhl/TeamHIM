@@ -23,7 +23,7 @@ import Objekte.Bewerbung;
 import Objekte.PPA;
 import Objekte.Studierende;
 import Objekte.User;
-import Objekte.Zuteilung;
+
 
 public class Datenbank {
 
@@ -55,7 +55,7 @@ public class Datenbank {
 				while (rs.next()) {
 					return new Studierende(id, rs.getString("passwort"), rs.getBytes("pwSalt"), rs.getString("name"),
 							rs.getString("vorname"), rs.getString("mail"), rs.getString("praxisstelle"),
-							rs.getString("betreuer"));
+							rs.getString("betreuer"),rs.getBlob("nachweis"),rs.getBlob("bericht"),rs.getBlob("vertrag"));
 				}
 			}
 			stmt = con.prepareStatement("SELECT * FROM db3.betreuer WHERE id =?");
@@ -134,7 +134,7 @@ public class Datenbank {
 			Studierende stud;
 			while (rs.next()) {
 
-				stud = new Studierende(rs.getInt("id"), null, null, rs.getString("name"), rs.getString("vorname"), rs.getString("mail"), rs.getString("praxisstelle"), rs.getString("betreuer"));
+				stud = new Studierende(rs.getInt("id"), null, null, rs.getString("name"), rs.getString("vorname"), rs.getString("mail"), rs.getString("praxisstelle"), rs.getString("betreuer"),rs.getBlob("nachweis"),rs.getBlob("bericht"),rs.getBlob("vertrag"));
 				studList.add(stud);
 			}
 		}
@@ -252,15 +252,26 @@ public class Datenbank {
 		return new String(hash);
 	}
 
-	public static void upload(File infile, int matnum, String column) throws Exception {
+	public static void upload(File infile, int matnum, String column, boolean isForBetreuer) throws Exception {
 		if (con == null)
 			startConnection();
-		PreparedStatement stmnt = con.prepareStatement("UPDATE student SET " + column + " = ? WHERE id = ?");
-		InputStream inputStream = new FileInputStream(infile);
-		stmnt.setBlob(1, inputStream);
-		stmnt.setInt(2, matnum);
-		stmnt.executeUpdate();
-		inputStream.close();
+		if(! isForBetreuer) {
+			PreparedStatement stmnt = con.prepareStatement("UPDATE student SET " + column + " = ? WHERE id = ?");
+			InputStream inputStream = new FileInputStream(infile);
+			stmnt.setBlob(1, inputStream);
+			stmnt.setInt(2, matnum);
+			stmnt.executeUpdate();
+			inputStream.close();
+		}
+		else
+		{
+			PreparedStatement stmnt = con.prepareStatement("UPDATE betreuerstudent SET `praktikumsbericht` = ? WHERE matnum = ?");
+			InputStream inputStream = new FileInputStream(infile);
+			stmnt.setBlob(1, inputStream);
+			stmnt.setInt(2, matnum);
+			stmnt.executeUpdate();
+			inputStream.close();
+		}
 	}
 	public static void uploadBesuchsBericht(File infile, int matnum) throws Exception {
 		if (con == null)
@@ -273,25 +284,50 @@ public class Datenbank {
 		inputStream.close();
 		
 	}
+	public static boolean checkBesuchBericht(int matnum) throws Exception {
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("Select `bericht` From betreuerstudent WHERE matnum = ?");
+		stmnt.setInt(1, matnum);
+		ResultSet rs= stmnt.executeQuery();
+		while (rs.next()) {
+			if(rs.getBlob("bericht")!=null) return true;
+		}
+		return false;
+	}
+	
 	public static void download(String path, int matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
 		FileOutputStream output = new FileOutputStream(path);
-		PreparedStatement stmnt = con.prepareStatement("Select " + column + " From student WHERE id = ?");
-		// stmnt.setString(1, column);
-		stmnt.setInt(1, matnum);
-		ResultSet rs = stmnt.executeQuery();
-		while (rs.next()) {
-			output.write(rs.getBlob(column).getBytes(1, (int) rs.getBlob(column).length()));
+		PreparedStatement stmnt;
+		
+		
+		if(column.equals("bericht")) {
+			stmnt = con.prepareStatement("Select `praktikumsbericht` From betreuerstudent WHERE matnum = ?");
+			stmnt.setInt(1, matnum);
+			ResultSet rs = stmnt.executeQuery();
+			while (rs.next()) {
+				output.write(rs.getBlob("praktikumsbericht").getBytes(1, (int) rs.getBlob("praktikumsbericht").length()));
+			}
 		}
+		else {
+			stmnt = con.prepareStatement("Select " + column + " From student WHERE id = ?");
+			stmnt.setInt(1, matnum);
+			ResultSet rs = stmnt.executeQuery();
+			while (rs.next()) {
+				output.write(rs.getBlob(column).getBytes(1, (int) rs.getBlob(column).length()));
+			}
+		}
+		
+		
+		
+		
 		output.close();
 
 	}
 
-	public boolean deleteUser() {
 
-		return false;
-	}
 
 	public static void studBetreuerMatch(int bpsId, int professor)	throws Exception {
 		if (con == null)
@@ -357,20 +393,6 @@ public class Datenbank {
 		 }
 		 return zuteilungList;
 	 }
-	 
-	 
-	 
-	 public static Zuteilung getBet(int matnum) throws SQLException{
-		 PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.betreuerstudent WHERE matnum=?");
-		 stmnt.setInt(1, matnum);
-		 ResultSet rs=stmnt.executeQuery();
-		 while(rs.next()) {
-			 return new Zuteilung(rs.getInt("betnum"),rs.getInt("matnum"));
-		 }
-		 return null;
-	 }
-	 
-	 
 	 
 	 public static void zuteilung(int matnum, int betnum) throws Exception{
 		 PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.betreuerstudent (`betnum`,`matnum`) VALUES (?,?)");

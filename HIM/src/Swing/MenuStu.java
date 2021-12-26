@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -144,7 +145,13 @@ public class MenuStu extends JFrame {
 		panel_1.setLayout(null);
 
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo.jpeg")));
+		
+		
+		ImageIcon imageIcon = new ImageIcon("/res/ProjLogo2.png"); 
+		Image image = imageIcon.getImage(); 
+		Image newimg = image.getScaledInstance(112, 87,  java.awt.Image.SCALE_SMOOTH); 
+		imageIcon = new ImageIcon(newimg);  
+		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo2.png")));
 		lblNewLabel_5.setBounds(14, 11, 112, 87);
 		panel_1.add(lblNewLabel_5);
 
@@ -763,7 +770,7 @@ public class MenuStu extends JFrame {
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis");
+					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis",false);
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -812,7 +819,7 @@ public class MenuStu extends JFrame {
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "bericht");
+					Datenbank.upload(inFileNachweis, matrikelnum, "bericht",true);
 				}
 
 			} catch (Exception e1) {
@@ -829,7 +836,7 @@ public class MenuStu extends JFrame {
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "vertrag");
+					Datenbank.upload(inFileNachweis, matrikelnum, "vertrag", false);
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();

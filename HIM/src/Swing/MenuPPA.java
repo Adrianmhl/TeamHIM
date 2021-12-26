@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +28,12 @@ import javax.swing.table.DefaultTableModel;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
+import Objekte.Studierende;
+
 import java.awt.ScrollPane;
+import java.awt.Dimension;
+import javax.swing.JCheckBox;
+import java.awt.Component;
 
 public class MenuPPA extends JFrame {
 
@@ -35,7 +41,6 @@ public class MenuPPA extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JTable table;
 	private JTable table_1;
-	private JTable documentTable;
 	/**
 	 * Launch the application.
 	 */
@@ -59,145 +64,256 @@ public class MenuPPA extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public MenuPPA() throws Exception{
+		setMinimumSize(new Dimension(640, 480));
+		setLocationByPlatform(true);
+		setSize(new Dimension(640, 480));
 		
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		
 		setTitle("HIM - HFT Intern Manager");
-		setResizable(false);
+		//setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 400);
+		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 110, 361);
-		panel_1.setLayout(null);
-		panel_1.setBackground(Color.decode("#CD201F"));
-		contentPane.add(panel_1);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{93, 438, 0};
+		gbl_contentPane.rowHeights = new int[]{361, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 50.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
+				JPanel panel_1 = new JPanel();
+				panel_1.setBackground(Color.decode("#CD201F"));
+				GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+				gbc_panel_1.fill = GridBagConstraints.BOTH;
+				gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+				gbc_panel_1.gridx = 0;
+				gbc_panel_1.gridy = 0;
+				contentPane.add(panel_1, gbc_panel_1);
+										GridBagLayout gbl_panel_1 = new GridBagLayout();
+										gbl_panel_1.columnWidths = new int[] {50, 0};
+										gbl_panel_1.rowHeights = new int[]{98, 112, 0};
+										gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+										gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+										panel_1.setLayout(gbl_panel_1);
+																		
+																				JLabel lblNewLabel_5_5 = new JLabel("");
+																				GridBagConstraints gbc_lblNewLabel_5_5 = new GridBagConstraints();
+																				gbc_lblNewLabel_5_5.fill = GridBagConstraints.BOTH;
+																				gbc_lblNewLabel_5_5.insets = new Insets(0, 0, 5, 0);
+																				gbc_lblNewLabel_5_5.gridx = 0;
+																				gbc_lblNewLabel_5_5.gridy = 0;
+																				panel_1.add(lblNewLabel_5_5, gbc_lblNewLabel_5_5);
+																
+																		JLabel lblNewLabel_5_2 = new JLabel("");
+																		GridBagConstraints gbc_lblNewLabel_5_2 = new GridBagConstraints();
+																		gbc_lblNewLabel_5_2.fill = GridBagConstraints.BOTH;
+																		gbc_lblNewLabel_5_2.insets = new Insets(0, 0, 5, 0);
+																		gbc_lblNewLabel_5_2.gridx = 0;
+																		gbc_lblNewLabel_5_2.gridy = 0;
+																		panel_1.add(lblNewLabel_5_2, gbc_lblNewLabel_5_2);
+														
+																JLabel lblNewLabel_5_4 = new JLabel("");
+																GridBagConstraints gbc_lblNewLabel_5_4 = new GridBagConstraints();
+																gbc_lblNewLabel_5_4.fill = GridBagConstraints.BOTH;
+																gbc_lblNewLabel_5_4.insets = new Insets(0, 0, 5, 0);
+																gbc_lblNewLabel_5_4.gridx = 0;
+																gbc_lblNewLabel_5_4.gridy = 0;
+																panel_1.add(lblNewLabel_5_4, gbc_lblNewLabel_5_4);
+												
+														JLabel lblNewLabel_5_1 = new JLabel("");
+														GridBagConstraints gbc_lblNewLabel_5_1 = new GridBagConstraints();
+														gbc_lblNewLabel_5_1.fill = GridBagConstraints.BOTH;
+														gbc_lblNewLabel_5_1.insets = new Insets(0, 0, 5, 0);
+														gbc_lblNewLabel_5_1.gridx = 0;
+														gbc_lblNewLabel_5_1.gridy = 0;
+														panel_1.add(lblNewLabel_5_1, gbc_lblNewLabel_5_1);
+										
+												JLabel lblNewLabel_5_3 = new JLabel("");
+												GridBagConstraints gbc_lblNewLabel_5_3 = new GridBagConstraints();
+												gbc_lblNewLabel_5_3.fill = GridBagConstraints.BOTH;
+												gbc_lblNewLabel_5_3.insets = new Insets(0, 0, 5, 0);
+												gbc_lblNewLabel_5_3.gridx = 0;
+												gbc_lblNewLabel_5_3.gridy = 0;
+												panel_1.add(lblNewLabel_5_3, gbc_lblNewLabel_5_3);
+												
+														JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
+														GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
+														gbc_lblNewLabel_1_2_2.insets = new Insets(0, 10, 10, 0);
+														gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
+														gbc_lblNewLabel_1_2_2.fill = GridBagConstraints.HORIZONTAL;
+														gbc_lblNewLabel_1_2_2.gridx = 0;
+														gbc_lblNewLabel_1_2_2.gridy = 1;
+														panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
+														lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
+															@Override
+															public void mouseClicked(MouseEvent e) {
 
-		JPanel tab2_2_2 = new JPanel();
-		tab2_2_2.setLayout(null);
-		tab2_2_2.setBackground(Color.decode("#CD201F"));
-		tab2_2_2.setBounds(10, 329, 126, 21);
-		panel_1.add(tab2_2_2);
+																Login log;
+																try {
+																	log = new Login();
+																	log.setVisible(true);
+																} catch (Exception e1) {
+																	// TODO Auto-generated catch block
+																	e1.printStackTrace();
+																}
 
-		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
-		lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+																dispose();
 
-				Login log;
-				try {
-					log = new Login();
-					log.setVisible(true);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				dispose();
-
-			}
-		});
-		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2_2.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1_2_2.setBounds(0, 0, 116, 18);
-		tab2_2_2.add(lblNewLabel_1_2_2);
-
-		JLabel lblNewLabel_5_1 = new JLabel("");
-		lblNewLabel_5_1.setBounds(10, 0, 112, 87);
-		panel_1.add(lblNewLabel_5_1);
-
-		JLabel lblNewLabel_5_2 = new JLabel("");
-		lblNewLabel_5_2.setBounds(10, 0, 112, 87);
-		panel_1.add(lblNewLabel_5_2);
-
-		JLabel lblNewLabel_5_3 = new JLabel("");
-		lblNewLabel_5_3.setBounds(10, 11, 112, 87);
-		panel_1.add(lblNewLabel_5_3);
-
-		JLabel lblNewLabel_5_4 = new JLabel("");
-		lblNewLabel_5_4.setBounds(10, 11, 112, 87);
-		panel_1.add(lblNewLabel_5_4);
-
-		JLabel lblNewLabel_5_5 = new JLabel("");
-		lblNewLabel_5_5.setBounds(10, 11, 112, 87);
-		panel_1.add(lblNewLabel_5_5);
-
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(145, 11, 539, 350);
-		contentPane.add(tabbedPane);
-
-		JPanel panel_BPS = new JPanel();
-		panel_BPS.setBackground(Color.WHITE);
-		tabbedPane.addTab("BPS", null, panel_BPS, null);
-		panel_BPS.setLayout(null);
-
-		JLabel lblNewLabel_3_1_2_2 = new JLabel("BPS-Formular pr\u00FCfen");
-		lblNewLabel_3_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_2_2.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_2_2.setBounds(10, 0, 252, 32);
-		panel_BPS.add(lblNewLabel_3_1_2_2);
-
-		JButton btnNewButton_2 = new JButton("aktualisieren");
-		btnNewButton_2.addActionListener(e->{
-			try {
-				refreshBPSinJTable();
-			}
-			catch(Exception e3) {
-				e3.printStackTrace();
-			}
-		});
-		btnNewButton_2.setBounds(20, 288, 129, 23);
-		panel_BPS.add(btnNewButton_2);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 43, 424, 169);
-		panel_BPS.add(scrollPane);
-
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
-			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			      JTable click = (JTable)e.getSource();
-			      int row = click.getSelectedRow();
-			      
-			      
-				try {
-					if(table.getValueAt(row, 2).equals("beantragt")) { 
-						StudentPopup popup;
-						popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
-						popup.setVisible(true);
-					}
-					else if(table.getValueAt(row, 2).equals("Bewerber")){
-						ApplicationChooser popup;
-						popup= new ApplicationChooser((int) table.getValueAt(row, 0));
-						popup.setVisible(true);
-						
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			      
-			    }
-			  }
-			});
+															}
+														});
+														lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
+														lblNewLabel_1_2_2.setForeground(Color.WHITE);
+														lblNewLabel_1_2_2.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		
-		scrollPane.setViewportView(table);
-		table.setModel(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }) {
+				
+				
+						JPanel panel_BPS = new JPanel();
+						panel_BPS.setBackground(Color.WHITE);
+						GridBagConstraints gbc_panel_BPS = new GridBagConstraints();
+						gbc_panel_BPS.fill = GridBagConstraints.BOTH;
+						contentPane.add(panel_BPS, gbc_panel_BPS);
+								GridBagLayout gbl_panel_BPS = new GridBagLayout();
+								gbl_panel_BPS.columnWidths = new int[]{527, 0};
+								gbl_panel_BPS.rowHeights = new int[]{45, 280, 40, 33, 0};
+								gbl_panel_BPS.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+								gbl_panel_BPS.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+								panel_BPS.setLayout(gbl_panel_BPS);
+										
+												JLabel lblNewLabel_3_1_2_2 = new JLabel("BPS-Formular pr\u00FCfen");
+												lblNewLabel_3_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
+												lblNewLabel_3_1_2_2.setFont(new Font("Arial", Font.BOLD, 12));
+												GridBagConstraints gbc_lblNewLabel_3_1_2_2 = new GridBagConstraints();
+												gbc_lblNewLabel_3_1_2_2.fill = GridBagConstraints.BOTH;
+												gbc_lblNewLabel_3_1_2_2.insets = new Insets(0, 0, 5, 0);
+												gbc_lblNewLabel_3_1_2_2.gridx = 0;
+												gbc_lblNewLabel_3_1_2_2.gridy = 0;
+												panel_BPS.add(lblNewLabel_3_1_2_2, gbc_lblNewLabel_3_1_2_2);
+										
+												JScrollPane scrollPane = new JScrollPane();
+												GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+												gbc_scrollPane.fill = GridBagConstraints.BOTH;
+												gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+												gbc_scrollPane.gridx = 0;
+												gbc_scrollPane.gridy = 1;
+												panel_BPS.add(scrollPane, gbc_scrollPane);
+												
+														table = new JTable();
+														table.addMouseListener(new MouseAdapter() {
+															  public void mouseClicked(MouseEvent e) {
+															    if (e.getClickCount() == 2) {
+															      JTable click = (JTable)e.getSource();
+															      int row = click.getSelectedRow();
+															      
+															      
+																try {
+																	if(table.getValueAt(row, 2).equals("beantragt")) { 
+																		StudentPopup popup;
+																		popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
+																		popup.setVisible(true);
+																	}
+																	else if(table.getValueAt(row, 2).equals("Bewerber")){
+																		ApplicationChooser popup;
+																		popup= new ApplicationChooser((int) table.getValueAt(row, 0));
+																		popup.setVisible(true);
+																		
+																	}
+																} catch (Exception e1) {
+																	e1.printStackTrace();
+																}
+															      
+															    }
+															  }
+															});
+														
+														scrollPane.setViewportView(table);
+														table.setModel(
+																new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }) {
 
-					@Override
-					public boolean isCellEditable(int row, int column) {
-						return false;
-					}
-					
-				});
-		table.getColumnModel().getColumn(0).setPreferredWidth(105);
-		table.getColumnModel().getColumn(1).setPreferredWidth(105);
-		table.getColumnModel().getColumn(2).setPreferredWidth(105);
+																	@Override
+																	public boolean isCellEditable(int row, int column) {
+																		return false;
+																	}
+																	
+																});
+														
+														JPanel panel = new JPanel();
+														panel.setBackground(Color.WHITE);
+														GridBagConstraints gbc_panel = new GridBagConstraints();
+														gbc_panel.fill = GridBagConstraints.BOTH;
+														gbc_panel.gridx = 0;
+														gbc_panel.gridy = 3;
+														panel_BPS.add(panel, gbc_panel);
+														GridBagLayout gbl_panel = new GridBagLayout();
+														gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 46, 0, 0};
+														gbl_panel.rowHeights = new int[]{40, 0};
+														gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+														gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+														panel.setLayout(gbl_panel);
+														
+														JCheckBox best_offen = new JCheckBox("Best\u00E4tigung offen");
+														best_offen.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+														GridBagConstraints gbc_best_offen = new GridBagConstraints();
+														gbc_best_offen.anchor = GridBagConstraints.SOUTH;
+														gbc_best_offen.insets = new Insets(0, 0, 0, 5);
+														gbc_best_offen.gridx = 1;
+														gbc_best_offen.gridy = 0;
+														
+														panel.add(best_offen, gbc_best_offen);
+														
+														JCheckBox zut_offen = new JCheckBox("Zuteilung offen");
+														zut_offen.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+														GridBagConstraints gbc_zut_offen = new GridBagConstraints();
+														gbc_zut_offen.anchor = GridBagConstraints.SOUTH;
+														gbc_zut_offen.insets = new Insets(0, 0, 0, 5);
+														gbc_zut_offen.gridx = 2;
+														gbc_zut_offen.gridy = 0;
+														
+														panel.add(zut_offen, gbc_zut_offen);
+														
+														JCheckBox doc_pr = new JCheckBox("Dokumente pr\u00FCfen");
+														GridBagConstraints gbc_doc_pr = new GridBagConstraints();
+														gbc_doc_pr.anchor = GridBagConstraints.SOUTH;
+														gbc_doc_pr.insets = new Insets(0, 0, 0, 5);
+														gbc_doc_pr.gridx = 3;
+														gbc_doc_pr.gridy = 0;
+														
+														panel.add(doc_pr, gbc_doc_pr);
+														
+														best_offen.addActionListener(e->{
+															try {
+																refreshBPSinJTable(best_offen,zut_offen,doc_pr);
+															} catch (Exception e1) {
+																e1.printStackTrace();
+															}
+														});
+														zut_offen.addActionListener(e->{
+															try {
+																refreshBPSinJTable(best_offen,zut_offen,doc_pr);
+															} catch (Exception e1) {
+																e1.printStackTrace();
+															}
+														});
+														doc_pr.addActionListener(e->{
+															try {
+																refreshBPSinJTable(best_offen,zut_offen,doc_pr);
+															} catch (Exception e1) {
+																e1.printStackTrace();
+															}
+														});
+														JButton btnNewButton_2 = new JButton("Aktualisieren");
+														btnNewButton_2.setActionCommand("Aktualisieren");
+														btnNewButton_2.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+														GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+														gbc_btnNewButton_2.anchor = GridBagConstraints.SOUTHEAST;
+														gbc_btnNewButton_2.gridx = 5;
+														gbc_btnNewButton_2.gridy = 0;
+														panel.add(btnNewButton_2, gbc_btnNewButton_2);
+														table.getColumnModel().getColumn(0).setPreferredWidth(105);
+														table.getColumnModel().getColumn(1).setPreferredWidth(105);
+														table.getColumnModel().getColumn(2).setPreferredWidth(105);
 		
 		///hier
 
@@ -205,136 +321,6 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
-		//panel_Praktikumsverwaltung.add(lblNewLabel_3_1_2);
-
-		JPanel panel_Betreuerverwaltung = new JPanel();
-		panel_Betreuerverwaltung.setBackground(Color.WHITE);
-		tabbedPane.addTab("Dokumente prüfen", null, panel_Betreuerverwaltung, null);
-		panel_Betreuerverwaltung.setLayout(null);
-		
-		JLabel lblNewLabel_3_1_2_3 = new JLabel("Betreuerverwaltung");
-		lblNewLabel_3_1_2_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_2_3.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_2_3.setBounds(10, 0, 252, 32);
-		panel_Betreuerverwaltung.add(lblNewLabel_3_1_2_3);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(33, 43, 441, 211);
-		panel_Betreuerverwaltung.add(scrollPane_1);
-		
-		
-	    documentTable = new JTable();
-		
-		documentTable.setToolTipText("");
-
-		documentTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle"}) {
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-			
-		});
-		scrollPane_1.setViewportView(documentTable);
-		panel_Betreuerverwaltung.add(scrollPane_1);
-		documentTable.addMouseListener(new MouseAdapter() {
-			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			      JTable click = (JTable)e.getSource();
-			      documentTable.getValueAt(click.getSelectedRow(), 0);
-			    }
-			  }
-		});
-		
-		JPanel panel_Profil = new JPanel();
-		panel_Profil.setBackground(Color.WHITE);
-		tabbedPane.addTab("Profil", null, panel_Profil, null);
-		panel_Profil.setLayout(null);
-
-		JPanel panel_Profil_2 = new JPanel();
-		panel_Profil_2.setBackground(Color.WHITE);
-		panel_Profil_2.setBounds(20, 43, 450, 212);
-		panel_Profil.add(panel_Profil_2);
-		GridBagLayout gbl_panel_Profil_2 = new GridBagLayout();
-		gbl_panel_Profil_2.columnWidths = new int[] { 114, 46, 0, 0, 0 };
-		gbl_panel_Profil_2.rowHeights = new int[] { 14, 14, 14, 14, 0, 14, 0, 0 };
-		gbl_panel_Profil_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel_Profil_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_Profil_2.setLayout(gbl_panel_Profil_2);
-
-		JLabel lblName = new JLabel("Name");
-		lblName.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.anchor = GridBagConstraints.WEST;
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 0;
-		panel_Profil_2.add(lblName, gbc_lblName);
-
-		JLabel lblProfilMatrikelnummerOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
-		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilMatrikelnummerOutput.gridx = 3;
-		gbc_lblProfilMatrikelnummerOutput.gridy = 0;
-		panel_Profil_2.add(lblProfilMatrikelnummerOutput, gbc_lblProfilMatrikelnummerOutput);
-
-		JLabel lblVorname = new JLabel("Vorname");
-		lblVorname.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblVorname = new GridBagConstraints();
-		gbc_lblVorname.anchor = GridBagConstraints.WEST;
-		gbc_lblVorname.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVorname.gridx = 0;
-		gbc_lblVorname.gridy = 1;
-		panel_Profil_2.add(lblVorname, gbc_lblVorname);
-
-		JLabel lblProfilNameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilNameOutput = new GridBagConstraints();
-		gbc_lblProfilNameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilNameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilNameOutput.gridx = 3;
-		gbc_lblProfilNameOutput.gridy = 1;
-		panel_Profil_2.add(lblProfilNameOutput, gbc_lblProfilNameOutput);
-
-		JLabel lblPersonalnummer = new JLabel("Personalnummer");
-		lblPersonalnummer.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblPersonalnummer = new GridBagConstraints();
-		gbc_lblPersonalnummer.anchor = GridBagConstraints.WEST;
-		gbc_lblPersonalnummer.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPersonalnummer.gridx = 0;
-		gbc_lblPersonalnummer.gridy = 2;
-		panel_Profil_2.add(lblPersonalnummer, gbc_lblPersonalnummer);
-
-		JLabel lblProfilVornameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilVornameOutput = new GridBagConstraints();
-		gbc_lblProfilVornameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilVornameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilVornameOutput.gridx = 3;
-		gbc_lblProfilVornameOutput.gridy = 2;
-		panel_Profil_2.add(lblProfilVornameOutput, gbc_lblProfilVornameOutput);
-
-		JLabel lblProfilEmail = new JLabel("Email");
-		lblProfilEmail.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilEmail = new GridBagConstraints();
-		gbc_lblProfilEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilEmail.gridx = 0;
-		gbc_lblProfilEmail.gridy = 3;
-		panel_Profil_2.add(lblProfilEmail, gbc_lblProfilEmail);
-
-		JLabel lblProfilEmailOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilEmailOutput = new GridBagConstraints();
-		gbc_lblProfilEmailOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmailOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilEmailOutput.gridx = 3;
-		gbc_lblProfilEmailOutput.gridy = 3;
-		panel_Profil_2.add(lblProfilEmailOutput, gbc_lblProfilEmailOutput);
-
-		JLabel lblNewLabel_3_1_2_1 = new JLabel("Profil");
-		lblNewLabel_3_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_2_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_2_1.setBounds(10, 0, 252, 32);
-		panel_Profil.add(lblNewLabel_3_1_2_1);
 	}
 
 	/*
@@ -364,22 +350,52 @@ public class MenuPPA extends JFrame {
 	 * @author isedo
 	 */
 
-	public void refreshBPSinJTable() throws Exception{
-
+	public void refreshBPSinJTable(JCheckBox best_offen, JCheckBox zut_offen, JCheckBox dok_pr) throws Exception{
+		
 		Datenbank.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		Object[] rowData = new Object[3];
-
+		
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-			if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&!Datenbank.getBPSlist().get(i).getStatus().equals("Zugeteilt")) {
-				rowData[0] = Datenbank.getBPSlist().get(i).getId();
-				rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-				rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
-				model.addRow(rowData);
+			if(best_offen.isSelected())
+				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
+					rowData[0] = Datenbank.getBPSlist().get(i).getId();
+					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+					model.addRow(rowData);
+				}
+			if(zut_offen.isSelected())
+				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("Bewerber")) {
+					rowData[0] = Datenbank.getBPSlist().get(i).getId();
+					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+					model.addRow(rowData);
+				}
+			if(dok_pr.isSelected()) {
+				checkStudentDocuments();
+				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("Abgeschlossen")) {
+					rowData[0] = Datenbank.getBPSlist().get(i).getId();
+					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
+					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+					model.addRow(rowData);
+				}
 			}
 		}
 
+	}
+	public void checkStudentDocuments() throws Exception {
+		
+		Datenbank.getStudentlist();
+		ArrayList <Studierende>studentList=new ArrayList();
+		studentList=Datenbank.getStudentlist();
+		
+		for(int i=0;i<studentList.size();i++) {
+			if(studentList.get(i).getBericht()!=null&&studentList.get(i).getNachweis()!=null&&studentList.get(i).getVertrag()!=null&&Datenbank.checkBesuchBericht(studentList.get(i).getUserId())) {
+				Datenbank.updateBPSStatus("Abgeschlossen", studentList.get(i).getUserId());
+				
+			}
+		}
 	}
 	
 }
