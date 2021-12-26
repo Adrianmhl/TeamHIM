@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EventObject;
@@ -20,6 +22,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,6 +34,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -38,6 +42,7 @@ import javax.swing.table.TableColumn;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
+import Objekte.PdfFilter;
 import Objekte.Zuteilung;
 
 import javax.swing.JScrollPane;
@@ -47,8 +52,9 @@ public class MenuBet extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
 	static JTable table;
-	static JList studentList;
+	static JTable studentTable;
 	public JScrollPane scrollPane;
+	public JScrollPane scrollPane2;
 	private final JPanel panel_Profil_2 = new JPanel();
 	public JPanel panel_3;
 
@@ -66,7 +72,7 @@ public class MenuBet extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MenuBet frame = new MenuBet(0);
+					MenuBet frame = new MenuBet(11);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -240,7 +246,7 @@ public class MenuBet extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setToolTipText("");
 
-		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle", "Status" }) {
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Name","Vorname", "Praxisstelle", "Status" }) {
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -330,7 +336,7 @@ public class MenuBet extends JFrame {
 		gbc_lblProfilMatrikelnummer.gridy = 0;
 		panel_Profil_2.add(lblProfilMatrikelnummer, gbc_lblProfilMatrikelnummer);
 
-		JLabel lblProfilMatrikelnummerOutput = new JLabel("-");
+		JLabel lblProfilMatrikelnummerOutput = new JLabel(Integer.toString(id));
 		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
 		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
 		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
@@ -347,7 +353,7 @@ public class MenuBet extends JFrame {
 		gbc_lblProfilName.gridy = 1;
 		panel_Profil_2.add(lblProfilName, gbc_lblProfilName);
 
-		JLabel lblProfilNameOutput = new JLabel("-");
+		JLabel lblProfilNameOutput = new JLabel(Datenbank.getUser(id).getUserName());
 		GridBagConstraints gbc_lblProfilNameOutput = new GridBagConstraints();
 		gbc_lblProfilNameOutput.anchor = GridBagConstraints.WEST;
 		gbc_lblProfilNameOutput.insets = new Insets(0, 0, 5, 0);
@@ -364,7 +370,7 @@ public class MenuBet extends JFrame {
 		gbc_lblProfilVorname.gridy = 2;
 		panel_Profil_2.add(lblProfilVorname, gbc_lblProfilVorname);
 
-		JLabel lblProfilVornameOutput = new JLabel("-");
+		JLabel lblProfilVornameOutput = new JLabel(Datenbank.getUser(id).getUserVorname());
 		GridBagConstraints gbc_lblProfilVornameOutput = new GridBagConstraints();
 		gbc_lblProfilVornameOutput.anchor = GridBagConstraints.WEST;
 		gbc_lblProfilVornameOutput.insets = new Insets(0, 0, 5, 0);
@@ -381,7 +387,7 @@ public class MenuBet extends JFrame {
 		gbc_lblProfilEmail.gridy = 3;
 		panel_Profil_2.add(lblProfilEmail, gbc_lblProfilEmail);
 
-		JLabel lblProfilEmailOutput = new JLabel("-");
+		JLabel lblProfilEmailOutput = new JLabel(Datenbank.getUser(id).getUserMail());
 		GridBagConstraints gbc_lblProfilEmailOutput = new GridBagConstraints();
 		gbc_lblProfilEmailOutput.anchor = GridBagConstraints.WEST;
 		gbc_lblProfilEmailOutput.insets = new Insets(0, 0, 5, 0);
@@ -395,16 +401,24 @@ public class MenuBet extends JFrame {
 		tabbedPane.addTab("Studenten", null, panel5, null);
 		
 	    
-	    DefaultListModel<Integer> studentListModell = new DefaultListModel<>();  
-	     
-	      studentList = new JList<>(studentListModell);  
-	      studentList.setBounds(20,20, 400,200);  
-	      
-	      JScrollPane scrollPane2 = new JScrollPane();
-	      scrollPane2.setBounds(20, 33, 390, 218);
-	      scrollPane2.setViewportView(studentList);
-	      panel5.add(scrollPane2);
-	      
+		scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(20, 33, 390, 218);
+	    studentTable = new JTable();
+		
+		studentTable.setToolTipText("");
+
+		studentTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Name","Vorname", "Praxisstelle"}) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+		});
+		scrollPane2.setViewportView(studentTable);
+		panel5.add(scrollPane2);
+		
+	    
 	      JButton btnNewButton_3 = new JButton("Aktualisieren");
 	      btnNewButton_3.addActionListener(e->{
 	    	  try {
@@ -414,8 +428,41 @@ public class MenuBet extends JFrame {
 				e1.printStackTrace();
 			}
 	      });
-	      btnNewButton_3.setBounds(20, 277, 89, 23);
+	      btnNewButton_3.setBounds(20, 277, 150, 23);
 	      panel5.add(btnNewButton_3);
+	      
+	      JButton btnNewButton_4 = new JButton("Besuchsbericht Abgeben");
+	      btnNewButton_4.setBounds(260, 277, 150, 23);
+	      btnNewButton_4.addActionListener(e->{
+	    	  	if(studentTable.getSelectedRowCount()>0)
+				try {
+					JFileChooser chooser = new JFileChooser();
+					
+					chooser.addChoosableFileFilter(new PdfFilter());
+					
+					int input = chooser.showOpenDialog(null);
+					try {
+						if (input == JFileChooser.APPROVE_OPTION) {
+							File file = new File(chooser.getSelectedFile().getAbsolutePath());
+							if(!file.getName().contains(".pdf")) throw new Exception() ;
+							if(JOptionPane.showConfirmDialog(null, "Wollen sie diesen Bericht ("+file.getName()+") wirklich Hochladen?")==JOptionPane.OK_OPTION);
+								Datenbank.uploadBesuchsBericht(file, (int) studentTable.getValueAt(studentTable.getSelectedRow(),0));
+							}
+						}
+						catch(Exception e3) {
+							e3.printStackTrace();
+							JOptionPane.showMessageDialog(null,"Bitte eine PDF-Datei auswählen");
+						}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			else
+			System.out.println("Bitte eine Zeile auswählen!");
+	    	 
+				
+	      });
+	      
+	      panel5.add(btnNewButton_4);
 	      
 		
 	}
@@ -440,25 +487,42 @@ public class MenuBet extends JFrame {
 		}
 
 	}
+	
 	public void refreshBPSinJTable() throws Exception{
 
 		Datenbank.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		Object[] rowData = new Object[3];
+		Object[] rowData = new Object[5];
 		
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 			if(!Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")&&!Datenbank.getBPSlist().get(i).getStatus().equals("Zugeteilt")) {
 			rowData[0] = Datenbank.getBPSlist().get(i).getId();
-			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+			rowData[1] = Datenbank.getUser(Datenbank.getBPSlist().get(i).getId()).getUserName();
+			rowData[2] = Datenbank.getUser(Datenbank.getBPSlist().get(i).getId()).getUserVorname();
+			rowData[3] = Datenbank.getBPSlist().get(i).getUnternehmen();
+			rowData[4] = Datenbank.getBPSlist().get(i).getStatus();
 			model.addRow(rowData);
 			}
 		}
 
-	}
-	public void refreshStudentList(int betnum) throws Exception {	
-		DefaultListModel<Integer> model= (DefaultListModel<Integer>) studentList.getModel();
-		model.addAll( Datenbank.getStudentList(betnum));	
+	} 
+	
+	public void refreshStudentList(int betnum) throws Exception{
+
+		
+		DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
+		model.setRowCount(0);
+		Object[] rowData = new Object[4];
+		
+		for (int i = 0; i < Datenbank.getStudentList(betnum).size(); i++) {
+			rowData[0] = Datenbank.getStudentList(betnum).get(i);
+			rowData[1] =Datenbank.getUser(Datenbank.getStudentList(betnum).get(i)).getUserName();
+			rowData[2]= Datenbank.getUser(Datenbank.getStudentList(betnum).get(i)).getUserVorname();
+			rowData[3] = Datenbank.getBPS(Datenbank.getStudentList(betnum).get(i)).getUnternehmen();
+			model.addRow(rowData);
+			
+		}
+
 	}
 }

@@ -35,7 +35,7 @@ public class MenuPPA extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JTable table;
 	private JTable table_1;
-
+	private JTable documentTable;
 	/**
 	 * Launch the application.
 	 */
@@ -71,99 +71,14 @@ public class MenuPPA extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 146, 361);
+		panel_1.setBounds(0, 0, 110, 361);
 		panel_1.setLayout(null);
-		panel_1.setBackground(Color.RED);
+		panel_1.setBackground(Color.decode("#CD201F"));
 		contentPane.add(panel_1);
-
-		JPanel tab2 = new JPanel();
-		tab2.setLayout(null);
-		tab2.setBackground(Color.RED);
-		tab2.setBounds(10, 102, 126, 21);
-		panel_1.add(tab2);
-
-		JLabel lblNewLabel_1 = new JLabel("BPS-Formular pr\u00FCfen");
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				tabbedPane.setSelectedIndex(0);
-			}
-		});
-
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(0, 0, 126, 21);
-		tab2.add(lblNewLabel_1);
-
-		JPanel tab2_1 = new JPanel();
-		tab2_1.setLayout(null);
-		tab2_1.setBackground(Color.RED);
-		tab2_1.setBounds(10, 134, 126, 21);
-		panel_1.add(tab2_1);
-
-		JLabel lblNewLabel_1_1 = new JLabel("Praktikumsverwaltung");
-		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				tabbedPane.setSelectedIndex(1);
-			}
-		});
-
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1_1.setBounds(0, 0, 141, 18);
-		tab2_1.add(lblNewLabel_1_1);
-
-		JPanel tab2_2 = new JPanel();
-		tab2_2.setLayout(null);
-		tab2_2.setBackground(Color.RED);
-		tab2_2.setBounds(10, 166, 126, 21);
-		panel_1.add(tab2_2);
-
-		JLabel lblNewLabel_1_2 = new JLabel("Betreuerverwaltung");
-		lblNewLabel_1_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				tabbedPane.setSelectedIndex(2);
-			}
-		});
-
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1_2.setBounds(0, 0, 126, 21);
-		tab2_2.add(lblNewLabel_1_2);
-
-		JPanel tab2_2_1 = new JPanel();
-		tab2_2_1.setLayout(null);
-		tab2_2_1.setBackground(Color.RED);
-		tab2_2_1.setBounds(10, 198, 126, 21);
-		panel_1.add(tab2_2_1);
-
-		JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
-		lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				tabbedPane.setSelectedIndex(3);
-			}
-		});
-
-		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1_2_1.setBackground(Color.RED);
-		lblNewLabel_1_2_1.setBounds(0, 0, 126, 21);
-		tab2_2_1.add(lblNewLabel_1_2_1);
 
 		JPanel tab2_2_2 = new JPanel();
 		tab2_2_2.setLayout(null);
-		tab2_2_2.setBackground(Color.RED);
+		tab2_2_2.setBackground(Color.decode("#CD201F"));
 		tab2_2_2.setBounds(10, 329, 126, 21);
 		panel_1.add(tab2_2_2);
 
@@ -190,25 +105,6 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_1_2_2.setFont(new Font("Arial", Font.BOLD, 11));
 		lblNewLabel_1_2_2.setBounds(0, 0, 116, 18);
 		tab2_2_2.add(lblNewLabel_1_2_2);
-
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(MenuPPA.class.getResource("/res/ProjLogo.jpeg")));
-		lblNewLabel_5.setBounds(10, 11, 112, 87);
-		panel_1.add(lblNewLabel_5);
-
-		JPanel tab2_2_1_1 = new JPanel();
-		tab2_2_1_1.setLayout(null);
-		tab2_2_1_1.setBackground(Color.RED);
-		tab2_2_1_1.setBounds(10, 307, 126, 21);
-		panel_1.add(tab2_2_1_1);
-
-		JLabel lblNewLabel_1_2_1_1 = new JLabel("Personalnummer");
-		lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel_1_2_1_1.setBackground(Color.RED);
-		lblNewLabel_1_2_1_1.setBounds(0, 0, 116, 18);
-		tab2_2_1_1.add(lblNewLabel_1_2_1_1);
 
 		JLabel lblNewLabel_5_1 = new JLabel("");
 		lblNewLabel_5_1.setBounds(10, 0, 112, 87);
@@ -270,12 +166,12 @@ public class MenuPPA extends JFrame {
 			      
 			      
 				try {
-					if(table.getValueAt(row, 2).equals("beantragt")||table.getValueAt(row, 2).equals("offen")) { 
+					if(table.getValueAt(row, 2).equals("beantragt")) { 
 						StudentPopup popup;
 						popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
 						popup.setVisible(true);
 					}
-					else{
+					else if(table.getValueAt(row, 2).equals("Bewerber")){
 						ApplicationChooser popup;
 						popup= new ApplicationChooser((int) table.getValueAt(row, 0));
 						popup.setVisible(true);
@@ -303,95 +199,19 @@ public class MenuPPA extends JFrame {
 		table.getColumnModel().getColumn(1).setPreferredWidth(105);
 		table.getColumnModel().getColumn(2).setPreferredWidth(105);
 		
-		JPanel panel_Praktikumsverwaltung = new JPanel();
-		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
-		panel_Praktikumsverwaltung.setLayout(null);
-
-		JButton btnNewButton = new JButton("\u00D6ffnen");
-		btnNewButton.setFont(new Font("Arial", Font.BOLD, 11));
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(31, 193, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("\u00D6ffnen");
-		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 11));
-		btnNewButton_1.setBounds(156, 193, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_1);
-
-		JButton btnNewButton_1_1 = new JButton("\u00D6ffnen");
-		btnNewButton_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-		btnNewButton_1_1.setBounds(284, 193, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_1_1);
-
-		JButton btnNewButton_1_1_1 = new JButton("\u00D6ffnen");
-		btnNewButton_1_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-		btnNewButton_1_1_1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1_1.setBounds(412, 193, 89, 23);
-		panel_Praktikumsverwaltung.add(btnNewButton_1_1_1);
-
-		JLabel lblNewLabel = new JLabel("T\u00E4tigkeitsnachweis");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 11));
-		lblNewLabel.setBounds(21, 168, 118, 14);
-		panel_Praktikumsverwaltung.add(lblNewLabel);
-
-		JLabel lblBericht = new JLabel("Bericht");
-		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));
-		lblBericht.setBounds(179, 168, 64, 14);
-		panel_Praktikumsverwaltung.add(lblBericht);
-
-		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
-		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
-		lblBpsvertrag.setBounds(294, 168, 118, 14);
-		panel_Praktikumsverwaltung.add(lblBpsvertrag);
-
-		JLabel lblBesuchsbericht = new JLabel("Besuchsbericht");
-		lblBesuchsbericht.setFont(new Font("Arial", Font.BOLD, 11));
-		lblBesuchsbericht.setBounds(412, 168, 89, 14);
-		panel_Praktikumsverwaltung.add(lblBesuchsbericht);
-
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(MenuPPA.class.getResource("/res/document_file_document_icon_159190.png")));
-		lblNewLabel_4.setBounds(40, 96, 99, 61);
-		panel_Praktikumsverwaltung.add(lblNewLabel_4);
-
-		JLabel lblNewLabel_4_1 = new JLabel("");
-		lblNewLabel_4_1
-				.setIcon(new ImageIcon(MenuPPA.class.getResource("/res/document_file_document_icon_159190.png")));
-		lblNewLabel_4_1.setBounds(164, 96, 81, 61);
-		panel_Praktikumsverwaltung.add(lblNewLabel_4_1);
-
-		JLabel lblNewLabel_4_1_1 = new JLabel("");
-		lblNewLabel_4_1_1
-				.setIcon(new ImageIcon(MenuPPA.class.getResource("/res/document_file_document_icon_159190.png")));
-		lblNewLabel_4_1_1.setBounds(292, 96, 81, 61);
-		panel_Praktikumsverwaltung.add(lblNewLabel_4_1_1);
-
-		JLabel lblNewLabel_4_1_1_1 = new JLabel("");
-		lblNewLabel_4_1_1_1
-				.setIcon(new ImageIcon(MenuPPA.class.getResource("/res/document_file_document_icon_159190.png")));
-		lblNewLabel_4_1_1_1.setBounds(420, 96, 81, 61);
-		panel_Praktikumsverwaltung.add(lblNewLabel_4_1_1_1);
+		///hier
 
 		JLabel lblNewLabel_3_1_2 = new JLabel("Praktikumsverwaltung");
 		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
-		panel_Praktikumsverwaltung.add(lblNewLabel_3_1_2);
+		//panel_Praktikumsverwaltung.add(lblNewLabel_3_1_2);
 
 		JPanel panel_Betreuerverwaltung = new JPanel();
 		panel_Betreuerverwaltung.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Betreuerverwaltung, null);
+		tabbedPane.addTab("Dokumente prüfen", null, panel_Betreuerverwaltung, null);
 		panel_Betreuerverwaltung.setLayout(null);
-
+		
 		JLabel lblNewLabel_3_1_2_3 = new JLabel("Betreuerverwaltung");
 		lblNewLabel_3_1_2_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1_2_3.setFont(new Font("Arial", Font.BOLD, 12));
@@ -402,12 +222,33 @@ public class MenuPPA extends JFrame {
 		scrollPane_1.setBounds(33, 43, 441, 211);
 		panel_Betreuerverwaltung.add(scrollPane_1);
 		
-	
 		
+	    documentTable = new JTable();
+		
+		documentTable.setToolTipText("");
+
+		documentTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Matrikelnummer", "Praxisstelle"}) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+		});
+		scrollPane_1.setViewportView(documentTable);
+		panel_Betreuerverwaltung.add(scrollPane_1);
+		documentTable.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable click = (JTable)e.getSource();
+			      documentTable.getValueAt(click.getSelectedRow(), 0);
+			    }
+			  }
+		});
 		
 		JPanel panel_Profil = new JPanel();
 		panel_Profil.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Profil, null);
+		tabbedPane.addTab("Profil", null, panel_Profil, null);
 		panel_Profil.setLayout(null);
 
 		JPanel panel_Profil_2 = new JPanel();
@@ -494,12 +335,6 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2_1.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2_1.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2_1);
-		
-				JPanel panel_2_1 = new JPanel();
-				panel_2_1.setBounds(0, 0, 684, 39);
-				contentPane.add(panel_2_1);
-				panel_2_1.setForeground(Color.WHITE);
-				panel_2_1.setBackground(Color.WHITE);
 	}
 
 	/*

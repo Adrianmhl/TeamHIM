@@ -32,6 +32,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightCo
 
 import Datenbank.Datenbank;
 import Objekte.BPS;
+import Objekte.PdfFilter;
 import Objekte.Studierende;
 
 public class MenuStu extends JFrame {
@@ -758,6 +759,7 @@ public class MenuStu extends JFrame {
 
 			try {
 				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
@@ -777,9 +779,12 @@ public class MenuStu extends JFrame {
 			
 			try {
 				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
-					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
-
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "nachweis");
+				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -803,6 +808,7 @@ public class MenuStu extends JFrame {
 			
 			try {
 				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
@@ -819,6 +825,7 @@ public class MenuStu extends JFrame {
 		btnNewButton_1_2.addActionListener(e -> {
 			try {
 				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
@@ -836,8 +843,12 @@ public class MenuStu extends JFrame {
 			try {
 			
 				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
-					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "bericht");
+				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -849,8 +860,12 @@ public class MenuStu extends JFrame {
 			try {
 			
 				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
-					Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "vertrag");
+				}
 
 			} catch (Exception e1) {
 				e1.printStackTrace();

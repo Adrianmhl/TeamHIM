@@ -257,14 +257,22 @@ public class Datenbank {
 			startConnection();
 		PreparedStatement stmnt = con.prepareStatement("UPDATE student SET " + column + " = ? WHERE id = ?");
 		InputStream inputStream = new FileInputStream(infile);
-		System.out.println(inputStream);
-		// stmnt.setString(1, column);
 		stmnt.setBlob(1, inputStream);
 		stmnt.setInt(2, matnum);
 		stmnt.executeUpdate();
 		inputStream.close();
 	}
-
+	public static void uploadBesuchsBericht(File infile, int matnum) throws Exception {
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("UPDATE betreuerstudent SET `bericht` = ? WHERE matnum = ?");
+		InputStream inputStream = new FileInputStream(infile);
+		stmnt.setBlob(1, inputStream);
+		stmnt.setInt(2, matnum);
+		stmnt.executeUpdate();
+		inputStream.close();
+		
+	}
 	public static void download(String path, int matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
@@ -376,6 +384,10 @@ public class Datenbank {
 		 stmnt2.executeUpdate();
 	 }
 	 
+	 public static void besuchsBerichtUpload(int matnum, String input) throws SQLException {
+		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `bericht` = ? WHERE matnum=?");
+		 stmnt.setString(1, input);
+	 }
 	public static void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";
