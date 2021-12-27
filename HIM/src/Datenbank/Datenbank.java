@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.security.spec.KeySpec;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -409,6 +410,20 @@ public class Datenbank {
 	 public static void besuchsBerichtUpload(int matnum, String input) throws SQLException {
 		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `bericht` = ? WHERE matnum=?");
 		 stmnt.setString(1, input);
+	 }
+	 public static void acceptBericht(int matnum) throws SQLException {
+		 PreparedStatement stmnt1 = con.prepareStatement("Select `praktikumsbericht` From betreuerstudent WHERE matnum = ?");
+		 stmnt1.setInt(1, matnum);
+		 ResultSet rs1=stmnt1.executeQuery();
+		 Blob bericht=null;
+		 while(rs1.next()) {
+			bericht=rs1.getBlob("praktikumsbericht");
+		 }
+		 PreparedStatement stmnt2 = con.prepareStatement("UPDATE db3.student SET `bericht` = ? WHERE id=?");
+		 stmnt2.setBlob(1, bericht);
+		 stmnt2.setInt(2, matnum);
+		 stmnt2.executeUpdate();
+		
 	 }
 	public static void startConnection() throws Exception {
 

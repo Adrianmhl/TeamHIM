@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -35,6 +36,7 @@ import Datenbank.Datenbank;
 import Objekte.BPS;
 import Objekte.PdfFilter;
 import Objekte.Studierende;
+import javax.swing.JList;
 
 public class MenuStu extends JFrame {
 
@@ -84,9 +86,8 @@ public class MenuStu extends JFrame {
 		});
 	}
 
-	private void bpsVisible(int matrikelnum) throws Exception{
+	private void bpsVisible(int matrikelnum) throws Exception {
 
-	
 		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
 			if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
@@ -108,7 +109,8 @@ public class MenuStu extends JFrame {
 
 			}
 
-			if (matrikelnum == Datenbank.getBPSlist().get(i).getId() && Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
+			if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
+					&& Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
 
 				panel_2.setVisible(false);
 				panel_BPSFormularAbgabe.setVisible(true);
@@ -124,33 +126,38 @@ public class MenuStu extends JFrame {
 	 * @throws Exception
 	 */
 	public MenuStu(int matrikelnum) throws Exception {
-		
-		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
-		
 
-		setResizable(false);
+		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 602);
+		setBounds(100, 100, 1250, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[] { 158, 1131, 0 };
+		gbl_contentPane.rowHeights = new int[] { 658, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		contentPane.setLayout(gbl_contentPane);
+
+		ImageIcon imageIcon = new ImageIcon("/res/ProjLogo2.png");
+		Image image = imageIcon.getImage();
+		Image newimg = image.getScaledInstance(112, 87, java.awt.Image.SCALE_SMOOTH);
+		imageIcon = new ImageIcon(newimg);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 146, 571);
-		panel_1.setBackground(Color.RED);
-		contentPane.add(panel_1);
+		panel_1.setBackground(Color.decode("#CD201F"));
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.anchor = GridBagConstraints.WEST;
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		contentPane.add(panel_1, gbc_panel_1);
 		panel_1.setLayout(null);
 
 		JLabel lblNewLabel_5 = new JLabel("");
-		
-		
-		ImageIcon imageIcon = new ImageIcon("/res/ProjLogo2.png"); 
-		Image image = imageIcon.getImage(); 
-		Image newimg = image.getScaledInstance(112, 87,  java.awt.Image.SCALE_SMOOTH); 
-		imageIcon = new ImageIcon(newimg);  
 		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo2.png")));
 		lblNewLabel_5.setBounds(14, 11, 112, 87);
 		panel_1.add(lblNewLabel_5);
@@ -161,7 +168,7 @@ public class MenuStu extends JFrame {
 		lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMatrikelnummerLeiste.setForeground(Color.WHITE);
 		lblMatrikelnummerLeiste.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblMatrikelnummerLeiste.setBackground(Color.RED);
+		lblMatrikelnummerLeiste.setBackground(Color.decode("#CD201F"));
 
 		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 		lblNewLabel_1_2_2.setBounds(10, 522, 116, 23);
@@ -191,7 +198,7 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1_2_1.setBounds(10, 213, 126, 23);
 		panel_1.add(lblNewLabel_1_2_1);
 		lblNewLabel_1_2_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1.setBackground(Color.RED);
+		lblNewLabel_1_2_1.setBackground(Color.decode("#CD201F"));
 		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -244,8 +251,11 @@ public class MenuStu extends JFrame {
 		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(145, 0, 649, 571);
-		contentPane.add(tabbedPane);
+		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
+		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
+		gbc_tabbedPane.gridx = 1;
+		gbc_tabbedPane.gridy = 0;
+		contentPane.add(tabbedPane, gbc_tabbedPane);
 
 		panel_BPSFormularAbgabe = new JPanel();
 		panel_BPSFormularAbgabe.setBackground(Color.WHITE);
@@ -360,33 +370,32 @@ public class MenuStu extends JFrame {
 		panel_2.add(lblURL, gbc_lblURL);
 
 		JButton btnNewButton_3 = new JButton("Antrag bearbeiten");
-		btnNewButton_3.addActionListener(e-> {
-				panel_BPSFormularAbgabe.setVisible(true);
-				panel_2.setVisible(false);
-				try {
-					for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
+		btnNewButton_3.addActionListener(e -> {
+			panel_BPSFormularAbgabe.setVisible(true);
+			panel_2.setVisible(false);
+			try {
+				for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
 
-						if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
-								&& (Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")||Datenbank.getBPSlist().get(i).getStatus().equals(""))) {
+					if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
+							&& (Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")
+									|| Datenbank.getBPSlist().get(i).getStatus().equals(""))) {
 
-
-							txtUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
-							txtFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
-							txtFirmenbetreuerName.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
-							txtAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
-							txtTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
-							txtMail.setText(Datenbank.getBPSlist().get(i).getMail());
-							Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
-							txtBeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
-
-						}
+						txtUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
+						txtFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
+						txtFirmenbetreuerName.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
+						txtAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
+						txtTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
+						txtMail.setText(Datenbank.getBPSlist().get(i).getMail());
+						Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
+						txtBeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
 
 					}
-					
+
 				}
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		JLabel lblNewLabel_7_2 = new JLabel("Firmenbetreuer");
@@ -740,28 +749,56 @@ public class MenuStu extends JFrame {
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
-		panel_Praktikumsverwaltung.setLayout(null);
+		GridBagLayout gbl_panel_Praktikumsverwaltung = new GridBagLayout();
+		gbl_panel_Praktikumsverwaltung.columnWidths = new int[] { 468, 0 };
+		gbl_panel_Praktikumsverwaltung.rowHeights = new int[] { 32, 190, 0 };
+		gbl_panel_Praktikumsverwaltung.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel_Praktikumsverwaltung.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		panel_Praktikumsverwaltung.setLayout(gbl_panel_Praktikumsverwaltung);
 
 		JLabel lblNewLabel_3_1 = new JLabel("Praktikumsverwaltung");
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1.setBounds(10, 0, 252, 32);
-		panel_Praktikumsverwaltung.add(lblNewLabel_3_1);
+		GridBagConstraints gbc_lblNewLabel_3_1 = new GridBagConstraints();
+		gbc_lblNewLabel_3_1.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_3_1.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_3_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_3_1.gridx = 0;
+		gbc_lblNewLabel_3_1.gridy = 0;
+		panel_Praktikumsverwaltung.add(lblNewLabel_3_1, gbc_lblNewLabel_3_1);
 
 		JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
 		panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
-		panel_Praktikumsverwaltungl_2.setBounds(10, 54, 468, 190);
-		panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2);
-		panel_Praktikumsverwaltungl_2.setLayout(null);
+		GridBagConstraints gbc_panel_Praktikumsverwaltungl_2 = new GridBagConstraints();
+		gbc_panel_Praktikumsverwaltungl_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_Praktikumsverwaltungl_2.gridx = 0;
+		gbc_panel_Praktikumsverwaltungl_2.gridy = 1;
+		panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2, gbc_panel_Praktikumsverwaltungl_2);
+		GridBagLayout gbl_panel_Praktikumsverwaltungl_2 = new GridBagLayout();
+		gbl_panel_Praktikumsverwaltungl_2.columnWidths = new int[] { 135, 43, 105, 105, 0 };
+		gbl_panel_Praktikumsverwaltungl_2.rowHeights = new int[] { 23, 32, 23, 23, 0 };
+		gbl_panel_Praktikumsverwaltungl_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_Praktikumsverwaltungl_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel_Praktikumsverwaltungl_2.setLayout(gbl_panel_Praktikumsverwaltungl_2);
 
 		JLabel lblNewLabel = new JLabel("T\u00E4tigkeitsnachweis");
-		lblNewLabel.setBounds(10, 0, 135, 13);
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 11));
-		panel_Praktikumsverwaltungl_2.add(lblNewLabel);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
+		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel_Praktikumsverwaltungl_2.add(lblNewLabel, gbc_lblNewLabel);
 
 		JButton btnNewButton_1 = new JButton("hochladen");
-		btnNewButton_1.setBounds(188, 0, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1);
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 2;
+		gbc_btnNewButton_1.gridy = 0;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1, gbc_btnNewButton_1);
 		btnNewButton_1.addActionListener(e -> {
 
 			try {
@@ -770,7 +807,7 @@ public class MenuStu extends JFrame {
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis",false);
+					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis", false);
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -778,57 +815,102 @@ public class MenuStu extends JFrame {
 		});
 
 		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
-		btnNewButton_2.setBounds(303, 0, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2);
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_2.gridx = 3;
+		gbc_btnNewButton_2.gridy = 0;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2, gbc_btnNewButton_2);
 		btnNewButton_2.addActionListener(e -> {
-			
-			
-			
+
 			try {
 				JFileChooser chooser = new JFileChooser();
 				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
 						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
 					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "nachweis");
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"nachweis");
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
 		JLabel lblBericht = new JLabel("Bericht");
-		lblBericht.setBounds(10, 55, 135, 13);
 		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));
-		panel_Praktikumsverwaltungl_2.add(lblBericht);
-
-		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
-		lblBpsvertrag.setBounds(10, 111, 135, 13);
-		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
-		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag);
+		GridBagConstraints gbc_lblBericht = new GridBagConstraints();
+		gbc_lblBericht.anchor = GridBagConstraints.NORTH;
+		gbc_lblBericht.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblBericht.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBericht.gridx = 0;
+		gbc_lblBericht.gridy = 2;
+		panel_Praktikumsverwaltungl_2.add(lblBericht, gbc_lblBericht);
 
 		JButton btnNewButton_1_1 = new JButton("hochladen");
-		btnNewButton_1_1.setBounds(188, 55, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1);
+		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
+		gbc_btnNewButton_1_1.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_1_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1_1.gridx = 2;
+		gbc_btnNewButton_1_1.gridy = 2;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1, gbc_btnNewButton_1_1);
 		btnNewButton_1_1.addActionListener(e -> {
-			
-			
-			
+
 			try {
 				JFileChooser chooser = new JFileChooser();
 				chooser.addChoosableFileFilter(new PdfFilter());
 				int input = chooser.showOpenDialog(null);
 				if (input == JFileChooser.APPROVE_OPTION) {
 					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "bericht",true);
+					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
 				}
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		});
+
+		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
+		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
+		gbc_btnNewButton_2_1.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_2_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_2_1.gridx = 3;
+		gbc_btnNewButton_2_1.gridy = 2;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
+		btnNewButton_2_1.addActionListener(e -> {
+			try {
+
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"bericht");
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+
+		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
+		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
+		GridBagConstraints gbc_lblBpsvertrag = new GridBagConstraints();
+		gbc_lblBpsvertrag.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblBpsvertrag.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBpsvertrag.gridx = 0;
+		gbc_lblBpsvertrag.gridy = 3;
+		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag, gbc_lblBpsvertrag);
 		JButton btnNewButton_1_2 = new JButton("hochladen");
-		btnNewButton_1_2.setBounds(188, 106, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2);
+		GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
+		gbc_btnNewButton_1_2.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_1_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1_2.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_1_2.gridx = 2;
+		gbc_btnNewButton_1_2.gridy = 3;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2, gbc_btnNewButton_1_2);
 		btnNewButton_1_2.addActionListener(e -> {
 			try {
 				JFileChooser chooser = new JFileChooser();
@@ -842,36 +924,23 @@ public class MenuStu extends JFrame {
 				e1.printStackTrace();
 			}
 		});
-
-		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
-		btnNewButton_2_1.setBounds(303, 55, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1);
-		btnNewButton_2_1.addActionListener(e -> {
-			try {
-			
-				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
-					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
-					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "bericht");
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
 		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
-		btnNewButton_2_2.setBounds(303, 106, 105, 23);
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2);
+		GridBagConstraints gbc_btnNewButton_2_2 = new GridBagConstraints();
+		gbc_btnNewButton_2_2.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_2_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2_2.gridx = 3;
+		gbc_btnNewButton_2_2.gridy = 3;
+		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2, gbc_btnNewButton_2_2);
 		btnNewButton_2_2.addActionListener(e -> {
 			try {
-			
+
 				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
-					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
 						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
 					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum, "vertrag");
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"vertrag");
 				}
 
 			} catch (Exception e1) {
@@ -881,13 +950,29 @@ public class MenuStu extends JFrame {
 		JPanel panel_Dokumente = new JPanel();
 		panel_Dokumente.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Dokumente, null);
-		panel_Dokumente.setLayout(null);
+		GridBagLayout gbl_panel_Dokumente = new GridBagLayout();
+		gbl_panel_Dokumente.columnWidths = new int[] { 1097, 0 };
+		gbl_panel_Dokumente.rowHeights = new int[] { 42, 0, 0 };
+		gbl_panel_Dokumente.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_Dokumente.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		panel_Dokumente.setLayout(gbl_panel_Dokumente);
 
-		JLabel lblNewLabel_3_1_1 = new JLabel("Dokumente");
+		JLabel lblNewLabel_3_1_1 = new JLabel("R\u00FCckmeldungen Bericht");
 		lblNewLabel_3_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1_1.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_1.setBounds(10, 0, 252, 32);
-		panel_Dokumente.add(lblNewLabel_3_1_1);
+		GridBagConstraints gbc_lblNewLabel_3_1_1 = new GridBagConstraints();
+		gbc_lblNewLabel_3_1_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_3_1_1.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel_3_1_1.gridx = 0;
+		gbc_lblNewLabel_3_1_1.gridy = 0;
+		panel_Dokumente.add(lblNewLabel_3_1_1, gbc_lblNewLabel_3_1_1);
+
+		JList list = new JList();
+		GridBagConstraints gbc_list = new GridBagConstraints();
+		gbc_list.fill = GridBagConstraints.BOTH;
+		gbc_list.gridx = 0;
+		gbc_list.gridy = 1;
+		panel_Dokumente.add(list, gbc_list);
 
 		JPanel panel_Profil = new JPanel();
 		panel_Profil.setLayout(null);
@@ -1029,10 +1114,9 @@ public class MenuStu extends JFrame {
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2);
 
-		JPanel panel = new JPanel();
-		panel.setBounds(116, 361, 10, 10);
-		contentPane.add(panel);
-
 		bpsVisible(matrikelnum);
+	}
+	public void refreshList() {
+		
 	}
 }
