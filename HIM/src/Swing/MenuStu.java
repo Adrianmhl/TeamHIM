@@ -37,47 +37,25 @@ import Objekte.BPS;
 import Objekte.PdfFilter;
 import Objekte.Studierende;
 import javax.swing.JList;
+import javax.swing.JProgressBar;
+import javax.swing.JCheckBox;
 
 public class MenuStu extends JFrame {
 
-	private JLabel lblStatus;
-	private JLabel lblUnternehmen;
-	private JLabel lblFirmenanschrift;
-	private JLabel lblURL;
-	private JLabel lblFirmenbetreuer;
-	private JLabel lblAbteilung;
-	private JLabel lblTelefon;
-	private JLabel lblEmail;
-	private JLabel lblZeitraum;
-	private JLabel Themenbereich;
-	private JLabel lblKurzbeschreibung;
-
 	private JTabbedPane tabbedPane;
 	private JPanel contentPane;
-	private JTextField txtUnternehmen;
-	private JTextField txtBeschreibung;
-	private JTextField txtFirmenanschrift;
-	private JTextField txtAbteilung;
-	private JTextField txtThemenbereich;
-	private JTextField txtTelefon;
-	private JTextField txtMail;
-	private JTextField txtFirmenbetreuerName;
-	private JRadioButton rdbtnZeitraum1;
-	private JRadioButton rdbtnZeitraum2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JPanel panel_BPSFormularAbgabe;
-	private JPanel panel_2;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-
+		
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					MenuStu frame = new MenuStu(0);
+					MenuStu frame = new MenuStu(444);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -86,39 +64,7 @@ public class MenuStu extends JFrame {
 		});
 	}
 
-	private void bpsVisible(int matrikelnum) throws Exception {
-
-		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-
-			if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
-					&& Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
-
-				lblStatus.setText(Datenbank.getBPSlist().get(i).getStatus());
-				lblUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
-				lblFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
-				lblFirmenbetreuer.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
-				lblAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
-				lblTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
-				lblEmail.setText(Datenbank.getBPSlist().get(i).getMail());
-				lblZeitraum.setText(Datenbank.getBPSlist().get(i).getZeitraum());
-				Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
-				lblKurzbeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
-
-				panel_2.setVisible(true);
-				panel_BPSFormularAbgabe.setVisible(false);
-
-			}
-
-			if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
-					&& Datenbank.getBPSlist().get(i).getStatus().equals("offen")) {
-
-				panel_2.setVisible(false);
-				panel_BPSFormularAbgabe.setVisible(true);
-
-			}
-
-		}
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -130,15 +76,15 @@ public class MenuStu extends JFrame {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1250, 720);
+		setBounds(100, 100, 1260, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 158, 1131, 0 };
+		gbl_contentPane.columnWidths = new int[] { 110, 1140, 0 };
 		gbl_contentPane.rowHeights = new int[] { 658, 0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 50.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
@@ -150,7 +96,6 @@ public class MenuStu extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.decode("#CD201F"));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.anchor = GridBagConstraints.WEST;
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 0;
@@ -257,503 +202,14 @@ public class MenuStu extends JFrame {
 		gbc_tabbedPane.gridy = 0;
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 
-		panel_BPSFormularAbgabe = new JPanel();
-		panel_BPSFormularAbgabe.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_BPSFormularAbgabe, null);
-		panel_BPSFormularAbgabe.setLayout(null);
-
-		panel_2 = new JPanel();
-		panel_2.setBounds(0, 0, 649, 543);
-		panel_BPSFormularAbgabe.add(panel_2);
-		panel_2.setBackground(Color.WHITE);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[] { 5, 69, 42, 61, 198, 121, 0 };
-		gbl_panel_2.rowHeights = new int[] { 5, 23, 23, 23, 23, 23, 23, 23, 23, 5, 23, 23, 23, 23, 0, 0, 23, 0, 0, 0, 0,
-				0 };
-		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_2.setLayout(gbl_panel_2);
-
-		JLayeredPane layeredPane_1 = new JLayeredPane();
-		GridBagConstraints gbc_layeredPane_1 = new GridBagConstraints();
-		gbc_layeredPane_1.anchor = GridBagConstraints.NORTHWEST;
-		gbc_layeredPane_1.insets = new Insets(0, 0, 5, 5);
-		gbc_layeredPane_1.gridx = 0;
-		gbc_layeredPane_1.gridy = 0;
-		panel_2.add(layeredPane_1, gbc_layeredPane_1);
-
-		JLabel lblNewLabel_3_2 = new JLabel("Anmeldung des BPS");
-		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_2.setFont(new Font("Arial", Font.BOLD, 14));
-		GridBagConstraints gbc_lblNewLabel_3_2 = new GridBagConstraints();
-		gbc_lblNewLabel_3_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3_2.gridx = 1;
-		gbc_lblNewLabel_3_2.gridy = 1;
-		panel_2.add(lblNewLabel_3_2, gbc_lblNewLabel_3_2);
-
-		JLabel lblNewLabel_6_1 = new JLabel("Status");
-		lblNewLabel_6_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_6_1 = new GridBagConstraints();
-		gbc_lblNewLabel_6_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_6_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_6_1.gridx = 4;
-		gbc_lblNewLabel_6_1.gridy = 1;
-		panel_2.add(lblNewLabel_6_1, gbc_lblNewLabel_6_1);
-
-		lblStatus = new JLabel("New label");
-		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-		gbc_lblStatus.insets = new Insets(0, 0, 5, 0);
-		gbc_lblStatus.gridx = 5;
-		gbc_lblStatus.gridy = 1;
-		panel_2.add(lblStatus, gbc_lblStatus);
-
-		JLabel lblNewLabel_6 = new JLabel("Unternehmen");
-		lblNewLabel_6.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
-		gbc_lblNewLabel_6.gridwidth = 2;
-		gbc_lblNewLabel_6.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_6.gridx = 1;
-		gbc_lblNewLabel_6.gridy = 4;
-		panel_2.add(lblNewLabel_6, gbc_lblNewLabel_6);
-
-		lblUnternehmen = new JLabel("-");
-		lblUnternehmen.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblUnternehmen = new GridBagConstraints();
-		gbc_lblUnternehmen.anchor = GridBagConstraints.WEST;
-		gbc_lblUnternehmen.fill = GridBagConstraints.VERTICAL;
-		gbc_lblUnternehmen.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUnternehmen.gridx = 4;
-		gbc_lblUnternehmen.gridy = 4;
-		panel_2.add(lblUnternehmen, gbc_lblUnternehmen);
-
-		JLabel lblNewLabel_7 = new JLabel("Firmenanschrift");
-		lblNewLabel_7.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
-		gbc_lblNewLabel_7.gridwidth = 2;
-		gbc_lblNewLabel_7.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7.gridx = 1;
-		gbc_lblNewLabel_7.gridy = 5;
-		panel_2.add(lblNewLabel_7, gbc_lblNewLabel_7);
-
-		lblFirmenanschrift = new JLabel("-");
-		lblFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblFirmenanschrift = new GridBagConstraints();
-		gbc_lblFirmenanschrift.anchor = GridBagConstraints.WEST;
-		gbc_lblFirmenanschrift.fill = GridBagConstraints.VERTICAL;
-		gbc_lblFirmenanschrift.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFirmenanschrift.gridx = 4;
-		gbc_lblFirmenanschrift.gridy = 5;
-		panel_2.add(lblFirmenanschrift, gbc_lblFirmenanschrift);
-
-		JLabel lblNewLabel_7_1 = new JLabel("URL");
-		lblNewLabel_7_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_1 = new GridBagConstraints();
-		gbc_lblNewLabel_7_1.gridwidth = 2;
-		gbc_lblNewLabel_7_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_7_1.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_7_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_1.gridx = 1;
-		gbc_lblNewLabel_7_1.gridy = 6;
-		panel_2.add(lblNewLabel_7_1, gbc_lblNewLabel_7_1);
-
-		lblURL = new JLabel("-");
-		lblURL.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblURL = new GridBagConstraints();
-		gbc_lblURL.anchor = GridBagConstraints.WEST;
-		gbc_lblURL.fill = GridBagConstraints.VERTICAL;
-		gbc_lblURL.insets = new Insets(0, 0, 5, 5);
-		gbc_lblURL.gridx = 4;
-		gbc_lblURL.gridy = 6;
-		panel_2.add(lblURL, gbc_lblURL);
-
-		JButton btnNewButton_3 = new JButton("Antrag bearbeiten");
-		btnNewButton_3.addActionListener(e -> {
-			panel_BPSFormularAbgabe.setVisible(true);
-			panel_2.setVisible(false);
-			try {
-				for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-
-					if (matrikelnum == Datenbank.getBPSlist().get(i).getId()
-							&& (Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")
-									|| Datenbank.getBPSlist().get(i).getStatus().equals(""))) {
-
-						txtUnternehmen.setText(Datenbank.getBPSlist().get(i).getUnternehmen());
-						txtFirmenanschrift.setText(Datenbank.getBPSlist().get(i).getFirmenanschrift());
-						txtFirmenbetreuerName.setText(Datenbank.getBPSlist().get(i).getFirmenbetreuerName());
-						txtAbteilung.setText(Datenbank.getBPSlist().get(i).getAbteilung());
-						txtTelefon.setText(Datenbank.getBPSlist().get(i).getTelefon());
-						txtMail.setText(Datenbank.getBPSlist().get(i).getMail());
-						Themenbereich.setText(Datenbank.getBPSlist().get(i).getThemenbereich());
-						txtBeschreibung.setText(Datenbank.getBPSlist().get(i).getKurzbeschreibung());
-
-					}
-
-				}
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-
-		JLabel lblNewLabel_7_2 = new JLabel("Firmenbetreuer");
-		lblNewLabel_7_2.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_2 = new GridBagConstraints();
-		gbc_lblNewLabel_7_2.gridwidth = 2;
-		gbc_lblNewLabel_7_2.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel_7_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_2.gridx = 1;
-		gbc_lblNewLabel_7_2.gridy = 8;
-		panel_2.add(lblNewLabel_7_2, gbc_lblNewLabel_7_2);
-
-		lblFirmenbetreuer = new JLabel("-");
-		lblFirmenbetreuer.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblFirmenbetreuer = new GridBagConstraints();
-		gbc_lblFirmenbetreuer.anchor = GridBagConstraints.WEST;
-		gbc_lblFirmenbetreuer.fill = GridBagConstraints.VERTICAL;
-		gbc_lblFirmenbetreuer.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFirmenbetreuer.gridx = 4;
-		gbc_lblFirmenbetreuer.gridy = 8;
-		panel_2.add(lblFirmenbetreuer, gbc_lblFirmenbetreuer);
-
-		JLabel lblNewLabel_7_4 = new JLabel("Abteilung");
-		lblNewLabel_7_4.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_4 = new GridBagConstraints();
-		gbc_lblNewLabel_7_4.gridwidth = 2;
-		gbc_lblNewLabel_7_4.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_7_4.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_7_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_4.gridx = 1;
-		gbc_lblNewLabel_7_4.gridy = 9;
-		panel_2.add(lblNewLabel_7_4, gbc_lblNewLabel_7_4);
-
-		lblAbteilung = new JLabel("-");
-		lblAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblAbteilung = new GridBagConstraints();
-		gbc_lblAbteilung.anchor = GridBagConstraints.WEST;
-		gbc_lblAbteilung.fill = GridBagConstraints.VERTICAL;
-		gbc_lblAbteilung.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAbteilung.gridx = 4;
-		gbc_lblAbteilung.gridy = 9;
-		panel_2.add(lblAbteilung, gbc_lblAbteilung);
-
-		JLabel lblNewLabel_7_5 = new JLabel("Telefon");
-		lblNewLabel_7_5.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_5 = new GridBagConstraints();
-		gbc_lblNewLabel_7_5.gridwidth = 2;
-		gbc_lblNewLabel_7_5.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_7_5.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_5.gridx = 1;
-		gbc_lblNewLabel_7_5.gridy = 10;
-		panel_2.add(lblNewLabel_7_5, gbc_lblNewLabel_7_5);
-
-		lblTelefon = new JLabel("-");
-		lblTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblTelefon = new GridBagConstraints();
-		gbc_lblTelefon.anchor = GridBagConstraints.WEST;
-		gbc_lblTelefon.fill = GridBagConstraints.VERTICAL;
-		gbc_lblTelefon.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTelefon.gridx = 4;
-		gbc_lblTelefon.gridy = 10;
-		panel_2.add(lblTelefon, gbc_lblTelefon);
-
-		JLabel lblNewLabel_7_6 = new JLabel("Email");
-		lblNewLabel_7_6.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_6 = new GridBagConstraints();
-		gbc_lblNewLabel_7_6.gridwidth = 2;
-		gbc_lblNewLabel_7_6.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_7_6.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_7_6.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_6.gridx = 1;
-		gbc_lblNewLabel_7_6.gridy = 11;
-		panel_2.add(lblNewLabel_7_6, gbc_lblNewLabel_7_6);
-
-		lblEmail = new JLabel("-");
-		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblEmail.fill = GridBagConstraints.VERTICAL;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 4;
-		gbc_lblEmail.gridy = 11;
-		panel_2.add(lblEmail, gbc_lblEmail);
-
-		JLabel lblNewLabel_7_7 = new JLabel("Zeitraum");
-		lblNewLabel_7_7.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_7 = new GridBagConstraints();
-		gbc_lblNewLabel_7_7.gridwidth = 2;
-		gbc_lblNewLabel_7_7.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_7_7.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_7_7.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_7.gridx = 1;
-		gbc_lblNewLabel_7_7.gridy = 13;
-		panel_2.add(lblNewLabel_7_7, gbc_lblNewLabel_7_7);
-
-		lblZeitraum = new JLabel("-");
-		lblZeitraum.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblZeitraum = new GridBagConstraints();
-		gbc_lblZeitraum.anchor = GridBagConstraints.WEST;
-		gbc_lblZeitraum.fill = GridBagConstraints.VERTICAL;
-		gbc_lblZeitraum.insets = new Insets(0, 0, 5, 5);
-		gbc_lblZeitraum.gridx = 4;
-		gbc_lblZeitraum.gridy = 13;
-		panel_2.add(lblZeitraum, gbc_lblZeitraum);
-
-		JLabel lblThemenbereich2 = new JLabel("Themenbereich");
-		lblThemenbereich2.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblThemenbereich2 = new GridBagConstraints();
-		gbc_lblThemenbereich2.gridwidth = 2;
-		gbc_lblThemenbereich2.fill = GridBagConstraints.BOTH;
-		gbc_lblThemenbereich2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblThemenbereich2.gridx = 1;
-		gbc_lblThemenbereich2.gridy = 14;
-		panel_2.add(lblThemenbereich2, gbc_lblThemenbereich2);
-
-		Themenbereich = new JLabel("-");
-		Themenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_Themenbereich = new GridBagConstraints();
-		gbc_Themenbereich.anchor = GridBagConstraints.NORTHWEST;
-		gbc_Themenbereich.insets = new Insets(0, 0, 5, 5);
-		gbc_Themenbereich.gridx = 4;
-		gbc_Themenbereich.gridy = 14;
-		panel_2.add(Themenbereich, gbc_Themenbereich);
-
-		JLabel lblNewLabel_7_9 = new JLabel("Kurzbeschreibung");
-		lblNewLabel_7_9.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblNewLabel_7_9 = new GridBagConstraints();
-		gbc_lblNewLabel_7_9.gridwidth = 2;
-		gbc_lblNewLabel_7_9.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel_7_9.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_7_9.gridx = 1;
-		gbc_lblNewLabel_7_9.gridy = 16;
-		panel_2.add(lblNewLabel_7_9, gbc_lblNewLabel_7_9);
-
-		lblKurzbeschreibung = new JLabel("-");
-		lblKurzbeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
-		GridBagConstraints gbc_lblKurzbeschreibung = new GridBagConstraints();
-		gbc_lblKurzbeschreibung.gridheight = 3;
-		gbc_lblKurzbeschreibung.anchor = GridBagConstraints.WEST;
-		gbc_lblKurzbeschreibung.fill = GridBagConstraints.VERTICAL;
-		gbc_lblKurzbeschreibung.insets = new Insets(0, 0, 5, 5);
-		gbc_lblKurzbeschreibung.gridx = 4;
-		gbc_lblKurzbeschreibung.gridy = 16;
-		panel_2.add(lblKurzbeschreibung, gbc_lblKurzbeschreibung);
-		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_3.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnNewButton_3.gridx = 1;
-		gbc_btnNewButton_3.gridy = 20;
-		panel_2.add(btnNewButton_3, gbc_btnNewButton_3);
-
-		JLabel lblNewLabel_3 = new JLabel("Anmeldung des BPS");
-		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 14));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3.setBounds(35, 0, 252, 32);
-		panel_BPSFormularAbgabe.add(lblNewLabel_3);
-
-		txtUnternehmen = new JTextField();
-		txtUnternehmen.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtUnternehmen.setText("");
-
-			}
-		});
-		txtUnternehmen.setForeground(Color.GRAY);
-		txtUnternehmen.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtUnternehmen.setText("Unternehmen");
-		txtUnternehmen.setColumns(10);
-		txtUnternehmen.setBounds(35, 40, 340, 22);
-		panel_BPSFormularAbgabe.add(txtUnternehmen);
-
-		JButton btnNewButton = new JButton("Antrag abgeben");
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				try {
-					String datum = null;
-
-					if (rdbtnZeitraum1.isSelected()) {
-						datum = rdbtnZeitraum1.getText();
-					}
-
-					if (rdbtnZeitraum2.isSelected()) {
-						datum = rdbtnZeitraum2.getText();
-					}
-
-					BPS bps = new BPS(matrikelnum, txtUnternehmen.getText(), txtFirmenanschrift.getText(),
-							txtFirmenbetreuerName.getText(), txtAbteilung.getText(), txtTelefon.getText(),
-							txtMail.getText(), datum, txtThemenbereich.getText(), txtBeschreibung.getText(),
-							"beantragt");
-
-					Datenbank.updateBPS(matrikelnum, bps);
-
-					JOptionPane.showMessageDialog(btnNewButton, "BPS - Antrag wurde an das PPA übermittelt ");
-					bpsVisible(matrikelnum);
-
-				} catch (Exception e1) {
-					new JOptionPane().showMessageDialog(null, "bereits abgegeben");
-				}
-
-			}
-		});
-		btnNewButton.setBounds(35, 447, 121, 23);
-		panel_BPSFormularAbgabe.add(btnNewButton);
-
-		txtBeschreibung = new JTextField();
-		txtBeschreibung.setHorizontalAlignment(SwingConstants.LEFT);
-		txtBeschreibung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtBeschreibung.setText("");
-			}
-		});
-		txtBeschreibung.setForeground(Color.GRAY);
-		txtBeschreibung.setText("Kurzbeschreibung der geplanten T\u00E4tigkeit");
-		txtBeschreibung.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtBeschreibung.setColumns(10);
-		txtBeschreibung.setBounds(35, 337, 340, 99);
-		panel_BPSFormularAbgabe.add(txtBeschreibung);
-
-		rdbtnZeitraum1 = new JRadioButton("01.03 - 31.08");
-		buttonGroup.add(rdbtnZeitraum1);
-		rdbtnZeitraum1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		rdbtnZeitraum1.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnZeitraum1.setBackground(Color.WHITE);
-		rdbtnZeitraum1.setBounds(149, 271, 109, 22);
-		panel_BPSFormularAbgabe.add(rdbtnZeitraum1);
-
-		rdbtnZeitraum2 = new JRadioButton("01.09 - 28.02");
-		buttonGroup.add(rdbtnZeitraum2);
-		rdbtnZeitraum2.setFont(new Font("Dialog", Font.PLAIN, 12));
-		rdbtnZeitraum2.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnZeitraum2.setBackground(Color.WHITE);
-		rdbtnZeitraum2.setBounds(266, 271, 109, 22);
-		panel_BPSFormularAbgabe.add(rdbtnZeitraum2);
-
-		JLabel lblNewLabel_2 = new JLabel("Zeitraum");
-		lblNewLabel_2.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lblNewLabel_2.setBounds(35, 271, 80, 22);
-		panel_BPSFormularAbgabe.add(lblNewLabel_2);
-
-		txtFirmenanschrift = new JTextField();
-		txtFirmenanschrift.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtFirmenanschrift.setText("");
-
-			}
-		});
-		txtFirmenanschrift.setText("Firmenanschrift");
-		txtFirmenanschrift.setForeground(Color.GRAY);
-		txtFirmenanschrift.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtFirmenanschrift.setColumns(10);
-		txtFirmenanschrift.setBounds(35, 73, 340, 22);
-		panel_BPSFormularAbgabe.add(txtFirmenanschrift);
-
-		txtAbteilung = new JTextField();
-		txtAbteilung.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtAbteilung.setText("");
-
-			}
-		});
-		txtAbteilung.setText("Abteilung");
-		txtAbteilung.setForeground(Color.GRAY);
-		txtAbteilung.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtAbteilung.setColumns(10);
-		txtAbteilung.setBounds(35, 172, 340, 22);
-		panel_BPSFormularAbgabe.add(txtAbteilung);
-
-		txtThemenbereich = new JTextField();
-		txtThemenbereich.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtThemenbereich.setText("");
-			}
-		});
-		txtThemenbereich.setText("Themenbereich");
-		txtThemenbereich.setForeground(Color.GRAY);
-		txtThemenbereich.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtThemenbereich.setColumns(10);
-		txtThemenbereich.setBounds(35, 304, 340, 22);
-		panel_BPSFormularAbgabe.add(txtThemenbereich);
-
-		txtTelefon = new JTextField();
-		txtTelefon.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtTelefon.setText("");
-			}
-		});
-		txtTelefon.setText("Telefon");
-		txtTelefon.setForeground(Color.GRAY);
-		txtTelefon.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtTelefon.setColumns(10);
-		txtTelefon.setBounds(35, 205, 340, 22);
-		panel_BPSFormularAbgabe.add(txtTelefon);
-
-		txtMail = new JTextField();
-		txtMail.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtMail.setText("");
-			}
-		});
-		txtMail.setText("Email");
-		txtMail.setForeground(Color.GRAY);
-		txtMail.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtMail.setColumns(10);
-		txtMail.setBounds(35, 238, 340, 22);
-		panel_BPSFormularAbgabe.add(txtMail);
-
-		txtFirmenbetreuerName = new JTextField();
-		txtFirmenbetreuerName.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtFirmenbetreuerName.setText("");
-			}
-		});
-		txtFirmenbetreuerName.setText("Name");
-		txtFirmenbetreuerName.setForeground(Color.GRAY);
-		txtFirmenbetreuerName.setFont(new Font("Dialog", Font.PLAIN, 12));
-		txtFirmenbetreuerName.setColumns(10);
-		txtFirmenbetreuerName.setBounds(35, 139, 340, 22);
-		panel_BPSFormularAbgabe.add(txtFirmenbetreuerName);
-
-		JLabel lblNewLabel_4 = new JLabel("Firmenbetreuer");
-		lblNewLabel_4.setFont(new Font("Dialog", Font.ITALIC, 12));
-		lblNewLabel_4.setBounds(35, 106, 99, 22);
-		panel_BPSFormularAbgabe.add(lblNewLabel_4);
-
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_1.setBounds(0, 0, 5, 5);
-		panel_BPSFormularAbgabe.add(tabbedPane_1);
-
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1, 1);
-		panel_BPSFormularAbgabe.add(layeredPane);
-
-		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane_3.setBounds(0, 0, 5, 5);
-		panel_BPSFormularAbgabe.add(tabbedPane_3);
-
-		JLayeredPane layeredPane_2 = new JLayeredPane();
-		layeredPane_2.setBounds(0, 0, 1, 1);
-		panel_BPSFormularAbgabe.add(layeredPane_2);
-
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
 		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
 		GridBagLayout gbl_panel_Praktikumsverwaltung = new GridBagLayout();
-		gbl_panel_Praktikumsverwaltung.columnWidths = new int[] { 468, 0 };
-		gbl_panel_Praktikumsverwaltung.rowHeights = new int[] { 32, 190, 0 };
-		gbl_panel_Praktikumsverwaltung.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gbl_panel_Praktikumsverwaltung.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_Praktikumsverwaltung.columnWidths = new int[] { 776, 0 };
+		gbl_panel_Praktikumsverwaltung.rowHeights = new int[] { 32, 86, 178, 309, 0 };
+		gbl_panel_Praktikumsverwaltung.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_Praktikumsverwaltung.rowWeights = new double[] { 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panel_Praktikumsverwaltung.setLayout(gbl_panel_Praktikumsverwaltung);
 
 		JLabel lblNewLabel_3_1 = new JLabel("Praktikumsverwaltung");
@@ -766,213 +222,237 @@ public class MenuStu extends JFrame {
 		gbc_lblNewLabel_3_1.gridx = 0;
 		gbc_lblNewLabel_3_1.gridy = 0;
 		panel_Praktikumsverwaltung.add(lblNewLabel_3_1, gbc_lblNewLabel_3_1);
+		
+				JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
+				panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
+				GridBagConstraints gbc_panel_Praktikumsverwaltungl_2 = new GridBagConstraints();
+				gbc_panel_Praktikumsverwaltungl_2.insets = new Insets(0, 0, 5, 0);
+				gbc_panel_Praktikumsverwaltungl_2.fill = GridBagConstraints.BOTH;
+				gbc_panel_Praktikumsverwaltungl_2.gridx = 0;
+				gbc_panel_Praktikumsverwaltungl_2.gridy = 2;
+				panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2, gbc_panel_Praktikumsverwaltungl_2);
+				GridBagLayout gbl_panel_Praktikumsverwaltungl_2 = new GridBagLayout();
+				gbl_panel_Praktikumsverwaltungl_2.columnWidths = new int[] { 209, 0, 135, 153, 170, 304, 0 };
+				gbl_panel_Praktikumsverwaltungl_2.rowHeights = new int[] { 0, 0, 0, 0 };
+				gbl_panel_Praktikumsverwaltungl_2.columnWeights = new double[] { 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
+				gbl_panel_Praktikumsverwaltungl_2.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				panel_Praktikumsverwaltungl_2.setLayout(gbl_panel_Praktikumsverwaltungl_2);
+																
+																JLabel lblAnmeldung = new JLabel("Auf R\u00FCckmeldung warten");
+																GridBagConstraints gbc_lblAnmeldung = new GridBagConstraints();
+																gbc_lblAnmeldung.insets = new Insets(0, 0, 5, 5);
+																gbc_lblAnmeldung.gridx = 0;
+																gbc_lblAnmeldung.gridy = 1;
+																panel_Praktikumsverwaltungl_2.add(lblAnmeldung, gbc_lblAnmeldung);
+																
+																JLabel betreuerName = new JLabel("Betreuer:");
+																GridBagConstraints gbc_betreuerName = new GridBagConstraints();
+																gbc_betreuerName.insets = new Insets(0, 0, 5, 5);
+																gbc_betreuerName.gridx = 1;
+																gbc_betreuerName.gridy = 1;
+																panel_Praktikumsverwaltungl_2.add(betreuerName, gbc_betreuerName);
+																JButton btnNewButton_2_2 = new JButton("Vertrag ansehen");
+																GridBagConstraints gbc_btnNewButton_2_2 = new GridBagConstraints();
+																gbc_btnNewButton_2_2.insets = new Insets(0, 0, 5, 5);
+																gbc_btnNewButton_2_2.anchor = GridBagConstraints.NORTH;
+																gbc_btnNewButton_2_2.fill = GridBagConstraints.HORIZONTAL;
+																gbc_btnNewButton_2_2.gridx = 2;
+																gbc_btnNewButton_2_2.gridy = 1;
+																panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2, gbc_btnNewButton_2_2);
+																
+																
+																
+																
+																
+																
+																
+																btnNewButton_2_2.addActionListener(e -> {
+																	try {
 
-		JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
-		panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
-		GridBagConstraints gbc_panel_Praktikumsverwaltungl_2 = new GridBagConstraints();
-		gbc_panel_Praktikumsverwaltungl_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_Praktikumsverwaltungl_2.gridx = 0;
-		gbc_panel_Praktikumsverwaltungl_2.gridy = 1;
-		panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2, gbc_panel_Praktikumsverwaltungl_2);
-		GridBagLayout gbl_panel_Praktikumsverwaltungl_2 = new GridBagLayout();
-		gbl_panel_Praktikumsverwaltungl_2.columnWidths = new int[] { 135, 43, 105, 105, 0 };
-		gbl_panel_Praktikumsverwaltungl_2.rowHeights = new int[] { 23, 32, 23, 23, 0 };
-		gbl_panel_Praktikumsverwaltungl_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel_Praktikumsverwaltungl_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_Praktikumsverwaltungl_2.setLayout(gbl_panel_Praktikumsverwaltungl_2);
+																		JFileChooser chooser = new JFileChooser();
+																		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+																			if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+																				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+																			else
+																				Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+																						"vertrag");
+																		}
 
-		JLabel lblNewLabel = new JLabel("T\u00E4tigkeitsnachweis");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
-		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		panel_Praktikumsverwaltungl_2.add(lblNewLabel, gbc_lblNewLabel);
+																	} catch (Exception e1) {
+																		e1.printStackTrace();
+																	}
+																});
+																		
+																				JButton btnNewButton_2 = new JButton("T\u00E4tigkeitsnachweis ansehen");
+																				GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+																				gbc_btnNewButton_2.anchor = GridBagConstraints.NORTH;
+																				gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
+																				gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+																				gbc_btnNewButton_2.gridx = 3;
+																				gbc_btnNewButton_2.gridy = 1;
+																				panel_Praktikumsverwaltungl_2.add(btnNewButton_2, gbc_btnNewButton_2);
+																				btnNewButton_2.addActionListener(e -> {
 
-		JButton btnNewButton_1 = new JButton("hochladen");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 0;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1, gbc_btnNewButton_1);
-		btnNewButton_1.addActionListener(e -> {
+																					try {
+																						JFileChooser chooser = new JFileChooser();
+																						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+																							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+																								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
+																							else
+																								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+																										"nachweis");
+																						}
+																					} catch (Exception e1) {
+																						e1.printStackTrace();
+																					}
+																				});
+																
+																		JButton btnNewButton_2_1 = new JButton("Bericht ansehen");
+																		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
+																		gbc_btnNewButton_2_1.anchor = GridBagConstraints.NORTH;
+																		gbc_btnNewButton_2_1.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 5);
+																		gbc_btnNewButton_2_1.gridx = 4;
+																		gbc_btnNewButton_2_1.gridy = 1;
+																		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
+																		btnNewButton_2_1.addActionListener(e -> {
+																			try {
 
-			try {
-				JFileChooser chooser = new JFileChooser();
-				chooser.addChoosableFileFilter(new PdfFilter());
-				int input = chooser.showOpenDialog(null);
-				if (input == JFileChooser.APPROVE_OPTION) {
-					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis", false);
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
+																				JFileChooser chooser = new JFileChooser();
+																				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+																					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+																						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+																					else
+																						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+																								"bericht");
+																				}
+																			} catch (Exception e1) {
+																				e1.printStackTrace();
+																			}
+																		});
+																
+																JLabel lblFeedback = new JLabel("Auf R\u00FCckmeldung warten");
+																GridBagConstraints gbc_lblFeedback = new GridBagConstraints();
+																gbc_lblFeedback.insets = new Insets(0, 0, 5, 0);
+																gbc_lblFeedback.gridx = 5;
+																gbc_lblFeedback.gridy = 1;
+																panel_Praktikumsverwaltungl_2.add(lblFeedback, gbc_lblFeedback);
+																
+																JButton btnBpsAnmeldungHochladen = new JButton("BPS Anmeldung Hochladen");
+																
+																GridBagConstraints gbc_btnBpsAnmeldungHochladen = new GridBagConstraints();
+																gbc_btnBpsAnmeldungHochladen.insets = new Insets(0, 0, 0, 5);
+																gbc_btnBpsAnmeldungHochladen.gridx = 0;
+																gbc_btnBpsAnmeldungHochladen.gridy = 2;
+																panel_Praktikumsverwaltungl_2.add(btnBpsAnmeldungHochladen, gbc_btnBpsAnmeldungHochladen);
+																
+																JLabel lblBetreuerName = new JLabel("keine Zuteilung");
+																GridBagConstraints gbc_lblBetreuerName = new GridBagConstraints();
+																gbc_lblBetreuerName.insets = new Insets(0, 0, 0, 5);
+																gbc_lblBetreuerName.gridx = 1;
+																gbc_lblBetreuerName.gridy = 2;
+																panel_Praktikumsverwaltungl_2.add(lblBetreuerName, gbc_lblBetreuerName);
+																JButton btnNewButton_1_2 = new JButton("Vertrag hochladen");
+																GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
+																gbc_btnNewButton_1_2.anchor = GridBagConstraints.NORTH;
+																gbc_btnNewButton_1_2.fill = GridBagConstraints.HORIZONTAL;
+																gbc_btnNewButton_1_2.insets = new Insets(0, 0, 0, 5);
+																gbc_btnNewButton_1_2.gridx = 2;
+																gbc_btnNewButton_1_2.gridy = 2;
+																panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2, gbc_btnNewButton_1_2);
+																btnNewButton_1_2.addActionListener(e -> {
+																	try {
+																		JFileChooser chooser = new JFileChooser();
+																		chooser.addChoosableFileFilter(new PdfFilter());
+																		int input = chooser.showOpenDialog(null);
+																		if (input == JFileChooser.APPROVE_OPTION) {
+																			File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+																			Datenbank.upload(inFileNachweis, matrikelnum, "vertrag", false);
+																		}
+																	} catch (Exception e1) {
+																		e1.printStackTrace();
+																	}
+																});
+																
+																		JButton btnNewButton_1 = new JButton("T\u00E4tigkeitsnachweis hochladen");
+																		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+																		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
+																		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+																		gbc_btnNewButton_1.gridx = 3;
+																		gbc_btnNewButton_1.gridy = 2;
+																		panel_Praktikumsverwaltungl_2.add(btnNewButton_1, gbc_btnNewButton_1);
+																		btnNewButton_1.addActionListener(e -> {
 
-		JButton btnNewButton_2 = new JButton("\u00F6ffnen");
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_2.gridx = 3;
-		gbc_btnNewButton_2.gridy = 0;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2, gbc_btnNewButton_2);
-		btnNewButton_2.addActionListener(e -> {
+																			try {
+																				JFileChooser chooser = new JFileChooser();
+																				chooser.addChoosableFileFilter(new PdfFilter());
+																				int input = chooser.showOpenDialog(null);
+																				if (input == JFileChooser.APPROVE_OPTION) {
+																					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+																					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis", false);
+																				}
+																			} catch (Exception e1) {
+																				e1.printStackTrace();
+																			}
+																		});
+																
+																		JButton btnNewButton_1_1 = new JButton("Bericht hochladen");
+																		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
+																		gbc_btnNewButton_1_1.anchor = GridBagConstraints.NORTH;
+																		gbc_btnNewButton_1_1.fill = GridBagConstraints.HORIZONTAL;
+																		gbc_btnNewButton_1_1.insets = new Insets(0, 0, 0, 5);
+																		gbc_btnNewButton_1_1.gridx = 4;
+																		gbc_btnNewButton_1_1.gridy = 2;
+																		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1, gbc_btnNewButton_1_1);
+																		btnNewButton_1_1.addActionListener(e -> {
 
-			try {
-				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
-					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-								"nachweis");
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-		JLabel lblBericht = new JLabel("Bericht");
-		lblBericht.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblBericht = new GridBagConstraints();
-		gbc_lblBericht.anchor = GridBagConstraints.NORTH;
-		gbc_lblBericht.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblBericht.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBericht.gridx = 0;
-		gbc_lblBericht.gridy = 2;
-		panel_Praktikumsverwaltungl_2.add(lblBericht, gbc_lblBericht);
+																			try {
+																				JFileChooser chooser = new JFileChooser();
+																				chooser.addChoosableFileFilter(new PdfFilter());
+																				int input = chooser.showOpenDialog(null);
+																				if (input == JFileChooser.APPROVE_OPTION) {
+																					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+																					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
+																				}
 
-		JButton btnNewButton_1_1 = new JButton("hochladen");
-		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
-		gbc_btnNewButton_1_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1_1.gridx = 2;
-		gbc_btnNewButton_1_1.gridy = 2;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1, gbc_btnNewButton_1_1);
-		btnNewButton_1_1.addActionListener(e -> {
-
-			try {
-				JFileChooser chooser = new JFileChooser();
-				chooser.addChoosableFileFilter(new PdfFilter());
-				int input = chooser.showOpenDialog(null);
-				if (input == JFileChooser.APPROVE_OPTION) {
-					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
-				}
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-
-		JButton btnNewButton_2_1 = new JButton("\u00F6ffnen");
-		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
-		gbc_btnNewButton_2_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_2_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_2_1.gridx = 3;
-		gbc_btnNewButton_2_1.gridy = 2;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
-		btnNewButton_2_1.addActionListener(e -> {
-			try {
-
-				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
-					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-								"bericht");
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-
-		JLabel lblBpsvertrag = new JLabel("BPS-Vertrag");
-		lblBpsvertrag.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblBpsvertrag = new GridBagConstraints();
-		gbc_lblBpsvertrag.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblBpsvertrag.insets = new Insets(0, 0, 0, 5);
-		gbc_lblBpsvertrag.gridx = 0;
-		gbc_lblBpsvertrag.gridy = 3;
-		panel_Praktikumsverwaltungl_2.add(lblBpsvertrag, gbc_lblBpsvertrag);
-		JButton btnNewButton_1_2 = new JButton("hochladen");
-		GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
-		gbc_btnNewButton_1_2.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1_2.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_1_2.gridx = 2;
-		gbc_btnNewButton_1_2.gridy = 3;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2, gbc_btnNewButton_1_2);
-		btnNewButton_1_2.addActionListener(e -> {
-			try {
-				JFileChooser chooser = new JFileChooser();
-				chooser.addChoosableFileFilter(new PdfFilter());
-				int input = chooser.showOpenDialog(null);
-				if (input == JFileChooser.APPROVE_OPTION) {
-					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-					Datenbank.upload(inFileNachweis, matrikelnum, "vertrag", false);
-				}
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-		JButton btnNewButton_2_2 = new JButton("\u00F6ffnen");
-		GridBagConstraints gbc_btnNewButton_2_2 = new GridBagConstraints();
-		gbc_btnNewButton_2_2.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_2_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_2_2.gridx = 3;
-		gbc_btnNewButton_2_2.gridy = 3;
-		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_2, gbc_btnNewButton_2_2);
-		btnNewButton_2_2.addActionListener(e -> {
-			try {
-
-				JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
-					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-								"vertrag");
-				}
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		});
-		JPanel panel_Dokumente = new JPanel();
-		panel_Dokumente.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Dokumente, null);
-		GridBagLayout gbl_panel_Dokumente = new GridBagLayout();
-		gbl_panel_Dokumente.columnWidths = new int[] { 1097, 0 };
-		gbl_panel_Dokumente.rowHeights = new int[] { 42, 0, 0 };
-		gbl_panel_Dokumente.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gbl_panel_Dokumente.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		panel_Dokumente.setLayout(gbl_panel_Dokumente);
-
-		JLabel lblNewLabel_3_1_1 = new JLabel("R\u00FCckmeldungen Bericht");
-		lblNewLabel_3_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_1.setFont(new Font("Arial", Font.BOLD, 12));
-		GridBagConstraints gbc_lblNewLabel_3_1_1 = new GridBagConstraints();
-		gbc_lblNewLabel_3_1_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_3_1_1.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel_3_1_1.gridx = 0;
-		gbc_lblNewLabel_3_1_1.gridy = 0;
-		panel_Dokumente.add(lblNewLabel_3_1_1, gbc_lblNewLabel_3_1_1);
-
-		JList list = new JList();
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 0;
-		gbc_list.gridy = 1;
-		panel_Dokumente.add(list, gbc_list);
+																			} catch (Exception e1) {
+																				e1.printStackTrace();
+																			}
+																		});
+																
+																JButton btnNewButton_4 = new JButton("Feedback ansehen");
+																GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
+																gbc_btnNewButton_4.fill = GridBagConstraints.HORIZONTAL;
+																gbc_btnNewButton_4.gridx = 5;
+																gbc_btnNewButton_4.gridy = 2;
+																panel_Praktikumsverwaltungl_2.add(btnNewButton_4, gbc_btnNewButton_4);
+																
+																btnNewButton_4.addActionListener(e->{
+																	
+																			try {
+																				JFileChooser chooser = new JFileChooser();
+																				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+																					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+																						Datenbank.getFeedback(matrikelnum, chooser.getSelectedFile().getAbsolutePath());
+																					else
+																				Datenbank.getFeedback( matrikelnum, chooser.getSelectedFile().getAbsolutePath().concat(".pdf"));
+																				}
+																			} 
+																			catch (Exception e1) {
+																				
+																				e1.printStackTrace();
+																			}
+																	
+																});
+		
+		JProgressBar progressBar = new JProgressBar();
+		GridBagConstraints gbc_progressBar = new GridBagConstraints();
+		gbc_progressBar.anchor = GridBagConstraints.NORTH;
+		gbc_progressBar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_progressBar.gridx = 0;
+		gbc_progressBar.gridy = 3;
+		panel_Praktikumsverwaltung.add(progressBar, gbc_progressBar);
 
 		JPanel panel_Profil = new JPanel();
 		panel_Profil.setLayout(null);
@@ -1113,10 +593,68 @@ public class MenuStu extends JFrame {
 		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
 		panel_Profil.add(lblNewLabel_3_1_2);
-
-		bpsVisible(matrikelnum);
+		btnBpsAnmeldungHochladen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new BPSAbgabe(matrikelnum).setVisible(true);
+					update(matrikelnum, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}
+																					}
+		});
+		update(matrikelnum, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
 	}
-	public void refreshList() {
+	
+	
+	public void update(int matnum, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
+		btnNewButton_2_2.setVisible(false);
+		btnNewButton_2_1.setVisible(false);
+		btnNewButton_2.setVisible(false);
+		lblAnmeldung.setVisible(false);
+		lblFeedback.setVisible(false);
+		btnNewButton_4.setVisible(false);
+		if(Datenbank.getBPS(matnum)!=null) {
+			lblAnmeldung.setVisible(true);
+			if(!Datenbank.getBPS(matnum).getStatus().equals("beantragt")) {
+				lblAnmeldung.setText("Angenommen");
+				lblAnmeldung.setVisible(true);
+				progressBar.setValue(10);
+				if(Datenbank.getBetreuer(matnum)!=null) {
+					lblBetreuerName.setText(Datenbank.getBetreuer(matnum));
+					progressBar.setValue(20);
+					Studierende  student= (Studierende) Datenbank.getUser(matnum);
+					if(student.getVertrag()!=null) {
+						progressBar.setValue(30);
+						btnNewButton_2_2.setVisible(true);
+						if(student.getNachweis()!=null) {
+							progressBar.setValue(30);
+							btnNewButton_2.setVisible(true);
+							if(Datenbank.checkBesuchBericht(matnum)&&student.getBericht()==null) {
+								btnNewButton_2_1.setVisible(true);
+								lblFeedback.setText("Bericht wird geprüft");
+								btnNewButton_2_1.setVisible(true);
+								lblFeedback.setVisible(true);
+							}
+							else if(student.getBericht()!=null) {
+								lblFeedback.setText("Bericht wurde akzeptiert");
+								lblFeedback.setVisible(true);
+								btnNewButton_2_1.setVisible(true);
+								progressBar.setValue(100);
+							}
+							else if(student.getBericht()==null&&Datenbank.checkFeedback(matnum))
+							lblFeedback.setText("Bericht muss überarbeitet werden");
+							lblFeedback.setVisible(true);
+							btnNewButton_2_1.setVisible(true);
+							btnNewButton_4.setVisible(true);
+						}
+					}
+				}
+				
+			}
+		}
+		
 		
 	}
 }

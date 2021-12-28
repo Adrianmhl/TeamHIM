@@ -3,6 +3,7 @@ package Datenbank;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.spec.KeySpec;
 import java.sql.Blob;
@@ -358,6 +359,8 @@ public class Datenbank {
 	}
 	
 	 public static ArrayList<Bewerbung> getApplicationList(int id) throws Exception {
+		 if (con == null)
+				startConnection();
 		 ArrayList<Bewerbung> bewerbungList = new ArrayList<>();
 		 PreparedStatement stmnt = con.prepareStatement("SELECT * FROM db3.bewerbungen WHERE bps=?");
 		 stmnt.setInt(1, id);
@@ -396,6 +399,8 @@ public class Datenbank {
 	 }
 	 
 	 public static void zuteilung(int matnum, int betnum) throws Exception{
+		 if (con == null)
+				startConnection();
 		 PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.betreuerstudent (`betnum`,`matnum`) VALUES (?,?)");
 		 PreparedStatement stmnt2 = con.prepareStatement("DELETE FROM db3.bewerbungen WHERE bps=?");
 		 stmnt2.setInt(1, matnum);
@@ -407,11 +412,40 @@ public class Datenbank {
 		 stmnt2.executeUpdate();
 	 }
 	 
-	 public static void besuchsBerichtUpload(int matnum, String input) throws SQLException {
+	 public static String getBetreuer(int matnum) {
+		 try {
+		 PreparedStatement stmnt1 = con.prepareStatement("Select `betnum` From betreuerstudent WHERE matnum = ?");
+		 
+			stmnt1.setInt(1, matnum);
+		
+		 ResultSet rs1=stmnt1.executeQuery();
+		 Integer betnum=null;
+		 if(rs1!=null) {
+			 while(rs1.next()) {
+				betnum=rs1.getInt("betnum");
+				
+			 }
+			 return getUser(betnum).getUserName();
+		 }
+		 else return null;
+		 } 
+		 catch (Exception e) {
+				
+			return null;
+		 }
+		
+	 }
+	 
+	 public static void besuchsBerichtUpload(int matnum, String input) throws Exception {
+		 if (con == null)
+				startConnection();
 		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `bericht` = ? WHERE matnum=?");
 		 stmnt.setString(1, input);
 	 }
-	 public static void acceptBericht(int matnum) throws SQLException {
+	 
+	 public static void acceptBericht(int matnum) throws Exception {
+		 if (con == null)
+				startConnection();
 		 PreparedStatement stmnt1 = con.prepareStatement("Select `praktikumsbericht` From betreuerstudent WHERE matnum = ?");
 		 stmnt1.setInt(1, matnum);
 		 ResultSet rs1=stmnt1.executeQuery();
@@ -423,6 +457,42 @@ public class Datenbank {
 		 stmnt2.setBlob(1, bericht);
 		 stmnt2.setInt(2, matnum);
 		 stmnt2.executeUpdate();
+		
+	 }
+	 public static void sendFeedback(int matnum, File inFile) throws Exception {
+		 if (con == null)
+				startConnection();
+		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `feedback` = ? WHERE matnum=?");
+			InputStream inputStream = new FileInputStream(inFile);
+			stmnt.setBlob(1, inputStream);
+			stmnt.setInt(2, matnum);
+			stmnt.executeUpdate();
+			inputStream.close();
+	 }
+	 public static void getFeedback(int matnum, String path) throws Exception {
+		 if (con == null)
+				startConnection();
+		 FileOutputStream output = new FileOutputStream(path);
+			PreparedStatement stmnt;
+			stmnt = con.prepareStatement("Select `feedback` From betreuerstudent WHERE matnum = ?");
+			stmnt.setInt(1, matnum);
+			ResultSet rs = stmnt.executeQuery();
+			while (rs.next()) {
+				output.write(rs.getBlob("feedback").getBytes(1, (int) rs.getBlob("feedback").length()));
+				
+			}
+			output.close();
+	 }
+	 public static boolean checkFeedback(int matnum) throws Exception {
+		 if (con == null)
+				startConnection();
+			PreparedStatement stmnt = con.prepareStatement("Select `feedback` From betreuerstudent WHERE matnum = ?");
+			stmnt.setInt(1, matnum);
+			ResultSet rs= stmnt.executeQuery();
+			while (rs.next()) {
+				if(rs.getBlob("feedback")!=null) return true;
+			}
+			return false;
 		
 	 }
 	public static void startConnection() throws Exception {

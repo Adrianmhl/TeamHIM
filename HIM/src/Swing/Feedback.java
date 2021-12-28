@@ -38,7 +38,7 @@ public class Feedback extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Feedback dialog = new Feedback(1);
+			Feedback dialog = new Feedback(909090);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -110,7 +110,13 @@ public class Feedback extends JDialog {
 					int input = chooser.showOpenDialog(null);
 					if (input == JFileChooser.APPROVE_OPTION) {
 						File feedback = new File(chooser.getSelectedFile().getAbsolutePath());
-						dispose();
+						try {
+							Datenbank.sendFeedback(matnum, feedback);
+							dispose();
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Die Datei konnte nicht hochgeladen werden");
+							e1.printStackTrace();
+						}	
 					}
 					else JOptionPane.showMessageDialog(null, "Bitte laden sie die von ihnen mit Feedback versehene PDF Datei hoch!");
 				});

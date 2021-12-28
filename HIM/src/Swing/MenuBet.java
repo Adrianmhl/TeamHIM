@@ -147,20 +147,7 @@ public class MenuBet extends JFrame {
 										gbc_tab2_2.gridx = 0;
 										gbc_tab2_2.gridy = 2;
 										panel_1.add(tab2_2, gbc_tab2_2);
-										
-												JLabel lblNewLabel_1_2 = new JLabel("Besuchsbericht");
-												lblNewLabel_1_2.setForeground(Color.WHITE);
-												lblNewLabel_1_2.setBounds(0, 0, 116, 18);
-												lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-												lblNewLabel_1_2.addMouseListener(new MouseAdapter() {
-													@Override
-													public void mouseClicked(MouseEvent e) {
-														tabbedPane.setSelectedIndex(1);
-													}
-												});
 												tab2_2.setLayout(null);
-												lblNewLabel_1_2.setFont(new Font("Arial", Font.BOLD, 11));
-												tab2_2.add(lblNewLabel_1_2);
 						
 								JPanel tab2_2_1 = new JPanel();
 								tab2_2_1.setBackground(Color.decode("#CD201F"));
@@ -354,6 +341,14 @@ public class MenuBet extends JFrame {
 																			gbl_panel5.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 																			gbl_panel5.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 																			panel5.setLayout(gbl_panel5);
+	      
+	      JLabel lblNewLabel = new JLabel("Meine Studenten");
+	      GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+	      gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+	      gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+	      gbc_lblNewLabel.gridx = 0;
+	      gbc_lblNewLabel.gridy = 0;
+	      panel5.add(lblNewLabel, gbc_lblNewLabel);
 	      
 	    
 	      scrollPane2 = new JScrollPane();
