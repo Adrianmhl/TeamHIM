@@ -38,9 +38,9 @@ import java.awt.Component;
 public class MenuPPA extends JFrame {
 
 	private JPanel contentPane;
-	private JTabbedPane tabbedPane;
+	
 	private JTable table;
-	private JTable table_1;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -71,7 +71,7 @@ public class MenuPPA extends JFrame {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		
 		setTitle("HIM - HFT Intern Manager");
-		//setResizable(false);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
@@ -156,7 +156,6 @@ public class MenuPPA extends JFrame {
 																	log = new Login();
 																	log.setVisible(true);
 																} catch (Exception e1) {
-																	// TODO Auto-generated catch block
 																	e1.printStackTrace();
 																}
 
@@ -219,6 +218,11 @@ public class MenuPPA extends JFrame {
 																		popup= new ApplicationChooser((int) table.getValueAt(row, 0));
 																		popup.setVisible(true);
 																		
+																	}
+																	else if(table.getValueAt(row, 2).equals("Abgeschlossen")){
+																		CheckFiles popup;
+																		popup= new CheckFiles((int) table.getValueAt(row, 0));
+																		popup.setVisible(true);
 																	}
 																} catch (Exception e1) {
 																	e1.printStackTrace();
@@ -315,7 +319,7 @@ public class MenuPPA extends JFrame {
 														table.getColumnModel().getColumn(1).setPreferredWidth(105);
 														table.getColumnModel().getColumn(2).setPreferredWidth(105);
 		
-		///hier
+		
 
 		JLabel lblNewLabel_3_1_2 = new JLabel("Praktikumsverwaltung");
 		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
@@ -323,32 +327,7 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
 	}
 
-	/*
-	 * 
-	 */
-
-	public void showBPSinJTable() throws Exception{
-
-		
-		Datenbank.getBPSlist();
-		DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-		Object[] rowData = new Object[3];
-
-		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-
-			rowData[0] = Datenbank.getBPSlist().get(i).getId();
-			rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-			rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
-			model.addRow(rowData);
-		}
-	}
-
-	/**
-	 * aktualisiert jtable / bps - tabelle
-	 * 
-	 * @author isedo
-	 */
+	
 
 	public void refreshBPSinJTable(JCheckBox best_offen, JCheckBox zut_offen, JCheckBox dok_pr) throws Exception{
 		

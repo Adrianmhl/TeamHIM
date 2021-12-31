@@ -205,6 +205,8 @@ public class MenuBet extends JFrame {
 										
 												JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 												GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
+												gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
+												gbc_lblNewLabel_1_2_2.fill = GridBagConstraints.HORIZONTAL;
 												gbc_lblNewLabel_1_2_2.gridx = 0;
 												gbc_lblNewLabel_1_2_2.gridy = 6;
 												panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
@@ -234,6 +236,7 @@ public class MenuBet extends JFrame {
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 1;
 		gbc_tabbedPane.gridy = 0;
+		
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 		
 				panel_3 = new JPanel();
@@ -296,21 +299,7 @@ public class MenuBet extends JFrame {
 						gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 						panel.setLayout(gbl_panel);
 						
-						JButton btnNewButton_1 = new JButton("Aktualisieren");
-						GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-						gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
-						gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-						gbc_btnNewButton_1.gridx = 0;
-						gbc_btnNewButton_1.gridy = 0;
-						panel.add(btnNewButton_1, gbc_btnNewButton_1);
-						btnNewButton_1.addActionListener(e->{
-							try {
-								refreshBPSinJTable();
-							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						});
+						
 						
 						JButton btnNewButton = new JButton("Bewerben");
 						GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -323,12 +312,12 @@ public class MenuBet extends JFrame {
 								if(table.getSelectedRowCount()>0)
 									try {
 										Datenbank.studBetreuerMatch((int) table.getValueAt(table.getSelectedRow(), 0), id);
-										JOptionPane.showConfirmDialog(null, "beworben");
+										JOptionPane.showMessageDialog(null, "beworben");
 									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
 								else
-								System.out.println("Bitte eine Zeile auswählen!");
+									JOptionPane.showMessageDialog(null,"Bitte eine Zeile auswählen!");
 							}
 						});
 																			
@@ -387,21 +376,7 @@ public class MenuBet extends JFrame {
 	      panel_5.setLayout(gbl_panel_5);
 	      
 	    
-	      JButton btnNewButton_3 = new JButton("Aktualisieren");
-	      GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-	      gbc_btnNewButton_3.fill = GridBagConstraints.HORIZONTAL;
-	      gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
-	      gbc_btnNewButton_3.gridx = 0;
-	      gbc_btnNewButton_3.gridy = 0;
-	      panel_5.add(btnNewButton_3, gbc_btnNewButton_3);
-	      btnNewButton_3.addActionListener(e->{
-	    	  try {
-				refreshStudentList(id);
-			} catch (Exception e1) {
-				
-				e1.printStackTrace();
-			}
-	      });
+	      
 	      
 	      JButton btnNewButton_4 = new JButton("Besuchsbericht Abgeben");
 	      GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
@@ -477,31 +452,56 @@ public class MenuBet extends JFrame {
 				e1.printStackTrace();
 			}
 	      });
+	      btnNewButton_4.setVisible(false);
+		  btnNewButton_5.setVisible(false);
+		  btnNewButton_2.setVisible(false);
 	      panel_5.add(btnNewButton_2, gbc_btnNewButton_2);
-	      
+	      studentTable.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+				  	try {
+				  		btnNewButton_2.setVisible(false);
+						if(!Datenbank.checkBesuchBericht((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0)))
+							btnNewButton_4.setVisible(true);
+						
+						else
+							btnNewButton_4.setVisible(false);
+						
+						if(Datenbank.checkBericht((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0))) {
+							btnNewButton_5.setVisible(true);
+							if(!Datenbank.checkFeedback((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0))) 
+								btnNewButton_2.setVisible(true);
+							else
+								btnNewButton_2.setVisible(false);
+						}
+						else 
+							btnNewButton_5.setVisible(false);
+					
+						
+							
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				  }
+				});
+	      tabbedPane.addChangeListener(e->{
+				try {
+					if(tabbedPane.getSelectedIndex()==0) {
+						refreshBPSinJTable();
+					}
+					else {
+						refreshStudentList(id);
+					} 
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			});
+	      refreshBPSinJTable();
+			refreshStudentList(id);
 		
 	}
 
-	public class MyRenderer implements TableCellRenderer {
-	   
-	      
-		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			JButton button = new JButton("Bewerben");
-			button.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-				System.out.println(button.getAlignmentX());
-
-				
-				}
-			});  
-			return button;
-		}
-
-	}
+	
 	
 	public void refreshBPSinJTable() throws Exception{
 

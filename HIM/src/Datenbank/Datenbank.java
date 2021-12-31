@@ -143,33 +143,29 @@ public class Datenbank {
 		return studList;
 	}
 
-	public static void updateBPS(int matrikelnum, BPS bps) throws Exception {
+	public static void createBPS(int matnum, BPS bps) throws Exception {
 
 		if (con == null)
 			startConnection();
-		PreparedStatement stmt = null;
-		if(!getBPS(matrikelnum).getStatus().equals("beantragt")&&!(getBPS(matrikelnum).getStatus().length()<2)) {
-			throw new Exception();
-		}
 		
-		stmt = con.prepareStatement(
-				"UPDATE `db3`.`bpsantrag` SET `unternehmen` = ?, `firmenanschrift` = ?, `firmenbetreuerName` = ?, "
-						+ "`abteilung` = ?, `telefon` = ?, `mail` = ?, `zeitraum` = ?, `themenbereich` = ?, "
-						+ "`kurzbeschreibung` = ?, `datumantrag` = ?, `status` = ? WHERE (`id` = " + matrikelnum + ")");
+		
+		
+		PreparedStatement stmnt = con.prepareStatement(
+				"Insert INTO `db3`.`bpsantrag` VALUES(?,?,?,?,?,?,?,?,?,?,?,?) ");
+		stmnt.setInt(1, bps.getId());
+		stmnt.setString(2, bps.getUnternehmen());
+		stmnt.setString(3, bps.getFirmenanschrift());
+		stmnt.setString(4, bps.getFirmenbetreuerName());
+		stmnt.setString(5, bps.getAbteilung());
+		stmnt.setString(6, bps.getTelefon());
+		stmnt.setString(7, bps.getMail());
+		stmnt.setString(8, bps.getZeitraum());
+		stmnt.setString(9, bps.getThemenbereich());
+		stmnt.setString(10, bps.getKurzbeschreibung());
+		stmnt.setString(11, bps.getDatumantrag());
+		stmnt.setString(12, bps.getStatus());
 
-		stmt.setString(1, bps.getUnternehmen());
-		stmt.setString(2, bps.getFirmenanschrift());
-		stmt.setString(3, bps.getFirmenbetreuerName());
-		stmt.setString(4, bps.getAbteilung());
-		stmt.setString(5, bps.getTelefon());
-		stmt.setString(6, bps.getMail());
-		stmt.setString(7, bps.getZeitraum());
-		stmt.setString(8, bps.getThemenbereich());
-		stmt.setString(9, bps.getKurzbeschreibung());
-		stmt.setString(10, bps.getDatumantrag());
-		stmt.setString(11, bps.getStatus());
-
-		stmt.executeUpdate();
+		stmnt.executeUpdate();
 
 	}
 
@@ -193,18 +189,7 @@ public class Datenbank {
 		return null;
 	}
 
-	public static void createBPS(int matrikelnum) throws Exception {
-
-		if (con == null)
-			startConnection();
-		PreparedStatement stmt = null;
-
-		stmt = con.prepareStatement("INSERT INTO `db3`.`bpsantrag` (`id`, `status`) VALUES (?,?);");
-		stmt.setInt(1, matrikelnum);
-		stmt.setString(2, "");
-		stmt.executeUpdate();
-
-	}
+	
 
 	/**
 	 * Stellt neuen User im Datenbank her
@@ -286,6 +271,7 @@ public class Datenbank {
 		inputStream.close();
 		
 	}
+	
 	public static boolean checkBesuchBericht(int matnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -294,6 +280,17 @@ public class Datenbank {
 		ResultSet rs= stmnt.executeQuery();
 		while (rs.next()) {
 			if(rs.getBlob("bericht")!=null) return true;
+		}
+		return false;
+	}
+	public static boolean checkBericht(int matnum) throws Exception {
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("Select `praktikumsbericht` From betreuerstudent WHERE matnum = ?");
+		stmnt.setInt(1, matnum);
+		ResultSet rs= stmnt.executeQuery();
+		while (rs.next()) {
+			if(rs.getBlob("praktikumsbericht")!=null) return true;
 		}
 		return false;
 	}
@@ -311,6 +308,14 @@ public class Datenbank {
 			ResultSet rs = stmnt.executeQuery();
 			while (rs.next()) {
 				output.write(rs.getBlob("praktikumsbericht").getBytes(1, (int) rs.getBlob("praktikumsbericht").length()));
+			}
+		}
+		else if (column.equals("besuchsbericht")) {
+			stmnt = con.prepareStatement("Select `bericht` From betreuerstudent WHERE matnum = ?");
+			stmnt.setInt(1, matnum);
+			ResultSet rs = stmnt.executeQuery();
+			while (rs.next()) {
+				output.write(rs.getBlob("bericht").getBytes(1, (int) rs.getBlob("bericht").length()));
 			}
 		}
 		else {
@@ -412,7 +417,9 @@ public class Datenbank {
 		 stmnt2.executeUpdate();
 	 }
 	 
-	 public static String getBetreuer(int matnum) {
+	 public static String getBetreuer(int matnum) throws Exception {
+		 if(con==null)
+			 startConnection();
 		 try {
 		 PreparedStatement stmnt1 = con.prepareStatement("Select `betnum` From betreuerstudent WHERE matnum = ?");
 		 
@@ -436,12 +443,7 @@ public class Datenbank {
 		
 	 }
 	 
-	 public static void besuchsBerichtUpload(int matnum, String input) throws Exception {
-		 if (con == null)
-				startConnection();
-		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `bericht` = ? WHERE matnum=?");
-		 stmnt.setString(1, input);
-	 }
+	
 	 
 	 public static void acceptBericht(int matnum) throws Exception {
 		 if (con == null)
@@ -462,12 +464,18 @@ public class Datenbank {
 	 public static void sendFeedback(int matnum, File inFile) throws Exception {
 		 if (con == null)
 				startConnection();
+		
 		 PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuerstudent SET `feedback` = ? WHERE matnum=?");
-			InputStream inputStream = new FileInputStream(inFile);
+		 InputStream inputStream = null;
+		 if(inFile!=null)	
+			inputStream = new FileInputStream(inFile);
+			
 			stmnt.setBlob(1, inputStream);
 			stmnt.setInt(2, matnum);
 			stmnt.executeUpdate();
-			inputStream.close();
+			if(inputStream!=null)
+				inputStream.close();
+		
 	 }
 	 public static void getFeedback(int matnum, String path) throws Exception {
 		 if (con == null)

@@ -118,7 +118,6 @@ public class ApplicationChooser extends JDialog {
 		
 		for (int i = 0; i < Datenbank.getApplicationList(id).size(); i++) {
 
-			//rowData[0] = Datenbank.getApplicationList().get(i).getId();
 			rowData[0] = Datenbank.getApplicationList(id).get(i).getProf();
 			
 			rowData[1] = Datenbank.getApplicationList(id).get(i).getCount();

@@ -71,7 +71,7 @@ public class StudentPopup extends JDialog {
 						new JOptionPane().showMessageDialog(null, "Bestätigt");
 						dispose();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 				});

@@ -10,9 +10,18 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
+import Datenbank.Datenbank;
+import Objekte.PdfFilter;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -26,7 +35,7 @@ public class CheckFiles extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			CheckFiles dialog = new CheckFiles();
+			CheckFiles dialog = new CheckFiles(333);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -36,9 +45,11 @@ public class CheckFiles extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws Exception 
 	 */
-	public CheckFiles() {
-		setBounds(100, 100, 450, 300);
+	public CheckFiles(int matnum) throws Exception {
+		UIManager.setLookAndFeel(new FlatLightLaf());
+		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -127,51 +138,100 @@ public class CheckFiles extends JDialog {
 				gbc_lblBesuchsbericht.gridy = 2;
 				panel_Praktikumsverwaltung.add(lblBesuchsbericht, gbc_lblBesuchsbericht);
 		
-				JButton btnNewButton = new JButton("\u00D6ffnen");
-				btnNewButton.setFont(new Font("Arial", Font.BOLD, 11));
-				btnNewButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
+				JButton nachweis = new JButton("\u00D6ffnen");
+				nachweis.setFont(new Font("Arial", Font.BOLD, 11));
+				nachweis.addActionListener(e->{
+					try {
+
+						JFileChooser chooser = new JFileChooser();
+						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "nachweis");
+							else
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
+										"nachweis");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 				});
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-				gbc_btnNewButton.gridx = 0;
-				gbc_btnNewButton.gridy = 3;
-				panel_Praktikumsverwaltung.add(btnNewButton, gbc_btnNewButton);
+				GridBagConstraints gbc_nachweis = new GridBagConstraints();
+				gbc_nachweis.fill = GridBagConstraints.VERTICAL;
+				gbc_nachweis.insets = new Insets(0, 0, 0, 5);
+				gbc_nachweis.gridx = 0;
+				gbc_nachweis.gridy = 3;
+				panel_Praktikumsverwaltung.add(nachweis, gbc_nachweis);
 		
-				JButton btnNewButton_1 = new JButton("\u00D6ffnen");
-				btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 11));
-				GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-				gbc_btnNewButton_1.fill = GridBagConstraints.VERTICAL;
-				gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-				gbc_btnNewButton_1.gridx = 1;
-				gbc_btnNewButton_1.gridy = 3;
-				panel_Praktikumsverwaltung.add(btnNewButton_1, gbc_btnNewButton_1);
-		
-				JButton btnNewButton_1_1_1 = new JButton("\u00D6ffnen");
-				btnNewButton_1_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-				btnNewButton_1_1_1.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
+				JButton bericht = new JButton("\u00D6ffnen");
+				bericht.setFont(new Font("Arial", Font.BOLD, 11));
+				GridBagConstraints gbc_bericht = new GridBagConstraints();
+				gbc_bericht.fill = GridBagConstraints.VERTICAL;
+				gbc_bericht.insets = new Insets(0, 0, 0, 5);
+				gbc_bericht.gridx = 1;
+				gbc_bericht.gridy = 3;
+				panel_Praktikumsverwaltung.add(bericht, gbc_bericht);
+				bericht.addActionListener(e->{
+					try {
+
+						JFileChooser chooser = new JFileChooser();
+						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "bericht");
+							else
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
+										"bericht");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 				});
-				
-						JButton btnNewButton_1_1 = new JButton("\u00D6ffnen");
-						btnNewButton_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-						GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
-						gbc_btnNewButton_1_1.fill = GridBagConstraints.VERTICAL;
-						gbc_btnNewButton_1_1.insets = new Insets(0, 0, 0, 5);
-						gbc_btnNewButton_1_1.gridx = 2;
-						gbc_btnNewButton_1_1.gridy = 3;
-						panel_Praktikumsverwaltung.add(btnNewButton_1_1, gbc_btnNewButton_1_1);
+				JButton besuchsBericht = new JButton("\u00D6ffnen");
+				besuchsBericht.setFont(new Font("Arial", Font.BOLD, 11));
+				besuchsBericht.addActionListener(e->{
+					try {
+
+						JFileChooser chooser = new JFileChooser();
+						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "besuchsbericht");
+							else
+								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
+										"besuchsbericht");
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					
+					}
+				});	
+						JButton vertrag = new JButton("\u00D6ffnen");
+						vertrag.setFont(new Font("Arial", Font.BOLD, 11));
+						GridBagConstraints gbc_vertrag = new GridBagConstraints();
+						gbc_vertrag.fill = GridBagConstraints.VERTICAL;
+						gbc_vertrag.insets = new Insets(0, 0, 0, 5);
+						gbc_vertrag.gridx = 2;
+						gbc_vertrag.gridy = 3;
+						panel_Praktikumsverwaltung.add(vertrag, gbc_vertrag);
+					vertrag.addActionListener(e->{
+						try {
+
+							JFileChooser chooser = new JFileChooser();
+							if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+								if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+									Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "vertrag");
+								else
+									Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
+											"vertrag");
+							}
+						} catch (Exception e1) {
+							e1.printStackTrace();
 						
-				GridBagConstraints gbc_btnNewButton_1_1_1 = new GridBagConstraints();
-				gbc_btnNewButton_1_1_1.fill = GridBagConstraints.VERTICAL;
-				gbc_btnNewButton_1_1_1.gridx = 3;
-				gbc_btnNewButton_1_1_1.gridy = 3;
-				panel_Praktikumsverwaltung.add(btnNewButton_1_1_1, gbc_btnNewButton_1_1_1);
+						}
+					});	
+				GridBagConstraints gbc_besuchsBericht = new GridBagConstraints();
+				gbc_besuchsBericht.fill = GridBagConstraints.VERTICAL;
+				gbc_besuchsBericht.gridx = 3;
+				gbc_besuchsBericht.gridy = 3;
+				panel_Praktikumsverwaltung.add(besuchsBericht, gbc_besuchsBericht);
 				contentPanel.add(panel_Praktikumsverwaltung);
 		{
 			JPanel buttonPane = new JPanel();

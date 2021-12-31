@@ -193,7 +193,7 @@ public class Registrierung extends JFrame {
 					/***
 					 * @author isedo
 					 */
-					Datenbank.createBPS(Integer.parseInt(txtMatrnr.getText()));
+					
 
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");
 				} else if (betreuerBtn.isSelected()) { //&&txtMatrnr.getText().length()==5

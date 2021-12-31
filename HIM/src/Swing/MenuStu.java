@@ -55,7 +55,7 @@ public class MenuStu extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MenuStu frame = new MenuStu(444);
+					MenuStu frame = new MenuStu(333);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -96,104 +96,79 @@ public class MenuStu extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.decode("#CD201F"));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 0;
 		contentPane.add(panel_1, gbc_panel_1);
-		panel_1.setLayout(null);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{126, 0};
+		gbl_panel_1.rowHeights = new int[]{87, 225, 23, 278, 23, 23, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+				
+						JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
+						GridBagConstraints gbc_lblNewLabel_1_2_1 = new GridBagConstraints();
+						gbc_lblNewLabel_1_2_1.anchor = GridBagConstraints.WEST;
+						gbc_lblNewLabel_1_2_1.fill = GridBagConstraints.VERTICAL;
+						gbc_lblNewLabel_1_2_1.insets = new Insets(0, 0, 5, 0);
+						gbc_lblNewLabel_1_2_1.gridx = 0;
+						gbc_lblNewLabel_1_2_1.gridy = 2;
+						panel_1.add(lblNewLabel_1_2_1, gbc_lblNewLabel_1_2_1);
+						lblNewLabel_1_2_1.setForeground(Color.WHITE);
+						lblNewLabel_1_2_1.setBackground(Color.decode("#CD201F"));
+						lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+						lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								tabbedPane.setSelectedIndex(3);
 
-		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon(MenuStu.class.getResource("/res/ProjLogo2.png")));
-		lblNewLabel_5.setBounds(14, 11, 112, 87);
-		panel_1.add(lblNewLabel_5);
+								// update Für Profil!!!
 
-		JLabel lblMatrikelnummerLeiste = new JLabel(Integer.toString(matrikelnum));
-		lblMatrikelnummerLeiste.setBounds(10, 488, 116, 23);
-		panel_1.add(lblMatrikelnummerLeiste);
-		lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMatrikelnummerLeiste.setForeground(Color.WHITE);
-		lblMatrikelnummerLeiste.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblMatrikelnummerLeiste.setBackground(Color.decode("#CD201F"));
+							}
+						});
+						lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+				
+						JLabel lblMatrikelnummerLeiste = new JLabel(Integer.toString(matrikelnum));
+						GridBagConstraints gbc_lblMatrikelnummerLeiste = new GridBagConstraints();
+						gbc_lblMatrikelnummerLeiste.anchor = GridBagConstraints.WEST;
+						gbc_lblMatrikelnummerLeiste.fill = GridBagConstraints.VERTICAL;
+						gbc_lblMatrikelnummerLeiste.insets = new Insets(0, 0, 5, 0);
+						gbc_lblMatrikelnummerLeiste.gridx = 0;
+						gbc_lblMatrikelnummerLeiste.gridy = 4;
+						panel_1.add(lblMatrikelnummerLeiste, gbc_lblMatrikelnummerLeiste);
+						lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
+						lblMatrikelnummerLeiste.setForeground(Color.WHITE);
+						lblMatrikelnummerLeiste.setFont(new Font("Dialog", Font.PLAIN, 12));
+						lblMatrikelnummerLeiste.setBackground(Color.decode("#CD201F"));
+		
+				JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
+				GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
+				gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.WEST;
+				gbc_lblNewLabel_1_2_2.gridx = 0;
+				gbc_lblNewLabel_1_2_2.gridy = 5;
+				panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
+				lblNewLabel_1_2_2.setForeground(Color.WHITE);
+				lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
 
-		JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
-		lblNewLabel_1_2_2.setBounds(10, 522, 116, 23);
-		panel_1.add(lblNewLabel_1_2_2);
-		lblNewLabel_1_2_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+						Login log;
+						try {
+							log = new Login();
+							log.setVisible(true);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 
-				Login log;
-				try {
-					log = new Login();
-					log.setVisible(true);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+						dispose();
 
-				dispose();
-
-			}
-		});
-		lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
-
-		JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
-		lblNewLabel_1_2_1.setBounds(10, 213, 126, 23);
-		panel_1.add(lblNewLabel_1_2_1);
-		lblNewLabel_1_2_1.setForeground(Color.WHITE);
-		lblNewLabel_1_2_1.setBackground(Color.decode("#CD201F"));
-		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPane.setSelectedIndex(3);
-
-				// update Für Profil!!!
-
-			}
-		});
-		lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-
-		JLabel lblNewLabel_1_2 = new JLabel("Dokumente");
-		lblNewLabel_1_2.setBounds(10, 177, 126, 23);
-		panel_1.add(lblNewLabel_1_2);
-		lblNewLabel_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPane.setSelectedIndex(2);
-			}
-		});
-		lblNewLabel_1_2.setFont(new Font("Dialog", Font.PLAIN, 12));
-
-		JLabel lblNewLabel_1_1 = new JLabel("Praktikumsverwaltung");
-		lblNewLabel_1_1.setBounds(10, 143, 126, 23);
-		panel_1.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPane.setSelectedIndex(1);
-			}
-		});
-		lblNewLabel_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-
-		JLabel lblNewLabel_1 = new JLabel("Anmeldung BPS");
-		lblNewLabel_1.setBounds(10, 109, 126, 23);
-		panel_1.add(lblNewLabel_1);
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				tabbedPane.setSelectedIndex(0);
-			}
-		});
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+					}
+				});
+				lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
+				lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
@@ -414,6 +389,7 @@ public class MenuStu extends JFrame {
 																				if (input == JFileChooser.APPROVE_OPTION) {
 																					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
 																					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
+																					Datenbank.sendFeedback(matrikelnum, null);
 																				}
 
 																			} catch (Exception e1) {
@@ -597,45 +573,56 @@ public class MenuStu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					new BPSAbgabe(matrikelnum).setVisible(true);
-					update(matrikelnum, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+					update(matrikelnum,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2,lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
 				} catch (Exception e1) {
 					
 					e1.printStackTrace();
 				}
 																					}
 		});
-		update(matrikelnum, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+		update(matrikelnum,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
 	}
 	
 	
-	public void update(int matnum, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
+	public void update(int matnum,JLabel betreuerName, JButton btnNewButton_1_1, JButton btnNewButton_1, JButton btnNewButton_1_2, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
 		btnNewButton_2_2.setVisible(false);
 		btnNewButton_2_1.setVisible(false);
 		btnNewButton_2.setVisible(false);
 		lblAnmeldung.setVisible(false);
 		lblFeedback.setVisible(false);
 		btnNewButton_4.setVisible(false);
+		btnNewButton_1_2.setVisible(false);
+		btnNewButton_1.setVisible(false);
+		btnNewButton_1_1.setVisible(false);
+		lblBetreuerName.setVisible(false);
+		betreuerName.setVisible(false);
 		if(Datenbank.getBPS(matnum)!=null) {
 			lblAnmeldung.setVisible(true);
-			if(!Datenbank.getBPS(matnum).getStatus().equals("beantragt")) {
+			if(!Datenbank.getBPS(matnum).getStatus().equals("beantragt")&&!Datenbank.getBPS(matnum).getStatus().equals("")) {
 				lblAnmeldung.setText("Angenommen");
 				lblAnmeldung.setVisible(true);
 				progressBar.setValue(10);
+				lblBetreuerName.setVisible(true);
+				betreuerName.setVisible(true);
 				if(Datenbank.getBetreuer(matnum)!=null) {
 					lblBetreuerName.setText(Datenbank.getBetreuer(matnum));
 					progressBar.setValue(20);
 					Studierende  student= (Studierende) Datenbank.getUser(matnum);
+					btnNewButton_1_2.setVisible(true);
 					if(student.getVertrag()!=null) {
 						progressBar.setValue(30);
 						btnNewButton_2_2.setVisible(true);
+						btnNewButton_1.setVisible(true);
 						if(student.getNachweis()!=null) {
 							progressBar.setValue(30);
 							btnNewButton_2.setVisible(true);
-							if(Datenbank.checkBesuchBericht(matnum)&&student.getBericht()==null) {
-								btnNewButton_2_1.setVisible(true);
+							btnNewButton_1_1.setVisible(true);
+							System.out.println(Datenbank.checkBericht(matnum));
+							if(Datenbank.checkBericht(matnum)&&student.getBericht()==null&&!Datenbank.checkFeedback(matnum)) {
+								lblFeedback.setVisible(true);
 								lblFeedback.setText("Bericht wird geprüft");
 								btnNewButton_2_1.setVisible(true);
-								lblFeedback.setVisible(true);
+								
 							}
 							else if(student.getBericht()!=null) {
 								lblFeedback.setText("Bericht wurde akzeptiert");
@@ -643,11 +630,13 @@ public class MenuStu extends JFrame {
 								btnNewButton_2_1.setVisible(true);
 								progressBar.setValue(100);
 							}
-							else if(student.getBericht()==null&&Datenbank.checkFeedback(matnum))
+							else if(student.getBericht()==null&&Datenbank.checkFeedback(matnum)) {
+							
 							lblFeedback.setText("Bericht muss überarbeitet werden");
 							lblFeedback.setVisible(true);
 							btnNewButton_2_1.setVisible(true);
 							btnNewButton_4.setVisible(true);
+							}
 						}
 					}
 				}

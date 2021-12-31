@@ -291,7 +291,8 @@ public class BPSAbgabe extends JDialog {
 							name.getText(), abteilung.getText(), telefon.getText(),
 							email.getText(), datum, themenbereich.getText(), kurzBeschreibung.getText(),
 							"beantragt");
-						Datenbank.updateBPS(matnum, bps);
+						Datenbank.createBPS(matnum, bps);
+						dispose();
 					}
 					else JOptionPane.showMessageDialog(null, "Bitte alle Felder ausfüllen");
 						
