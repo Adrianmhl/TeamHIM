@@ -61,7 +61,7 @@ public class ApplicationChooser extends JDialog {
 				table = new JTable();
 				table.setToolTipText("");
 				table.setModel(
-						new DefaultTableModel(new Object[][] {}, new String[] { "Betreuer", "Rang" }) {
+						new DefaultTableModel(new Object[][] {}, new String[] {"Rang", "ID","Name"  }) {
 
 							@Override
 							public boolean isCellEditable(int row, int column) {
@@ -85,7 +85,7 @@ public class ApplicationChooser extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(table.getSelectedRowCount()>0)
 							try {
-								Datenbank.zuteilung(id, (int) table.getValueAt(table.getSelectedRow(), 0));
+								Datenbank.zuteilung(id, (int) table.getValueAt(table.getSelectedRow(), 1));
 								new JOptionPane().showMessageDialog(null, "Zugeteilt");
 								dispose();
 							} catch (Exception e1) {
@@ -117,10 +117,10 @@ public class ApplicationChooser extends JDialog {
 		Object[] rowData = new Object[3];
 		
 		for (int i = 0; i < Datenbank.getApplicationList(id).size(); i++) {
-
-			rowData[0] = Datenbank.getApplicationList(id).get(i).getProf();
+			rowData[0] = Datenbank.getApplicationList(id).get(i).getCount();
+			rowData[1] =Datenbank.getApplicationList(id).get(i).getProf();
+			rowData[2] = Datenbank.getUser(Datenbank.getApplicationList(id).get(i).getProf()).getUserName();
 			
-			rowData[1] = Datenbank.getApplicationList(id).get(i).getCount();
 			model.addRow(rowData);
 		}
 

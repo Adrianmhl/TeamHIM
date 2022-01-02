@@ -115,7 +115,7 @@ public class Login extends JFrame {
 						dispose();
 						break;
 					case 1:
-						MenuPPA mp = new MenuPPA();
+						MenuPPA mp = new MenuPPA(Integer.parseInt(textFieldBenutzer.getText()));
 						mp.setVisible(true);
 						dispose();
 					}

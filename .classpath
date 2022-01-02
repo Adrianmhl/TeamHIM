@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="HIM/src/res/mysql-connector-java-8.0.19.jar"/>
 	<classpathentry kind="lib" path="HIM/src/res/flatlaf-1.6.4.jar"/>
 	<classpathentry kind="lib" path="HIM/src/res/flatlaf-intellij-themes-1.6.4.jar"/>
+	<classpathentry kind="lib" path="HIM/src/res/poi-3.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

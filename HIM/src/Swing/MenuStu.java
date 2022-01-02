@@ -124,7 +124,7 @@ public class MenuStu extends JFrame {
 							public void mouseClicked(MouseEvent e) {
 								tabbedPane.setSelectedIndex(3);
 
-								// update Für Profil!!!
+								
 
 							}
 						});

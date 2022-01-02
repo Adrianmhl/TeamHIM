@@ -10,29 +10,46 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightContrastIJTheme;
 
 import Datenbank.Datenbank;
+import Objekte.BPS;
+import Objekte.PdfFilter;
 import Objekte.Studierende;
 
 import java.awt.ScrollPane;
 import java.awt.Dimension;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+
 import java.awt.Component;
 
 public class MenuPPA extends JFrame {
@@ -50,7 +67,7 @@ public class MenuPPA extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MenuPPA frame = new MenuPPA();
+					MenuPPA frame = new MenuPPA(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +80,7 @@ public class MenuPPA extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("serial")
-	public MenuPPA() throws Exception{
+	public MenuPPA(int ppaNum) throws Exception{
 		setMinimumSize(new Dimension(640, 480));
 		setLocationByPlatform(true);
 		setSize(new Dimension(640, 480));
@@ -307,7 +324,22 @@ public class MenuPPA extends JFrame {
 																e1.printStackTrace();
 															}
 														});
-														JButton btnNewButton_2 = new JButton("Aktualisieren");
+														
+														JButton anzeigeButton = new JButton("Liste anzeigen");
+														anzeigeButton.addActionListener(e->{
+															try {
+																createExcel(ppaNum);
+															} catch (Exception e1) {
+																// TODO Auto-generated catch block
+																e1.printStackTrace();
+															}
+														});
+														GridBagConstraints gbc_anzeigeButton = new GridBagConstraints();
+														gbc_anzeigeButton.insets = new Insets(0, 0, 0, 5);
+														gbc_anzeigeButton.gridx = 4;
+														gbc_anzeigeButton.gridy = 0;
+														panel.add(anzeigeButton, gbc_anzeigeButton);
+														JButton btnNewButton_2 = new JButton("Absolventenliste");
 														btnNewButton_2.setActionCommand("Aktualisieren");
 														btnNewButton_2.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 														GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
@@ -315,6 +347,22 @@ public class MenuPPA extends JFrame {
 														gbc_btnNewButton_2.gridx = 5;
 														gbc_btnNewButton_2.gridy = 0;
 														panel.add(btnNewButton_2, gbc_btnNewButton_2);
+														JTextField pathField=new JTextField();
+														
+														btnNewButton_2.addActionListener(e->{
+															try {
+																JFileChooser chooser = new JFileChooser();
+																chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+																int input = chooser.showOpenDialog(null);
+																if (input == JFileChooser.APPROVE_OPTION) {
+																	Datenbank.setPpaPath(ppaNum,chooser.getSelectedFile().getCanonicalPath());
+																}		
+															} catch (Exception e1) {
+									
+																e1.printStackTrace();
+															}
+															
+														});
 														table.getColumnModel().getColumn(0).setPreferredWidth(105);
 														table.getColumnModel().getColumn(1).setPreferredWidth(105);
 														table.getColumnModel().getColumn(2).setPreferredWidth(105);
@@ -331,32 +379,39 @@ public class MenuPPA extends JFrame {
 
 	public void refreshBPSinJTable(JCheckBox best_offen, JCheckBox zut_offen, JCheckBox dok_pr) throws Exception{
 		
-		Datenbank.getBPSlist();
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 		Object[] rowData = new Object[3];
 		
-		for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
-			if(best_offen.isSelected())
-				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("beantragt")) {
-					rowData[0] = Datenbank.getBPSlist().get(i).getId();
-					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+		ArrayList <BPS> bpsList=new ArrayList <BPS>();
+		bpsList=Datenbank.getBPSlist();
+		if(best_offen.isSelected()) {
+			for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
+				if(bpsList.get(i).getStatus().length()>1&&bpsList.get(i).getStatus().equals("beantragt")) {
+					rowData[0] = bpsList.get(i).getId();
+					rowData[1] = bpsList.get(i).getUnternehmen();
+					rowData[2] = bpsList.get(i).getStatus();
 					model.addRow(rowData);
 				}
-			if(zut_offen.isSelected())
-				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("Bewerber")) {
-					rowData[0] = Datenbank.getBPSlist().get(i).getId();
-					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+			}
+		}
+		if(zut_offen.isSelected()) {
+			for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
+				if(bpsList.get(i).getStatus().length()>1&&bpsList.get(i).getStatus().equals("Bewerber")) {
+					rowData[0] = bpsList.get(i).getId();
+					rowData[1] = bpsList.get(i).getUnternehmen();
+					rowData[2] = bpsList.get(i).getStatus();
 					model.addRow(rowData);
 				}
-			if(dok_pr.isSelected()) {
-				checkStudentDocuments();
-				if(Datenbank.getBPSlist().get(i).getStatus().length()>1&&Datenbank.getBPSlist().get(i).getStatus().equals("Abgeschlossen")) {
-					rowData[0] = Datenbank.getBPSlist().get(i).getId();
-					rowData[1] = Datenbank.getBPSlist().get(i).getUnternehmen();
-					rowData[2] = Datenbank.getBPSlist().get(i).getStatus();
+			}
+		}
+		if(dok_pr.isSelected()) {
+			checkStudentDocuments();
+			for (int i = 0; i < Datenbank.getBPSlist().size(); i++) {
+				if(bpsList.get(i).getStatus().length()>1&&bpsList.get(i).getStatus().equals("Abgeschlossen")) {
+					rowData[0] = bpsList.get(i).getId();
+					rowData[1] = bpsList.get(i).getUnternehmen();
+					rowData[2] = bpsList.get(i).getStatus();
 					model.addRow(rowData);
 				}
 			}
@@ -365,16 +420,50 @@ public class MenuPPA extends JFrame {
 	}
 	public void checkStudentDocuments() throws Exception {
 		
-		Datenbank.getStudentlist();
-		ArrayList <Studierende>studentList=new ArrayList();
+		ArrayList <Studierende>studentList=new ArrayList <Studierende>();
 		studentList=Datenbank.getStudentlist();
 		
 		for(int i=0;i<studentList.size();i++) {
-			if(studentList.get(i).getBericht()!=null&&studentList.get(i).getNachweis()!=null&&studentList.get(i).getVertrag()!=null&&Datenbank.checkBesuchBericht(studentList.get(i).getUserId())) {
-				Datenbank.updateBPSStatus("Abgeschlossen", studentList.get(i).getUserId());
-				
+			if(studentList.get(i).getBericht()!=null) {
+					if(studentList.get(i).getNachweis()!=null&&studentList.get(i).getVertrag()!=null&&Datenbank.checkBesuchBericht(studentList.get(i).getUserId())&&!Datenbank.getBPS(studentList.get(i).getUserId()).getStatus().equals("Beendet")) {
+						Datenbank.updateBPSStatus("Abgeschlossen", studentList.get(i).getUserId());
+				}
 			}
 		}
 	}
+	private void createExcel(int ppaNum) throws Exception { 
+	
+		 
+		System.out.println(Datenbank.getPpaPath(ppaNum));
+		String filename = ""+Datenbank.getPpaPath(ppaNum)+"\\Absolventen.xlsx";  
+		
+		HSSFWorkbook workbook = new HSSFWorkbook(); 
+        
+    
+        HSSFSheet sheet = workbook.createSheet("Absolventen");
+        Map<String, Object[]> data = Datenbank.getAbsolventen();
+        Set<String> keyset = data.keySet();
+        int rownum = 0;
+        for (String key : keyset)
+        {
+            Row row = sheet.createRow(rownum++);
+            Object [] rowData = data.get(key);
+            int cellnum = 0;
+            for (Object cellData : rowData)
+            {
+            	Cell cell = row.createCell(cellnum++);
+            	if(cellData instanceof String)
+            		cell.setCellValue((String)cellData);
+            	else if(cellData instanceof Integer)
+            		cell.setCellValue((Integer)cellData);
+            }
+        }
+        
+            
+            FileOutputStream outputStream = new FileOutputStream(new File(filename));
+            workbook.write(outputStream);
+            outputStream.close();
+	} 
+ 
 	
 }

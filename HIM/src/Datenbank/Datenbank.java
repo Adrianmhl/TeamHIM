@@ -13,7 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TreeMap;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -244,11 +248,16 @@ public class Datenbank {
 			startConnection();
 		if(! isForBetreuer) {
 			PreparedStatement stmnt = con.prepareStatement("UPDATE student SET " + column + " = ? WHERE id = ?");
-			InputStream inputStream = new FileInputStream(infile);
+			InputStream inputStream;
+			if(infile==null)
+				inputStream=null;
+			else
+				inputStream = new FileInputStream(infile);
 			stmnt.setBlob(1, inputStream);
 			stmnt.setInt(2, matnum);
 			stmnt.executeUpdate();
-			inputStream.close();
+			if(inputStream!=null)
+				inputStream.close();
 		}
 		else
 		{
@@ -334,7 +343,7 @@ public class Datenbank {
 
 	}
 
-
+	
 
 	public static void studBetreuerMatch(int bpsId, int professor)	throws Exception {
 		if (con == null)
@@ -517,7 +526,57 @@ public class Datenbank {
 
 		System.out.println("Connected to the database");
 	}
-
+	public static void addAbsolvent(int matnum) throws Exception {
+		if (con == null)
+			startConnection();
+		PreparedStatement stmnt = con.prepareStatement("Insert INTO db3.absolventen (`id`,`datum`,`betreuer`) VALUES (?,?,?)");
+		Date today = new Date();
+	    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+	    String date = format.format(today);
+		stmnt.setInt(1, matnum);
+		stmnt.setString(2,date);
+		stmnt.setString(3, getBetreuer(matnum));
+		stmnt.executeUpdate();
+		updateBPSStatus("Beendet", matnum);
+	}
+	
+	public static void setPpaPath(int ppaNum, String path) throws Exception {
+		if (con == null)
+			startConnection();
+		
+		PreparedStatement stmnt = con.prepareStatement("UPDATE db3.ppa SET `pfad` = ? WHERE id=?");
+		 stmnt.setString(1, path);
+		 stmnt.setInt(2, ppaNum);
+		 stmnt.executeUpdate();
+	}
+	
+	public static String getPpaPath(int ppaNum) throws Exception {
+		if (con == null)
+			startConnection();
+		
+		PreparedStatement stmnt = con.prepareStatement("Select `pfad` From db3.ppa WHERE id = ?");
+		stmnt.setInt(1, ppaNum);
+		ResultSet rs= stmnt.executeQuery();
+		while (rs.next()) {
+			if(rs.getString("pfad")!=null) return rs.getString("pfad");
+		}
+		return null;
+	}
+	
+	public static TreeMap<String, Object[]> getAbsolventen() throws SQLException{
+		PreparedStatement stmnt=con.prepareStatement("Select * From db3.absolventen");
+		ResultSet rs= stmnt.executeQuery();
+		TreeMap<String, Object[]> data= new TreeMap <String, Object[]> ();
+		int i=1;
+		data.put("1", new Object[] {"Matrikelnummer", "Abschlussdatum", "Betreuer"});
+		while(rs.next()) {
+			i++;
+			data.put(""+i,new Object[] {rs.getInt("id"), rs.getString("datum"), rs.getString("betreuer")});
+		}
+		return data;
+		
+	}
+	
 	public void closeConnection() {
 
 	}

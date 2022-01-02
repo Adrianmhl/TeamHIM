@@ -94,6 +94,8 @@ public class Feedback extends JDialog {
 				okButton.addActionListener(e->{
 					try {
 						Datenbank.acceptBericht(matnum);
+						dispose();
+						JOptionPane.showConfirmDialog(null, "Akzeptiert");
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
