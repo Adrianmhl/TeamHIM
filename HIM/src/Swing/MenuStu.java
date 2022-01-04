@@ -39,6 +39,7 @@ import Objekte.Studierende;
 import javax.swing.JList;
 import javax.swing.JProgressBar;
 import javax.swing.JCheckBox;
+import javax.swing.JSeparator;
 
 public class MenuStu extends JFrame {
 
@@ -55,7 +56,7 @@ public class MenuStu extends JFrame {
 			@Override
 			public void run() {
 				try {
-					MenuStu frame = new MenuStu(333);
+					MenuStu frame = new MenuStu(999);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,6 +73,7 @@ public class MenuStu extends JFrame {
 	 * @throws Exception
 	 */
 	public MenuStu(int matrikelnum) throws Exception {
+		setResizable(false);
 
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setTitle("HIM - HFT Intern Manager");
@@ -103,32 +105,10 @@ public class MenuStu extends JFrame {
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{126, 0};
-		gbl_panel_1.rowHeights = new int[]{87, 225, 23, 278, 23, 23, 0};
+		gbl_panel_1.rowHeights = new int[]{87, 492, 23, 23, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
-				
-						JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
-						GridBagConstraints gbc_lblNewLabel_1_2_1 = new GridBagConstraints();
-						gbc_lblNewLabel_1_2_1.anchor = GridBagConstraints.WEST;
-						gbc_lblNewLabel_1_2_1.fill = GridBagConstraints.VERTICAL;
-						gbc_lblNewLabel_1_2_1.insets = new Insets(0, 0, 5, 0);
-						gbc_lblNewLabel_1_2_1.gridx = 0;
-						gbc_lblNewLabel_1_2_1.gridy = 2;
-						panel_1.add(lblNewLabel_1_2_1, gbc_lblNewLabel_1_2_1);
-						lblNewLabel_1_2_1.setForeground(Color.WHITE);
-						lblNewLabel_1_2_1.setBackground(Color.decode("#CD201F"));
-						lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-						lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								tabbedPane.setSelectedIndex(3);
-
-								
-
-							}
-						});
-						lblNewLabel_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 				
 						JLabel lblMatrikelnummerLeiste = new JLabel(Integer.toString(matrikelnum));
 						GridBagConstraints gbc_lblMatrikelnummerLeiste = new GridBagConstraints();
@@ -136,7 +116,7 @@ public class MenuStu extends JFrame {
 						gbc_lblMatrikelnummerLeiste.fill = GridBagConstraints.VERTICAL;
 						gbc_lblMatrikelnummerLeiste.insets = new Insets(0, 0, 5, 0);
 						gbc_lblMatrikelnummerLeiste.gridx = 0;
-						gbc_lblMatrikelnummerLeiste.gridy = 4;
+						gbc_lblMatrikelnummerLeiste.gridy = 2;
 						panel_1.add(lblMatrikelnummerLeiste, gbc_lblMatrikelnummerLeiste);
 						lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
 						lblMatrikelnummerLeiste.setForeground(Color.WHITE);
@@ -147,7 +127,7 @@ public class MenuStu extends JFrame {
 				GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
 				gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_1_2_2.gridx = 0;
-				gbc_lblNewLabel_1_2_2.gridy = 5;
+				gbc_lblNewLabel_1_2_2.gridy = 3;
 				panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
 				lblNewLabel_1_2_2.setForeground(Color.WHITE);
 				lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
@@ -170,33 +150,27 @@ public class MenuStu extends JFrame {
 				lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
 				lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
-		gbc_tabbedPane.gridx = 1;
-		gbc_tabbedPane.gridy = 0;
-		contentPane.add(tabbedPane, gbc_tabbedPane);
+		
+	
 
 		JPanel panel_Praktikumsverwaltung = new JPanel();
 		panel_Praktikumsverwaltung.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Praktikumsverwaltung, null);
+		
+		contentPane.add(panel_Praktikumsverwaltung);
 		GridBagLayout gbl_panel_Praktikumsverwaltung = new GridBagLayout();
 		gbl_panel_Praktikumsverwaltung.columnWidths = new int[] { 776, 0 };
-		gbl_panel_Praktikumsverwaltung.rowHeights = new int[] { 32, 86, 178, 309, 0 };
+		gbl_panel_Praktikumsverwaltung.rowHeights = new int[] { 291, 73, 196, 0 };
 		gbl_panel_Praktikumsverwaltung.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gbl_panel_Praktikumsverwaltung.rowWeights = new double[] { 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel_Praktikumsverwaltung.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panel_Praktikumsverwaltung.setLayout(gbl_panel_Praktikumsverwaltung);
-
-		JLabel lblNewLabel_3_1 = new JLabel("Praktikumsverwaltung");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1.setFont(new Font("Arial", Font.BOLD, 12));
-		GridBagConstraints gbc_lblNewLabel_3_1 = new GridBagConstraints();
-		gbc_lblNewLabel_3_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_3_1.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_3_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_3_1.gridx = 0;
-		gbc_lblNewLabel_3_1.gridy = 0;
-		panel_Praktikumsverwaltung.add(lblNewLabel_3_1, gbc_lblNewLabel_3_1);
+				
+				JLabel lblStatus = new JLabel("Gl\u00FCckwunsch, sie haben das BPS erfolgreich abgeschlossen!");
+				lblStatus.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+				GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+				gbc_lblStatus.insets = new Insets(0, 0, 5, 0);
+				gbc_lblStatus.gridx = 0;
+				gbc_lblStatus.gridy = 0;
+				panel_Praktikumsverwaltung.add(lblStatus, gbc_lblStatus);
 		
 				JPanel panel_Praktikumsverwaltungl_2 = new JPanel();
 				panel_Praktikumsverwaltungl_2.setBackground(Color.WHITE);
@@ -204,7 +178,7 @@ public class MenuStu extends JFrame {
 				gbc_panel_Praktikumsverwaltungl_2.insets = new Insets(0, 0, 5, 0);
 				gbc_panel_Praktikumsverwaltungl_2.fill = GridBagConstraints.BOTH;
 				gbc_panel_Praktikumsverwaltungl_2.gridx = 0;
-				gbc_panel_Praktikumsverwaltungl_2.gridy = 2;
+				gbc_panel_Praktikumsverwaltungl_2.gridy = 1;
 				panel_Praktikumsverwaltung.add(panel_Praktikumsverwaltungl_2, gbc_panel_Praktikumsverwaltungl_2);
 				GridBagLayout gbl_panel_Praktikumsverwaltungl_2 = new GridBagLayout();
 				gbl_panel_Praktikumsverwaltungl_2.columnWidths = new int[] { 209, 0, 135, 153, 170, 304, 0 };
@@ -241,22 +215,7 @@ public class MenuStu extends JFrame {
 																
 																
 																
-																btnNewButton_2_2.addActionListener(e -> {
-																	try {
-
-																		JFileChooser chooser = new JFileChooser();
-																		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-																			if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-																				Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
-																			else
-																				Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-																						"vertrag");
-																		}
-
-																	} catch (Exception e1) {
-																		e1.printStackTrace();
-																	}
-																});
+																
 																		
 																				JButton btnNewButton_2 = new JButton("T\u00E4tigkeitsnachweis ansehen");
 																				GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
@@ -266,21 +225,7 @@ public class MenuStu extends JFrame {
 																				gbc_btnNewButton_2.gridx = 3;
 																				gbc_btnNewButton_2.gridy = 1;
 																				panel_Praktikumsverwaltungl_2.add(btnNewButton_2, gbc_btnNewButton_2);
-																				btnNewButton_2.addActionListener(e -> {
-
-																					try {
-																						JFileChooser chooser = new JFileChooser();
-																						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-																							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-																								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
-																							else
-																								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-																										"nachweis");
-																						}
-																					} catch (Exception e1) {
-																						e1.printStackTrace();
-																					}
-																				});
+																				
 																
 																		JButton btnNewButton_2_1 = new JButton("Bericht ansehen");
 																		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
@@ -290,21 +235,7 @@ public class MenuStu extends JFrame {
 																		gbc_btnNewButton_2_1.gridx = 4;
 																		gbc_btnNewButton_2_1.gridy = 1;
 																		panel_Praktikumsverwaltungl_2.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
-																		btnNewButton_2_1.addActionListener(e -> {
-																			try {
-
-																				JFileChooser chooser = new JFileChooser();
-																				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-																					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-																						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
-																					else
-																						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
-																								"bericht");
-																				}
-																			} catch (Exception e1) {
-																				e1.printStackTrace();
-																			}
-																		});
+																		
 																
 																JLabel lblFeedback = new JLabel("Auf R\u00FCckmeldung warten");
 																GridBagConstraints gbc_lblFeedback = new GridBagConstraints();
@@ -316,6 +247,7 @@ public class MenuStu extends JFrame {
 																JButton btnBpsAnmeldungHochladen = new JButton("BPS Anmeldung Hochladen");
 																
 																GridBagConstraints gbc_btnBpsAnmeldungHochladen = new GridBagConstraints();
+																gbc_btnBpsAnmeldungHochladen.fill = GridBagConstraints.HORIZONTAL;
 																gbc_btnBpsAnmeldungHochladen.insets = new Insets(0, 0, 0, 5);
 																gbc_btnBpsAnmeldungHochladen.gridx = 0;
 																gbc_btnBpsAnmeldungHochladen.gridy = 2;
@@ -335,19 +267,7 @@ public class MenuStu extends JFrame {
 																gbc_btnNewButton_1_2.gridx = 2;
 																gbc_btnNewButton_1_2.gridy = 2;
 																panel_Praktikumsverwaltungl_2.add(btnNewButton_1_2, gbc_btnNewButton_1_2);
-																btnNewButton_1_2.addActionListener(e -> {
-																	try {
-																		JFileChooser chooser = new JFileChooser();
-																		chooser.addChoosableFileFilter(new PdfFilter());
-																		int input = chooser.showOpenDialog(null);
-																		if (input == JFileChooser.APPROVE_OPTION) {
-																			File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-																			Datenbank.upload(inFileNachweis, matrikelnum, "vertrag", false);
-																		}
-																	} catch (Exception e1) {
-																		e1.printStackTrace();
-																	}
-																});
+																
 																
 																		JButton btnNewButton_1 = new JButton("T\u00E4tigkeitsnachweis hochladen");
 																		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
@@ -357,20 +277,7 @@ public class MenuStu extends JFrame {
 																		gbc_btnNewButton_1.gridx = 3;
 																		gbc_btnNewButton_1.gridy = 2;
 																		panel_Praktikumsverwaltungl_2.add(btnNewButton_1, gbc_btnNewButton_1);
-																		btnNewButton_1.addActionListener(e -> {
-
-																			try {
-																				JFileChooser chooser = new JFileChooser();
-																				chooser.addChoosableFileFilter(new PdfFilter());
-																				int input = chooser.showOpenDialog(null);
-																				if (input == JFileChooser.APPROVE_OPTION) {
-																					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-																					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis", false);
-																				}
-																			} catch (Exception e1) {
-																				e1.printStackTrace();
-																			}
-																		});
+																		
 																
 																		JButton btnNewButton_1_1 = new JButton("Bericht hochladen");
 																		GridBagConstraints gbc_btnNewButton_1_1 = new GridBagConstraints();
@@ -380,22 +287,7 @@ public class MenuStu extends JFrame {
 																		gbc_btnNewButton_1_1.gridx = 4;
 																		gbc_btnNewButton_1_1.gridy = 2;
 																		panel_Praktikumsverwaltungl_2.add(btnNewButton_1_1, gbc_btnNewButton_1_1);
-																		btnNewButton_1_1.addActionListener(e -> {
-
-																			try {
-																				JFileChooser chooser = new JFileChooser();
-																				chooser.addChoosableFileFilter(new PdfFilter());
-																				int input = chooser.showOpenDialog(null);
-																				if (input == JFileChooser.APPROVE_OPTION) {
-																					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
-																					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
-																					Datenbank.sendFeedback(matrikelnum, null);
-																				}
-
-																			} catch (Exception e1) {
-																				e1.printStackTrace();
-																			}
-																		});
+																		
 																
 																JButton btnNewButton_4 = new JButton("Feedback ansehen");
 																GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
@@ -404,187 +296,149 @@ public class MenuStu extends JFrame {
 																gbc_btnNewButton_4.gridy = 2;
 																panel_Praktikumsverwaltungl_2.add(btnNewButton_4, gbc_btnNewButton_4);
 																
-																btnNewButton_4.addActionListener(e->{
-																	
-																			try {
-																				JFileChooser chooser = new JFileChooser();
-																				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-																					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-																						Datenbank.getFeedback(matrikelnum, chooser.getSelectedFile().getAbsolutePath());
-																					else
-																				Datenbank.getFeedback( matrikelnum, chooser.getSelectedFile().getAbsolutePath().concat(".pdf"));
-																				}
-																			} 
-																			catch (Exception e1) {
-																				
-																				e1.printStackTrace();
-																			}
-																	
-																});
+																
 		
 		JProgressBar progressBar = new JProgressBar();
+		progressBar.setForeground(Color.decode("#487eb0"));
 		GridBagConstraints gbc_progressBar = new GridBagConstraints();
 		gbc_progressBar.anchor = GridBagConstraints.NORTH;
 		gbc_progressBar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_progressBar.gridx = 0;
-		gbc_progressBar.gridy = 3;
+		gbc_progressBar.gridy = 2;
 		panel_Praktikumsverwaltung.add(progressBar, gbc_progressBar);
-
-		JPanel panel_Profil = new JPanel();
-		panel_Profil.setLayout(null);
-		panel_Profil.setBackground(Color.WHITE);
-		tabbedPane.addTab("New tab", null, panel_Profil, null);
-
-		JPanel panel_Profil_2 = new JPanel();
-		panel_Profil_2.setBackground(Color.WHITE);
-		panel_Profil_2.setBounds(20, 43, 450, 212);
-		panel_Profil.add(panel_Profil_2);
-		GridBagLayout gbl_panel_Profil_2 = new GridBagLayout();
-		gbl_panel_Profil_2.columnWidths = new int[] { 114, 46, 0, 0, 0 };
-		gbl_panel_Profil_2.rowHeights = new int[] { 14, 14, 14, 14, 0, 14, 0, 0 };
-		gbl_panel_Profil_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel_Profil_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		panel_Profil_2.setLayout(gbl_panel_Profil_2);
-
-		JLabel lblProfilMatrikelnummer = new JLabel("Matrikelnummer");
-		lblProfilMatrikelnummer.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilMatrikelnummer = new GridBagConstraints();
-		gbc_lblProfilMatrikelnummer.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilMatrikelnummer.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilMatrikelnummer.gridx = 0;
-		gbc_lblProfilMatrikelnummer.gridy = 0;
-		panel_Profil_2.add(lblProfilMatrikelnummer, gbc_lblProfilMatrikelnummer);
-
-		JLabel lblProfilMatrikelnummerOutput = new JLabel(String.valueOf(matrikelnum));
-		GridBagConstraints gbc_lblProfilMatrikelnummerOutput = new GridBagConstraints();
-		gbc_lblProfilMatrikelnummerOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilMatrikelnummerOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilMatrikelnummerOutput.gridx = 3;
-		gbc_lblProfilMatrikelnummerOutput.gridy = 0;
-		panel_Profil_2.add(lblProfilMatrikelnummerOutput, gbc_lblProfilMatrikelnummerOutput);
-
-		JLabel lblProfilName = new JLabel("Name");
-		lblProfilName.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilName = new GridBagConstraints();
-		gbc_lblProfilName.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilName.gridx = 0;
-		gbc_lblProfilName.gridy = 1;
-		panel_Profil_2.add(lblProfilName, gbc_lblProfilName);
-
-		JLabel lblProfilNameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilNameOutput = new GridBagConstraints();
-		gbc_lblProfilNameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilNameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilNameOutput.gridx = 3;
-		gbc_lblProfilNameOutput.gridy = 1;
-		panel_Profil_2.add(lblProfilNameOutput, gbc_lblProfilNameOutput);
-
-		JLabel lblProfilVorname = new JLabel("Vorname");
-		lblProfilVorname.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilVorname = new GridBagConstraints();
-		gbc_lblProfilVorname.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilVorname.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilVorname.gridx = 0;
-		gbc_lblProfilVorname.gridy = 2;
-		panel_Profil_2.add(lblProfilVorname, gbc_lblProfilVorname);
-
-		JLabel lblProfilVornameOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilVornameOutput = new GridBagConstraints();
-		gbc_lblProfilVornameOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilVornameOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilVornameOutput.gridx = 3;
-		gbc_lblProfilVornameOutput.gridy = 2;
-		panel_Profil_2.add(lblProfilVornameOutput, gbc_lblProfilVornameOutput);
-
-		JLabel lblProfilEmail = new JLabel("Email");
-		lblProfilEmail.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilEmail = new GridBagConstraints();
-		gbc_lblProfilEmail.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilEmail.gridx = 0;
-		gbc_lblProfilEmail.gridy = 3;
-		panel_Profil_2.add(lblProfilEmail, gbc_lblProfilEmail);
-
-		JLabel lblProfilEmailOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilEmailOutput = new GridBagConstraints();
-		gbc_lblProfilEmailOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilEmailOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilEmailOutput.gridx = 3;
-		gbc_lblProfilEmailOutput.gridy = 3;
-		panel_Profil_2.add(lblProfilEmailOutput, gbc_lblProfilEmailOutput);
-
-		JLabel lblProfilPraxisstelle = new JLabel("Praxisstelle");
-		lblProfilPraxisstelle.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilPraxisstelle = new GridBagConstraints();
-		gbc_lblProfilPraxisstelle.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilPraxisstelle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilPraxisstelle.gridx = 0;
-		gbc_lblProfilPraxisstelle.gridy = 4;
-		panel_Profil_2.add(lblProfilPraxisstelle, gbc_lblProfilPraxisstelle);
-
-		JLabel lblProfilPraxisstelleOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilPraxisstelleOutput = new GridBagConstraints();
-		gbc_lblProfilPraxisstelleOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilPraxisstelleOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilPraxisstelleOutput.gridx = 3;
-		gbc_lblProfilPraxisstelleOutput.gridy = 4;
-		panel_Profil_2.add(lblProfilPraxisstelleOutput, gbc_lblProfilPraxisstelleOutput);
-
-		JLabel lblProfilZeitraum = new JLabel("Zeitraum");
-		lblProfilZeitraum.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilZeitraum = new GridBagConstraints();
-		gbc_lblProfilZeitraum.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilZeitraum.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfilZeitraum.gridx = 0;
-		gbc_lblProfilZeitraum.gridy = 5;
-		panel_Profil_2.add(lblProfilZeitraum, gbc_lblProfilZeitraum);
-
-		JLabel lblProfilZeitraumOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilZeitraumOutput = new GridBagConstraints();
-		gbc_lblProfilZeitraumOutput.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProfilZeitraumOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilZeitraumOutput.gridx = 3;
-		gbc_lblProfilZeitraumOutput.gridy = 5;
-		panel_Profil_2.add(lblProfilZeitraumOutput, gbc_lblProfilZeitraumOutput);
-
-		JLabel lblProfilBetreuer = new JLabel("Betreuer");
-		lblProfilBetreuer.setFont(new Font("Arial", Font.BOLD, 11));
-		GridBagConstraints gbc_lblProfilBetreuer = new GridBagConstraints();
-		gbc_lblProfilBetreuer.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilBetreuer.insets = new Insets(0, 0, 0, 5);
-		gbc_lblProfilBetreuer.gridx = 0;
-		gbc_lblProfilBetreuer.gridy = 6;
-		panel_Profil_2.add(lblProfilBetreuer, gbc_lblProfilBetreuer);
-
-		JLabel lblProfilBetreuerOutput = new JLabel("-");
-		GridBagConstraints gbc_lblProfilBetreuerOutput = new GridBagConstraints();
-		gbc_lblProfilBetreuerOutput.anchor = GridBagConstraints.WEST;
-		gbc_lblProfilBetreuerOutput.gridx = 3;
-		gbc_lblProfilBetreuerOutput.gridy = 6;
-		panel_Profil_2.add(lblProfilBetreuerOutput, gbc_lblProfilBetreuerOutput);
-
-		JLabel lblNewLabel_3_1_2 = new JLabel("Profil");
-		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
-		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
-		panel_Profil.add(lblNewLabel_3_1_2);
 		btnBpsAnmeldungHochladen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					new BPSAbgabe(matrikelnum).setVisible(true);
-					update(matrikelnum,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2,lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+					update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2,lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
 				} catch (Exception e1) {
 					
 					e1.printStackTrace();
 				}
 																					}
 		});
-		update(matrikelnum,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+		update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+		
+		
+		
+	
+		btnNewButton_1_2.addActionListener(e -> {
+			try {
+				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "vertrag", false);
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_1_1.addActionListener(e -> {
+
+			try {
+				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "bericht", true);
+					Datenbank.sendFeedback(matrikelnum, null);
+					
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_2_2.addActionListener(e -> {
+			try {
+
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "vertrag");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"vertrag");
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
+		});
+		btnNewButton_2.addActionListener(e -> {
+
+			try {
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "nachweis");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"nachweis");
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_2_1.addActionListener(e -> {
+			try {
+
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matrikelnum, "bericht");
+					else
+						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matrikelnum,
+								"bericht");
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_1.addActionListener(e -> {
+
+			try {
+				JFileChooser chooser = new JFileChooser();
+				chooser.addChoosableFileFilter(new PdfFilter());
+				int input = chooser.showOpenDialog(null);
+				if (input == JFileChooser.APPROVE_OPTION) {
+					File inFileNachweis = new File(chooser.getSelectedFile().getAbsolutePath());
+					Datenbank.upload(inFileNachweis, matrikelnum, "nachweis", false);
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		});
+		btnNewButton_4.addActionListener(e->{
+			
+			try {
+				JFileChooser chooser = new JFileChooser();
+				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+					if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
+						Datenbank.getFeedback(matrikelnum, chooser.getSelectedFile().getAbsolutePath());
+					else
+				Datenbank.getFeedback( matrikelnum, chooser.getSelectedFile().getAbsolutePath().concat(".pdf"));
+				}
+				update(matrikelnum,lblStatus,betreuerName,btnNewButton_1_1,btnNewButton_1, btnNewButton_1_2, lblBetreuerName,lblAnmeldung,btnNewButton_2_2,btnNewButton_2,btnNewButton_2_1,lblFeedback,btnNewButton_4,progressBar);
+			} 
+			catch (Exception e1) {
+				
+				e1.printStackTrace();
+			}
+	
+});
 	}
 	
 	
-	public void update(int matnum,JLabel betreuerName, JButton btnNewButton_1_1, JButton btnNewButton_1, JButton btnNewButton_1_2, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
+	public void update(int matnum,JLabel lblStatus, JLabel betreuerName, JButton btnNewButton_1_1, JButton btnNewButton_1, JButton btnNewButton_1_2, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
 		btnNewButton_2_2.setVisible(false);
 		btnNewButton_2_1.setVisible(false);
 		btnNewButton_2.setVisible(false);
@@ -596,42 +450,53 @@ public class MenuStu extends JFrame {
 		btnNewButton_1_1.setVisible(false);
 		lblBetreuerName.setVisible(false);
 		betreuerName.setVisible(false);
+		lblStatus.setText("Bitte BPS-Anmeldung ausfüllen und hochladen.");
 		if(Datenbank.getBPS(matnum)!=null) {
 			lblAnmeldung.setVisible(true);
+			progressBar.setValue(21);
+			lblStatus.setText("Das PPA prüft nun ihre BPS-Anmeldung, bitte entwas Geduld");
 			if(!Datenbank.getBPS(matnum).getStatus().equals("beantragt")&&!Datenbank.getBPS(matnum).getStatus().equals("")) {
 				lblAnmeldung.setText("Angenommen");
 				lblAnmeldung.setVisible(true);
-				progressBar.setValue(10);
+				progressBar.setValue(27);
 				lblBetreuerName.setVisible(true);
 				betreuerName.setVisible(true);
+				lblStatus.setText("Ihre BPS-Anmeldung wurde akzeptiert, Betreuer bewerben sich nun und werden zugeteilt.");
 				if(Datenbank.getBetreuer(matnum)!=null) {
 					lblBetreuerName.setText(Datenbank.getBetreuer(matnum));
-					progressBar.setValue(20);
+					
+					progressBar.setValue(38);
 					Studierende  student= (Studierende) Datenbank.getUser(matnum);
 					btnNewButton_1_2.setVisible(true);
+					lblStatus.setText("Ein Betreuer wurde ihnen zugeteilt, laden sie nun bitte ihren BPS-Vertrag mit dem Unternehmen hoch!");
 					if(student.getVertrag()!=null) {
-						progressBar.setValue(30);
+						progressBar.setValue(55);
 						btnNewButton_2_2.setVisible(true);
 						btnNewButton_1.setVisible(true);
+						lblStatus.setText("Laden sie bitte den Beschäftigungsnachweis hoch!");
 						if(student.getNachweis()!=null) {
-							progressBar.setValue(30);
+							progressBar.setValue(71);
 							btnNewButton_2.setVisible(true);
 							btnNewButton_1_1.setVisible(true);
-							System.out.println(Datenbank.checkBericht(matnum));
+							lblStatus.setText("Laden sie als Letztes bitte den von ihnen verfassten Praktikumsbericht hoch!");
 							if(Datenbank.checkBericht(matnum)&&student.getBericht()==null&&!Datenbank.checkFeedback(matnum)) {
 								lblFeedback.setVisible(true);
 								lblFeedback.setText("Bericht wird geprüft");
 								btnNewButton_2_1.setVisible(true);
-								
+								lblStatus.setText("Ihr Praktikumsbericht wird durch ihren Betreuer überprüft.");
 							}
 							else if(student.getBericht()!=null) {
 								lblFeedback.setText("Bericht wurde akzeptiert");
 								lblFeedback.setVisible(true);
 								btnNewButton_2_1.setVisible(true);
-								progressBar.setValue(100);
+								lblStatus.setText("Der Betreuer hat ihren Bericht akzeptiert, das PPA prüft nun ihre Dateien.");
+								if(Datenbank.getBPS(matnum).getStatus().equals("Beendet")){
+									lblStatus.setText("Glückwunsch, sie haben das BPS erfolgreich abgeschlossen!");
+									progressBar.setValue(100);
+								}
 							}
 							else if(student.getBericht()==null&&Datenbank.checkFeedback(matnum)) {
-							
+							lblStatus.setText("Bericht leider abgelehnt. Bitte lesen sie die Feedback Datei und laden sie einen überarbeiteten Bericht hoch.");
 							lblFeedback.setText("Bericht muss überarbeitet werden");
 							lblFeedback.setVisible(true);
 							btnNewButton_2_1.setVisible(true);

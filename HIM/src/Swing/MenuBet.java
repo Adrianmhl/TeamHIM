@@ -312,9 +312,9 @@ public class MenuBet extends JFrame {
 								if(table.getSelectedRowCount()>0)
 									try {
 										Datenbank.studBetreuerMatch((int) table.getValueAt(table.getSelectedRow(), 0), id);
-										JOptionPane.showMessageDialog(null, "beworben");
+										JOptionPane.showMessageDialog(null, "Erfolgreich beworben!");
 									} catch (Exception e1) {
-										e1.printStackTrace();
+										JOptionPane.showMessageDialog(null, "Sie haben sich bereits beworben!");
 									}
 								else
 									JOptionPane.showMessageDialog(null,"Bitte eine Zeile auswählen!");
@@ -404,13 +404,14 @@ public class MenuBet extends JFrame {
 							e3.printStackTrace();
 							JOptionPane.showMessageDialog(null,"Bitte eine PDF-Datei auswählen");
 						}
+					refreshStudentList(id);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			else
 			System.out.println("Bitte eine Zeile auswählen!");
 	    	 
-				
+	    	  	
 	      });
 	      
 	      JButton btnNewButton_5 = new JButton("Bericht pr\u00FCfen");
@@ -448,7 +449,8 @@ public class MenuBet extends JFrame {
 	    	  try {
 	    		if(studentTable.getSelectedRowCount()>0)
 				new Feedback((int) studentTable.getValueAt(studentTable.getSelectedRow(),0)).setVisible(true);
-			} catch (UnsupportedLookAndFeelException e1) {
+	    		refreshStudentList(id);
+			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 	      });
@@ -459,6 +461,7 @@ public class MenuBet extends JFrame {
 	      studentTable.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
 				  	try {
+				  		
 				  		btnNewButton_2.setVisible(false);
 						if(!Datenbank.checkBesuchBericht((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0)))
 							btnNewButton_4.setVisible(true);
@@ -467,15 +470,20 @@ public class MenuBet extends JFrame {
 							btnNewButton_4.setVisible(false);
 						
 						if(Datenbank.checkBericht((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0))) {
-							btnNewButton_5.setVisible(true);
-							if(!Datenbank.checkFeedback((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0))) 
+							if(!Datenbank.checkFeedback((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0))&&!Datenbank.getBPS((int) studentTable.getValueAt(studentTable.getSelectedRow(), 0)).getStatus().equals("Beendet")) {
 								btnNewButton_2.setVisible(true);
-							else
+								btnNewButton_5.setVisible(true);
+								
+							}
+							else {
 								btnNewButton_2.setVisible(false);
+								btnNewButton_5.setVisible(false);
+								
+							}
 						}
 						else 
 							btnNewButton_5.setVisible(false);
-					
+						
 						
 							
 					} catch (Exception e1) {

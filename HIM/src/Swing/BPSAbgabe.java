@@ -291,8 +291,14 @@ public class BPSAbgabe extends JDialog {
 							name.getText(), abteilung.getText(), telefon.getText(),
 							email.getText(), datum, themenbereich.getText(), kurzBeschreibung.getText(),
 							"beantragt");
+						try {
 						Datenbank.createBPS(matnum, bps);
+						}
+						catch(Exception e2) {
+							JOptionPane.showMessageDialog(null, "Sie haben bereits eine Bewerbung hochgeladen");
+						}
 						dispose();
+						
 					}
 					else JOptionPane.showMessageDialog(null, "Bitte alle Felder ausfüllen");
 						

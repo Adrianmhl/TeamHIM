@@ -60,30 +60,19 @@ public class Feedback extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{469, 0};
-		gbl_contentPanel.rowHeights = new int[]{51, 245, 0};
+		gbl_contentPanel.rowHeights = new int[]{51, 0};
 		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JTextPane txtpnWollenSieDen = new JTextPane();
 			txtpnWollenSieDen.setEditable(false);
-			txtpnWollenSieDen.setText("Wollen sie den Bericht Annehmen? \n Wenn nicht, f\u00FCllen sie bitte das Feedbackfeld unten aus und klickenn sie anschlie\u00DFend auf \"Ablenen\"");
+			txtpnWollenSieDen.setText("Wenn sie den Bericht annehmen wollen, klicken sie bitte unten auf \"Annehmen\". Falls nicht, klicken sie bitte auf \"Ablehnen\" und laden anschlie\u00DFend eine mit Feedback versehene PDF-Datei hoch.");
 			GridBagConstraints gbc_txtpnWollenSieDen = new GridBagConstraints();
-			gbc_txtpnWollenSieDen.insets = new Insets(0, 0, 5, 0);
 			gbc_txtpnWollenSieDen.fill = GridBagConstraints.BOTH;
 			gbc_txtpnWollenSieDen.gridx = 0;
 			gbc_txtpnWollenSieDen.gridy = 0;
 			contentPanel.add(txtpnWollenSieDen, gbc_txtpnWollenSieDen);
-		}
-		{
-			JTextArea textArea = new JTextArea();
-			textArea.setBackground(Color.WHITE);
-			textArea.setToolTipText("Feedback hier eingeben");
-			GridBagConstraints gbc_textArea = new GridBagConstraints();
-			gbc_textArea.fill = GridBagConstraints.BOTH;
-			gbc_textArea.gridx = 0;
-			gbc_textArea.gridy = 1;
-			contentPanel.add(textArea, gbc_textArea);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -95,7 +84,7 @@ public class Feedback extends JDialog {
 					try {
 						Datenbank.acceptBericht(matnum);
 						dispose();
-						JOptionPane.showConfirmDialog(null, "Akzeptiert");
+						JOptionPane.showMessageDialog(null, "Akzeptiert");
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}

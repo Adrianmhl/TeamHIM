@@ -109,80 +109,108 @@ public class MenuPPA extends JFrame {
 				gbc_panel_1.gridx = 0;
 				gbc_panel_1.gridy = 0;
 				contentPane.add(panel_1, gbc_panel_1);
-										GridBagLayout gbl_panel_1 = new GridBagLayout();
-										gbl_panel_1.columnWidths = new int[] {50, 0};
-										gbl_panel_1.rowHeights = new int[]{98, 112, 0};
-										gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-										gbl_panel_1.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-										panel_1.setLayout(gbl_panel_1);
-																		
-																				JLabel lblNewLabel_5_5 = new JLabel("");
-																				GridBagConstraints gbc_lblNewLabel_5_5 = new GridBagConstraints();
-																				gbc_lblNewLabel_5_5.fill = GridBagConstraints.BOTH;
-																				gbc_lblNewLabel_5_5.insets = new Insets(0, 0, 5, 0);
-																				gbc_lblNewLabel_5_5.gridx = 0;
-																				gbc_lblNewLabel_5_5.gridy = 0;
-																				panel_1.add(lblNewLabel_5_5, gbc_lblNewLabel_5_5);
-																
-																		JLabel lblNewLabel_5_2 = new JLabel("");
-																		GridBagConstraints gbc_lblNewLabel_5_2 = new GridBagConstraints();
-																		gbc_lblNewLabel_5_2.fill = GridBagConstraints.BOTH;
-																		gbc_lblNewLabel_5_2.insets = new Insets(0, 0, 5, 0);
-																		gbc_lblNewLabel_5_2.gridx = 0;
-																		gbc_lblNewLabel_5_2.gridy = 0;
-																		panel_1.add(lblNewLabel_5_2, gbc_lblNewLabel_5_2);
-														
-																JLabel lblNewLabel_5_4 = new JLabel("");
-																GridBagConstraints gbc_lblNewLabel_5_4 = new GridBagConstraints();
-																gbc_lblNewLabel_5_4.fill = GridBagConstraints.BOTH;
-																gbc_lblNewLabel_5_4.insets = new Insets(0, 0, 5, 0);
-																gbc_lblNewLabel_5_4.gridx = 0;
-																gbc_lblNewLabel_5_4.gridy = 0;
-																panel_1.add(lblNewLabel_5_4, gbc_lblNewLabel_5_4);
-												
-														JLabel lblNewLabel_5_1 = new JLabel("");
-														GridBagConstraints gbc_lblNewLabel_5_1 = new GridBagConstraints();
-														gbc_lblNewLabel_5_1.fill = GridBagConstraints.BOTH;
-														gbc_lblNewLabel_5_1.insets = new Insets(0, 0, 5, 0);
-														gbc_lblNewLabel_5_1.gridx = 0;
-														gbc_lblNewLabel_5_1.gridy = 0;
-														panel_1.add(lblNewLabel_5_1, gbc_lblNewLabel_5_1);
+																				GridBagLayout gbl_panel_1 = new GridBagLayout();
+																				gbl_panel_1.columnWidths = new int[]{87, 0};
+																				gbl_panel_1.rowHeights = new int[]{93, 230, 0, 25, 0, 17, 0};
+																				gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+																				gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+																				panel_1.setLayout(gbl_panel_1);
+																												
+																														JLabel lblNewLabel_5_4 = new JLabel("");
+																														GridBagConstraints gbc_lblNewLabel_5_4 = new GridBagConstraints();
+																														gbc_lblNewLabel_5_4.fill = GridBagConstraints.BOTH;
+																														gbc_lblNewLabel_5_4.insets = new Insets(0, 0, 5, 0);
+																														gbc_lblNewLabel_5_4.gridx = 0;
+																														gbc_lblNewLabel_5_4.gridy = 0;
+																														panel_1.add(lblNewLabel_5_4, gbc_lblNewLabel_5_4);
+																										
+																												JLabel lblNewLabel_5_5 = new JLabel("");
+																												GridBagConstraints gbc_lblNewLabel_5_5 = new GridBagConstraints();
+																												gbc_lblNewLabel_5_5.fill = GridBagConstraints.BOTH;
+																												gbc_lblNewLabel_5_5.insets = new Insets(0, 0, 5, 0);
+																												gbc_lblNewLabel_5_5.gridx = 0;
+																												gbc_lblNewLabel_5_5.gridy = 0;
+																												panel_1.add(lblNewLabel_5_5, gbc_lblNewLabel_5_5);
+																								
+																										JLabel lblNewLabel_5_3 = new JLabel("");
+																										GridBagConstraints gbc_lblNewLabel_5_3 = new GridBagConstraints();
+																										gbc_lblNewLabel_5_3.fill = GridBagConstraints.BOTH;
+																										gbc_lblNewLabel_5_3.insets = new Insets(0, 0, 5, 0);
+																										gbc_lblNewLabel_5_3.gridx = 0;
+																										gbc_lblNewLabel_5_3.gridy = 0;
+																										panel_1.add(lblNewLabel_5_3, gbc_lblNewLabel_5_3);
+																						
+																								JLabel lblNewLabel_5_2 = new JLabel("");
+																								GridBagConstraints gbc_lblNewLabel_5_2 = new GridBagConstraints();
+																								gbc_lblNewLabel_5_2.fill = GridBagConstraints.BOTH;
+																								gbc_lblNewLabel_5_2.insets = new Insets(0, 0, 5, 0);
+																								gbc_lblNewLabel_5_2.gridx = 0;
+																								gbc_lblNewLabel_5_2.gridy = 0;
+																								panel_1.add(lblNewLabel_5_2, gbc_lblNewLabel_5_2);
+																				
+																						JLabel lblNewLabel_5_1 = new JLabel("");
+																						GridBagConstraints gbc_lblNewLabel_5_1 = new GridBagConstraints();
+																						gbc_lblNewLabel_5_1.fill = GridBagConstraints.BOTH;
+																						gbc_lblNewLabel_5_1.insets = new Insets(0, 0, 5, 0);
+																						gbc_lblNewLabel_5_1.gridx = 0;
+																						gbc_lblNewLabel_5_1.gridy = 0;
+																						panel_1.add(lblNewLabel_5_1, gbc_lblNewLabel_5_1);
+																						
+																						JPanel dateipfadPanel = new JPanel();
+																						GridBagConstraints gbc_dateipfadPanel = new GridBagConstraints();
+																						gbc_dateipfadPanel.insets = new Insets(0, 0, 5, 0);
+																						gbc_dateipfadPanel.fill = GridBagConstraints.HORIZONTAL;
+																						gbc_dateipfadPanel.gridx = 0;
+																						gbc_dateipfadPanel.gridy = 3;
+																						panel_1.add(dateipfadPanel, gbc_dateipfadPanel);
+																						dateipfadPanel.setBackground(Color.decode("#CD201F"));
+																						dateipfadPanel.addMouseListener(new MouseAdapter() {
+																							@Override
+																							public void mouseClicked(MouseEvent e) {
+																								try {
+																									JFileChooser chooser = new JFileChooser();
+																									chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+																									int input = chooser.showOpenDialog(null);
+																									if (input == JFileChooser.APPROVE_OPTION) {
+																										Datenbank.setPpaPath(ppaNum,chooser.getSelectedFile().getCanonicalPath());
+																									}		
+																								} catch (Exception e1) {
 										
-												JLabel lblNewLabel_5_3 = new JLabel("");
-												GridBagConstraints gbc_lblNewLabel_5_3 = new GridBagConstraints();
-												gbc_lblNewLabel_5_3.fill = GridBagConstraints.BOTH;
-												gbc_lblNewLabel_5_3.insets = new Insets(0, 0, 5, 0);
-												gbc_lblNewLabel_5_3.gridx = 0;
-												gbc_lblNewLabel_5_3.gridy = 0;
-												panel_1.add(lblNewLabel_5_3, gbc_lblNewLabel_5_3);
-												
-														JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
-														GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
-														gbc_lblNewLabel_1_2_2.insets = new Insets(0, 10, 10, 0);
-														gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
-														gbc_lblNewLabel_1_2_2.fill = GridBagConstraints.HORIZONTAL;
-														gbc_lblNewLabel_1_2_2.gridx = 0;
-														gbc_lblNewLabel_1_2_2.gridy = 1;
-														panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
-														lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
-															@Override
-															public void mouseClicked(MouseEvent e) {
+																									e1.printStackTrace();
+																								}
+																							}
+																						});
 
-																Login log;
-																try {
-																	log = new Login();
-																	log.setVisible(true);
-																} catch (Exception e1) {
-																	e1.printStackTrace();
-																}
+																						JLabel lblNewLabel = new JLabel("Dateipfad");
+																						lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																						lblNewLabel.setForeground(Color.WHITE);
+																						dateipfadPanel.add(lblNewLabel);
+																				
+																						JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
+																						GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
+																						gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
+																						gbc_lblNewLabel_1_2_2.gridx = 0;
+																						gbc_lblNewLabel_1_2_2.gridy = 5;
+																						panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
+																						lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
+																							@Override
+																							public void mouseClicked(MouseEvent e) {
 
-																dispose();
+																								Login log;
+																								try {
+																									log = new Login();
+																									log.setVisible(true);
+																								} catch (Exception e1) {
+																									e1.printStackTrace();
+																								}
 
-															}
-														});
-														lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-														lblNewLabel_1_2_2.setForeground(Color.WHITE);
-														lblNewLabel_1_2_2.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+																								dispose();
+
+																							}
+																						});
+																						lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
+																						lblNewLabel_1_2_2.setForeground(Color.WHITE);
+																						lblNewLabel_1_2_2.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		
 				
 				
@@ -198,7 +226,7 @@ public class MenuPPA extends JFrame {
 								gbl_panel_BPS.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 								panel_BPS.setLayout(gbl_panel_BPS);
 										
-												JLabel lblNewLabel_3_1_2_2 = new JLabel("BPS-Formular pr\u00FCfen");
+												JLabel lblNewLabel_3_1_2_2 = new JLabel("BPS Verwaltung");
 												lblNewLabel_3_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
 												lblNewLabel_3_1_2_2.setFont(new Font("Arial", Font.BOLD, 12));
 												GridBagConstraints gbc_lblNewLabel_3_1_2_2 = new GridBagConstraints();
@@ -325,7 +353,12 @@ public class MenuPPA extends JFrame {
 															}
 														});
 														
-														JButton anzeigeButton = new JButton("Liste anzeigen");
+														JButton anzeigeButton = new JButton("Excel refresh");
+														GridBagConstraints gbc_anzeigeButton = new GridBagConstraints();
+														gbc_anzeigeButton.insets = new Insets(0, 0, 0, 5);
+														gbc_anzeigeButton.gridx = 4;
+														gbc_anzeigeButton.gridy = 0;
+														panel.add(anzeigeButton, gbc_anzeigeButton);
 														anzeigeButton.addActionListener(e->{
 															try {
 																createExcel(ppaNum);
@@ -334,35 +367,7 @@ public class MenuPPA extends JFrame {
 																e1.printStackTrace();
 															}
 														});
-														GridBagConstraints gbc_anzeigeButton = new GridBagConstraints();
-														gbc_anzeigeButton.insets = new Insets(0, 0, 0, 5);
-														gbc_anzeigeButton.gridx = 4;
-														gbc_anzeigeButton.gridy = 0;
-														panel.add(anzeigeButton, gbc_anzeigeButton);
-														JButton btnNewButton_2 = new JButton("Absolventenliste");
-														btnNewButton_2.setActionCommand("Aktualisieren");
-														btnNewButton_2.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-														GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-														gbc_btnNewButton_2.anchor = GridBagConstraints.SOUTHEAST;
-														gbc_btnNewButton_2.gridx = 5;
-														gbc_btnNewButton_2.gridy = 0;
-														panel.add(btnNewButton_2, gbc_btnNewButton_2);
 														JTextField pathField=new JTextField();
-														
-														btnNewButton_2.addActionListener(e->{
-															try {
-																JFileChooser chooser = new JFileChooser();
-																chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-																int input = chooser.showOpenDialog(null);
-																if (input == JFileChooser.APPROVE_OPTION) {
-																	Datenbank.setPpaPath(ppaNum,chooser.getSelectedFile().getCanonicalPath());
-																}		
-															} catch (Exception e1) {
-									
-																e1.printStackTrace();
-															}
-															
-														});
 														table.getColumnModel().getColumn(0).setPreferredWidth(105);
 														table.getColumnModel().getColumn(1).setPreferredWidth(105);
 														table.getColumnModel().getColumn(2).setPreferredWidth(105);
