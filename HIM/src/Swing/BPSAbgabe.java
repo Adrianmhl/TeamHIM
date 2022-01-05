@@ -223,7 +223,7 @@ public class BPSAbgabe extends JDialog {
 			gbc_datum1.gridy = 0;
 			panel.add(datum1, gbc_datum1);
 			
-			JRadioButton datum2 = new JRadioButton("01.09.-28.02");
+			JRadioButton datum2 = new JRadioButton("01.09.- 28.02");
 			GridBagConstraints gbc_datum2 = new GridBagConstraints();
 			gbc_datum2.fill = GridBagConstraints.HORIZONTAL;
 			gbc_datum2.gridx = 1;

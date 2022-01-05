@@ -89,13 +89,13 @@ public class MenuBet extends JFrame {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		setTitle("HIM - HFT Intern Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 1260, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{93, 518, 0};
+		gbl_contentPane.columnWidths = new int[]{130, 518, 0};
 		gbl_contentPane.rowHeights = new int[]{361, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 50.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -111,104 +111,55 @@ public class MenuBet extends JFrame {
 				contentPane.add(panel_1, gbc_panel_1);
 						GridBagLayout gbl_panel_1 = new GridBagLayout();
 						gbl_panel_1.columnWidths = new int[] {90, 0};
-						gbl_panel_1.rowHeights = new int[]{90, 21, 21, 21, 21, 236, 0, 0};
-						gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-						gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+						gbl_panel_1.rowHeights = new int[]{0, 90, 236, 0, 0, 0};
+						gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+						gbl_panel_1.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 						panel_1.setLayout(gbl_panel_1);
-								
-										JPanel tab2_2_3 = new JPanel();
-										tab2_2_3.setLayout(null);
-										tab2_2_3.setBackground(Color.decode("#CD201F"));
-										GridBagConstraints gbc_tab2_2_3 = new GridBagConstraints();
-										gbc_tab2_2_3.fill = GridBagConstraints.BOTH;
-										gbc_tab2_2_3.insets = new Insets(0, 0, 5, 0);
-										gbc_tab2_2_3.gridx = 0;
-										gbc_tab2_2_3.gridy = 1;
-										panel_1.add(tab2_2_3, gbc_tab2_2_3);
-										
-												JLabel lblNewLabel_1_1 = new JLabel("Bewerbung");
-												lblNewLabel_1_1.setBounds(0, 0, 126, 24);
-												tab2_2_3.add(lblNewLabel_1_1);
-												lblNewLabel_1_1.setForeground(Color.WHITE);
-												lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-												lblNewLabel_1_1.addMouseListener(new MouseAdapter() {
+												
+												JLabel lblNewLabel_1 = new JLabel(new ImageIcon(MenuStu.class.getResource("/res/LogoBetreuer.png")));
+												GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+												gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+												gbc_lblNewLabel_1.gridx = 0;
+												gbc_lblNewLabel_1.gridy = 1;
+												panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+												
+												JPanel dateipfadPanel = new JPanel();
+												dateipfadPanel.setBackground(new Color(205, 32, 31));
+												GridBagConstraints gbc_dateipfadPanel = new GridBagConstraints();
+												gbc_dateipfadPanel.anchor = GridBagConstraints.WEST;
+												gbc_dateipfadPanel.insets = new Insets(0, 0, 5, 0);
+												gbc_dateipfadPanel.fill = GridBagConstraints.VERTICAL;
+												gbc_dateipfadPanel.gridx = 0;
+												gbc_dateipfadPanel.gridy = 3;
+												panel_1.add(dateipfadPanel, gbc_dateipfadPanel);
+												
+												JLabel lblNewLabel_2 = new JLabel("Dateipfad");
+												dateipfadPanel.add(lblNewLabel_2);
+												lblNewLabel_2.setForeground(Color.WHITE);
+												lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+												dateipfadPanel.addMouseListener(new MouseAdapter() {
 													@Override
 													public void mouseClicked(MouseEvent e) {
-														tabbedPane.setSelectedIndex(0);
+														try {
+															JFileChooser chooser = new JFileChooser();
+															chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+															int input = chooser.showOpenDialog(null);
+															if (input == JFileChooser.APPROVE_OPTION) {
+																Datenbank.setBetreuerPath(id,chooser.getSelectedFile().getCanonicalPath());
+															}		
+														} catch (Exception e1) {
+
+															e1.printStackTrace();
+														}
 													}
 												});
-												lblNewLabel_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-								
-										JPanel tab2_2 = new JPanel();
-										tab2_2.setBackground(Color.decode("#CD201F"));
-										GridBagConstraints gbc_tab2_2 = new GridBagConstraints();
-										gbc_tab2_2.fill = GridBagConstraints.BOTH;
-										gbc_tab2_2.insets = new Insets(0, 0, 5, 0);
-										gbc_tab2_2.gridx = 0;
-										gbc_tab2_2.gridy = 2;
-										panel_1.add(tab2_2, gbc_tab2_2);
-												tab2_2.setLayout(null);
-						
-								JPanel tab2_2_1 = new JPanel();
-								tab2_2_1.setBackground(Color.decode("#CD201F"));
-								GridBagConstraints gbc_tab2_2_1 = new GridBagConstraints();
-								gbc_tab2_2_1.fill = GridBagConstraints.BOTH;
-								gbc_tab2_2_1.insets = new Insets(0, 0, 5, 0);
-								gbc_tab2_2_1.gridx = 0;
-								gbc_tab2_2_1.gridy = 3;
-								panel_1.add(tab2_2_1, gbc_tab2_2_1);
-								
-										JLabel lblNewLabel_1_2_1 = new JLabel("Profil");
-										lblNewLabel_1_2_1.setForeground(Color.WHITE);
-										lblNewLabel_1_2_1.setBackground(Color.decode("#CD201F"));
-										lblNewLabel_1_2_1.setBounds(0, 0, 116, 18);
-										lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
-										lblNewLabel_1_2_1.addMouseListener(new MouseAdapter() {
-											@Override
-											public void mouseClicked(MouseEvent e) {
-												tabbedPane.setSelectedIndex(2);
-											}
-										});
-										tab2_2_1.setLayout(null);
-										lblNewLabel_1_2_1.setFont(new Font("Arial", Font.BOLD, 11));
-										tab2_2_1.add(lblNewLabel_1_2_1);
-						
-						JPanel tab2_2_1_1 = new JPanel();
-						tab2_2_1_1.setLayout(null);
-						tab2_2_1_1.setBackground(Color.decode("#CD201F"));
-						GridBagConstraints gbc_tab2_2_1_1 = new GridBagConstraints();
-						gbc_tab2_2_1_1.fill = GridBagConstraints.BOTH;
-						gbc_tab2_2_1_1.insets = new Insets(0, 0, 5, 0);
-						gbc_tab2_2_1_1.gridx = 0;
-						gbc_tab2_2_1_1.gridy = 4;
-						panel_1.add(tab2_2_1_1, gbc_tab2_2_1_1);
-						
-						JLabel lblNewLabel_1_2_1_1 = new JLabel("Studenten");
-						lblNewLabel_1_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-						lblNewLabel_1_2_1_1.setForeground(Color.WHITE);
-						lblNewLabel_1_2_1_1.setFont(new Font("Arial", Font.BOLD, 11));
-						lblNewLabel_1_2_1_1.setBackground(Color.decode("#CD201F"));
-						lblNewLabel_1_2_1_1.setBounds(0, 0, 116, 18);
-						tab2_2_1_1.add(lblNewLabel_1_2_1_1);
-						lblNewLabel_1_2_1_1.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								tabbedPane.setSelectedIndex(3);
-								try {
-									refreshStudentList(id);
-								} catch (Exception e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-							}
-						});
 										
 												JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 												GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
 												gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
 												gbc_lblNewLabel_1_2_2.fill = GridBagConstraints.HORIZONTAL;
 												gbc_lblNewLabel_1_2_2.gridx = 0;
-												gbc_lblNewLabel_1_2_2.gridy = 6;
+												gbc_lblNewLabel_1_2_2.gridy = 4;
 												panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
 												lblNewLabel_1_2_2.setForeground(Color.WHITE);
 												lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
@@ -313,12 +264,14 @@ public class MenuBet extends JFrame {
 									try {
 										Datenbank.studBetreuerMatch((int) table.getValueAt(table.getSelectedRow(), 0), id);
 										JOptionPane.showMessageDialog(null, "Erfolgreich beworben!");
+										refreshBPSinJTable();
 									} catch (Exception e1) {
 										JOptionPane.showMessageDialog(null, "Sie haben sich bereits beworben!");
 									}
 								else
 									JOptionPane.showMessageDialog(null,"Bitte eine Zeile auswählen!");
 							}
+							
 						});
 																			
 																			JPanel panel5 = new JPanel();
@@ -423,20 +376,21 @@ public class MenuBet extends JFrame {
 	      panel_5.add(btnNewButton_5, gbc_btnNewButton_5);
 	      btnNewButton_5.addActionListener(e->{
 	    	  	if(studentTable.getSelectedRowCount()>0) {
-	    	  		JFileChooser chooser = new JFileChooser();
-				if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) 
+	    	  		
 				try {
-					if(PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), (int) studentTable.getValueAt(studentTable.getSelectedRow(),0), "bericht");
-					else
-						Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), (int) studentTable.getValueAt(studentTable.getSelectedRow(),0), "bericht");
+					int matnum=(int) studentTable.getValueAt(studentTable.getSelectedRow(),0);
+					new File("\\"+Datenbank.getBetreuerPath(id)+"\\"+matnum).mkdirs();
+					Datenbank.download(Datenbank.getBetreuerPath(id).concat("\\"+matnum+"\\bericht.pdf"), matnum, "bericht");
+					JOptionPane.showMessageDialog(null,"Der Bericht wurde heruntergeladen");
+					
 				} 
 				catch (Exception e1) {
 					e1.printStackTrace();		
 				}
+	    	  	}
 			else
 			System.out.println("Bitte eine Zeile auswählen!");
-	    	  	}
+	    	  	
 				
 	      });
 	      

@@ -549,7 +549,15 @@ public class Datenbank {
 		 stmnt.setInt(2, ppaNum);
 		 stmnt.executeUpdate();
 	}
-	
+	public static void setBetreuerPath(int betNum, String path) throws Exception {
+		if (con == null)
+			startConnection();
+		
+		PreparedStatement stmnt = con.prepareStatement("UPDATE db3.betreuer SET `pfad` = ? WHERE id=?");
+		 stmnt.setString(1, path);
+		 stmnt.setInt(2, betNum);
+		 stmnt.executeUpdate();
+	}
 	public static String getPpaPath(int ppaNum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -559,10 +567,23 @@ public class Datenbank {
 		ResultSet rs= stmnt.executeQuery();
 		while (rs.next()) {
 			if(rs.getString("pfad")!=null) return rs.getString("pfad");
+			else return "C:\\";
 		}
 		return null;
 	}
-	
+	public static String getBetreuerPath(int betNum) throws Exception {
+		if (con == null)
+			startConnection();
+		
+		PreparedStatement stmnt = con.prepareStatement("Select `pfad` From db3.betreuer WHERE id = ?");
+		stmnt.setInt(1, betNum);
+		ResultSet rs= stmnt.executeQuery();
+		while (rs.next()) {
+			if(rs.getString("pfad")!=null) return rs.getString("pfad");
+			else return "C:\\";
+		}
+		return null;
+	}
 	public static TreeMap<String, Object[]> getAbsolventen() throws SQLException{
 		PreparedStatement stmnt=con.prepareStatement("Select * From db3.absolventen");
 		ResultSet rs= stmnt.executeQuery();

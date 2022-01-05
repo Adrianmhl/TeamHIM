@@ -81,16 +81,15 @@ public class MenuPPA extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public MenuPPA(int ppaNum) throws Exception{
-		setMinimumSize(new Dimension(640, 480));
 		setLocationByPlatform(true);
-		setSize(new Dimension(640, 480));
+		setSize(new Dimension(640, 764));
 		
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
 		
 		setTitle("HIM - HFT Intern Manager");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 1260, 720);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -110,13 +109,13 @@ public class MenuPPA extends JFrame {
 				gbc_panel_1.gridy = 0;
 				contentPane.add(panel_1, gbc_panel_1);
 																				GridBagLayout gbl_panel_1 = new GridBagLayout();
-																				gbl_panel_1.columnWidths = new int[]{87, 0};
-																				gbl_panel_1.rowHeights = new int[]{93, 230, 0, 25, 0, 17, 0};
+																				gbl_panel_1.columnWidths = new int[]{130, 0};
+																				gbl_panel_1.rowHeights = new int[]{334, 180, 36, 20, 17, 0};
 																				gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-																				gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+																				gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 																				panel_1.setLayout(gbl_panel_1);
 																												
-																														JLabel lblNewLabel_5_4 = new JLabel("");
+																														JLabel lblNewLabel_5_4 = new JLabel(new ImageIcon(MenuStu.class.getResource("/res/LogoPPA.png")));
 																														GridBagConstraints gbc_lblNewLabel_5_4 = new GridBagConstraints();
 																														gbc_lblNewLabel_5_4.fill = GridBagConstraints.BOTH;
 																														gbc_lblNewLabel_5_4.insets = new Insets(0, 0, 5, 0);
@@ -158,10 +157,10 @@ public class MenuPPA extends JFrame {
 																						
 																						JPanel dateipfadPanel = new JPanel();
 																						GridBagConstraints gbc_dateipfadPanel = new GridBagConstraints();
+																						gbc_dateipfadPanel.anchor = GridBagConstraints.WEST;
 																						gbc_dateipfadPanel.insets = new Insets(0, 0, 5, 0);
-																						gbc_dateipfadPanel.fill = GridBagConstraints.HORIZONTAL;
 																						gbc_dateipfadPanel.gridx = 0;
-																						gbc_dateipfadPanel.gridy = 3;
+																						gbc_dateipfadPanel.gridy = 2;
 																						panel_1.add(dateipfadPanel, gbc_dateipfadPanel);
 																						dateipfadPanel.setBackground(Color.decode("#CD201F"));
 																						dateipfadPanel.addMouseListener(new MouseAdapter() {
@@ -188,9 +187,9 @@ public class MenuPPA extends JFrame {
 																				
 																						JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 																						GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
-																						gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.SOUTH;
+																						gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.NORTHWEST;
 																						gbc_lblNewLabel_1_2_2.gridx = 0;
-																						gbc_lblNewLabel_1_2_2.gridy = 5;
+																						gbc_lblNewLabel_1_2_2.gridy = 4;
 																						panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
 																						lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
 																							@Override
@@ -245,37 +244,7 @@ public class MenuPPA extends JFrame {
 												panel_BPS.add(scrollPane, gbc_scrollPane);
 												
 														table = new JTable();
-														table.addMouseListener(new MouseAdapter() {
-															  public void mouseClicked(MouseEvent e) {
-															    if (e.getClickCount() == 2) {
-															      JTable click = (JTable)e.getSource();
-															      int row = click.getSelectedRow();
-															      
-															      
-																try {
-																	if(table.getValueAt(row, 2).equals("beantragt")) { 
-																		StudentPopup popup;
-																		popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
-																		popup.setVisible(true);
-																	}
-																	else if(table.getValueAt(row, 2).equals("Bewerber")){
-																		ApplicationChooser popup;
-																		popup= new ApplicationChooser((int) table.getValueAt(row, 0));
-																		popup.setVisible(true);
-																		
-																	}
-																	else if(table.getValueAt(row, 2).equals("Abgeschlossen")){
-																		CheckFiles popup;
-																		popup= new CheckFiles((int) table.getValueAt(row, 0));
-																		popup.setVisible(true);
-																	}
-																} catch (Exception e1) {
-																	e1.printStackTrace();
-																}
-															      
-															    }
-															  }
-															});
+														
 														
 														scrollPane.setViewportView(table);
 														table.setModel(
@@ -378,6 +347,39 @@ public class MenuPPA extends JFrame {
 		lblNewLabel_3_1_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_1_2.setFont(new Font("Arial", Font.BOLD, 12));
 		lblNewLabel_3_1_2.setBounds(10, 0, 252, 32);
+		table.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable click = (JTable)e.getSource();
+			      int row = click.getSelectedRow();
+			      
+			      
+				try {
+					if(table.getValueAt(row, 2).equals("beantragt")) { 
+						StudentPopup popup;
+						popup = new StudentPopup(Datenbank.getBPS((int) table.getValueAt(row, 0)));
+						popup.setVisible(true);
+					}
+					else if(table.getValueAt(row, 2).equals("Bewerber")){
+						ApplicationChooser popup;
+						popup= new ApplicationChooser((int) table.getValueAt(row, 0));
+						popup.setVisible(true);
+						
+					}
+					else if(table.getValueAt(row, 2).equals("Abgeschlossen")){
+						CheckFiles popup;
+						popup= new CheckFiles((int) table.getValueAt(row, 0),ppaNum);
+						popup.setVisible(true);
+						
+					}
+					refreshBPSinJTable(best_offen,zut_offen,doc_pr);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			      
+			    }
+			  }	  
+			});
 	}
 
 	
@@ -439,7 +441,7 @@ public class MenuPPA extends JFrame {
 	private void createExcel(int ppaNum) throws Exception { 
 	
 		 
-		System.out.println(Datenbank.getPpaPath(ppaNum));
+		
 		String filename = ""+Datenbank.getPpaPath(ppaNum)+"\\Absolventen.xlsx";  
 		
 		HSSFWorkbook workbook = new HSSFWorkbook(); 

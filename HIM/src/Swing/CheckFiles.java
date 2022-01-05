@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,7 +37,7 @@ public class CheckFiles extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			CheckFiles dialog = new CheckFiles(333);
+			CheckFiles dialog = new CheckFiles(333,1);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -48,7 +49,7 @@ public class CheckFiles extends JDialog {
 	 * Create the dialog.
 	 * @throws Exception 
 	 */
-	public CheckFiles(int matnum) throws Exception {
+	public CheckFiles(int matnum, int ppanum) throws Exception {
 		setTitle("Dokumente pr\u00FCfen");
 		setResizable(false);
 		UIManager.setLookAndFeel(new FlatLightLaf());
@@ -107,15 +108,11 @@ public class CheckFiles extends JDialog {
 				nachweis.setFont(new Font("Arial", Font.BOLD, 11));
 				nachweis.addActionListener(e->{
 					try {
-
-						JFileChooser chooser = new JFileChooser();
-						if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-							if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-								Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "nachweis");
-							else
-								Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
-										"nachweis");
-						}
+						new File("\\"+Datenbank.getPpaPath(ppanum)+"\\"+matnum).mkdirs();
+						Datenbank.download(Datenbank.getPpaPath(ppanum).concat("\\"+matnum+"\\nachweis.pdf"),matnum, "nachweis");
+						
+						
+						
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -136,15 +133,9 @@ public class CheckFiles extends JDialog {
 						panel_Praktikumsverwaltung.add(vertrag, gbc_vertrag);
 					vertrag.addActionListener(e->{
 						try {
-
-							JFileChooser chooser = new JFileChooser();
-							if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-								if (PdfFilter.getExtension(chooser.getSelectedFile()).equals(".pdf"))
-									Datenbank.download(chooser.getSelectedFile().getAbsolutePath(), matnum, "vertrag");
-								else
-									Datenbank.download(chooser.getSelectedFile().getAbsolutePath().concat(".pdf"), matnum,
-											"vertrag");
-							}
+							new File("\\"+Datenbank.getPpaPath(ppanum)+"\\"+matnum).mkdirs();
+							Datenbank.download(Datenbank.getPpaPath(ppanum).concat("\\"+matnum+"\\vertrag.pdf"),matnum, "vertrag");
+							
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						

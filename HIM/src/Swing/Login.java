@@ -102,7 +102,6 @@ public class Login extends JFrame {
 			try {
 				if (verifyLogin(Integer.parseInt(textFieldBenutzer.getText()), textFieldPasswort.getText())) {
 					int role = Datenbank.getUser(Integer.parseInt(textFieldBenutzer.getText())).getRole();
-
 					switch (role) {
 					case -1:
 						MenuStu ms = new MenuStu(Integer.parseInt(textFieldBenutzer.getText()));

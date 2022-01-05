@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -84,7 +85,7 @@ public class MenuStu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 110, 1140, 0 };
+		gbl_contentPane.columnWidths = new int[] { 130, 1140, 0 };
 		gbl_contentPane.rowHeights = new int[] { 658, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, 50.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
@@ -105,10 +106,19 @@ public class MenuStu extends JFrame {
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{126, 0};
-		gbl_panel_1.rowHeights = new int[]{87, 492, 23, 23, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowHeights = new int[]{73, 287, 263, 36, 66, 23, 0};
+		gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{1.0, 1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
+						
+						JLabel lblNewLabel = new JLabel(new ImageIcon(MenuStu.class.getResource("/res/LogoStudent.png")));
+						GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+						gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+						gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+						gbc_lblNewLabel.gridx = 0;
+						gbc_lblNewLabel.gridy = 1;
+						panel_1.add(lblNewLabel, gbc_lblNewLabel);
+						
 				
 						JLabel lblMatrikelnummerLeiste = new JLabel(Integer.toString(matrikelnum));
 						GridBagConstraints gbc_lblMatrikelnummerLeiste = new GridBagConstraints();
@@ -116,20 +126,20 @@ public class MenuStu extends JFrame {
 						gbc_lblMatrikelnummerLeiste.fill = GridBagConstraints.VERTICAL;
 						gbc_lblMatrikelnummerLeiste.insets = new Insets(0, 0, 5, 0);
 						gbc_lblMatrikelnummerLeiste.gridx = 0;
-						gbc_lblMatrikelnummerLeiste.gridy = 2;
+						gbc_lblMatrikelnummerLeiste.gridy = 3;
 						panel_1.add(lblMatrikelnummerLeiste, gbc_lblMatrikelnummerLeiste);
 						lblMatrikelnummerLeiste.setHorizontalAlignment(SwingConstants.LEFT);
-						lblMatrikelnummerLeiste.setForeground(Color.WHITE);
-						lblMatrikelnummerLeiste.setFont(new Font("Dialog", Font.PLAIN, 12));
+						lblMatrikelnummerLeiste.setForeground(Color.decode("#f7f1e3"));
+						lblMatrikelnummerLeiste.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 15));
 						lblMatrikelnummerLeiste.setBackground(Color.decode("#CD201F"));
 		
 				JLabel lblNewLabel_1_2_2 = new JLabel("Log Out");
 				GridBagConstraints gbc_lblNewLabel_1_2_2 = new GridBagConstraints();
 				gbc_lblNewLabel_1_2_2.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_1_2_2.gridx = 0;
-				gbc_lblNewLabel_1_2_2.gridy = 3;
+				gbc_lblNewLabel_1_2_2.gridy = 5;
 				panel_1.add(lblNewLabel_1_2_2, gbc_lblNewLabel_1_2_2);
-				lblNewLabel_1_2_2.setForeground(Color.WHITE);
+				lblNewLabel_1_2_2.setForeground(Color.decode("#f7f1e3"));
 				lblNewLabel_1_2_2.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -148,7 +158,7 @@ public class MenuStu extends JFrame {
 					}
 				});
 				lblNewLabel_1_2_2.setHorizontalAlignment(SwingConstants.LEFT);
-				lblNewLabel_1_2_2.setFont(new Font("Dialog", Font.PLAIN, 12));
+				lblNewLabel_1_2_2.setFont(new Font("Segoe UI Semilight", Font.PLAIN, 15));
 
 		
 	
@@ -439,15 +449,15 @@ public class MenuStu extends JFrame {
 	
 	
 	public void update(int matnum,JLabel lblStatus, JLabel betreuerName, JButton btnNewButton_1_1, JButton btnNewButton_1, JButton btnNewButton_1_2, JLabel lblBetreuerName, JLabel lblAnmeldung,JButton btnNewButton_2_2, JButton btnNewButton_2,JButton btnNewButton_2_1, JLabel lblFeedback, JButton btnNewButton_4, JProgressBar progressBar) throws Exception {
-		btnNewButton_2_2.setVisible(false);
-		btnNewButton_2_1.setVisible(false);
-		btnNewButton_2.setVisible(false);
+		btnNewButton_2_2.setEnabled(false);
+		btnNewButton_2_1.setEnabled(false);
+		btnNewButton_2.setEnabled(false);
 		lblAnmeldung.setVisible(false);
 		lblFeedback.setVisible(false);
 		btnNewButton_4.setVisible(false);
-		btnNewButton_1_2.setVisible(false);
-		btnNewButton_1.setVisible(false);
-		btnNewButton_1_1.setVisible(false);
+		btnNewButton_1_2.setEnabled(false);
+		btnNewButton_1.setEnabled(false);
+		btnNewButton_1_1.setEnabled(false);
 		lblBetreuerName.setVisible(false);
 		betreuerName.setVisible(false);
 		lblStatus.setText("Bitte BPS-Anmeldung ausfüllen und hochladen.");
@@ -467,28 +477,28 @@ public class MenuStu extends JFrame {
 					
 					progressBar.setValue(38);
 					Studierende  student= (Studierende) Datenbank.getUser(matnum);
-					btnNewButton_1_2.setVisible(true);
+					btnNewButton_1_2.setEnabled(true);
 					lblStatus.setText("Ein Betreuer wurde ihnen zugeteilt, laden sie nun bitte ihren BPS-Vertrag mit dem Unternehmen hoch!");
 					if(student.getVertrag()!=null) {
 						progressBar.setValue(55);
-						btnNewButton_2_2.setVisible(true);
-						btnNewButton_1.setVisible(true);
+						btnNewButton_2_2.setEnabled(true);
+						btnNewButton_1.setEnabled(true);
 						lblStatus.setText("Laden sie bitte den Beschäftigungsnachweis hoch!");
 						if(student.getNachweis()!=null) {
 							progressBar.setValue(71);
-							btnNewButton_2.setVisible(true);
-							btnNewButton_1_1.setVisible(true);
+							btnNewButton_2.setEnabled(true);
+							btnNewButton_1_1.setEnabled(true);
 							lblStatus.setText("Laden sie als Letztes bitte den von ihnen verfassten Praktikumsbericht hoch!");
 							if(Datenbank.checkBericht(matnum)&&student.getBericht()==null&&!Datenbank.checkFeedback(matnum)) {
 								lblFeedback.setVisible(true);
 								lblFeedback.setText("Bericht wird geprüft");
-								btnNewButton_2_1.setVisible(true);
+								btnNewButton_2_1.setEnabled(true);
 								lblStatus.setText("Ihr Praktikumsbericht wird durch ihren Betreuer überprüft.");
 							}
 							else if(student.getBericht()!=null) {
 								lblFeedback.setText("Bericht wurde akzeptiert");
 								lblFeedback.setVisible(true);
-								btnNewButton_2_1.setVisible(true);
+								btnNewButton_2_1.setEnabled(true);
 								lblStatus.setText("Der Betreuer hat ihren Bericht akzeptiert, das PPA prüft nun ihre Dateien.");
 								if(Datenbank.getBPS(matnum).getStatus().equals("Beendet")){
 									lblStatus.setText("Glückwunsch, sie haben das BPS erfolgreich abgeschlossen!");
@@ -499,7 +509,7 @@ public class MenuStu extends JFrame {
 							lblStatus.setText("Bericht leider abgelehnt. Bitte lesen sie die Feedback Datei und laden sie einen überarbeiteten Bericht hoch.");
 							lblFeedback.setText("Bericht muss überarbeitet werden");
 							lblFeedback.setVisible(true);
-							btnNewButton_2_1.setVisible(true);
+							btnNewButton_2_1.setEnabled(true);
 							btnNewButton_4.setVisible(true);
 							}
 						}
