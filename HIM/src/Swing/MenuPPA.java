@@ -425,6 +425,10 @@ public class MenuPPA extends JFrame {
 		}
 
 	}
+	/**
+	 * Überprüft, ob alle Dokumente vom Studenten und Betreuer abgegeben wurden
+	 * @throws Exception
+	 */
 	public void checkStudentDocuments() throws Exception {
 		
 		ArrayList <Studierende>studentList=new ArrayList <Studierende>();
@@ -438,6 +442,11 @@ public class MenuPPA extends JFrame {
 			}
 		}
 	}
+	/**
+	 * Erstellt eine Excel Tabelle mit den Absolventen
+	 * @param ppaNum
+	 * @throws Exception
+	 */
 	private void createExcel(int ppaNum) throws Exception { 
 	
 		 

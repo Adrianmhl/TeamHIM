@@ -48,8 +48,9 @@ public class StudentPopup extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
-	 * @throws Exception 
+	 * Ein Popup, das dem PPA ermöglicht, die angaben zum BPS eines Studenten zu prüfen
+	 * @param bps
+	 * @throws Exception
 	 */
 	public StudentPopup(BPS bps) throws Exception {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());

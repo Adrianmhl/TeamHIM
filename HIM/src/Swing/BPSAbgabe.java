@@ -57,8 +57,9 @@ public class BPSAbgabe extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
-	 * @throws UnsupportedLookAndFeelException 
+	 * Erzeugt ein Fenster zur abgabe des BPS
+	 * @param matnum
+	 * @throws Exception
 	 */
 	public BPSAbgabe(int matnum) throws Exception {
 		UIManager.setLookAndFeel(new FlatLightLaf());

@@ -35,17 +35,12 @@ public class Datenbank {
 
 	private static Connection con;
 
-	/**
-	 * <<<<<<< Updated upstream
-	 * 
-	 * @SalamQu @author isedo
-	 * @param betPersNr
-	 * @return =======
-	 * @throws Exception
-	 * @Salam
-	 * 
-	 *        >>>>>>> Stashed changes
-	 */
+/**
+ * Gibt einen Benutzer anhand seiner id zurück
+ * @param id
+ * @return
+ * @throws Exception
+ */
 
 	public static User getUser(int id) throws Exception {
 
@@ -91,11 +86,10 @@ public class Datenbank {
 	}
 
 	/**
-	 * holt bps daten aus der datenbank und gibt sie in das bps-objekt weiter
-	 * 
+	 * Gibt eine Liste aller BPS aus der Datenbank zurück
 	 * @return
+	 * @throws Exception
 	 */
-
 	public static ArrayList<BPS> getBPSlist() throws Exception {
 		ArrayList<BPS> bpslist = new ArrayList<>();
 
@@ -117,13 +111,13 @@ public class Datenbank {
 				bpslist.add(bps);
 			}
 		}
-//		System.out.println(bpslist);
+
 		return bpslist;
 	}
+	
 	/**
-	 * Diese Methode erzeugt ein Array der Studierenden
-	 * @author Adrian
-	 * @return studList[] Liste von angelegten Studierenden
+	 * Erzeugt eine Liste aller Studierender
+	 * @return
 	 * @throws Exception
 	 */
 	public static ArrayList<Studierende> getStudentlist() throws Exception {
@@ -173,6 +167,12 @@ public class Datenbank {
 
 	}
 
+	/**
+	 * gibt ein BPS anhand der Matrikelnummer des zugehörigen Studenten zurück
+	 * @param matrikelnum
+	 * @return
+	 * @throws Exception
+	 */
 	public static BPS getBPS(int matrikelnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -196,16 +196,7 @@ public class Datenbank {
 	
 
 	/**
-	 * Stellt neuen User im Datenbank her
-	 * 
-	 * @author isedor, Felix
-	 * @param id
-	 * @param passwort
-	 * @param name
-	 * @param vorname
-	 * @param mail
-	 * @return //
-	 * @throws Exception
+	 * Stellt einen neuen User in der Datenbank her
 	 */
 
 	public static void createUser(User user) throws Exception {
@@ -234,7 +225,13 @@ public class Datenbank {
 		stmt.setString(6, user.getUserMail());
 		stmt.executeUpdate();
 	}
-
+ /**
+  * Generiert einen Hash aus einem beliebigen Passwort und Salt
+  * @param password
+  * @param salt
+  * @return
+  * @throws Exception
+  */
 	public static String hashPassword(String password, byte[] salt) throws Exception {
 
 		KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 500000, 128);
@@ -242,7 +239,14 @@ public class Datenbank {
 		byte[] hash = factory.generateSecret(keySpec).getEncoded();
 		return new String(hash);
 	}
-
+/**
+ * Funktion um Dateien in die Datenbank hochzuladen
+ * @param infile
+ * @param matnum
+ * @param column
+ * @param isForBetreuer
+ * @throws Exception
+ */
 	public static void upload(File infile, int matnum, String column, boolean isForBetreuer) throws Exception {
 		if (con == null)
 			startConnection();
@@ -269,6 +273,12 @@ public class Datenbank {
 			inputStream.close();
 		}
 	}
+	/**
+	 * Funktion um den Besuchsbericht in die Datenbank hochzuladen
+	 * @param infile
+	 * @param matnum
+	 * @throws Exception
+	 */
 	public static void uploadBesuchsBericht(File infile, int matnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -281,6 +291,12 @@ public class Datenbank {
 		
 	}
 	
+	/**
+	 * Funktion um nach dem Vorhandensein des Besuchsberichtes eines Studenten zu pruefen
+	 * @param matnum
+	 * @return
+	 * @throws Exception
+	 */
 	public static boolean checkBesuchBericht(int matnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -292,6 +308,13 @@ public class Datenbank {
 		}
 		return false;
 	}
+	
+	/**
+	 * Funktion um nach dem Vorhandensein des Praktikumsberichtes eines Studenten zu pruefen
+	 * @param matnum
+	 * @return
+	 * @throws Exception
+	 */
 	public static boolean checkBericht(int matnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -304,6 +327,13 @@ public class Datenbank {
 		return false;
 	}
 	
+	/**
+	 * Funktion um eine Datei aus der Datenbank herunterzuladen
+	 * @param path
+	 * @param matnum
+	 * @param column
+	 * @throws Exception
+	 */
 	public static void download(String path, int matnum, String column) throws Exception {
 		if (con == null)
 			startConnection();
@@ -343,7 +373,12 @@ public class Datenbank {
 
 	}
 
-	
+	/**
+	 * Teilt einen Studenten vorläufig einem Betreuer zu
+	 * @param bpsId
+	 * @param professor
+	 * @throws Exception
+	 */
 
 	public static void studBetreuerMatch(int bpsId, int professor)	throws Exception {
 		if (con == null)
@@ -357,6 +392,12 @@ public class Datenbank {
 		
 	}
 	
+	/**
+	 * Überprüfung des Platzes in der Chronologischen Rangliste der Betreuerbewerbungen
+	 * @param bps
+	 * @return
+	 * @throws Exception
+	 */
 	public static int getQueuePosition(int bps) throws Exception{
 		if (con == null)
 			startConnection();
@@ -372,6 +413,12 @@ public class Datenbank {
 		return 0;
 	}
 	
+	/**
+	 * Gibt die Bewerbungen auf einen Studenten zurück
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	 public static ArrayList<Bewerbung> getApplicationList(int id) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -388,6 +435,12 @@ public class Datenbank {
 		 else return null;
 	 }
 	 
+	 /**
+	  * Setzt den Status des BPS eines Studenten
+	  * @param status
+	  * @param id
+	  * @throws Exception
+	  */
 	 public static void updateBPSStatus(String status, int id) throws Exception{
 		 if (con == null)
 				startConnection();
@@ -398,7 +451,12 @@ public class Datenbank {
 	 }
 	 
 	 
-	 
+	 /**
+	  * Gibt eine Liste aller Studenten zurück
+	  * @param betnum
+	  * @return
+	  * @throws Exception
+	  */
 	 public static ArrayList<Integer> getStudentList(int betnum) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -412,6 +470,12 @@ public class Datenbank {
 		 return zuteilungList;
 	 }
 	 
+	 /**
+	  * Teilt einen Betreuer fest einem Studenten zu
+	  * @param matnum
+	  * @param betnum
+	  * @throws Exception
+	  */
 	 public static void zuteilung(int matnum, int betnum) throws Exception{
 		 if (con == null)
 				startConnection();
@@ -426,6 +490,12 @@ public class Datenbank {
 		 stmnt2.executeUpdate();
 	 }
 	 
+	 /**
+	  * Gibt die Mitarbeiternummer des Betreuer eines Studenten zurück
+	  * @param matnum
+	  * @return
+	  * @throws Exception
+	  */
 	 public static String getBetreuer(int matnum) throws Exception {
 		 if(con==null)
 			 startConnection();
@@ -453,7 +523,11 @@ public class Datenbank {
 	 }
 	 
 	
-	 
+	 /**
+	  * Akzeptiert einen Praktikumsbericht
+	  * @param matnum
+	  * @throws Exception
+	  */
 	 public static void acceptBericht(int matnum) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -470,6 +544,13 @@ public class Datenbank {
 		 stmnt2.executeUpdate();
 		
 	 }
+	 
+	 /**
+	  * Lädt eine Feedbackdatei für den Praktikumsbericht eines Studentenin die Datenbank hoch
+	  * @param matnum
+	  * @param inFile
+	  * @throws Exception
+	  */
 	 public static void sendFeedback(int matnum, File inFile) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -486,6 +567,13 @@ public class Datenbank {
 				inputStream.close();
 		
 	 }
+	 
+	 /**
+	  * Lädt die Feedbackdatei für einen Studenten aus der Datenbank herunter
+	  * @param matnum
+	  * @param path
+	  * @throws Exception
+	  */
 	 public static void getFeedback(int matnum, String path) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -500,6 +588,13 @@ public class Datenbank {
 			}
 			output.close();
 	 }
+	 
+	 /**
+	  * Prüft, ob eine Feedbackdatei für einen Studenten existiert
+	  * @param matnum
+	  * @return
+	  * @throws Exception
+	  */
 	 public static boolean checkFeedback(int matnum) throws Exception {
 		 if (con == null)
 				startConnection();
@@ -512,6 +607,11 @@ public class Datenbank {
 			return false;
 		
 	 }
+	 
+	 /**
+	  * Startet die Verbindung zur Datenbank
+	  * @throws Exception
+	  */
 	public static void startConnection() throws Exception {
 
 		String url = "jdbc:mysql://3.69.96.96:3306/";
@@ -526,6 +626,12 @@ public class Datenbank {
 
 		System.out.println("Connected to the database");
 	}
+	
+	/**
+	 * Macht einen Studenten zu einem Absolventen und fügt ihn als solchen in die Datenbank ein
+	 * @param matnum
+	 * @throws Exception
+	 */
 	public static void addAbsolvent(int matnum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -540,6 +646,12 @@ public class Datenbank {
 		updateBPSStatus("Beendet", matnum);
 	}
 	
+	/**
+	 * Legt den Downloadpfad für das PPA fest
+	 * @param ppaNum
+	 * @param path
+	 * @throws Exception
+	 */
 	public static void setPpaPath(int ppaNum, String path) throws Exception {
 		if (con == null)
 			startConnection();
@@ -549,6 +661,13 @@ public class Datenbank {
 		 stmnt.setInt(2, ppaNum);
 		 stmnt.executeUpdate();
 	}
+	
+	/**
+	 * Legt den Downloadpfad für den Betreuer fest
+	 * @param ppaNum
+	 * @param path
+	 * @throws Exception
+	 */
 	public static void setBetreuerPath(int betNum, String path) throws Exception {
 		if (con == null)
 			startConnection();
@@ -558,6 +677,13 @@ public class Datenbank {
 		 stmnt.setInt(2, betNum);
 		 stmnt.executeUpdate();
 	}
+	
+	/**
+	 * gibt den Downloadpfad für das PPA zurück
+	 * @param ppaNum
+	 * @return
+	 * @throws Exception
+	 */
 	public static String getPpaPath(int ppaNum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -571,6 +697,13 @@ public class Datenbank {
 		}
 		return null;
 	}
+	
+	/**
+	 * gibt den Downloadpfad für des Betreuers zurück
+	 * @param ppaNum
+	 * @return
+	 * @throws Exception
+	 */
 	public static String getBetreuerPath(int betNum) throws Exception {
 		if (con == null)
 			startConnection();
@@ -584,7 +717,15 @@ public class Datenbank {
 		}
 		return null;
 	}
-	public static TreeMap<String, Object[]> getAbsolventen() throws SQLException{
+	
+	/**
+	 * Gibt eine Map der Absolventen für die einspeisung in Excel zurück
+	 * @return
+	 * @throws SQLException
+	 */
+	public static TreeMap<String, Object[]> getAbsolventen() throws Exception{
+		if (con == null)
+			startConnection();
 		PreparedStatement stmnt=con.prepareStatement("Select * From db3.absolventen");
 		ResultSet rs= stmnt.executeQuery();
 		TreeMap<String, Object[]> data= new TreeMap <String, Object[]> ();
@@ -598,7 +739,5 @@ public class Datenbank {
 		
 	}
 	
-	public void closeConnection() {
-
-	}
+	
 }

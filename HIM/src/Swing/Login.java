@@ -162,7 +162,13 @@ public class Login extends JFrame {
 		panel.add(lblRegistrieren);
 
 	}
-
+/**
+ * Überprüft, ob ein eingegebenes Passwort dem Benutzer entspricht
+ * @param id
+ * @param passwort
+ * @return
+ * @throws Exception
+ */
 	public static boolean verifyLogin(int id, String passwort) throws Exception {
 
 		if (Datenbank.getUser(id) == null) {

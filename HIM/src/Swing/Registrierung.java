@@ -190,9 +190,7 @@ public class Registrierung extends JFrame {
 					Datenbank.createUser(new User(Integer.parseInt(txtMatrnr.getText()), hash, salt, txtName.getText(),
 							txtVorname.getText(), txtMail.getText(), -1));
 
-					/***
-					 * @author isedo
-					 */
+					
 					
 
 					JOptionPane.showMessageDialog(btnNewButton, "Erfolreich registriert!");

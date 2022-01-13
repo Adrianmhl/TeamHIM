@@ -31,12 +31,9 @@ public class ApplicationChooser extends JDialog {
 	private JTable table;
 
 	/**
-	 * Launch the application.
-	 */
-	
-	/**
-	 * Create the dialog.
-	 * @throws Exception 
+	 * Ein Popup, in dem das PPA einen Betreuer aus der Bewerberliste für einen Studenten auswählen kann
+	 * @param id
+	 * @throws Exception
 	 */
 	public ApplicationChooser(int id) throws Exception {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());
@@ -109,6 +106,7 @@ public class ApplicationChooser extends JDialog {
 			}
 		}
 	}
+	
 	public void applicationTableData(int id) throws Exception{
 
 		Datenbank.getBPSlist();

@@ -47,8 +47,9 @@ public class Feedback extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
-	 * @throws UnsupportedLookAndFeelException 
+	 * Erzeugt ein Popup für den Betreuer um Feedback zum abgegebenen Praktikumsbericht zu geben
+	 * @param matnum
+	 * @throws UnsupportedLookAndFeelException
 	 */
 	public Feedback(int matnum) throws UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(new FlatAtomOneLightContrastIJTheme());

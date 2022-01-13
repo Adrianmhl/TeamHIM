@@ -46,8 +46,10 @@ public class CheckFiles extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
-	 * @throws Exception 
+	 * Erzeugt ein Popup für das PPA zur Überprüfung der Dokumente
+	 * @param matnum
+	 * @param ppanum
+	 * @throws Exception
 	 */
 	public CheckFiles(int matnum, int ppanum) throws Exception {
 		setTitle("Dokumente pr\u00FCfen");
